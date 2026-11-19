@@ -1,0 +1,240 @@
+## Deriving training records from the details pages, modules and tests (ADR-NCK-0003). Pure: the
+## files arrive as strings, so the same repository gives the same bytes (NCK-DATA-01).
+
+import std/[algorithm, json, strutils]
+
+type
+  RecordKind* = enum
+    rkExplain = "explain"
+    rkImplement = "implement"
+    rkRefactor = "refactor"
+    rkLaw = "law"
+
+  Block* = object
+    bad*: bool
+    code*: string
+    section*: string
+
+  Page* = object
+    title*: string
+    sections*: seq[(string, string)] ## heading, body (without the fenced blocks' fences removed)
+    blocks*: seq[Block]
+
+  Record* = object
+    id*: string
+    kind*: RecordKind
+    area*: string
+    topic*: string
+    instruction*: string
+    input*: string
+    output*: string
+    specIds*: seq[string]
+    sources*: seq[string]
+    files*: seq[string]
+
+  ConceptFiles* = object
+    ## One concept: its page, and when it names one, its module and test file.
+    skill*: string
+    area*: string
+    topic*: string
+    pagePath*: string
+    page*: string
+    modulePath*: string
+    module*: string
+    testPath*: string
+    test*: string
+
+const SystemPrompt* = "You write functional, idempotent, modern Nim (2.4, --mm:orc): public routines are " &
+  "`func` with `{.raises: [].}`, failure is Option or Result, data is plain objects and object variants " &
+  "with exhaustive `case`, domain values are `distinct` with smart constructors, updates return new " &
+  "values, mutation stays local, and every law is a property test."
+
+func parsePage*(md: string): Page {.raises: [].} =
+  var heading = ""
+  var body = ""
+  var inside = false
+  var cur: Block
+  for line in md.splitLines:
+    if not inside and line.startsWith("```nim"):
+      inside = true
+      cur = Block(bad: line.strip == "```nim bad", section: heading)
+      body.add line & "\n"
+    elif inside and line.startsWith("```"):
+      inside = false
+      result.blocks.add cur
+      body.add line & "\n"
+    elif inside:
+      cur.code.add line & "\n"
+      body.add line & "\n"
+    elif line.startsWith("# ") and result.title.len == 0:
+      result.title = line[2 .. ^1].strip
+    elif line.startsWith("## "):
+      if heading.len > 0: result.sections.add (heading, body.strip)
+      heading = line[3 .. ^1].strip
+      body = ""
+    else:
+      body.add line & "\n"
+  if heading.len > 0: result.sections.add (heading, body.strip)
+
+func section*(p: Page; name: string): string {.raises: [].} =
+  for (h, b) in p.sections:
+    if h.toLowerAscii.startsWith(name.toLowerAscii): return b
+
+func isHex16(s: string): bool {.raises: [].} =
+  s.len == 16 and s.allCharsInSet(HexDigits - {'A'..'F'})
+
+func catalogIds*(text: string): seq[string] {.raises: [].} =
+  ## The catalog IDs (16 lower-case hex digits) mentioned in `text`, sorted, without duplicates.
+  for w in text.multiReplace(("`", " "), (",", " "), ("(", " "), (")", " "), ("[", " "), ("]", " "),
+      (".", " "), (":", " "), (";", " "), ("|", " ")).splitWhitespace:
+    if isHex16(w) and w notin result: result.add w
+  result.sort()
+
+func isSpecId*(s: string): bool {.raises: [].} =
+  ## Segments of capitals or digits starting with a capital, joined by '-', ending in two digits.
+  let parts = s.split('-')
+  if parts.len < 2: return false
+  let last = parts[^1]
+  if last.len != 2 or not last.allCharsInSet(Digits): return false
+  for p in parts[0 .. ^2]:
+    if p.len == 0 or p[0] notin {'A'..'Z'} or not p.allCharsInSet({'A'..'Z', '0'..'9'}): return false
+  true
+
+func specIdsIn*(text: string): seq[string] {.raises: [].} =
+  for w in text.multiReplace(("(", " "), (")", " "), ("`", " "), (",", " "), (";", " "), (".", " "), (":", " ")).splitWhitespace:
+    if isSpecId(w) and w notin result: result.add w
+
+func indentOf(line: string): int {.raises: [].} =
+  while result < line.len and line[result] == ' ': inc result
+
+func taggedTest*(testSource, specId: string): string {.raises: [].} =
+  ## The test tagged `# SPEC: <specId>`: from its tag line through the test's last indented line.
+  ## "" when no test carries the tag.
+  let lines = testSource.splitLines
+  var i = 0
+  while i < lines.len:
+    let t = lines[i].strip
+    if t.startsWith("# SPEC:") and specId in t.splitWhitespace:
+      var j = i
+      while j < lines.len and lines[j].strip.startsWith("# SPEC:"): inc j
+      if j >= lines.len or not lines[j].strip.startsWith("test "): return ""
+      let base = indentOf(lines[j])
+      var k = j + 1
+      while k < lines.len and (lines[k].strip.len == 0 or indentOf(lines[k]) > base): inc k
+      while k > j + 1 and lines[k - 1].strip.len == 0: dec k
+      var outLines: seq[string]
+      for x in lines[i ..< k]:
+        outLines.add(if x.len >= indentOf(lines[i]): x[min(indentOf(lines[i]), x.len) .. ^1] else: x)
+      return outLines.join("\n") & "\n"
+    inc i
+  ""
+
+func publicSignatures*(module: string): string {.raises: [].} =
+  ## The exported declarations of a module: each `func|proc|iterator|template|macro name*` header up to
+  ## its `=`, and each exported type line. The instruction of an `implement` record.
+  let lines = module.splitLines
+  var i = 0
+  var section = ""
+  while i < lines.len:
+    let t = lines[i]
+    var routine = false
+    for kw in ["func ", "proc ", "iterator ", "template ", "macro "]:
+      if t.startsWith(kw):
+        var k = kw.len
+        if k < t.len and t[k] == '`':
+          k = t.find('`', k + 1) + 1 # an operator name such as `==`
+        else:
+          while k < t.len and t[k] in IdentChars: inc k
+        if k > 0 and k < t.len and t[k] == '*': routine = true
+    if routine:
+      var header = t
+      var j = i
+      while not header.strip.endsWith("=") and j + 1 < lines.len and j - i < 6:
+        inc j
+        header.add "\n" & lines[j]
+      if header.strip.endsWith("="): header = header.strip[0 ..< header.strip.len - 1].strip
+      result.add header & "\n"
+      i = j + 1
+      continue
+    # A section keyword at column 0 decides how its indented declarations are shown.
+    for kw in ["type", "const", "let", "var"]:
+      if t == kw or t.startsWith(kw & " ") or t.startsWith(kw & "\t"):
+        section = kw
+    if t.len > 0 and t[0] notin {' ', '#'} and not (t.startsWith("type") or t.startsWith("const") or
+        t.startsWith("let") or t.startsWith("var")):
+      section = ""
+    if section.len > 0 and t.startsWith("  ") and not t.startsWith("   ") and not t.strip.startsWith("#"):
+      let name = t.strip.split({' ', '=', ':', '['})[0]
+      if name.endsWith("*") and (section != "type" or " = " in t or t.strip.endsWith("=")):
+        result.add section & " " & t.strip & "\n"
+    inc i
+
+func moduleDoc*(module: string): string {.raises: [].} =
+  for line in module.splitLines:
+    let t = line.strip
+    if t.startsWith("##"): result.add t[2 .. ^1].strip & "\n"
+    elif t.len == 0 and result.len == 0: continue
+    else: break
+  result = result.strip
+
+func extractFilenameNoDir(path: string): string {.raises: [].} =
+  let slash = path.rfind('/')
+  if slash < 0: path else: path[slash + 1 .. ^1]
+
+func recordsOf*(c: ConceptFiles): seq[Record] {.raises: [].} =
+  let p = parsePage(c.page)
+  let sources = catalogIds(p.section("Sources"))
+  let base = c.area & "/" & c.topic
+  let explain = "## Intent\n" & p.section("Intent") & "\n\n## Use when / avoid when\n" &
+    p.section("Use when") & "\n\n## Complexity\n" & p.section("Complexity")
+  result.add Record(id: "explain:" & base, kind: rkExplain, area: c.area, topic: c.topic,
+    instruction: "Explain " & p.title & " for a Nim programmer: the problem it solves, when to use it " &
+      "and when not, and its cost.",
+    output: explain, sources: sources, files: @[c.pagePath])
+  if c.module.len > 0:
+    result.add Record(id: "implement:" & base, kind: rkImplement, area: c.area, topic: c.topic,
+      instruction: "Write the Nim module `" & c.modulePath.extractFilenameNoDir & "` (" & p.title & ").\n\n" &
+        moduleDoc(c.module) & "\n\nPublic API:\n```nim\n" & publicSignatures(c.module) & "```",
+      output: c.module, sources: sources, files: @[c.modulePath, c.pagePath])
+  var n = 0
+  for i, b in p.blocks:
+    if b.bad and i + 1 < p.blocks.len and not p.blocks[i + 1].bad and p.blocks[i + 1].section == b.section:
+      inc n
+      result.add Record(id: "refactor:" & base & "#" & align($n, 2, '0'), kind: rkRefactor,
+        area: c.area, topic: c.topic,
+        instruction: "This Nim code has the wrong shape for " & p.title & ". Rewrite it in functional, idempotent Nim.",
+        input: b.code, output: p.blocks[i + 1].code, sources: sources, files: @[c.pagePath])
+  if c.test.len > 0:
+    for line in p.section("Laws").splitLines:
+      let t = line.strip
+      if not t.startsWith("- "): continue
+      let ids = specIdsIn(t)
+      if ids.len == 0: continue
+      let test = taggedTest(c.test, ids[0])
+      if test.len == 0: continue
+      result.add Record(id: "law:" & base & "#" & ids[0], kind: rkLaw, area: c.area, topic: c.topic,
+        instruction: "Write a Nim property or example test (std/unittest, nim-propcheck) for this law of " &
+          p.title & ":\n" & t[2 .. ^1],
+        output: test, specIds: @[ids[0]], sources: sources, files: @[c.testPath, c.pagePath])
+
+func toJson*(r: Record): JsonNode {.raises: [].} =
+  %*{"id": r.id, "kind": $r.kind, "area": r.area, "concept": r.topic, "instruction": r.instruction,
+     "input": r.input, "output": r.output, "specIds": r.specIds, "sources": r.sources, "files": r.files}
+
+func toChat*(r: Record): JsonNode {.raises: [].} =
+  let user = if r.input.len > 0: r.instruction & "\n\n```nim\n" & r.input & "```" else: r.instruction
+  let assistant = if r.kind in {rkImplement, rkRefactor, rkLaw}: "```nim\n" & r.output & "```" else: r.output
+  %*{"id": r.id, "messages": [
+    {"role": "system", "content": SystemPrompt},
+    {"role": "user", "content": user},
+    {"role": "assistant", "content": assistant}]}
+
+func render*(records: openArray[Record]): (string, string) {.raises: [].} =
+  ## (records.jsonl, chat.jsonl), sorted by id.
+  var rs = @records
+  rs.sort(proc(a, b: Record): int = cmp(a.id, b.id))
+  var a, b: seq[string]
+  for r in rs:
+    a.add $toJson(r)
+    b.add $toChat(r)
+  (a.join("\n") & "\n", b.join("\n") & "\n")

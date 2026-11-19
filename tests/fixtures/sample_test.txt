@@ -1,0 +1,7 @@
+suite "s":
+  # SPEC: FP-THING-01
+  test "FP-THING-01 Given x, when f twice, then same":
+    check f(f(1)) == f(1)
+
+  test "other":
+    check true
