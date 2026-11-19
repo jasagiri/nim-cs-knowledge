@@ -1,0 +1,86 @@
+# Lens
+
+## Intent
+A lens focuses on one field deep inside an immutable value. It bundles a getter and a setter: `view` reads the focus, `put` returns a new whole with the focus replaced. Lenses compose, so reaching `company.ceo.address.city` is the composition of three one-step lenses instead of three levels of hand-written copying.
+
+## Use when / avoid when
+- Use for nested immutable records that are read and updated at many places.
+- Use when you want updates to a nested field to be declared once and checked by laws.
+- Avoid for a field one level down: copying the object with one field changed (`fp/immutable_update`) is simpler.
+- Avoid when the focus may be absent or plural; that is an optional or a traversal, which this module does not cover.
+
+## Nim shape
+`src/nimcs/patterns/lens.nim`. `Lens[S, A]` is an object holding two `noSideEffect, raises: []` procs. `lens(getter, setter)` builds one, `view` and `put` use it, `over(l, s, f)` modifies through a function, `compose(outer, inner)` chains. The module defines `Company`, `Person` and `Address` with lenses `ceoCity()` and `ceoAge()`.
+
+```nim
+import nimcs/patterns/lens
+
+let c = Company(name: "acme", ceo: Person(name: "ann", age: 50,
+  address: Address(street: "1 main", city: "oslo", zip: 150)))
+let moved = ceoCity().put(c, "bergen")
+doAssert ceoCity().view(moved) == "bergen"
+doAssert ceoCity().view(c) == "oslo"
+doAssert ceoAge().over(c, proc(a: int): int {.noSideEffect, raises: [].} = a + 1).ceo.age == 51
+```
+
+Writing a lens for your own type, and checking its laws on one value (use a property test for all values):
+
+```nim
+import nimcs/patterns/lens
+
+type Point = object
+  x, y: int
+
+let xLens = lens(
+  proc(p: Point): int {.noSideEffect, raises: [].} = p.x,
+  proc(p: Point; v: int): Point {.noSideEffect, raises: [].} = Point(x: v, y: p.y))
+let p = Point(x: 1, y: 2)
+doAssert xLens.put(p, xLens.view(p)) == p
+doAssert xLens.view(xLens.put(p, 9)) == 9
+doAssert xLens.put(xLens.put(p, 5), 9) == xLens.put(p, 9)
+```
+
+## Laws and invariants
+Why this is testable: getter and setter are pure functions of immutable values, so the three lens laws are plain equations over generated wholes and parts, and a lawless lens is caught by a counterexample.
+- Get-set: putting back what you viewed changes nothing (PAT-LENS-01).
+- Set-get: viewing after a put returns what was put; a clamping setter breaks this and the property finds the counterexample (PAT-LENS-02).
+- Set-set: two puts equal the second alone (PAT-LENS-03).
+- `compose` is associative in behaviour (PAT-LENS-04).
+- `over` equals `put` of the function's result; `over` with identity changes nothing; two `over`s equal one `over` of the composed functions (PAT-LENS-05).
+- A put through a composed lens changes only the focused field and leaves the original intact (PAT-LENS-06).
+
+## Complexity
+`view` and `put` through a composed lens cost the sum of the steps: O(depth) calls, and `put` copies one record per level (each copy is O(size of that record)). Composition allocates a closure once, when the lens is built.
+
+## Pitfalls
+A setter that normalises its input breaks the laws, and code that relies on them then misbehaves in ways that look unrelated.
+
+```nim bad
+let ageLens = lens(
+  proc(p: Person): int = p.age,
+  proc(p: Person; a: int): Person = Person(name: p.name, age: min(a, 120), address: p.address))
+# put 200, then view: 120, not 200 (violates set-get)
+```
+
+Validate in a smart constructor or in the caller, and keep the setter a plain replacement:
+
+```nim
+import nimcs/patterns/lens
+
+let c = Company(name: "n", ceo: Person(name: "p", age: 1, address: Address(street: "s", city: "c", zip: 1)))
+doAssert ceoAge().view(ceoAge().put(c, 200)) == 200
+```
+
+A second trap is rebuilding a record in a setter and forgetting a field: the get-set law catches exactly that.
+
+## Related
+- `pipeline.md` (another algebra of composable function values)
+- `event_sourcing.md` (immutable state updated by pure steps)
+- `functional_core.md`
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `04bc6d730024731d` Haskell Notes for Professionals
+- `90944eadae97da9a` Learning Scalaz

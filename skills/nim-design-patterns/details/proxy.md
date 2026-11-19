@@ -1,0 +1,105 @@
+# Proxy
+
+## Intent
+Put a stand-in with the same interface in front of an object to control access to it (protection),
+to delay or avoid its cost (virtual) or to remember its answers (caching). In Nim the interface is a
+record of procs (`Source` with a `fetch` field) and a fetch has three outcomes that a caller must
+tell apart: a value, an absent key (`ok(none)`) and a refusal (`err(refDenied)`). A protection
+proxy is a func from `Source` to `Source`, fully substitutable. A cache needs state, so `Cached` is
+an explicit value that `lookup` returns again: it has a different interface and is **not** a
+`Source`; `asSource` gives a read-only view that is one.
+
+## Use when / avoid when
+- Use a protection proxy (`guarded`) to enforce a rule in one place in front of any source.
+- Use the caching proxy (`Cached`) when the same keys are asked repeatedly and answers do not change.
+  Every answer is remembered, absences and refusals included; a source whose answers change needs a
+  fresh `Cached`.
+- Use `cache.asSource` when code expects a `Source` and you want it to benefit from what the cache
+  already knows (it never adds to the cache).
+- Prefer `decorator.md` when you add behaviour on every call rather than control whether the call happens.
+
+## Nim shape
+`guarded` returns a new `Source` whose `fetch` asks `allow` first and only then the wrapped source.
+`lookup` returns the updated cache together with the value, so the caller threads the cache through.
+
+Module: `src/nimcs/patterns/proxy.nim`.
+
+```nim
+import std/options
+import nimcs/fp/result
+import nimcs/patterns/proxy
+
+func echoFetch(key: string): FetchResult = ok(some("value:" & key), Refusal)
+func notSecret(key: string): bool = key != "secret"
+
+let source = Source(fetch: echoFetch)
+let publicOnly = guarded(source, notSecret)
+
+doAssert publicOnly.fetch("a") == ok(some("value:a"), Refusal)
+doAssert publicOnly.fetch("secret").isErr          # refused, not "absent"
+
+let (c1, v1) = initCached(source).lookup("a")
+let (c2, v2) = c1.lookup("a")
+doAssert v1 == v2 and c1.misses == 1 and c2.misses == 1
+doAssert c2.asSource.fetch("a") == source.fetch("a")   # substitutable view
+```
+
+## Laws and invariants
+- A protection proxy that allows every key behaves as the source (GOF-PROXY-01).
+- A denied key yields `err(refDenied)`, distinct from an absent key, and the source is never asked
+  (GOF-PROXY-02).
+- `lookup` returns what the source returns (values, absences and refusals alike), and a repeated
+  lookup leaves the cache unchanged (GOF-PROXY-03).
+- After any sequence of lookups, `misses` equals the number of distinct keys looked up
+  (GOF-PROXY-04).
+- `asSource` of a cache answers every key exactly as the real source does (GOF-PROXY-05).
+
+## Complexity
+`guarded` adds one predicate call per fetch. `lookup` copies the cache on a miss (O(size of cache))
+and is O(1) expected on a hit; the cache is bounded only by the number of distinct keys, so add an
+eviction rule before using it on unbounded input. `asSource` captures the cache by value: O(1) to
+build, O(1) expected per fetch.
+
+## Pitfalls
+A cache hidden in a module-level `var`: calls become impure, tests order-dependent, and the proxy
+looks substitutable while behaving differently on the second call.
+
+```nim bad
+import std/tables
+
+var cache: Table[string, string]
+
+proc fetchCached(key: string): string =
+  if key notin cache:
+    cache[key] = "value:" & key
+  cache[key]
+```
+
+Make the cache a value the caller threads through:
+
+```nim
+import std/options
+import nimcs/fp/result
+import nimcs/patterns/proxy
+
+func fetchV(key: string): FetchResult = ok(some("v:" & key), Refusal)
+
+var cache = initCached(Source(fetch: fetchV))
+for key in ["a", "b", "a"]:
+  cache = cache.lookup(key).cache
+doAssert cache.misses == 2
+```
+
+Collapsing refusal into absence is the second pitfall: a caller cannot then tell "no such key" from
+"you may not ask". Keep them as `ok(none)` and `err`.
+
+## Related
+- `decorator.md`, `adapter.md`, `singleton.md`, `facade.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

@@ -1,0 +1,87 @@
+# Flyweight
+
+## Intent
+Many equal values are stored many times (the same font name on every run of text). The OO pattern
+shares one object among all users and keeps a factory table of shared objects. In functional Nim the
+shared thing is a small symbol (`Sym`, an index) and the table is an **explicit immutable pool value**:
+`intern(pool, s)` returns the new pool and the symbol. There is no global table, so interning is
+deterministic and testable.
+
+## Use when / avoid when
+- Use when a large number of values repeat from a small set and you compare or store them often
+  (identifiers, tags, font and style names, keys).
+- Pass the pool through the code that interns; return it from the routine that extends it.
+- Avoid when values are mostly unique or small: the pool costs more than it saves.
+- Avoid a module-level `var` pool: it is a singleton in disguise (`singleton.md`).
+
+## Nim shape
+Symbols are numbered by first appearance, so the numbering depends only on the input order.
+Interning something already present returns the same pool and symbol: `intern` is idempotent.
+
+Module: `src/nimcs/patterns/flyweight.nim`.
+
+```nim
+import std/options
+import nimcs/patterns/flyweight
+
+let (pool, syms) = initPool().internAll(@["bold", "serif", "bold", "mono", "serif"])
+doAssert syms == @[Sym(0), Sym(1), Sym(0), Sym(2), Sym(1)]
+doAssert pool.size == 3
+doAssert pool.resolve(Sym(2)) == some("mono")
+
+let (again, sym) = pool.intern("bold")
+doAssert sym == Sym(0) and again == pool      # idempotent
+```
+
+## Laws and invariants
+- Interning a string twice returns the same symbol and the same pool the second time
+  (GOF-FLYWEIGHT-01).
+- `resolve(intern(s))` is `s` (GOF-FLYWEIGHT-02).
+- Equal strings get equal symbols and different strings get different symbols
+  (GOF-FLYWEIGHT-03).
+- Pool size is the number of distinct strings interned; symbols follow first appearance
+  (GOF-FLYWEIGHT-04).
+- `internAll` equals interning the items one by one, on any starting pool (GOF-FLYWEIGHT-05), and
+  does it in one pass: 20000 distinct strings take well under a second (GOF-FLYWEIGHT-06).
+
+## Complexity
+Looking up an existing string is O(1) expected (hash table). `intern` takes the pool by value and
+copies it when it adds a new string, which is O(size of pool): interning n new strings one by one
+is O(n^2). `internAll` copies the pool once and then interns in one pass, so it is O(size of pool +
+n) expected; use it whenever you have the strings together. If you must intern one at a time into a
+big pool, back the pool with a persistent map. `resolve` is O(1).
+
+## Pitfalls
+Using the interned symbol with a different pool than the one that issued it: symbols are only
+meaningful for their pool.
+
+```nim bad
+import nimcs/patterns/flyweight
+
+let (poolA, symA) = initPool().intern("x")
+let poolB = initPool().internAll(@["y", "x"]).pool
+echo poolB.resolve(symA)   # prints "y", not "x"
+```
+
+Keep one pool per universe of symbols and carry it with them (a symbol resolved against the pool
+that issued it, or a later pool that extends it, is always right):
+
+```nim
+import std/options
+import nimcs/patterns/flyweight
+
+let (poolA, symA) = initPool().intern("x")
+let (poolB, _) = poolA.intern("y")
+doAssert poolB.resolve(symA) == some("x")
+```
+
+## Related
+- `composite.md` (share leaves), `prototype.md` (copy instead of share), `singleton.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

@@ -1,0 +1,79 @@
+# Memento
+
+## Intent
+Capture an object's state so it can be restored later without breaking encapsulation. The OO pattern needs a sealed copy because objects are mutable and their fields are private. With value semantics the problem disappears: `let saved = settings` is the memento, and later changes build new values that cannot reach it. What remains to design is the history policy: how many snapshots, how undo and redo move between them.
+
+## Use when / avoid when
+- Use when undo by snapshot is simple: small values, or persistent structures that share unchanged parts.
+- Use `Timeline[T]` when you need a bounded undo/redo history of whole values.
+- Avoid when snapshots are large and edits are small: store commands and inverses instead (`command`).
+- Avoid when the state includes handles (files, sockets) that a snapshot cannot restore.
+
+## Nim shape
+The module is `src/nimcs/patterns/memento.nim`. `Timeline[T]` holds past values (oldest first), the present, the redo side and a capacity. `record` makes a new value the present, drops the oldest past value beyond the capacity and clears redo. `undo` and `redo` return an `Option` of a new timeline, so "nothing to undo" is a value.
+
+```nim
+import std/options
+import nimcs/patterns/memento
+
+type Settings = object
+  volume: int
+
+var live = Settings(volume: 3)
+let saved = live                      # the memento: nothing to implement
+live.volume = 9
+doAssert saved.volume == 3
+
+let t = initTimeline(Settings(volume: 3), 10).record(Settings(volume: 5))
+doAssert t.current.volume == 5
+doAssert t.undo.get.current.volume == 3
+doAssert t.undo.get.redo.get.current.volume == 5
+```
+
+The capacity bounds the history:
+
+```nim
+import nimcs/patterns/memento
+
+var t = initTimeline(0, 2)
+for i in 1 .. 5: t = t.record(i)
+doAssert t.history == @[3, 4, 5]
+doAssert t.pastLen == 2
+```
+
+## Laws and invariants
+- A saved value is unaffected by later changes to the original, when its fields are values (GOF-MEMENTO-01). A `ref` field is copied as a pointer: the data behind it is shared, so a change through the original shows in the snapshot (GOF-MEMENTO-08).
+- Recording then undoing returns the previous present (GOF-MEMENTO-02); undo then redo changes nothing (GOF-MEMENTO-03).
+- The past never exceeds the capacity (at least 1) and keeps the newest values (GOF-MEMENTO-04).
+- Recording clears redo (GOF-MEMENTO-05); undo and redo on a fresh timeline are `none` (GOF-MEMENTO-06).
+- Undoing leaves the timeline it came from unchanged (GOF-MEMENTO-07).
+
+## Complexity
+`record`, `undo` and `redo` copy the history `seq`s, so each is O(h) in the retained history (bounded by the capacity for the past; the redo side is bounded by it too, since it only holds undone past values). Space is O(capacity x size of a value); with structurally shared values the cost per snapshot is the changed part only.
+
+## Pitfalls
+Sharing mutable references in snapshots, so the "saved" state changes with the live one:
+
+```nim bad
+type State = ref object
+  items: seq[int]
+
+var live = State(items: @[1, 2])
+let saved = live          # same object, not a copy
+live.items.add 3          # saved.items changed too
+```
+
+Fix: use value `object`s (copy on assignment), or immutable `ref` nodes that are never modified in place. Note that copying an `object` that has a `ref` field copies only the pointer; the referenced data stays shared, so such a snapshot must build a fresh referent (as `Holder(box: Box(n: live.box.n))` does in the tests). Another trap: an unbounded history (memory grows with every edit): always give a capacity. And do not clear redo on `record` only some of the time; the redo side would then describe a history that no longer exists.
+
+## Related
+- `command.nim` (undo by inverse commands)
+- `state.nim` (the state that is snapshotted)
+- `../../nim-data-structures` (persistent structures make snapshots cheap)
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

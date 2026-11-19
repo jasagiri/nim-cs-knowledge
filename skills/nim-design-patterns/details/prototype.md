@@ -1,0 +1,121 @@
+# Prototype
+
+## Intent
+Make a new object by copying an existing one, without depending on its class and without redoing
+its construction. In a language with reference objects this needs a `clone()` protocol. In Nim an
+`object` has value semantics: assignment is already an independent deep copy, `seq` and `string`
+fields included. The pattern therefore **mostly disappears**: `let b = a` is the clone, and "clone
+and change" is a `withX` func. What survives is a registry of named template values.
+
+## Use when / avoid when
+- Use plain assignment plus `withX` funcs whenever you have the template in hand.
+- Use the `Registry` when callers choose a template by name at run time (spawn tables, document
+  templates, presets).
+- Avoid a `clone` proc or a `Cloneable` interface: it re-implements what the language does.
+- Avoid `ref object` for the template: then `let b = a` shares, and you would need a manual deep copy.
+
+## Nim shape
+`Enemy` is a value; `withHp` and `withTag` copy and change. `Registry` is an immutable list of
+(name, template); `register` returns a new registry and `instantiate` returns an independent copy
+as an `Option`.
+
+Module: `src/nimcs/patterns/prototype.nim`.
+
+```nim
+import std/options
+import nimcs/patterns/prototype
+
+let goblin = Enemy(kind: "goblin", hp: 10, tags: @["small"])
+let boss = goblin.withHp(100).withTag("boss")
+doAssert goblin.hp == 10 and goblin.tags == @["small"]   # the original is untouched
+doAssert boss.tags == @["small", "boss"]
+
+let reg = initRegistry().register("goblin", goblin).register("boss", boss)
+doAssert reg.instantiate("boss") == some(boss)
+doAssert reg.instantiate("dragon").isNone
+doAssert reg.names == @["goblin", "boss"]
+```
+
+## Laws and invariants
+- A copy equals its original, and changing the copy leaves the original unchanged
+  (GOF-PROTOTYPE-01).
+- `instantiate` of a registered name equals the prototype, every time; an unknown name is `none`
+  (GOF-PROTOTYPE-02).
+- `register` replaces an existing name instead of duplicating it, keeps the other entries, and
+  leaves the old registry valid (GOF-PROTOTYPE-03).
+- Copying an object with a `ref` field shares the referenced data; value fields stay independent
+  (GOF-PROTOTYPE-04, a caveat, not a guarantee of independence).
+
+## Complexity
+Copying is O(size of the value), as for any assignment. `register` and `instantiate` are O(n) in the
+number of entries (linear scan over a `seq`; fine for tens of templates, use a persistent map for
+thousands).
+
+## Pitfalls
+Using `ref` for the template and expecting a copy.
+
+```nim bad
+type Enemy = ref object
+  hp: int
+
+let a = Enemy(hp: 10)
+let b = a           # same object, not a copy
+b.hp = 99
+doAssert a.hp == 10 # fails
+```
+
+Keep it a value type:
+
+```nim
+type Enemy = object
+  hp: int
+
+let a = Enemy(hp: 10)
+var b = a
+b.hp = 99
+doAssert a.hp == 10
+doAssert b.hp == 99
+```
+
+The same trap applies to a value object that holds a `ref` field: the copy copies the reference,
+so original and copy share the referenced data (GOF-PROTOTYPE-04). Keep templates free of `ref`
+fields, or hold that data in a value type.
+
+```nim bad
+type
+  Counter = ref object
+    n: int
+  Template = object
+    name: string
+    counter: Counter
+
+let a = Template(name: "a", counter: Counter(n: 1))
+var b = a
+b.counter.n = 5
+doAssert a.counter.n == 1   # fails: the counter is shared
+```
+
+```nim
+type
+  Counter = object
+    n: int
+  Template = object
+    name: string
+    counter: Counter
+
+let a = Template(name: "a", counter: Counter(n: 1))
+var b = a
+b.counter.n = 5
+doAssert a.counter.n == 1
+```
+
+## Related
+- `builder.md` (the same copy-and-change shape with validation), `flyweight.md` (sharing instead of copying).
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

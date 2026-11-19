@@ -1,0 +1,68 @@
+# Tagless final
+
+## Intent
+Write a program once against an interface of operations and pick its meaning by picking a type. The program is a generic function over `R`; instantiate it with a type that evaluates, one that prints, one that counts nodes or one that builds a tree. There is no instruction type and no interpreter loop: each interpretation is a type with a few small functions.
+
+## Use when / avoid when
+- Use when the operations are stable and interpretations keep being added (evaluate, show, size, optimise, compile).
+- Use when you want the compiler to reject a program that uses an operation an interpreter lacks.
+- Avoid when you must inspect or rewrite programs as values; a final program is not data. Use `free_interpreter.md`, or reify with an `Ast` interpreter as shown here.
+- Avoid when adding operations is the frequent change: each new operation touches the interface and every interpreter.
+
+## Nim shape
+`src/nimcs/patterns/tagless_final.nim`. `ExprSym` is a concept naming four operations (`lit`, `add`, `mul`, `neg`). The interpretations are types: `Eval` (an int), `Show` (a string), `Size` (a node count), and `Ast` (a reified tree, the initial encoding for comparison). Each is a `distinct` type so that `Eval` and `Size`, both wrapping an `int`, do not collide. Programs are generic functions: `dotProduct[R]`, `horner[R]`, `negated[R]`.
+
+```nim
+import nimcs/patterns/tagless_final
+
+let pairs = @[(2, 3), (4, -1)]
+doAssert dotProduct[Eval](pairs).value == 2
+doAssert dotProduct[Show](pairs).text == "((0+(2*3))+(4*-1))"
+doAssert dotProduct[Size](pairs).nodes == 9
+doAssert evalAst(dotProduct[Ast](pairs)) == 2
+```
+
+A new interpretation needs no change to the programs:
+
+```nim
+import nimcs/patterns/tagless_final
+
+type Depth = distinct int
+func lit(t: typedesc[Depth]; n: int): Depth = Depth(1)
+func add(a, b: Depth): Depth = Depth(max(int(a), int(b)) + 1)
+func mul(a, b: Depth): Depth = Depth(max(int(a), int(b)) + 1)
+func neg(a: Depth): Depth = Depth(int(a) + 1)
+
+doAssert int(dotProduct[Depth](@[(1, 2), (3, 4)])) == 4
+```
+
+## Laws and invariants
+Why this is testable: a program is a function of an interpretation, so one property can run the same program under two interpretations and compare, with a plain-arithmetic oracle as the referee.
+- `Eval` equals plain arithmetic (PAT-TAGLESSFINAL-01).
+- `Size` follows the shape of the program: 1 + 4n nodes for n pairs or n steps (PAT-TAGLESSFINAL-02).
+- Final and initial encodings agree: reifying to an `Ast` and then evaluating or counting equals interpreting directly (PAT-TAGLESSFINAL-03).
+- `Show` equals printing the reified tree, with balanced parentheses (PAT-TAGLESSFINAL-04).
+- A program built from another (`negated`) behaves as expected under each interpretation (PAT-TAGLESSFINAL-05).
+
+## Complexity
+Each interpretation is one pass over the program's own structure: O(n) for a program with n operations. Generic instantiation costs compile time and code size per interpretation, nothing at run time beyond the interpretation itself.
+
+## Pitfalls
+Using the same underlying type for two interpretations makes them indistinguishable to overload resolution.
+
+```nim bad
+func lit(t: typedesc[int]; n: int): int = n
+func add(a, b: int): int = a + b
+# a second interpretation that also wraps an int (a node count) cannot coexist with this one
+```
+
+Give each interpretation its own `distinct` type, as `Eval` and `Size` do. A second trap is leaving an operation out of one interpreter: the concept check then fails at the instantiation, which is the point, so add the function rather than loosening the concept.
+
+## Related
+- `free_interpreter.md` (the same programs as data; compare costs of adding operations versus interpreters)
+- `dependency_record.md`
+- `parser_combinator.md` (another place where small typed pieces compose)
+
+## Sources
+
+None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.

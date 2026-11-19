@@ -1,0 +1,80 @@
+# Functional core, imperative shell
+
+## Intent
+Tangled code decides and acts in the same breath: it reads a sensor, compares, switches a relay and prints. Split it. The core is a pure function that takes the current state and the new input and returns the next state together with a list of effect descriptions (plain data). The shell is a thin loop that fetches inputs, calls the core and performs the effects. All rules live in the core; the shell has none.
+
+## Use when / avoid when
+- Use when logic and I/O are mixed and you want to test the rules without a clock, a device or a network.
+- Use when the same decision must be replayed or explained later (the effect list is the explanation).
+- Avoid for a one-line effect with no decision in it; call the effect directly.
+- When the decisions themselves are a closed table of transitions, reach for `state_machine.md`; when the effects must be inspected or rewritten as a program, reach for `free_interpreter.md`.
+
+## Nim shape
+`src/nimcs/patterns/functional_core.nim` is a thermostat with a dead band. `decide(cfg, current, reading)` is a `func` returning a `Decision` (the new `state` and a `seq[Effect]`). `Effect` is an object variant (`ekSetHeater`, `ekLog`), so the set of effects is closed and a `case` over it is checked for exhaustiveness. The shell below owns the only mutable variables and does what the effects say.
+
+```nim
+import nimcs/patterns/functional_core
+
+proc main() =
+  let cfg = Config(target: 200, band: 15)
+  var heater = hsOff
+  var log: seq[string]
+  for reading in [210, 180, 181, 230]:
+    let d = cfg.decide(heater, reading)
+    for e in d.effects:
+      case e.kind
+      of ekSetHeater: heater = e.heater
+      of ekLog: log.add e.line
+    heater = d.state
+  doAssert log == @["heater on at 180", "heater off at 230"]
+  doAssert heater == hsOff
+
+main()
+```
+
+The temperatures are tenths of a degree; `initConfig` is the smart constructor that rejects a negative band.
+
+## Laws and invariants
+Why this is testable: `decide` takes everything it depends on as arguments and returns everything it does as data, so a property test needs no fake device, only generated states and readings.
+- A decision emits no effect when the state is unchanged, and otherwise exactly one `ekSetHeater` naming the new state followed by one `ekLog` (PAT-FUNCTIONALCORE-01).
+- Idempotence under repetition: deciding again from the returned state with the same reading emits nothing (PAT-FUNCTIONALCORE-02).
+- Inside the dead band the state is kept and nothing is emitted; outside it the heater is driven toward the target (PAT-FUNCTIONALCORE-03).
+- Core and shell agree: for any readings, the world the shell builds ends in the core's final state, with one log line per switch (PAT-FUNCTIONALCORE-04).
+- A negative band is rejected at construction (PAT-FUNCTIONALCORE-05).
+
+## Complexity
+`decide` is O(1) time and space (at most two effects). The shell is O(n) over n readings.
+
+## Pitfalls
+Decision, state change and I/O in one routine cannot be tested without capturing the output, and a rule that only runs next to the device is a rule nobody can check.
+
+```nim bad
+proc tick(heater: var HeaterState; reading: int) =
+  if reading < 185 and heater == hsOff:
+    heater = hsOn
+    echo "heater on"
+```
+
+Return the decision as data and let the caller act on it:
+
+```nim
+import nimcs/patterns/functional_core
+
+let d = Config(target: 200, band: 15).decide(hsOff, 180)
+doAssert d.state == hsOn
+doAssert d.effects.len == 2
+```
+
+Also keep the core free of hidden inputs: a clock read or a random draw inside `decide` brings back the problem. Pass the time or the draw in as an argument.
+
+## Related
+- `state_machine.md` (decisions as a transition table)
+- `event_sourcing.md` (the effects of a core can be recorded as events)
+- `free_interpreter.md` (effects as a program that several interpreters can run)
+- `dependency_record.md` (when the shell needs injectable dependencies)
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `57f76eb4ea4f92e1` Hands-on Elixir & OTP: Cryptocurrency trading bot

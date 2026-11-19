@@ -1,0 +1,74 @@
+# Command
+
+## Intent
+A request must be stored, logged, replayed or reversed. The OO pattern turns the request into an object with `execute` and `undo`. In functional Nim the command is data (an object variant), execution is a pure function `apply(state, command): Result[state, Error]`, and undo is another command: the inverse, computed from the state before the edit. The invoker, receiver and "command object" collapse into a value, a function and a list.
+
+## Use when / avoid when
+- Use when operations must be replayable (event log, test script), serialisable, undoable or sent over a wire.
+- Use inverse commands when states are large and edits are small; use `memento` snapshots when states are small or structurally shared and the inverse is hard to compute.
+- Avoid when you only need "call this later": store a closure (see `strategy`) instead of inventing a command type.
+- Avoid when there is no undo and no log: a plain function call is the command.
+
+## Nim shape
+The module is `src/nimcs/patterns/command.nim`: a text editor. `Cmd` is an object variant (`ckInsert`, `ckDelete`). `apply(doc, cmd)` returns a new text or `eeOutOfRange`. `inverse(doc, cmd)` needs the document because a delete must remember the text it removed. Positions and lengths are byte offsets into UTF-8 text; `apply` refuses a position inside a multi-byte character (`eeNotCharBoundary`) and inserted text that is not valid UTF-8 (`eeInvalidUtf8`), so a valid document stays valid. `Editor` holds the text plus an undo stack of inverse commands and a redo stack of forward commands; `exec`, `undo` and `redo` return a new `Editor` inside a `Result`.
+
+```nim
+import nimcs/fp/result
+import nimcs/patterns/command
+
+let ed = initEditor("hello world")
+let edited = ed.exec(deleteCmd(5, 6)).value
+doAssert edited.text == "hello"
+let restored = edited.undo.value
+doAssert restored.text == "hello world"
+doAssert restored.redo.value.text == "hello"
+doAssert ed.exec(insertCmd(99, "x")).error == eeOutOfRange
+```
+
+Replaying a log is a fold, which is why a command log is a complete record of a session:
+
+```nim
+import nimcs/fp/result
+import nimcs/patterns/command
+
+let log = [insertCmd(0, "ab"), insertCmd(2, "cd"), deleteCmd(1, 2)]
+doAssert replay("", log) == ok("ad", EditError)
+doAssert replay("", log) == replay("", log)
+```
+
+## Laws and invariants
+- Executing a valid command and then undoing it restores the text (GOF-COMMAND-01).
+- An out-of-range command fails and the editor value is unchanged (GOF-COMMAND-02).
+- Replaying a log is deterministic and agrees with `exec` one by one (GOF-COMMAND-03).
+- Undoing every successful edit returns the original text (GOF-COMMAND-04).
+- Undo then redo restores the editor exactly (GOF-COMMAND-05); a new command clears redo (GOF-COMMAND-06).
+- Undo on an empty history is `eeNothingToUndo` (GOF-COMMAND-07).
+- Cutting inside a UTF-8 character or inserting invalid UTF-8 is refused; accepted edits keep valid text valid and undo restores it (GOF-COMMAND-09).
+
+## Complexity
+`apply` is O(n) in the text length (strings are rebuilt); `inverse` is O(len of the removed text). Each `exec`/`undo`/`redo` copies the stacks (`&` allocates), so a long history costs O(h) per step; use a persistent list from `ds` when h is large. Space is O(sum of removed or inserted text).
+
+## Pitfalls
+Computing the inverse after applying the command: the removed text is gone by then.
+
+```nim bad
+func undoDelete(textAfter: string; at, len: int): string =
+  # What was deleted? It is no longer in textAfter.
+  textAfter
+```
+
+Fix: compute `inverse(docBefore, cmd)` first, as `exec` does. A second trap is clamping an out-of-range position silently; the inverse would then describe a different edit than the one applied. Refuse with an error instead. A third: letting a new command keep the old redo stack, which redoes edits on a text they were never made for.
+
+## Related
+- `memento.nim` (undo by keeping old values)
+- `state.nim` (a transition function over events)
+- `observer.nim` (event logs folded over state)
+- `../../nim-data-structures` (persistent lists for long histories)
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

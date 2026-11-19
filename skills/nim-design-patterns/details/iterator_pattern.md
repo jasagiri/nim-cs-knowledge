@@ -1,0 +1,79 @@
+# Iterator
+
+## Intent
+Walk the elements of a collection without exposing how it is stored. The OO pattern defines an iterator object with `hasNext` and `next`. Nim has the pattern in the language: an `iterator` is the traversal and a `for` loop is the client. When two traversals must advance independently, the functional answer is a cursor that is a value: `next` returns the element and the cursor to continue from, so a cursor can be kept and resumed.
+
+## Use when / avoid when
+- Use an `iterator` (internal iteration, `for x in c`) for almost everything: traversal order and storage stay hidden and nothing is allocated.
+- Use a `Cursor` value when you must hold a position (resume later, branch from one position twice) or advance several traversals in lockstep (merging, zipping).
+- Avoid building a whole `seq` just to loop over it when a `for` loop over the iterator does the job.
+- Avoid a closure iterator unless you need to suspend it and pass it around; it is stateful, so a `func` cannot call it and it cannot be resumed from an earlier position.
+- For lazy infinite sequences, see `../../nim-functional-core` (lazy streams) rather than a hand-made cursor.
+
+## Nim shape
+The module is `src/nimcs/patterns/iterator_pattern.nim`: an immutable binary search tree (`insert` returns a new tree). `items` yields the elements in ascending order. `cursor(t)` and `next(c)` give external iteration as a value (the cursor holds the pending left spine). `mergeUnion` walks two trees in lockstep with two cursors.
+
+```nim
+import nimcs/patterns/iterator_pattern
+
+let t = fromSeq([5, 1, 9, 3, 5])
+var seen: seq[int]
+for x in t.items: seen.add x
+doAssert seen == @[1, 3, 5, 9]
+doAssert mergeUnion(t, fromSeq([2, 3, 10])) == @[1, 2, 3, 5, 9, 10]
+```
+
+A cursor can be resumed from a saved position any number of times:
+
+```nim
+import std/options
+import nimcs/patterns/iterator_pattern
+
+let c0 = cursor(fromSeq([4, 2, 6]))
+let first = c0.next.get
+doAssert first[0] == 2
+let c1 = first[1]
+doAssert c1.next.get[0] == 4
+doAssert c1.next.get[0] == 4   # same cursor, same answer
+doAssert c0.next.get[0] == 2   # the original is untouched
+```
+
+## Laws and invariants
+- `items` yields the inserted values ascending and without repeats (GOF-ITER-01).
+- Draining a cursor yields exactly what `items` yields (GOF-ITER-02).
+- Calling `next` twice on one cursor gives the same element and equal continuations (GOF-ITER-03).
+- Iterating twice gives the same sequence (GOF-ITER-04).
+- `mergeUnion` is the ascending union without repeats (GOF-ITER-05).
+- `insert` leaves the old tree's traversal unchanged (GOF-ITER-06); an empty tree yields nothing (GOF-ITER-07).
+
+## Complexity
+Each `next` copies the pending stack (`seq` value semantics) and pushes one left spine, so it costs O(h) with h the tree height; a full traversal is therefore O(n h) time, which is O(n log n) for a balanced tree (a mutable stack inside one loop would be O(n); the cursor pays for being a value). A cursor holds the left spine, O(h) space. `insert` is O(h) time and allocates O(h) new nodes (the rest is shared). The unbalanced tree degrades to O(n) height on sorted input.
+
+## Pitfalls
+Keeping an index in a mutable object that every consumer shares, so two loops over one collection disturb each other:
+
+```nim bad
+type Walker = ref object
+  items: seq[int]
+  pos: int
+
+proc next(w: Walker): int =
+  result = w.items[w.pos]   # out-of-range when pos == len; also shared mutable position
+  inc w.pos
+```
+
+Fix: use `for x in items`, or a `Cursor` value whose `next` returns the continuation and an `Option` for the end, so end-of-data is a value and each holder has its own position. Another trap: modifying a collection while iterating it; with persistent structures the loop sees the old version, which is the point.
+
+## Related
+- `visitor.nim` (traversal that computes results from a structure)
+- `observer.nim` (a log folded over state)
+- `../../nim-data-structures` (persistent trees and lists)
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `90944eadae97da9a` Learning Scalaz
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

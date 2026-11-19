@@ -1,0 +1,69 @@
+# Idempotent command
+
+## Intent
+Make a command safe to deliver more than once. The client attaches a key to each command. The ledger remembers, for every key, the command and the response it produced. A repeat of the same command returns the stored response and changes nothing; a different command under a used key is a conflict. The handler is a pure function from (ledger, command) to (ledger, response).
+
+## Use when / avoid when
+- Use for anything a client may retry after a timeout: payments, orders, sign-ups, webhooks received at least once.
+- Use when the retry must see the same answer as the original attempt, including a refusal.
+- Avoid when the operation is naturally idempotent (setting a field to a value) and has no response worth replaying.
+- In production the entry list is a keyed table with an expiry; the list here keeps the example short and ordered.
+
+## Nim shape
+`src/nimcs/patterns/idempotent_command.nim`. `Command` has a `key`, a kind and an amount. `Ledger` holds the balance and a list of `Entry` (command and response, one per key, in order of first arrival). `handle(ledger, cmd)` returns a named tuple `(ledger, response)`. Refusals (`rkInvalidAmount`, `rkInsufficientFunds`) are stored like successes so that a retry sees the same refusal even if the balance would now allow it.
+
+```nim
+import nimcs/patterns/idempotent_command
+
+let pay = Command(key: "order-17", kind: ckDeposit, amount: 40)
+let first = initLedger().handle(pay)
+let retry = first.ledger.handle(pay)
+doAssert first.response == Response(kind: rkAccepted, balance: 40)
+doAssert retry == first
+let clash = retry.ledger.handle(Command(key: "order-17", kind: ckDeposit, amount: 41))
+doAssert clash.response.kind == rkKeyConflict
+doAssert clash.ledger == first.ledger
+```
+
+## Laws and invariants
+Why this is testable: because `handle` is a pure function, "applying twice equals applying once" is an equation between two return values, and at-least-once delivery is a generated list of commands with duplicates, compared with the same list without them.
+- Handling the same command twice gives the same ledger and response as once (PAT-IDEMPOTENTCOMMAND-01).
+- For any at-least-once delivery (duplicates after the first arrival), the final ledger equals exactly-once processing (PAT-IDEMPOTENTCOMMAND-02).
+- A redelivered command gets the response of its first handling, even after later commands changed the balance (PAT-IDEMPOTENTCOMMAND-03).
+- Distinct keys are independent: the balance equals an independent model (PAT-IDEMPOTENTCOMMAND-04).
+- A different command under a used key is a conflict and changes nothing (PAT-IDEMPOTENTCOMMAND-05).
+- A non-positive amount is refused identically on retry; an overdraft is `rkInsufficientFunds` (PAT-IDEMPOTENTCOMMAND-06).
+
+## Complexity
+`handle` is O(k) for k stored keys here (linear lookup) and copies the entry list on a new key; with a hash map and a persistent structure both become O(1) or O(log k). Space grows with the number of distinct keys until entries expire.
+
+## Pitfalls
+Deduplicating by key but returning nothing teaches the retrying client nothing; it cannot tell whether the first attempt succeeded.
+
+```nim bad
+func handle(l: Ledger; cmd: Command): Ledger =
+  if cmd.key in l.seenKeys: return l
+  Ledger(balance: l.balance + cmd.amount, seenKeys: l.seenKeys & cmd.key)
+```
+
+Store the response with the key and return it:
+
+```nim
+import nimcs/patterns/idempotent_command
+
+let l = initLedger().handle(Command(key: "k", kind: ckWithdraw, amount: 5)).ledger
+doAssert l.entries[0].response.kind == rkInsufficientFunds
+doAssert l.handle(Command(key: "k", kind: ckWithdraw, amount: 5)).response.kind == rkInsufficientFunds
+```
+
+Also compare the whole command, not only the key: the same key with another payload is a client bug and must not be silently treated as a duplicate.
+
+## Related
+- `event_sourcing.md` (the accepted commands become events)
+- `cqrs.md`
+- `retry_backoff.md` (the client side of at-least-once delivery)
+- `state_machine.md`
+
+## Sources
+
+None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.

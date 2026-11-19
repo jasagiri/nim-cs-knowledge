@@ -1,0 +1,74 @@
+# Mediator
+
+## Intent
+Many participants interact by rules, and letting each know all the others creates a tangle. The OO pattern puts the "who talks to whom" logic in a mediator object that the colleagues call. In functional Nim the mediator is a pure routing function from (current room, message) to (new room, deliveries): participants are just names in a value, and nothing is sent from inside, so the caller performs the deliveries and the logic needs no sockets to test.
+
+## Use when / avoid when
+- Use when a group of parties interacts under rules that depend on group membership or state (chat rooms, dialog fields that enable each other, hand-offs).
+- Use when you want the whole interaction testable as data in, data out.
+- Avoid when there are two parties: call one from the other, or pass a function.
+- Avoid for pure broadcast with no routing rules: that is `observer`.
+
+## Nim shape
+The module is `src/nimcs/patterns/mediator.nim`. `Msg` is an object variant (join, leave, say, whisper). `Room` keeps its members sorted. `route(room, msg)` returns `Result[Routed, RoomError]` where `Routed` carries the new room and a `seq[Delivery]`. `runLog` folds a message list and, instead of hiding rejected messages, lists each with its index.
+
+```nim
+import nimcs/fp/result
+import nimcs/patterns/mediator
+
+var room = emptyRoom()
+for who in ["ann", "bob", "cy"]:
+  room = room.route(join(who)).value.room
+let routed = room.route(say("bob", "hi")).value
+doAssert routed.deliveries == @[Delivery(to: "ann", body: "bob: hi"),
+                                Delivery(to: "cy", body: "bob: hi")]
+doAssert room.route(say("zed", "hi")).error == reNotMember
+```
+
+The deliveries are values, so the edge of the program decides how to send them:
+
+```nim
+import nimcs/patterns/mediator
+
+let report = runLog(emptyRoom(), [join("ann"), say("zed", "?"), join("bob")])
+doAssert report.room.members == @["ann", "bob"]
+doAssert report.rejected == @[(1, reNotMember)]
+```
+
+## Laws and invariants
+- A `say` reaches every member but the sender, once, and leaves the room unchanged (GOF-MEDIATOR-01).
+- A message from a non-member is `reNotMember` (GOF-MEDIATOR-02).
+- A whisper reaches exactly its recipient; bad recipients are refused (GOF-MEDIATOR-03).
+- Deliveries only go to members of the room before the message, never to the sender (GOF-MEDIATOR-04).
+- The same log gives the same report (GOF-MEDIATOR-05); members stay sorted and unique, double join fails (GOF-MEDIATOR-06).
+- A rejected message has no effect and is listed with its index (GOF-MEDIATOR-07); leaving tells the others (GOF-MEDIATOR-08).
+
+## Complexity
+Each `route` is O(m) in the number of members (membership test, sort on join, one delivery per recipient); `runLog` is O(k m) for k messages. Memory per delivery is one small string pair.
+
+## Pitfalls
+Colleagues that hold references to each other and call each other directly, with the mediator only forwarding: coupling stays, and state changes are hidden inside callbacks.
+
+```nim bad
+type Member = ref object
+  name: string
+  peers: seq[Member]      # every member knows every other
+
+proc say(m: Member; text: string) =
+  for p in m.peers: p.inbox.add text   # mutation hidden in the loop
+```
+
+Fix: members are names, the room is a value, and `route` returns the deliveries. Also avoid iterating a hash table of members: delivery order would then depend on hashing; keep members in a sorted `seq`, as `Room` does.
+
+## Related
+- `observer.nim` (broadcast without routing rules)
+- `state.nim` (rules as a transition function)
+- `command.nim` (messages as data, logs as folds)
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

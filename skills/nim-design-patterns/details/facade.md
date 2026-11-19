@@ -1,0 +1,84 @@
+# Facade
+
+## Intent
+Callers need one or two answers from a subsystem and should not know its steps, their order, or how
+many there are. The OO pattern puts one simple class in front of several. In Nim the **module
+boundary is the facade**: the steps are not exported, and the exported surface is a small API.
+
+## Use when / avoid when
+- Use when a task is a fixed sequence of steps (normalise, tokenise, count, rank) that callers would
+  otherwise repeat or get in the wrong order.
+- Export the one or two routines callers need; leave the steps unexported so they can change.
+- Avoid when callers genuinely need the steps individually: export those, with no wrapper.
+- Avoid a facade object with fields holding the subsystems: a module of funcs does it with no state.
+
+## Nim shape
+`summarize` composes private steps; `normalizeText` is exported because callers legitimately use it
+alone. Nothing here owns state, so everything is a `func`. Output order never depends on hashing:
+ties in counts break by word.
+
+Module: `src/nimcs/patterns/facade.nim`.
+
+```nim
+import std/options
+import nimcs/patterns/facade
+
+let s = summarize("The cat; the DOG, the end.", 2)
+doAssert s.words == 6 and s.unique == 4
+doAssert s.longest == some("the")
+doAssert s.top == @[("the", 3), ("cat", 1)]
+doAssert normalizeText("  Hello,   World! ") == "hello world"
+```
+
+## Laws and invariants
+- Words are the maximal runs of ASCII letters and digits, counted case-insensitively
+  (GOF-FACADE-01).
+- `normalizeText` is idempotent (GOF-FACADE-02).
+- `summarize(t)` equals `summarize(normalizeText(t))` (GOF-FACADE-03).
+- A text with no word characters summarises to nothing; `top` is ordered by count descending, then
+  word ascending, and has at most `topN` entries (GOF-FACADE-04).
+
+## Complexity
+Time O(n + u log u) for n characters and u unique words (counting, then sorting). Space O(n).
+
+## Pitfalls
+Exporting everything defeats the facade: callers depend on internals and the steps cannot change.
+
+```nim bad
+# module with every step marked public
+func tokenize*(s: string): seq[string] = @[]
+func countWords*(ws: seq[string]): int = ws.len
+func summarize*(s: string): int = countWords(tokenize(s))
+```
+
+Mark only the API with `*`:
+
+```nim
+func tokenize(s: string): seq[string] =
+  var cur = ""
+  for c in s:
+    if c == ' ':
+      if cur.len > 0:
+        result.add(cur)
+        cur = ""
+    else:
+      cur.add(c)
+  if cur.len > 0:
+    result.add(cur)
+
+func wordCount*(s: string): int = tokenize(s).len
+
+doAssert wordCount("a b  c") == 3
+```
+
+## Related
+- `adapter.md` (changes a shape, not the size of an API), `singleton.md` (module-level constants
+  instead of global state), `proxy.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

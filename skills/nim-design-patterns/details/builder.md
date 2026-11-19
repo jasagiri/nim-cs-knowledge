@@ -1,0 +1,98 @@
+# Builder
+
+## Intent
+An object has many settings, some optional, with rules that span several fields (TLS needs a
+certificate). The OO pattern collects settings in a mutable builder. In Nim the builder is an
+immutable value: each `withX` returns a changed copy, and `build` is the single place that checks
+the whole combination and returns a `Result`. The finished `ServerConfig` can only exist valid.
+
+## Use when / avoid when
+- Use when a record has more than a few settings, defaults, or cross-field rules.
+- Use a plain object constructor with named arguments when there are few fields and no cross-field
+  rule; Nim's `Foo(a: 1, b: 2)` is already a builder.
+- Avoid a `bool` parameter per option (BN-02); each `withX` names the option.
+- Avoid a mutable builder with `var` setters: the old state is lost and a half-built builder can
+  leak.
+
+## Nim shape
+Fields of `ConfigBuilder` are private, so the only ways to make one are `initConfigBuilder` and the
+setters. `build` checks in a fixed order, so the reported error is deterministic.
+
+Module: `src/nimcs/patterns/builder.nim`.
+
+```nim
+import nimcs/fp/result
+import nimcs/patterns/builder
+
+let base = initConfigBuilder().withHost("example.org").withPort(443)
+let secure = base.withTls("cert.pem").build
+doAssert secure.isOk and secure.value.tls
+
+# `base` is a value: the setter above did not change it.
+doAssert base.build.value.tls == false
+
+doAssert initConfigBuilder().build.error == beEmptyHost
+doAssert base.withTls("").build.error == beTlsNeedsCert
+```
+
+## Laws and invariants
+- A setter returns a changed copy; the original builder still builds what it built before
+  (GOF-BUILDER-01).
+- `build` rejects an empty host, a port outside 1..65535, TLS without a certificate and fewer than
+  one worker, each with its own error; the first failing check in that order is reported
+  (GOF-BUILDER-02).
+- Valid settings always build, and the configuration holds exactly them (GOF-BUILDER-03).
+- Setters of different fields commute; applying one twice equals once (GOF-BUILDER-04).
+- Without a host nothing builds, whatever else is set (GOF-BUILDER-05).
+
+## Complexity
+Each setter copies the builder: O(size of builder), which is a handful of fields. `build` is O(1)
+in the number of checks. If a builder grows large collections, hold them in a persistent structure
+instead of a `seq`.
+
+## Pitfalls
+Validating in the setters instead of at `build` makes the error depend on call order and misses
+cross-field rules.
+
+```nim bad
+type B = object
+  tls: bool
+  cert: string
+
+func withTls(b: B): B =
+  doAssert b.cert.len > 0, "certificate must be set first"
+  result = b
+  result.tls = true
+```
+
+Collect, then decide once:
+
+```nim
+import nimcs/fp/result
+
+type
+  B = object
+    tls: bool
+    cert: string
+
+func withTls(b: B): B = (result = b; result.tls = true)
+func withCert(b: B; c: string): B = (result = b; result.cert = c)
+
+func build(b: B): Result[B, string] =
+  if b.tls and b.cert.len == 0: err(B, "tls needs a certificate") else: ok(b, string)
+
+doAssert B().withTls.withCert("c").build.isOk
+doAssert B().withCert("c").withTls.build.isOk
+doAssert B().withTls.build.isErr
+```
+
+## Related
+- `factory_method.md`, `abstract_factory.md`, `prototype.md` (copy-and-change), `src/nimcs/fp/result.nim` (the `Result` type).
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns

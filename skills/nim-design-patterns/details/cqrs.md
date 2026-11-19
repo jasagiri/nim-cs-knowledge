@@ -1,0 +1,75 @@
+# CQRS (command query responsibility segregation)
+
+## Intent
+Use different models for changing and for reading. The write side checks a command against the current state and answers with events or a reason for refusing. The read side never decides anything: each read model is a projection, a fold over the events, shaped for one question. Here both sides consume the same event log (a choice of this example, not a requirement of CQRS).
+
+## Use when / avoid when
+- Use when reads and writes have different shapes (a validated stock table for deciding, a dashboard of totals for display) or need to evolve independently.
+- Use when you want to add a new read model later by replaying the log.
+- Avoid for simple CRUD where one table serves both purposes.
+- CQRS does not require event sourcing: read models can be fed from any change notification, and the write side can keep plain state. This module uses an event log because it makes the projections easy to state as folds; `event_sourcing.md` is the optional next step where the log, not the state, is the source of truth.
+
+## Nim shape
+`src/nimcs/patterns/cqrs.nim` is a small warehouse. `decide(stock, cmd)` returns `Result[seq[Event], CommandError]` and changes nothing. `evolve(stock, event)` folds an event into the write-side `Stock`. `submit` is the application step: decide, and on success append the events and evolve; a refusal is recorded. The read side is `dashboard` (a fold into totals) and `stockOf` (rebuilding the write-side stock from events alone).
+
+```nim
+import nimcs/patterns/cqrs
+
+let cmds = [Command(kind: ckReceive, sku: "a", qty: 5),
+            Command(kind: ckShip, sku: "a", qty: 9),
+            Command(kind: ckShip, sku: "a", qty: 2)]
+let s = runAll(cmds)
+doAssert s.rejected == @[ceInsufficientStock]
+doAssert s.events.len == 2
+doAssert dashboard(s.events) == Dashboard(received: 5, shipped: 2, shipments: 1)
+doAssert stockOf(s.events) == s.stock
+```
+
+## Laws and invariants
+Why this is testable: `decide` is a function of (state, command) and every projection is a fold, so invariants of the whole system become properties over generated command lists.
+- Invalid commands are refused with their own error and no event; an accepted one yields exactly one event (PAT-CQRS-01).
+- Whatever commands arrive, every stock line stays positive, sorted and unique, because the guard lives in `decide` (PAT-CQRS-02).
+- A projection is a fold: projecting log B onto the dashboard of log A equals the dashboard of A followed by B (PAT-CQRS-03).
+- Read models agree with each other: units on hand equal units received minus units shipped (PAT-CQRS-04).
+- Rebuilding the write side from the events equals the live state (PAT-CQRS-05).
+
+## Complexity
+`decide` and `evolve` are O(s) in the number of distinct skus s (the stock is a sorted list). A dashboard projection is O(e) for e events; the incremental form `continueDashboard` is O(new events). Rebuilding stock is O(e * s).
+
+## Pitfalls
+Letting the command mutate state and answer in one step leaves no fact behind, so no read model can follow and nothing can be replayed.
+
+```nim bad
+proc ship(stock: var Stock; sku: string; qty: int): bool =
+  let have = stock.qtyOf(sku)
+  if have < qty: return false
+  stock.lines = @[]   # mutates, decides and answers at once; no event exists
+  true
+```
+
+Decide into events, then evolve:
+
+```nim
+import nimcs/fp/result
+import nimcs/patterns/cqrs
+
+let stock = initStock().evolve(Event(kind: evReceived, sku: "a", qty: 3))
+let decided = stock.decide(Command(kind: ckShip, sku: "a", qty: 3))
+doAssert decided.isOk
+doAssert stock.evolve(decided.value[0]).lines.len == 0
+```
+
+A second trap: reading the write model to answer queries couples the two sides again. Query only projections.
+
+## Related
+- `event_sourcing.md` (optional: makes the log the source of truth)
+- `idempotent_command.md` (retried commands must not produce duplicate events)
+- `state_machine.md` (a command side often enforces a lifecycle)
+- `functional_core.md`
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `cdbf277d93825bc0` Designing Event-Driven Systems. Concepts and Patterns for Streaming Services with Apache Kafka
+- `5009e42d6ca146f2` Exploring CQRS and Event Sourcing

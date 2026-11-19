@@ -1,0 +1,131 @@
+# Factory Method
+
+## Intent
+A shared algorithm must work with a product whose concrete shape it should not know. The OO pattern
+solves this with an overridable `createProduct()` in a base class. In functional Nim the creating
+step is simply a parameter: a proc value (`ExporterFactory`) that the algorithm calls. No base class,
+no subclass per product.
+
+## Use when / avoid when
+- Use when one routine (`publish`) is reused with several ways of making its collaborator and the
+  caller picks the way.
+- Use a generic parameter instead of a proc value when the choice is known at compile time and you
+  want it inlined.
+- Avoid when there is a single product: call the constructor. A factory with one implementation is
+  indirection without a reason.
+- Avoid a `case` on a kind inside the algorithm: that hard-codes the product list there.
+
+## Nim shape
+The factory returns a `Result` because making the product can fail (a format the factory does not
+know). The algorithm forwards that failure. `publish` also owns two checks that no factory should
+have to repeat: the title becomes a file name, so an unsafe title (empty, over 100 bytes, `..`, a
+path separator, `:`, a control character, a leading or trailing dot) is refused with
+`"invalid title"`; and the html exporter escapes `& < > " '` in the text it embeds. The text and
+markdown exporters write content verbatim; they are not escaped for any other markup language.
+
+Module: `src/nimcs/patterns/factory_method.nim`.
+
+```nim
+import nimcs/fp/result
+import nimcs/patterns/factory_method
+
+let doc = Doc(title: "Notes", paras: @["first", "second"])
+let md = publish(doc, standardFactory, fmtMarkdown)
+doAssert md.isOk and md.value.name == "Notes.md"
+doAssert publish(doc, standardFactory, fmtHtml).value.body ==
+  "<h1>Notes</h1><p>first</p><p>second</p>"
+doAssert publish(Doc(title: "../x", paras: @[]), standardFactory, fmtText).error == "invalid title"
+
+# A different factory, same algorithm.
+doAssert publish(doc, textOnlyFactory, fmtHtml).isErr
+
+# A factory written at the call site.
+let shout: ExporterFactory = proc(f: Format): Result[Exporter, string] {.noSideEffect, raises: [].} =
+  ok(Exporter(ext: "up", render: proc(d: Doc): string {.noSideEffect, raises: [].} = d.title), string)
+doAssert publish(doc, shout, fmtText).value.name == "Notes.up"
+```
+
+The generic form picks the factory by type:
+
+```nim
+type
+  Plain = object
+  Loud = object
+
+func greet(_: typedesc[Plain]; name: string): string = "hello " & name
+func greet(_: typedesc[Loud]; name: string): string = "HELLO " & name
+
+func welcome[F](_: typedesc[F]; name: string): string =
+  F.greet(name) & "!"
+
+doAssert Plain.welcome("ana") == "hello ana!"
+doAssert Loud.welcome("ana") == "HELLO ana!"
+```
+
+## Laws and invariants
+- `publish(d, standardFactory, f)` names the file `title.ext` and its body is the exporter's own
+  render of `d` (GOF-FACTORYMETHOD-01).
+- For a safe title, a factory that refuses a format makes `publish` return that factory's error
+  unchanged and no file (GOF-FACTORYMETHOD-02).
+- Swapping the factory changes the product and requires no change to `publish`
+  (GOF-FACTORYMETHOD-03).
+- The html body contains no markup but the exporter's own tags, whatever the content
+  (GOF-FACTORYMETHOD-04).
+- Unsafe titles are refused for every format, and a published name has no path separator or
+  control character (GOF-FACTORYMETHOD-05).
+
+## Complexity
+One extra proc call per product; no allocation beyond the product itself. The factory proc is a
+closure value, so a call through it is an indirect call.
+
+## Pitfalls
+Writing the OO shape: a base object with a "virtual" creator. Nim has no need of it, and `method`
+is forbidden in this repository (ADR-NCK-0002 S3).
+
+```nim bad
+type
+  Creator = ref object of RootObj
+
+method make(c: Creator): string {.base.} = "base"
+```
+
+Pass the creating step as a value instead:
+
+```nim
+type Maker = proc(): string {.noSideEffect, raises: [].}
+
+func run(make: Maker): string = "made " & make()
+
+doAssert run(proc(): string {.noSideEffect, raises: [].} = "x") == "made x"
+```
+
+A second pitfall is trusting the product's input: a title used as a file name, or text embedded in
+html, is untrusted data.
+
+```nim bad
+func page(title: string): string = "<h1>" & title & "</h1>"   # title "<script>..." becomes markup
+```
+
+Escape at the point where the text enters the markup (see `escapeHtml` in the module), and validate
+what becomes a file name before the factory is even asked.
+
+```nim
+func escapeAmp(s: string): string =
+  for c in s:
+    if c == '&': result.add("&amp;") else: result.add(c)
+
+doAssert escapeAmp("a&b") == "a&amp;b"
+```
+
+## Related
+- `abstract_factory.md` (a record of several creating procs).
+- `builder.md` (when creation is multi-step).
+- `strategy.md` (the same shape, a proc value chosen by the caller, but for behaviour, not creation).
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
+- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `690b10bb5f31ac02` The Catalog of Design Patterns
