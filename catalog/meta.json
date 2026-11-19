@@ -1,0 +1,166 @@
+{
+  "fpbCommit": "10e33dd516cc53864e6bece7e6bd51f2a035d06c",
+  "fetchedAt": "2026-11-19T10:59:17Z",
+  "depthLimit": 2,
+  "maxLinksPerExpansion": 2000,
+  "counts": {
+    "sources": 11963,
+    "relevance.core": 885,
+    "relevance.adjacent": 10067,
+    "relevance.out": 1011,
+    "listings.depth1": 10788,
+    "listings.depth2": 1378,
+    "reach.dead": 21,
+    "reach.error": 71,
+    "reach.ok": 561,
+    "reach.redirected": 167,
+    "reach.refused": 30,
+    "reach.unchecked": 11113
+  },
+  "notFollowed": [
+    {
+      "id": "0d4f9a850fc2a03d",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "0de0592c75eb165b",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "12467355ed63cde1",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "14c45395dd68371d",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "17b9fe980d91fa4d",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "1805ad6175581a5d",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "1f40b0bb54729e8e",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "275ea2fe30c098c5",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "365f1c670c71df51",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "399d28e84030040d",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "40bcd8d448724a3b",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "430de3111c14918a",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "4d61c82e78818938",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "5df14660c78c8e30",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "7463fb75ef610896",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "78ee04af48c5f4e6",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "7a46b58085467af3",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "7de264969229cc44",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "89389e8e51a6ab45",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "8bd79bad47381a98",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "98dd900ff9c60b67",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "a41f26090a531823",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "ab7b3bc23082f227",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "b155082b296fd7c8",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "b59f3f4a811ffc15",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "b7f350842b1d0410",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "bf5c6fce3a6a0ce2",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "ce3407afbd3b0b1d",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "d65c76c980bc8583",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "d888547113499177",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "d97ec861b85c3d68",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "d9c549f126d7195f",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "de0b9c1706eefd25",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "dea3bf0dd942b95d",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "dff827885dc7ee9b",
+      "reason": "meta-list is a whole site, not one page of links"
+    },
+    {
+      "id": "f69580693b95c8e1",
+      "reason": "meta-list is a whole site, not one page of links"
+    }
+  ]
+}
