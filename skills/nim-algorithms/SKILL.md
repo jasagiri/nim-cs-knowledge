@@ -19,7 +19,10 @@ working arrays, queues and DP tables are local `var`s nobody outside can see.
 
 Inside this repository, import the module (`import nimcs/<area>/<name>`). In another project the
 modules are not a published package: copy the shape from the details page into your own file, or
-add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
+add this repository's `src/` to the compiler path (`--path:"<repo>/src"`). When the task fixes a
+signature the module does not have (`topo(n, deps)` instead of `topoSort(g)`), write the algorithm
+in your own file from the page's shape and laws; do not wrap the module behind a converting layer.
+Edges are directed (`a -> b`) unless the task says otherwise; for an undirected road add both arcs.
 
 ## How to write one
 

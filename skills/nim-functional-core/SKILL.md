@@ -213,12 +213,40 @@ The propcheck API (`import propcheck`; the sibling package nim-propcheck, on the
 `nim.cfg`): `check(gen, property): CheckResult[T]` where `property` is
 `proc(x: T): bool {.raises: [CatchableError].}`, the result has `.passed` and `describe(result)` says
 why it failed; generators `intIn(lo, hi)`, `pick(values)`, `seqOf(gen, minLen, maxLen)`,
-`stringOf(alphabet, minLen, maxLen)` and `gen.map(f)` with `f: proc(a: A): B {.raises: [].}`. In a
+`stringOf(alphabet, minLen, maxLen)`, `pair(genA, genB)` and `gen.map(f)` with `f: proc(a: A): B {.raises: [].}`. In a
 `std/unittest` file, `check(gen, property)` with two arguments is propcheck's; its result must be
 used, and `check outcome.passed` is unittest's assertion. Build generators inside the test body
 (they raise `ValueError` when their arguments are wrong). A passing run with a fixed seed is reproducible; a failure prints a
 shrunk counterexample. Idempotence (`details/idempotence.md`) and the monoid laws
 (`details/monoid.md`) are the two families you will use most.
+
+A value with several fields is generated as a `pair` (or a `seqOf` for a list) turned into the
+record with `map`. A type sealed by a smart constructor cannot be generated directly: generate the
+raw input, pass it through the constructor, and treat `Err` as "nothing to check" (return `true`).
+The round trip is then printing and parsing again. `isErr` and `.value` come from
+`nimcs/fp/result`, so import it next to the constructor's module:
+
+```nim
+import std/unittest
+import propcheck
+import nimcs/fp/[result, smart_constructor]
+
+type RawOrder = object      # the unchecked input, one field per form field
+  name: string
+  qty: int
+
+test "Given any raw order, when it parses, then printing and parsing again gives the same order":
+  let raws = pair(stringOf("ab_1 ", 0, 12), intIn(-5, 1200)).map(
+    proc(p: (string, int)): RawOrder {.raises: [].} = RawOrder(name: p[0], qty: p[1]))
+  let outcome = check(raws, proc(r: RawOrder): bool {.raises: [CatchableError].} =
+    let who = parseUsername(r.name)
+    let qty = parseQuantity(r.qty)
+    if who.isErr or qty.isErr: return true    # rejected input: nothing to round-trip
+    let again = parseQuantityText($qty.value)
+    parseUsername($who.value) == who and again.isOk and again.value == qty.value)
+  checkpoint describe(outcome)
+  check outcome.passed
+```
 
 ## S7. Determinism
 

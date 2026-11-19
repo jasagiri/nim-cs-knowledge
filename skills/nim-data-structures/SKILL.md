@@ -35,7 +35,7 @@ add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
 | Priority queue, reason like binary addition | `binomial_heap` | worst-case O(log n) insert and merge |
 | Ordered map or set, sorted iteration | `rb_tree` | `hamt` has no key order |
 | Unordered map with `remove`, large and updated functionally | `hamt` | `rb_tree` has deeper paths and no `remove` here |
-| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n)); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate | `rb_tree` here has no `remove` |
+| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n)); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate; when the mix is unknown, `hamt` | `rb_tree` here has no `remove` |
 | Indexed sequence, push at the back, update by index | `pvector` | `seq` copies O(n) per version |
 | Indexed stack (push, pop and index at the front) | `skew_list` | `cons_list` indexes in O(n) |
 | Prefix search, autocompletion | `trie` | `hamt` finds whole keys only |
@@ -110,6 +110,11 @@ let h = emptyHeap[ByPriority]().insert(ByPriority(priority: 1, name: "a"))
   .insert(ByPriority(priority: 5, name: "b")).insert(ByPriority(priority: 5, name: "a"))
 doAssert h.findMin.get.name == "a" and h.findMin.get.priority == 5
 ```
+
+  When the element type is fixed as a tuple (`Task = tuple[name: string, priority: int]`), give the
+  order to a wrapper object that holds it (`Queued = object` with a `task: Task` field and its own
+  `<`). Push `Queued(task: t)` and return `.task` from the pop, so the public signature still speaks
+  of `Task`.
 - **Build with a local `var`, return a value.** A routine may loop with a local `var` and return it;
   no caller sees the mutation. Never take `var` parameters in public routines.
 - **Failure is a value.** `get(i)` is `Option[T]`; popping an empty structure returns the empty structure;

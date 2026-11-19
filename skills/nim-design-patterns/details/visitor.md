@@ -60,6 +60,11 @@ doAssert shapes[0].area() + shapes[1].area() == 19
 doAssert shapes[1].label() == "triangle"
 ```
 
+A constructor that can be given an impossible shape (a negative side, three lengths that break the
+triangle inequality) returns `Option[OpenShape]` or a `Result`, so no closure ever computes from
+bad input (Heron's formula takes the square root of a negative number and gives NaN). Use `float`
+for areas that are not whole numbers, and compare them with a tolerance in tests.
+
 ## Laws and invariants
 - A direct `case` and a `ShapeFold` through `accept` agree for the same operation (GOF-VISITOR-01).
 - Translating moves the bounds by the offset (GOF-VISITOR-02) and keeps leaf count and footprint (GOF-VISITOR-03).

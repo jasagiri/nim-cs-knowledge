@@ -49,22 +49,23 @@ doAssert bus.ids == @["add", "dbl"]            # the original bus is intact
 
 When the listeners are fixed (a port of `CounterListener` and `LogListener`), skip the bus: one
 state record with a field per listener and one reducer. Use the bus when listeners are added and
-removed while running. This form needs no import, so it also works outside this repository:
+removed while running. This form needs no import, so it also works outside this repository. The
+`*` marks export the types, fields and functions, which a test in another file needs:
 
 ```nim
 type
-  Event = object
-    kind, payload: string
-  Listeners = object
-    clicks: int          # was CounterListener
-    log: seq[string]     # was LogListener
+  Event* = object
+    kind*, payload*: string
+  Listeners* = object
+    clicks*: int          # was CounterListener
+    log*: seq[string]     # was LogListener
 
-func step(s: Listeners; e: Event): Listeners {.raises: [].} =
+func step*(s: Listeners; e: Event): Listeners {.raises: [].} =
   result = s
   if e.kind == "Click": inc result.clicks
   result.log.add e.kind & ":" & e.payload
 
-func replay(events: openArray[Event]): Listeners {.raises: [].} =
+func replay*(events: openArray[Event]): Listeners {.raises: [].} =
   for e in events: result = result.step(e)
 
 let events = [Event(kind: "Click", payload: "a"), Event(kind: "Key", payload: "x")]
