@@ -4,7 +4,8 @@ description: >-
   Apply, translate or review a design pattern in Nim — the 23 GoF patterns and functional
   architecture patterns (functional core / imperative shell, event sourcing, CQRS, state machines,
   free and tagless-final interpreters, dependency records, middleware pipelines, idempotent
-  commands, lenses, parser combinators, retry with backoff). Use whenever Nim code reaches for
+  commands, lenses, parser combinators, retry with backoff) and actor- and capability-based designs
+  (actors, supervisors, request/reply, object capabilities, caretakers, sealer/unsealer). Use whenever Nim code reaches for
   classes, inheritance, `method`, callbacks, global singletons or mutable shared state, when a
   design is being ported from Java/C#/C++/Python, or when a request names a pattern. Shows what
   each pattern becomes in functional Nim, and which ones disappear.
@@ -32,6 +33,11 @@ add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
 | callbacks registered on a subject | events as values, folded by pure reducers |
 | `execute`/`undo` objects | commands as data + `apply(state, cmd): state` |
 | global instance | a value passed as an argument (or an immutable `const`/`let`) |
+| thread with a mutable inbox and handler | an actor: `step(self, state, msg)` returns the new state and effects as data; a host delivers one message at a time |
+| restart-on-failure code with timers and counters | a supervisor: `onExit(policy, history, child, reason, now)` returns a decision; time is a tick argument |
+| ambient authority (globals, role checks) | an object capability: a sealed value passed in, narrowed by attenuation |
+| shared mutable "revoked" flag | a caretaker: revocation state is a value threaded through the calls |
+| secret token or opaque handle | a sealer/unsealer pair over a sealed box |
 | inheritance for reuse | a function taking the varying steps as arguments |
 
 Rules (ADR-NCK-0002): no `method`, no `ref object of RootObj` hierarchies, no `converter`, no
@@ -78,11 +84,17 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | update deep inside immutable data | Lens | [details/lens.md](details/lens.md) |
 | parse text into an AST | Parser combinators | [details/parser_combinator.md](details/parser_combinator.md) |
 | retry failed calls politely | Retry with backoff | [details/retry_backoff.md](details/retry_backoff.md) |
+| independent parties with private state, talking by messages (rather than one shared state: observer, state) | Actor → pure `step` returning state and effect data, persistent mailbox, a host loop | [details/actor.md](details/actor.md) |
+| a running party died and something must decide what to restart (rather than repeating one call: retry) | Supervisor → pure `onExit` decision, strategies and a restart limit with time as data | [details/supervisor.md](details/supervisor.md) |
+| an actor needs an answer without blocking | Request/reply → correlation id, reply-to, a ledger of pending requests, timeout as a message | [details/request_reply.md](details/request_reply.md) |
+| what a caller may do must be limited (rather than swappable: dependency record) | Object capability → sealed value, attenuation, delegation by passing | [details/object_capability.md](details/object_capability.md) |
+| a grant must be taken back | Caretaker → forwarder plus revoker, revocation state threaded as data | [details/caretaker.md](details/caretaker.md) |
+| a value must pass through parties that must not read or forge it | Sealer/unsealer → a matched pair over a sealed box | [details/sealer_unsealer.md](details/sealer_unsealer.md) |
 
 ## Why the functional form
 
 The point of each translation is that the decision becomes a pure function of values, so its
-laws can be property-tested: replaying an event log twice gives the same state; a command followed
+laws can be property-tested: replaying an event log twice gives the same state; an actor's mailbox is processed in order; an attenuated capability never permits more than its parent; a command followed
 by its undo is the identity; a lens obeys get-set, set-get and set-set; the same idempotency key
 delivered twice changes nothing; a parser reads back what the printer wrote.
 

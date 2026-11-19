@@ -1,0 +1,111 @@
+# Actor
+
+## Intent
+Concurrent parties that share nothing and talk only by messages. The usual object version gives each actor a mutable inbox and a mutable handler, run by threads, so ordering, "become" (changing behaviour) and failure live in hidden state. In functional Nim an actor is one pure transition `step(self, state, msg): Reaction`: the next state and a list of effects as data (send a message to an address, spawn an actor, stop). A mailbox is a persistent FIFO value. A host loop that is not part of the actor delivers one message at a time and performs the effects, so the behaviour is tested without threads, timers or mocks, and a message log replays to the same states.
+
+## Use when / avoid when
+- Use when many independent parties each own some state and communicate asynchronously: sessions, devices, workers, game entities, protocol endpoints.
+- Use instead of `observer.md` when parties must keep a private state and a private order of messages rather than all folding one shared event; use instead of `state.md` alone when the machine also talks to other machines (its transitions emit sends); use instead of `command.md` when the receiver is a long-lived party with an address, not a value applied to one state.
+- Use `request_reply.md` for asking and `supervisor.md` for failure; neither is part of this page.
+- Avoid when one state with one reducer is enough (`observer.md`, `state.md`): addresses and mailboxes add nothing there.
+- Avoid when the effect must happen in the middle of a decision and feed its result back at once; a message round trip is slower than a call.
+
+## Nim shape
+The module is `src/nimcs/patterns/actor.nim`. `Step[S, M]` is the transition; `Reaction[S, M]` holds the new state and `seq[Effect[S, M]]`, where an `Effect` is a variant: `efSend`, `efSpawn` (initial state plus an optional first message for the child), `efStop`. `Mailbox[M]` is a persistent FIFO (`post`, `take`). `System[S, M]` is a small pure reference host: actors by address, `tell`, `deliver` (one message), `runRounds` (round robin with a budget, so two actors that answer each other forever cannot hang it), dead letters for messages to a stopped or unknown address. `self` is passed to `step` so an actor can put its own address in a message; it is a constant of the actor. "Become" is a field of the state, read by an exhaustive `case`.
+
+```nim
+import std/options
+import nimcs/patterns/actor
+
+type
+  Kind = enum kDeposit, kFreeze, kThaw, kAsk
+  Msg = object
+    kind: Kind
+    amount: int
+    replyTo: Address
+  Mode = enum mOpen, mFrozen
+  Account = object
+    mode: Mode       # "become": the behaviour is this field, not a replaced handler
+    balance: int
+
+func step(self: Address; s: Account; m: Msg): Reaction[Account, Msg] {.raises: [].} =
+  var next = s
+  var fx: seq[Effect[Account, Msg]]
+  case m.kind
+  of kDeposit:
+    if s.mode == mOpen: next.balance += m.amount
+  of kFreeze: next.mode = mFrozen
+  of kThaw: next.mode = mOpen
+  of kAsk: fx.add sendTo[Account, Msg](m.replyTo, Msg(kind: kDeposit, amount: s.balance))
+  Reaction[Account, Msg](state: next, effects: fx)
+
+let (s0, bank) = initSystem[Account, Msg](step).addActor(Account(mode: mOpen, balance: 0))
+let (s1, audit) = s0.addActor(Account(mode: mOpen, balance: 0))
+let done = s1
+  .tell(bank, Msg(kind: kDeposit, amount: 10))
+  .tell(bank, Msg(kind: kFreeze))
+  .tell(bank, Msg(kind: kDeposit, amount: 5))        # ignored while frozen
+  .tell(bank, Msg(kind: kThaw))
+  .tell(bank, Msg(kind: kDeposit, amount: 5))
+  .tell(bank, Msg(kind: kAsk, replyTo: audit))
+  .runRounds(100)
+doAssert done.stateOf(bank).get.balance == 15
+doAssert done.stateOf(audit).get.balance == 15
+```
+
+The mailbox on its own is a value; every version stays valid:
+
+```nim
+import std/options
+import nimcs/patterns/actor
+
+let box = emptyMailbox[string]().post("a").post("b")
+let first = box.take.get
+doAssert first[0] == "a"
+doAssert box.pending == 2 and first[1].pending == 1   # the older mailbox is unchanged
+```
+
+A spawned child learns its parent because the parent builds the child's first message from its own `self` (`spawnActor(initialState, some(greetingWith(self)))`); the parent learns the child because the child answers the greeting.
+
+## Laws and invariants
+- Each actor processes its messages in mailbox order, whatever other actors do in between (PAT-ACTOR-01).
+- A mailbox is a FIFO value: messages leave in arrival order and older versions are unchanged (PAT-ACTOR-02).
+- Replaying the same messages gives the same states, effects and dead letters (PAT-ACTOR-03).
+- "Become" is a state change: an actor's state equals the fold of `step` over its messages, and the same function handles every message (PAT-ACTOR-04).
+- A send reaches the target mailbox; a message to a stopped or unknown address is a dead letter (PAT-ACTOR-05).
+- Spawn gives the child the next address and its greeting first; stop turns the rest of its mailbox into dead letters (PAT-ACTOR-06).
+- `runRounds` makes at most `budget` deliveries and stops early only when idle (PAT-ACTOR-07).
+
+## Complexity
+`tell` and `take` are amortised O(1) when each mailbox version is used once. `deliver` is O(1) plus the cost of `step` and of copying the state and the actor table (the reference host copies `cells` per delivery, O(actors)); a production host keeps its tables in mutable storage and uses the same `step`. `runRounds` is O(budget) deliveries.
+
+## Pitfalls
+A mutable handler that actors replace, reachable from anywhere:
+
+```nim bad
+type Actor = ref object of RootObj
+  inbox: seq[string]
+
+var behaviour: proc(msg: string)        # "become" by assigning a global
+
+proc become(h: proc(msg: string)) = behaviour = h
+
+method receive(a: Actor; msg: string) {.base.} = behaviour(msg)   # order and re-entrancy are implicit
+```
+
+Fix: the behaviour is a field of the state and `step` returns the new state; effects are returned, not performed. Also do not let `step` perform I/O or read a clock: a time-dependent actor receives a tick message from the host. Do not use the reference `System` as the production scheduler; it is the specification of what a host must do.
+
+## Related
+- `observer.md` (one shared state folded by reducers)
+- `state.md` (a single machine; an actor adds addresses and effects)
+- `command.md` (messages as data)
+- `dependency_record.md` (inject the host's effects instead of returning them)
+- `supervisor.md`, `request_reply.md` (failure and asking, built on this)
+- `smart_constructor` in nim-functional-core (keep an address or a state valid by construction)
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `d8b43bb6711561da` Actor Model of Computation: Scalable Robust Information Systems (Hewitt)
+- `f2b0c2a6b0908171` Making reliable distributed systems in the presence of software errors (Armstrong thesis)

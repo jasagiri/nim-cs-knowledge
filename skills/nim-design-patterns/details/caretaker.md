@@ -1,0 +1,71 @@
+# Caretaker
+
+## Intent
+Revocable forwarding. A caretaker gives a client a forwarder, a capability that passes operations on to a target, and keeps a revoker, the capability that cuts the forwarder off. Before revocation the forwarder behaves like the target; after it, every use fails with an error value. Classic caretakers use a mutable cell that all forwarders read. Here the revocation state is data threaded through the calls: `forward` takes the caretaker as an argument and `revoke` returns a new one whose slot has dropped the target.
+
+## Use when / avoid when
+- Use when a grant must be taken back: a session token, a plugin's access, a lease, a delegated capability (`object_capability.md`).
+- Use when the caretaker can live in the one place that owns the resource, such as an actor's state (`actor.md`) or a store threaded through the program, and clients call through that owner.
+- Use instead of an expiry check inside the target (`proxy.md` with a flag): the target does not know about revocation and cannot forget to check it.
+- Avoid when independent parties must see a revocation immediately without passing through any owner. Then a shared mutable cell (a `ref` read by every forwarder) is the right tool: it gives up the value semantics and the replayable laws, so confine it to that edge and say so.
+- Avoid for a grant that only expires with time: pass the tick and compare (`retry_backoff.md` shows time as data).
+
+## Nim shape
+The module is `src/nimcs/patterns/caretaker.nim`. `Caretaker[T]` holds one slot per forwarder in a persistent map; a slot is `some(target)` while live and `none` after revocation, so a revoked caretaker no longer references the target. `wrap(target)` returns a `Wrapped` value: the new caretaker, a `Forwarder` and a `Revoker` (both sealed). `forward(caretaker, forwarder, op)` runs a pure operation on the target and returns `ok(result)`, `err(crRevoked)` after revocation, or `err(crForeign)` for a forwarder of another caretaker (every caretaker has a `brand`, use a distinct one). `revoke` returns a `Result`: it is idempotent for this caretaker's own revoker, and a revoker of another caretaker is `err(crForeign)`. To forward an effectful call, have `op` return a description of the call and perform it in the shell.
+
+```nim
+import nimcs/fp/result
+import nimcs/patterns/caretaker
+
+func shout(t: string): string {.noSideEffect, raises: [].} = t & "!"
+
+let w = initCaretaker[string](1).wrap("hello")
+doAssert w.caretaker.forward(w.forwarder, shout) == ok("hello!", CaretakerError)
+let after = w.caretaker.revoke(w.revoker).value
+doAssert after.forward(w.forwarder, shout) == err(string, crRevoked)
+doAssert after.revoke(w.revoker).value.liveCount == after.liveCount        # revoking again changes nothing
+# Revocation is a state change: only callers that use `after` see it.
+doAssert w.caretaker.forward(w.forwarder, shout) == ok("hello!", CaretakerError)
+```
+
+The last line is the cost of values, not a bug: keep the current caretaker where every call can reach it (the owner's state), and drop old versions.
+
+## Laws and invariants
+- Before revocation, forwarding gives the operation applied to the target (PAT-CARETAKER-01).
+- After revocation, every forwarding fails with `crRevoked`, however many times and with whatever operation (PAT-CARETAKER-02).
+- Revoking once or many times gives the same caretaker behaviour (PAT-CARETAKER-03).
+- A revoker affects only its own forwarder; the other forwarders of the same caretaker keep working (PAT-CARETAKER-04).
+- Capabilities of another caretaker are refused as foreign, and a foreign revoker is refused with `crForeign` (PAT-CARETAKER-05).
+- Revocation returns a new caretaker; the earlier value is unchanged, and the sealed types cannot be forged (PAT-CARETAKER-06).
+
+## Complexity
+`wrap`, `forward`, `revoke` and `isRevoked` are O(log32 n) in the number of forwarders; `liveCount` is O(n log n).
+
+## Pitfalls
+A flag inside the target that every operation must remember to check, flipped from anywhere:
+
+```nim bad
+type Handle = ref object
+  revoked: bool                       # shared and mutable: who may flip it, and who checks it?
+  data: string
+
+proc read(h: Handle): string =
+  h.data                              # forgot `if h.revoked`: the check is not enforced by the structure
+```
+
+Fix: the client holds only a forwarder; the target never leaves the caretaker; revocation empties the slot. Also do not hand the target itself to a client "for speed" (it can never be revoked), and do not reuse a brand across caretakers.
+
+## Related
+- `object_capability.md` (the capabilities being revoked)
+- `sealer_unsealer.md` (opaque tokens a caretaker's owner can open)
+- `proxy.md` (a forwarder is a proxy with a revocable target)
+- `actor.md` (a natural owner of the caretaker's state)
+- `dependency_record.md`
+- `smart_constructor` in nim-functional-core
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `ace3a1130eba6d54` Capability Myths Demolished
+- `1e2d20b92c98ae15` Robust Composition (Miller thesis)

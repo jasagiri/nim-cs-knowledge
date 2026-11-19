@@ -1,0 +1,60 @@
+# Sealer and unsealer
+
+## Intent
+A matched pair of capabilities over an opaque box. `seal(value)` gives a box that only the unsealer of the same pair opens; the unsealer of a different pair gets an error. A box can be carried, stored and handed through parties that cannot read it, which is how a party issues an unforgeable token (a ticket, a session, a permission) or keeps the real authority of a value inside a box that only its owner can open. The brand that ties the pair together is a sealed token, so it cannot be written down or copied from a box.
+
+## Use when / avoid when
+- Use to pass a value through code you do not trust to look at it: opaque handles, tickets returned to a client, rights amplification (a public handle whose real capability sits in a box the owner opens).
+- Use with `object_capability.md` when a capability must travel inside a message to an untrusted relay, and with `caretaker.md` when the owner opens the box to find the slot.
+- Use instead of encryption when the parties share a process and you only need the language's own guarantee: nobody can fabricate or open a box without the matching value.
+- Avoid across a process or network boundary: a box is not a serialisation format and brands do not survive it; use signatures or encryption there.
+- Avoid a sealed type from `smart_constructor` (nim-functional-core) when the value itself must be readable by everyone but only constructible through a check; sealer/unsealer is for values that must not be readable.
+
+## Nim shape
+The module is `src/nimcs/patterns/sealer_unsealer.nim`. `Sealer`, `Unsealer` and `Box[T]` are sealed (private fields, `{.requiresInit.}`): outside the module their fields cannot be named, and a sealer cannot open a box nor an unsealer seal one. `newPair(mint)` returns the next `Mint` with a fresh pair; the mint is a value you thread through the program (no hidden counter, no global), and two pairs from one mint never match. Two mints started from the same seed repeat their brands, so create one mint at the start and pass it on. `unseal` returns `Result[T, SealError]`; a wrong pair is `seWrongBrand`, and the type `T` of the content is kept by the type system.
+
+```nim
+import nimcs/fp/result
+import nimcs/patterns/sealer_unsealer
+
+let (mint1, ticketSealer, ticketUnsealer) = initMint(0).newPair()
+let (_, _, strangerUnsealer) = mint1.newPair()
+let ticket = ticketSealer.seal("seat 12A")        # a box anyone can carry
+doAssert ticketUnsealer.unseal(ticket).value == "seat 12A"
+doAssert strangerUnsealer.unseal(ticket).error == seWrongBrand
+```
+
+## Laws and invariants
+- For the matching pair, `unseal(seal(x))` is `ok(x)` for every value (PAT-SEALER-01).
+- An unsealer from any other pair of the same mint fails with `seWrongBrand`; this holds only between pairs of one mint, because two mints started from the same seed make the same brands and their pairs then match (PAT-SEALER-02).
+- Starting a mint again from the same seed repeats the same pairs, and consecutive pairs differ (PAT-SEALER-03).
+- Outside the module, boxes, sealers and unsealers cannot be forged or inspected, a sealer cannot open and an unsealer cannot seal (PAT-SEALER-04).
+
+## Complexity
+`seal`, `unseal` and `newPair` are O(1) plus copying the content.
+
+## Pitfalls
+A "token" that is a plain value anyone can build or read:
+
+```nim bad
+type Ticket = object
+  owner: int
+  secret: string                      # public fields: anyone can read it or write Ticket(owner: 1, secret: "x")
+
+proc isValid(t: Ticket): bool = t.secret == "x"     # a guessable value is the only protection
+```
+
+Fix: seal the content in a `Box[T]` and keep the unsealer with the issuer; a value that can be written down can be forged. Also do not export a way to read the brand, do not compare boxes by content to "check" them (unseal instead), and do not share one `Unsealer` with parties that must not read the box: the unsealer is the permission.
+
+## Related
+- `object_capability.md` (what is usually in the box)
+- `caretaker.md` (revocation, sealing's partner for control)
+- `actor.md` (boxes travel in messages)
+- `proxy.md`
+- `smart_constructor` in nim-functional-core (the same sealing technique for validity instead of secrecy)
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `1e2d20b92c98ae15` Robust Composition (Miller thesis)
