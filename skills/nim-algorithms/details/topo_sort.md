@@ -2,7 +2,9 @@
 
 ## Intent
 
-Order the vertices of a directed acyclic graph so that every arc goes from an earlier to a later vertex. Kahn's algorithm repeatedly takes a vertex with no remaining incoming arcs. If some vertices never become free, they lie on or behind a cycle, and the error carries one cycle.
+Order the vertices of a directed acyclic graph so that every arc goes from an earlier to a later vertex. Kahn's algorithm repeatedly takes a vertex with no remaining incoming arcs. If some vertices never become free, they lie on or behind a cycle, and the error carries one cycle. To find it, start at any leftover
+vertex and step to one of its leftover predecessors (every leftover vertex still has one) until a
+vertex repeats; the vertices from its first visit to the repeat form a cycle.
 
 ## Use when / avoid when
 
@@ -12,7 +14,7 @@ Order the vertices of a directed acyclic graph so that every arc goes from an ea
 
 ## Nim shape
 
-`src/nimcs/algo/topo_sort.nim`: `topoSort(g): Result[seq[int], TopoCycle]`. The ready vertices sit in a small `HeapQueue` local to the function, so ties are broken by the smallest vertex and the output is deterministic. The cycle is listed once around, starting at its smallest vertex.
+`src/nimcs/algo/topo_sort.nim`: `topoSort(g): Result[seq[int], TopoCycle]`. The ready vertices sit in a small `HeapQueue` (`import std/heapqueue`) local to the function, so ties are broken by the smallest vertex and the output is deterministic. The cycle is listed once around, starting at its smallest vertex.
 
 ```nim
 import nimcs/fp/result

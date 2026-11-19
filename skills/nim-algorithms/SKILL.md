@@ -63,7 +63,9 @@ with "undeclared field".
    Bellman–Ford, an unreachable vertex, a modulus out of range: `Result` or `Option`, never an
    exception or a sentinel like `-1` or `high(int)`. When the signature is fixed and has no error
    channel (`seq[Option[int]]`), state the precondition in the doc comment, keep the routine total
-   (skip an arc that names a vertex outside `0 ..< n`; never index out of range), and add a checked
+   (skip an arc that names a vertex outside `0 ..< n`, or one the algorithm cannot take, such as a
+   negative weight for Dijkstra; never index out of range; write the edge direction and these skips
+   in the doc comment), and add a checked
    companion that returns `Result` and calls it (`fastestChecked(...): Result[seq[Option[int]], E]`).
 4. **Keep mutation local.** In-place partition, heap sift-down, DP table filling and union-find are
    fine inside the routine; the signature stays pure.

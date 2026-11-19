@@ -35,7 +35,7 @@ add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
 | Priority queue, reason like binary addition | `binomial_heap` | worst-case O(log n) insert and merge |
 | Ordered map or set, sorted iteration | `rb_tree` | `hamt` has no key order |
 | Unordered map with `remove`, large and updated functionally | `hamt` | `rb_tree` has deeper paths and no `remove` here |
-| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n)); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate; when the mix is unknown, `hamt` | `rb_tree` here has no `remove` |
+| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n), gives `(key, value)` pairs); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate; when the mix is unknown, `hamt` | `rb_tree` here has no `remove` |
 | Indexed sequence, push at the back, update by index | `pvector` | `seq` copies O(n) per version |
 | Indexed stack (push, pop and index at the front) | `skew_list` | `cons_list` indexes in O(n) |
 | Prefix search, autocompletion | `trie` | `hamt` finds whole keys only |
@@ -89,7 +89,8 @@ doAssert base.toSeq == @[2, 3]         # base never changed
   fails if the caller did not import that module.
 - **A wrapper does not pass its imports on.** A module that wraps a structure (a task queue over a
   heap) must `export` the structure module, or its callers must import it too, before they can call
-  `len`, `findMin` and the like on the wrapped value. A wrapper's pop returns
+  `len`, `findMin` and the like on the wrapped value. Export it when the structure's type shows in
+  your signatures; when the wrapper hides it in a private field (below), there is nothing to export. A wrapper's pop returns
   `tuple[item: Option[T], rest: Wrapper]`: `none` and the empty wrapper when it is empty.
 - **A different order is a wrapper element with its own `<`.** The heaps and trees compare with `<`,
   resolved where the generic is instantiated, so a `<` declared in your module before the first use
@@ -111,10 +112,38 @@ let h = emptyHeap[ByPriority]().insert(ByPriority(priority: 1, name: "a"))
 doAssert h.findMin.get.name == "a" and h.findMin.get.priority == 5
 ```
 
-  When the element type is fixed as a tuple (`Task = tuple[name: string, priority: int]`), give the
-  order to a wrapper object that holds it (`Queued = object` with a `task: Task` field and its own
-  `<`). Push `Queued(task: t)` and return `.task` from the pop, so the public signature still speaks
-  of `Task`.
+  When the element type is fixed as a tuple, give the order to a private object that holds it, and
+  keep the tuple in the public signature:
+
+```nim
+import std/options
+import nimcs/ds/leftist_heap
+
+type
+  Task* = tuple[priority: int, name: string]
+  Queued = object                 # carries the order; never leaves this module
+    task: Task
+  TaskQueue* = object
+    heap: LeftistHeap[Queued]
+
+func `<`(a, b: Queued): bool {.raises: [].} =   # highest priority first, then name
+  a.task.priority > b.task.priority or
+    (a.task.priority == b.task.priority and a.task.name < b.task.name)
+
+func emptyTaskQueue*(): TaskQueue {.raises: [].} = TaskQueue(heap: emptyHeap[Queued]())
+
+func push*(q: TaskQueue; t: Task): TaskQueue {.raises: [].} =
+  TaskQueue(heap: q.heap.insert(Queued(task: t)))
+
+func popHighest*(q: TaskQueue): tuple[item: Option[Task], rest: TaskQueue] {.raises: [].} =
+  let top = q.heap.findMin
+  if top.isNone: return (none(Task), q)
+  (some(top.get.task), TaskQueue(heap: q.heap.deleteMin))
+
+let q = emptyTaskQueue().push((1, "a")).push((5, "b")).push((5, "a"))
+doAssert q.popHighest.item == some((5, "a"))
+doAssert q.popHighest.rest.popHighest.item == some((5, "b"))
+```
 - **Build with a local `var`, return a value.** A routine may loop with a local `var` and return it;
   no caller sees the mutation. Never take `var` parameters in public routines.
 - **Failure is a value.** `get(i)` is `Option[T]`; popping an empty structure returns the empty structure;

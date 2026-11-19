@@ -78,7 +78,10 @@ doAssert firstEven([1, 3, 4]) == some(4)
 
 Chain fallible steps with `flatMap`; the first error stops the chain. Library code that converts a
 stdlib exception into an error value (for example `parseInt`) catches that one exception type, names
-it, and returns `err`; it does not swallow it. See `details/result.md`, `details/option_ops.md`.
+it, and returns `err`; it does not swallow it. `parseInt` raises `ValueError` both for text that is
+not a number and for a number that does not fit an `int`, so one `except ValueError` covers both
+(`parseQuantityText` in `details/smart_constructor.md`). Read `.value` or `.error` only after
+checking `isOk` or `isErr`, in tests too. See `details/result.md`, `details/option_ops.md`.
 
 ## S3. Data: value objects, variants, distinct types
 

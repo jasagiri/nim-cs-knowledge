@@ -41,29 +41,36 @@ doAssert s.accept(totalWidth) == 11
 
 When shapes are open, each shape carries its operations as procs, so a new kind is a new value and no existing code changes (a new operation then means a new field everywhere):
 
-```nim
-type
-  OpenShape = object
-    area: proc(): int {.noSideEffect, raises: [].}
-    label: proc(): string {.noSideEffect, raises: [].}
-
-func square(side: int): OpenShape {.raises: [].} =
-  OpenShape(area: proc(): int {.noSideEffect, raises: [].} = side * side,
-            label: proc(): string {.noSideEffect, raises: [].} = "square " & $side)
-
-func triangle(base, height: int): OpenShape {.raises: [].} =
-  OpenShape(area: proc(): int {.noSideEffect, raises: [].} = base * height div 2,
-            label: proc(): string {.noSideEffect, raises: [].} = "triangle")
-
-let shapes = [square(3), triangle(4, 5)]
-doAssert shapes[0].area() + shapes[1].area() == 19
-doAssert shapes[1].label() == "triangle"
-```
-
 A constructor that can be given an impossible shape (a negative side, three lengths that break the
 triangle inequality) returns `Option[OpenShape]` or a `Result`, so no closure ever computes from
-bad input (Heron's formula takes the square root of a negative number and gives NaN). Use `float`
-for areas that are not whole numbers, and compare them with a tolerance in tests.
+bad input (Heron's formula takes the square root of a negative number and gives NaN). `not (x > 0.0)`
+also rejects NaN. Areas are `float`, compared with a tolerance:
+
+```nim
+import std/[math, options]
+
+type
+  OpenShape = object
+    area: proc(): float {.noSideEffect, raises: [].}
+    label: proc(): string {.noSideEffect, raises: [].}
+
+func square(side: float): Option[OpenShape] {.raises: [].} =
+  if not (side > 0.0): return none(OpenShape)
+  some OpenShape(area: proc(): float {.noSideEffect, raises: [].} = side * side,
+                 label: proc(): string {.noSideEffect, raises: [].} = "square")
+
+func triangle(a, b, c: float): Option[OpenShape] {.raises: [].} =
+  if not (a > 0.0 and b > 0.0 and c > 0.0 and a + b > c and b + c > a and a + c > b):
+    return none(OpenShape)
+  let s = (a + b + c) / 2
+  some OpenShape(area: proc(): float {.noSideEffect, raises: [].} = sqrt(s * (s - a) * (s - b) * (s - c)),
+                 label: proc(): string {.noSideEffect, raises: [].} = "triangle")
+
+let shapes = [square(3.0).get, triangle(3.0, 4.0, 5.0).get]
+doAssert abs(shapes[0].area() + shapes[1].area() - 15.0) < 1e-9
+doAssert shapes[1].label() == "triangle"
+doAssert triangle(1.0, 1.0, 5.0).isNone and square(-1.0).isNone
+```
 
 ## Laws and invariants
 - A direct `case` and a `ShapeFold` through `accept` agree for the same operation (GOF-VISITOR-01).

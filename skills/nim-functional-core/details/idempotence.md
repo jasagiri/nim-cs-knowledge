@@ -52,9 +52,9 @@ proc deposit(balance: var int; amount: int) =
 
 ```nim
 import nimcs/fp/idempotence
+import nimcs/fp/result
 
 let key = "request-42"
-import nimcs/fp/result
 
 let first = initLedger().apply(Command(key: key, amount: 10))
 let retry = first.value.apply(Command(key: key, amount: 10))

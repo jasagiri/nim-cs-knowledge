@@ -50,7 +50,9 @@ doAssert bus.ids == @["add", "dbl"]            # the original bus is intact
 When the listeners are fixed (a port of `CounterListener` and `LogListener`), skip the bus: one
 state record with a field per listener and one reducer. Use the bus when listeners are added and
 removed while running. This form needs no import, so it also works outside this repository. The
-`*` marks export the types, fields and functions, which a test in another file needs:
+`*` marks export the types, fields and functions, which a test in another file needs. `subscribe`
+disappears (each listener is a field), `publish` becomes `step`, and a field named after a Nim
+keyword (`type`) is renamed (`kind`):
 
 ```nim
 type
