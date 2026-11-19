@@ -110,8 +110,34 @@ doAssert area(Shape(kind: rectangle, width: 2.0, height: 3.0)) == 6.0
 ```
 
 Smart constructors are the second half of S3: parse once at the boundary, then every function that
-takes the domain type trusts it. Read `.value` of a `Result` only after checking `isOk` (it raises
-`FieldDefect` on an error), or use `valueOr`.
+takes the domain type trusts it. Read `.value` only after checking `isOk` and `.error` only after
+checking `isErr` (each raises `FieldDefect` on the other case), or use `valueOr`. `nimcs/fp/result`
+exports `map` and `flatMap` for `Result`; on a `seq` in the same module, use a loop or `mapIt`
+rather than `xs.map(f)`, which can resolve to the `Result` overload. A module whose exported
+routines return `Result` writes `export result`, or its callers get "undeclared field" on `isErr`.
+
+A new sealed type, complete (the field has no `*`, so other modules can neither set it nor build a
+default value):
+
+```nim
+import nimcs/fp/result
+
+type
+  PercentError* = enum
+    belowZero, aboveHundred
+  Percent* {.requiresInit.} = object
+    points: int              # private: only `percent` below can set it
+
+func percent*(n: int): Result[Percent, PercentError] {.raises: [].} =
+  if n < 0: err(Percent, belowZero)
+  elif n > 100: err(Percent, aboveHundred)
+  else: ok(Percent(points: n), PercentError)
+
+func points*(p: Percent): int {.raises: [].} = p.points   # read access
+
+doAssert percent(42).isOk and percent(42).value.points == 42
+doAssert percent(101).isErr and percent(101).error == aboveHundred
+```
 
 ```nim
 import nimcs/fp/[result, smart_constructor]
@@ -183,8 +209,14 @@ test "FP-IDEMPOTENCE-01 Given any text, when normalizeSpaces is applied twice, t
   check outcome.passed
 ```
 
-Build generators inside the test body (`intIn`, `seqOf`, `pick` and `stringOf` raise `ValueError`
-when their arguments are wrong). A passing run with a fixed seed is reproducible; a failure prints a
+The propcheck API (`import propcheck`; the sibling package nim-propcheck, on the path through
+`nim.cfg`): `check(gen, property): CheckResult[T]` where `property` is
+`proc(x: T): bool {.raises: [CatchableError].}`, the result has `.passed` and `describe(result)` says
+why it failed; generators `intIn(lo, hi)`, `pick(values)`, `seqOf(gen, minLen, maxLen)`,
+`stringOf(alphabet, minLen, maxLen)` and `gen.map(f)` with `f: proc(a: A): B {.raises: [].}`. In a
+`std/unittest` file, `check(gen, property)` with two arguments is propcheck's; its result must be
+used, and `check outcome.passed` is unittest's assertion. Build generators inside the test body
+(they raise `ValueError` when their arguments are wrong). A passing run with a fixed seed is reproducible; a failure prints a
 shrunk counterexample. Idempotence (`details/idempotence.md`) and the monoid laws
 (`details/monoid.md`) are the two families you will use most.
 
@@ -247,12 +279,12 @@ Both must exit with 0. Each `nim` block in this skill and in `details/` compiles
 | Result railway | `details/result.md` | `src/nimcs/fp/result.nim` | FP-RESULT-01 to 06 |
 | Option operations | `details/option_ops.md` | `src/nimcs/fp/option_ops.nim` | FP-OPTIONOPS-01 to 08 |
 | Fold, scan, unfold | `details/fold.md` | `src/nimcs/fp/fold.nim` | FP-FOLD-01 to 07 |
-| Immutable update | `details/immutable_update.md` | `src/nimcs/fp/immutable_update.nim` | FP-IMMUTABLEUPDATE-01 to 05 |
+| Immutable update | `details/immutable_update.md` | `src/nimcs/fp/immutable_update.nim` | FP-IMMUTABLEUPDATE-01 to 07 |
 | Composition and pipelines | `details/compose.md` | `src/nimcs/fp/compose.nim` | FP-COMPOSE-01 to 06 |
-| Lazy streams | `details/lazy_stream.md` | `src/nimcs/fp/lazy_stream.nim` | FP-LAZYSTREAM-01 to 07 |
+| Lazy streams | `details/lazy_stream.md` | `src/nimcs/fp/lazy_stream.nim` | FP-LAZYSTREAM-01 to 08 |
 | Algebraic data types | `details/adt.md` | `src/nimcs/fp/adt.nim` | FP-ADT-01 to 07 |
 | Smart constructors | `details/smart_constructor.md` | `src/nimcs/fp/smart_constructor.nim` | FP-SMARTCONSTRUCTOR-01 to 08 |
-| Idempotence | `details/idempotence.md` | `src/nimcs/fp/idempotence.nim` | FP-IDEMPOTENCE-01 to 08 |
+| Idempotence | `details/idempotence.md` | `src/nimcs/fp/idempotence.nim` | FP-IDEMPOTENCE-01 to 09 |
 | Monoid | `details/monoid.md` | `src/nimcs/fp/monoid.nim` | FP-MONOID-01 to 07 |
 
 Read the details page of a concept before writing code of that kind; each lists use and avoid cases,
