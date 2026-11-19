@@ -90,6 +90,9 @@ suite "cons_list":
       let a = base.cons(-1)
       base = emptyList[int]()
       check a.len == 1_000_001
+      var total = 0
+      for x in a: total += x       # every shared cell is still alive and holds its value
+      check total == 999_999 * 1_000_000 div 2 - 1
 
   # SPEC: DS-CONSLIST-09
   test "DS-CONSLIST-09 Given a list, when another list is consed onto it, then its first cell counts as shared":

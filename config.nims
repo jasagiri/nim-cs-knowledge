@@ -27,6 +27,11 @@ task test, "all tests":
   for t in testFiles():
     echo "== " & t
     exec "nim c -r --hints:off " & t
+  # The iterative destructors rely on isUniqueRef, whose value Nim says may change with the compiler
+  # version and optimiser settings; run their drop tests in a release build as well.
+  for t in ["tests/test_ds_cons_list.nim", "tests/test_ds_pairing_heap.nim", "tests/test_ds_leftist_heap.nim"]:
+    echo "== " & t & " (release)"
+    exec "nim c -r --hints:off -d:release " & t
 
 task catalog, "rebuild catalog/ from raw/":
   buildTools()
