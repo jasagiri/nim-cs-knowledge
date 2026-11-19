@@ -16,6 +16,17 @@ Why.
 ## Nim shape
 Module `src/nimcs/fp/thing.nim`.
 
+## Public API
+
+Generated.
+
+```text
+type Kind = enum
+  one, two
+const limit = 3
+func f(x: int): int
+```
+
 ## Laws and invariants
 - `f(f(x)) == f(x)` (FP-THING-01)
 
@@ -86,11 +97,9 @@ suite "NCK-D dataset":
     for r in rs: kinds.add r.kind
     check kinds == @[rkExplain, rkImplement, rkRefactor, rkLaw]
     check rs[1].output == sampleModule
-    check "func f*(x: int): int {.raises: [].}" in rs[1].instruction
-    check "hidden" notin rs[1].instruction
-    check "type Kind* = enum" in rs[1].instruction
-    check "const limit* = 3" in rs[1].instruction
-    check "secret" notin rs[1].instruction
+    # The signatures come from the page's generated Public API section (NCK-KNOW-06 checks it).
+    check "```nim\ntype Kind = enum\n  one, two\nconst limit = 3\nfunc f(x: int): int\n```" in rs[1].instruction
+    check "Generated." notin rs[1].instruction
     check "A thing." in rs[1].instruction
     check rs[2].input == "var x = 1\n"
     check rs[2].output == "let x = 1\n"

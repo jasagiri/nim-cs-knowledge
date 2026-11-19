@@ -2,6 +2,7 @@
 #
 #   nim test           every tests/test_*.nim (knowledge modules, catalog, pages, dataset, style)
 #   nim catalog        rebuild catalog/ from the fetched pages with ../free-books-catalog (no network)
+#   nim apiSections    rewrite the Public API section of every details page from its module
 #   nim dataset        rebuild dataset/ from skills/, src/, tests/ and catalog/
 #   nim specCoverage   G1 table → docs/quality/g1-spec-coverage.md
 #
@@ -21,6 +22,7 @@ proc buildTools() =
   mkDir("bin")
   exec "nim c --hints:off -d:release -o:bin/catalog_build ../free-books-catalog/tools/catalog_build.nim"
   exec "nim c --hints:off -d:release -o:bin/dataset_build tools/dataset_build.nim"
+  exec "nim c --hints:off -d:release -o:bin/api_sections tools/api_sections.nim"
 
 task test, "all tests":
   buildTools()
@@ -36,6 +38,10 @@ task test, "all tests":
 task catalog, "rebuild catalog/ from raw/":
   buildTools()
   exec "bin/catalog_build --config:catalog/config.json"
+
+task apiSections, "rewrite the Public API sections":
+  buildTools()
+  exec "bin/api_sections"
 
 task dataset, "rebuild dataset/":
   buildTools()

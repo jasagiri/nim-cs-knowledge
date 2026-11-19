@@ -1,4 +1,4 @@
-## E tests for docs/specification.md NCK-KNOW-01…NCK-KNOW-05 (details pages, skills, modules) and
+## E tests for docs/specification.md NCK-KNOW-01…NCK-KNOW-06 (details pages, skills, modules) and
 ## NCK-STYLE-01…NCK-STYLE-02 (style).
 
 import std/[os, osproc, sets, strutils, unittest]
@@ -6,7 +6,7 @@ import nimcs/dataset
 
 const
   root = currentSourcePath().parentDir.parentDir
-  Sections = ["Intent", "Use when / avoid when", "Nim shape", "Laws and invariants", "Complexity",
+  Sections = ["Intent", "Use when / avoid when", "Nim shape", "Public API", "Laws and invariants", "Complexity",
               "Pitfalls", "Related", "Sources"]
   Areas = ["fp", "ds", "algo", "patterns"]
 
@@ -34,7 +34,7 @@ suite "NCK-K pages and modules":
     check pages.len > 0
 
   # SPEC: NCK-KNOW-01
-  test "NCK-KNOW-01 Given every details page, when its headings are read, then the eight sections appear in order with a bad example under Pitfalls":
+  test "NCK-KNOW-01 Given every details page, when its headings are read, then the nine sections appear in order with a bad example under Pitfalls":
     for f in pages:
       let p = parsePage(readFile(f))
       var names: seq[string]
@@ -133,6 +133,12 @@ suite "NCK-K pages and modules":
         let link = "details/" & d.extractFilename
         if link notin text: checkpoint f.relativePath(root) & ": does not link " & link
         check link in text
+
+  # SPEC: NCK-KNOW-06
+  test "NCK-KNOW-06 Given every details page, when its Public API section is compared with its module's jsondoc, then they agree":
+    let (output, rc) = execCmdEx(quoteShell(root / "bin" / "api_sections") & " --check")
+    if rc != 0: checkpoint output
+    check rc == 0
 
 suite "NCK-S style":
   # SPEC: NCK-STYLE-01

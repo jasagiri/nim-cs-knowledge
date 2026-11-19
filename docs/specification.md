@@ -16,11 +16,12 @@ checks that hold the repository together. Every ID has a test tagged `# SPEC: <I
 
 | ID | Statement |
 |---|---|
-| NCK-KNOW-01 | Every details page has the sections Intent, Use when / avoid when, Nim shape, Laws and invariants, Complexity, Pitfalls, Related, Sources, in that order, and at least one `nim bad` block under Pitfalls. |
+| NCK-KNOW-01 | Every details page has the sections Intent, Use when / avoid when, Nim shape, Public API, Laws and invariants, Complexity, Pitfalls, Related, Sources, in that order, and at least one `nim bad` block under Pitfalls. |
 | NCK-KNOW-02 | Every `nim` block of every SKILL.md and details page compiles on its own under the repository's lint settings; fences are only `nim` and `nim bad`. |
 | NCK-KNOW-03 | Every Sources section cites at least one catalog ID, or states `None in the catalog:` with the reason; every cited ID exists in catalog/sources.jsonl. |
 | NCK-KNOW-04 | Every details page names a module that exists, and every knowledge module has a details page. |
 | NCK-KNOW-05 | Every SKILL.md has `name` and `description` front matter and links every details page of its skill. |
+| NCK-KNOW-06 | Every details page's Public API section lists exactly the exported symbols of its module, as `nim jsondoc` reports them (`bin/api_sections --check` exits 0). |
 
 ## Style (ADR-NCK-0002)
 
