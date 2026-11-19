@@ -58,7 +58,10 @@ with "undeclared field".
    the sieve. The obvious version is the oracle; the fast one must agree on generated inputs.
 3. **Put the failure in the type.** A cycle in a topological sort, a negative cycle in
    Bellman–Ford, an unreachable vertex, a modulus out of range: `Result` or `Option`, never an
-   exception or a sentinel like `-1` or `high(int)`.
+   exception or a sentinel like `-1` or `high(int)`. When the signature is fixed and has no error
+   channel (`seq[Option[int]]`), state the precondition in the doc comment, keep the routine total
+   (skip an arc that names a vertex outside `0 ..< n`; never index out of range), and add a checked
+   companion that returns `Result` and calls it (`fastestChecked(...): Result[seq[Option[int]], E]`).
 4. **Keep mutation local.** In-place partition, heap sift-down, DP table filling and union-find are
    fine inside the routine; the signature stays pure.
 5. **Mind the integer range.** Sums and products of `int` can overflow (`OverflowDefect`); either

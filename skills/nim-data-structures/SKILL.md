@@ -77,7 +77,9 @@ doAssert base.toSeq == @[2, 3]         # base never changed
   list of a few hundred thousand nodes (measured: 5 x 10^5 crashed). `cons_list`, `pairing_heap` and
   `leftist_heap` therefore define an iterative `=destroy` that stops at nodes another version still
   shares (`isUniqueRef`); with it 5 x 10^7 cons cells and 5 x 10^6 heap nodes drop fine (release build,
-  8 MB stack). A structure whose depth follows user data (a `trie` word, a `zipper` tree) still recurses:
+  8 MB stack). Nim documents that `isUniqueRef` can change with the compiler version and optimiser, so
+  `nim test` runs these drop tests (DS-CONSLIST-08, DS-PAIRINGHEAP-06, DS-LEFTISTHEAP-07) in debug and
+  release builds; rerun it after upgrading Nim. A structure whose depth follows user data (a `trie` word, a `zipper` tree) still recurses:
   a trie word of 40,000 characters is fine in a release build, 60,000 crashes, and a debug build stops at
   about 2,000 (call depth limit).
 - **Same names across modules.** The three heap modules export the same names; qualify `emptyHeap` and
@@ -89,6 +91,25 @@ doAssert base.toSeq == @[2, 3]         # base never changed
   heap) must `export` the structure module, or its callers must import it too, before they can call
   `len`, `findMin` and the like on the wrapped value. A wrapper's pop returns
   `tuple[item: Option[T], rest: Wrapper]`: `none` and the empty wrapper when it is empty.
+- **A different order is a wrapper element with its own `<`.** The heaps and trees compare with `<`,
+  resolved where the generic is instantiated, so a `<` declared in your module before the first use
+  is the one they call:
+
+```nim
+import std/options
+import nimcs/ds/leftist_heap
+
+type ByPriority = object      # highest priority first, then name ascending
+  priority: int
+  name: string
+
+func `<`(a, b: ByPriority): bool {.raises: [].} =
+  a.priority > b.priority or (a.priority == b.priority and a.name < b.name)
+
+let h = emptyHeap[ByPriority]().insert(ByPriority(priority: 1, name: "a"))
+  .insert(ByPriority(priority: 5, name: "b")).insert(ByPriority(priority: 5, name: "a"))
+doAssert h.findMin.get.name == "a" and h.findMin.get.priority == 5
+```
 - **Build with a local `var`, return a value.** A routine may loop with a local `var` and return it;
   no caller sees the mutation. Never take `var` parameters in public routines.
 - **Failure is a value.** `get(i)` is `Option[T]`; popping an empty structure returns the empty structure;
