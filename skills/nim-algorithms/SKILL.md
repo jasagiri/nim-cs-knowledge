@@ -27,15 +27,23 @@ Edges are directed (`a -> b`) unless the task says otherwise; for an undirected 
 Your own task (a scratch directory, another project): the page's Public API section lists every
 exported signature of its module. When the task fixes names, fields or a signature the module does
 not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
-in your file from the page's shape and laws: the algorithm, the laws and the tests carry over, the
-type and routine names do not. Do not convert between your types and the module's on every call;
+in your file from the page's shape and laws: the algorithm, the laws, the tests and the example's
+layout (its fields and steps) carry over, the type and routine names do not (use the task's names: `circle`, not the example's `square`). Do not convert between your types and the module's on every call;
 a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
 `TaskQueue` over `leftist_heap`) is fine. The
 spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
 a module to this repository; for your own code, put `std/unittest` tests with Given-When-Then names
 in `test_<name>.nim` beside it, with no spec file. `propcheck` and `std/unittest` both define
-`check`; they take different arguments, so both work in one file. Import by default: if
-`import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
+`check`; they take different arguments, so both work in one file. A callback parameter of a
+`func` is typed `proc(i: int): bool {.noSideEffect, raises: [].}`: add these pragmas to a fixed
+signature that says `proc(i: int): bool`, since a `func` cannot call a callback that may have
+effects or raise. Import only what the file uses (an unused import is a compile error under the
+strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`, and a file whose exported
+routines return `Result` also writes `export result`, or a test that imports only that file fails
+with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
+`{.requiresInit.}`) included; an object variant does not. `opt.get` on
+`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. When the file
+uses `Result`, import it by default: if `import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
 use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
 
 ```nim
@@ -58,7 +66,7 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
    any distance. Write each as a property test before the body: `import propcheck`, then
    `check(gen, property)` with generators such as `intIn(lo, hi)` and `seqOf(gen, minLen, maxLen)`
    (`import propcheck`: `check(gen, proc(x: T): bool {.raises: [CatchableError].})` returns a result
-   with `.passed` and `describe(result)`; generators `intIn(lo, hi)`, `pick(values)`,
+   with `.passed` and `describe(result)`; generators (each a `Gen[T]`) `intIn(lo, hi)`, `pick(values)`,
    `seqOf(gen, minLen, maxLen)`, `pair(genA, genB)`, `gen.map(f)`; in a test, `checkpoint
    describe(outcome)` then `check outcome.passed`).
 
@@ -117,7 +125,7 @@ doAssert firstOf(@[4]).value == 4
    A page that says its module refuses an input with an error (Dijkstra's `geNegativeWeight`)
    describes a routine that returns `Result`; with no error channel, skip instead. When the task
    leaves the error type open and the error must carry a value (which vertex), use an object with a
-   `kind` enum and the value (`OrderError = object` with `kind: OrderErrorKind` and `vertex: int`).
+   `kind` enum and the value (a negative `n` or a vertex outside `0 ..< n` is the bad-input kind) (`OrderError = object` with `kind: OrderErrorKind` and `vertex: int`).
 4. **Keep mutation local.** In-place partition, heap sift-down, DP table filling and union-find are
    fine inside the routine; the signature stays pure.
 5. **Mind the integer range.** Sums and products of `int` can overflow (`OverflowDefect`); either

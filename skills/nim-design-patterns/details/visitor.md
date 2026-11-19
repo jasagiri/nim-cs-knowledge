@@ -43,6 +43,11 @@ doAssert s.accept(totalWidth) == 11
 
 ### Open form (kinds added by other modules)
 
+The module and its Public API cover the closed form only; copy this block into your file. For a
+plugin, the lines under `# plugin.nim` go in a second file that starts with `import shapes` (the
+first file's name), and the first file is not edited. `OpenShape` and its field names stay as they
+are in both files.
+
 When shapes are open, each shape carries its operations as procs, so a new kind is a new value and no existing code changes. A second operation (`perimeter` next to `area`) is one more field in the record and one more closure in every constructor, as `perimeter` below.
 
 A constructor that can be given an impossible shape (a negative side, three lengths that break the
@@ -51,6 +56,7 @@ bad input (Heron's formula takes the square root of a negative number and gives 
 also rejects NaN. Areas are `float`, compared with a tolerance:
 
 ```nim
+# shapes.nim: the record and the first kinds
 import std/[math, options]
 
 type
@@ -65,7 +71,8 @@ func square*(side: float): Option[OpenShape] {.raises: [].} =
                  perimeter: proc(): float {.noSideEffect, raises: [].} = 4 * side,
                  label: proc(): string {.noSideEffect, raises: [].} = "square")
 
-func triangle*(a, b, c: float): Option[OpenShape] {.raises: [].} =   # could live in another module
+# plugin.nim: import shapes (and std/[math, options]); adds a kind with no edit to shapes.nim
+func triangle*(a, b, c: float): Option[OpenShape] {.raises: [].} =
   if not (a > 0.0 and b > 0.0 and c > 0.0 and a + b > c and b + c > a and a + c > b):
     return none(OpenShape)
   let s = (a + b + c) / 2

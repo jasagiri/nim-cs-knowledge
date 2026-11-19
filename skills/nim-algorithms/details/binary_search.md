@@ -13,7 +13,7 @@ Halve the candidate range by asking one yes/no question per step. The general fo
 
 ## Nim shape
 
-`src/nimcs/algo/binary_search.nim`: `firstTrue(lo, hi, pred)` over an integer range, `partitionPoint(xs, pred)` over a sequence, `lowerBound`, `upperBound` and `binarySearch` with an optional comparator. All are `func`s; "not found" is `Option`. The midpoint is `low + (high - low) div 2`, or `floorDiv(low + high, 2)` when the range crosses zero (where `high - low` could overflow; the sum of a negative and a non-negative `int` cannot), so any bounds in the `int` range work. The range is half-open, `[lo, hi)`, so `hi` itself is never tested: to include `high(int)`, search `[lo, high(int))` and test `high(int)` separately.
+`src/nimcs/algo/binary_search.nim`: `firstTrue(lo, hi, pred)` over an integer range, `partitionPoint(xs, pred)` over a sequence, `lowerBound`, `upperBound` and `binarySearch` with an optional comparator. All are `func`s; "not found" is `Option`. The midpoint is `low + (high - low) div 2`, or `floorDiv(low + high, 2)` when the range crosses zero (where `high - low` could overflow; the sum of a negative and a non-negative `int` cannot), so any bounds in the `int` range work: `if lo < 0 and hi >= 0: floorDiv(lo + hi, 2) else: lo + (hi - lo) div 2`. The range is half-open, `[lo, hi)`, so `hi` itself is never tested: to include `high(int)`, search `[lo, high(int))` and test `high(int)` separately. For a closed range `lo..hi`, test `pred(hi)` first (false means none), then search `[lo, hi)` and answer `hi` when nothing earlier is true.
 
 ```nim
 import std/options

@@ -25,15 +25,23 @@ as errors listed in `nim.cfg`; fix a warning, never switch it off.
 Your own task (a scratch directory, another project): the page's Public API section lists every
 exported signature of its module. When the task fixes names, fields or a signature the module does
 not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
-in your file from the page's shape and laws: the algorithm, the laws and the tests carry over, the
-type and routine names do not. Do not convert between your types and the module's on every call;
+in your file from the page's shape and laws: the algorithm, the laws, the tests and the example's
+layout (its fields and steps) carry over, the type and routine names do not (use the task's names: `circle`, not the example's `square`). Do not convert between your types and the module's on every call;
 a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
 `TaskQueue` over `leftist_heap`) is fine. The
 spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
 a module to this repository; for your own code, put `std/unittest` tests with Given-When-Then names
 in `test_<name>.nim` beside it, with no spec file. `propcheck` and `std/unittest` both define
-`check`; they take different arguments, so both work in one file. Import by default: if
-`import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
+`check`; they take different arguments, so both work in one file. A callback parameter of a
+`func` is typed `proc(i: int): bool {.noSideEffect, raises: [].}`: add these pragmas to a fixed
+signature that says `proc(i: int): bool`, since a `func` cannot call a callback that may have
+effects or raise. Import only what the file uses (an unused import is a compile error under the
+strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`, and a file whose exported
+routines return `Result` also writes `export result`, or a test that imports only that file fails
+with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
+`{.requiresInit.}`) included; an object variant does not. `opt.get` on
+`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. When the file
+uses `Result`, import it by default: if `import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
 use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
 
 ```nim
@@ -126,7 +134,10 @@ doAssert parseWhole("80").value == 80 and parseWhole("8x").isErr
 ```
 
 `parseInt` accepts a sign (`+80`, `-1`), leading zeros (`080`) and underscores (`1_000`), and
-rejects surrounding spaces and the empty string; check any form the task forbids before calling it.
+rejects surrounding spaces and the empty string. For a stricter grammar (ASCII digits only), check
+`raw.len > 0 and raw.allCharsInSet(Digits)` (`std/strutils`) first and keep the `try` for overflow.
+This also reports the two causes apart: text that fails the check is "not digits", and a
+`ValueError` after the check can only be a number too big for an `int` (out of range).
 Read `.value` or `.error` only after checking `isOk` or `isErr`, in tests too. See `details/result.md`, `details/option_ops.md`.
 
 ## S3. Data: value objects, variants, distinct types
@@ -261,7 +272,7 @@ test "FP-IDEMPOTENCE-01 Given any text, when normalizeSpaces is applied twice, t
 The propcheck API (`import propcheck`; the sibling package nim-propcheck, on the path through
 `nim.cfg`): `check(gen, property): CheckResult[T]` where `property` is
 `proc(x: T): bool {.raises: [CatchableError].}`, the result has `.passed` and `describe(result)` says
-why it failed; generators `intIn(lo, hi)`, `pick(values)`, `seqOf(gen, minLen, maxLen)`,
+why it failed; generators (each a `Gen[T]`) `intIn(lo, hi)`, `pick(values)`, `seqOf(gen, minLen, maxLen)`,
 `stringOf(alphabet, minLen, maxLen)`, `pair(genA, genB)` and `gen.map(f)` with `f: proc(a: A): B {.raises: [].}`. In a
 `std/unittest` file, `check(gen, property)` with two arguments is propcheck's; its result must be
 used, and `check outcome.passed` is unittest's assertion. Build generators inside the test body

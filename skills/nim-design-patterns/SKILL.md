@@ -27,15 +27,23 @@ only when the task fixes a different signature. The `Result` in the pages is `ni
 Your own task (a scratch directory, another project): the page's Public API section lists every
 exported signature of its module. When the task fixes names, fields or a signature the module does
 not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
-in your file from the page's shape and laws: the algorithm, the laws and the tests carry over, the
-type and routine names do not. Do not convert between your types and the module's on every call;
+in your file from the page's shape and laws: the algorithm, the laws, the tests and the example's
+layout (its fields and steps) carry over, the type and routine names do not (use the task's names: `circle`, not the example's `square`). Do not convert between your types and the module's on every call;
 a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
 `TaskQueue` over `leftist_heap`) is fine. The
 spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
 a module to this repository; for your own code, put `std/unittest` tests with Given-When-Then names
 in `test_<name>.nim` beside it, with no spec file. `propcheck` and `std/unittest` both define
-`check`; they take different arguments, so both work in one file. Import by default: if
-`import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
+`check`; they take different arguments, so both work in one file. A callback parameter of a
+`func` is typed `proc(i: int): bool {.noSideEffect, raises: [].}`: add these pragmas to a fixed
+signature that says `proc(i: int): bool`, since a `func` cannot call a callback that may have
+effects or raise. Import only what the file uses (an unused import is a compile error under the
+strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`, and a file whose exported
+routines return `Result` also writes `export result`, or a test that imports only that file fails
+with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
+`{.requiresInit.}`) included; an object variant does not. `opt.get` on
+`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. When the file
+uses `Result`, import it by default: if `import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
 use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
 
 ```nim
@@ -99,7 +107,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | behaviour depends on mode | State → variant + `step(s, event): Result` | [details/state.md](details/state.md) |
 | interchangeable step | Strategy → a proc value | [details/strategy.md](details/strategy.md) |
 | fixed skeleton, varying steps | Template Method → higher-order `func` | [details/template_method.md](details/template_method.md) |
-| new operations over a closed family | Visitor → variant + `case` | [details/visitor.md](details/visitor.md) |
+| new operations over a closed family (no other module adds kinds) | Visitor → variant + `case` | [details/visitor.md](details/visitor.md) |
 | new kinds added by other modules (an open family) | a record of procs per value: each kind is a constructor returning the record | [details/visitor.md](details/visitor.md), heading "Open form" |
 | keep decisions testable, effects at the edge | Functional core, imperative shell | [details/functional_core.md](details/functional_core.md) |
 | history as the source of truth | Event sourcing | [details/event_sourcing.md](details/event_sourcing.md) |

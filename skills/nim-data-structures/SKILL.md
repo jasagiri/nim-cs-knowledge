@@ -27,15 +27,23 @@ add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
 Your own task (a scratch directory, another project): the page's Public API section lists every
 exported signature of its module. When the task fixes names, fields or a signature the module does
 not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
-in your file from the page's shape and laws: the algorithm, the laws and the tests carry over, the
-type and routine names do not. Do not convert between your types and the module's on every call;
+in your file from the page's shape and laws: the algorithm, the laws, the tests and the example's
+layout (its fields and steps) carry over, the type and routine names do not (use the task's names: `circle`, not the example's `square`). Do not convert between your types and the module's on every call;
 a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
 `TaskQueue` over `leftist_heap`) is fine. The
 spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
 a module to this repository; for your own code, put `std/unittest` tests with Given-When-Then names
 in `test_<name>.nim` beside it, with no spec file. `propcheck` and `std/unittest` both define
-`check`; they take different arguments, so both work in one file. Import by default: if
-`import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
+`check`; they take different arguments, so both work in one file. A callback parameter of a
+`func` is typed `proc(i: int): bool {.noSideEffect, raises: [].}`: add these pragmas to a fixed
+signature that says `proc(i: int): bool`, since a `func` cannot call a callback that may have
+effects or raise. Import only what the file uses (an unused import is a compile error under the
+strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`, and a file whose exported
+routines return `Result` also writes `export result`, or a test that imports only that file fails
+with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
+`{.requiresInit.}`) included; an object variant does not. `opt.get` on
+`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. When the file
+uses `Result`, import it by default: if `import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
 use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
 
 ```nim
@@ -58,13 +66,13 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | Stack, "build then reverse", shared tails | `cons_list` | O(1) at the front only |
 | FIFO queue, each version used once | `bankers_queue` | amortized O(1); repeated pops from one old version re-pay the reversal |
 | Both ends push and pop | `deque` | `bankers_queue` pops only the front |
-| FIFO queue whose old versions are reused (backtracking search) | a local `seq` with a head index inside one routine, or `leftist_heap` keyed by an insertion counter | `bankers_queue` and `deque` are amortized and re-pay their rebuild on each reuse |
+| FIFO queue whose old versions are reused (backtracking search) | a local `seq` with a head index inside one routine, or `leftist_heap` keyed by an insertion counter (compiled in `details/leftist_heap.md`) | `bankers_queue` and `deque` are amortized and re-pay their rebuild on each reuse |
 | Priority queue whose old versions are reused (undo), or merged often | `leftist_heap` (worst-case O(log n)) | `pairing_heap` is amortized: popping an old version again re-pays |
 | Priority queue, each version used once | `pairing_heap` (usually fastest) or `leftist_heap` | |
 | Priority queue, reason like binary addition | `binomial_heap` | worst-case O(log n) insert and merge |
 | Ordered map or set, sorted iteration, no `remove` | `rb_tree` | `hamt` has no key order; with `remove`, see below |
 | Unordered map with `remove`, large and updated functionally | `hamt` | `rb_tree` has deeper paths and no `remove` here |
-| Ordered map that also needs `remove` | default `hamt`, sorting keys when read (`toSortedSeq`, O(n log n), gives `(key, value)` pairs); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate; when the mix is unknown, `hamt` | `rb_tree` here has no `remove` |
+| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n), gives `(key, value)` pairs) | `rb_tree` here has no `remove`; switch to it (rebuilt without the key, O(n) per `remove`) only when the task says ordered reads far outnumber removes |
 | Indexed sequence, push at the back, update by index | `pvector` | `seq` copies O(n) per version |
 | Indexed stack (push, pop and index at the front) | `skew_list` | `cons_list` indexes in O(n) |
 | Prefix search, autocompletion | `trie` | `hamt` finds whole keys only |
@@ -74,7 +82,7 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | "Certainly absent" test with small memory | `bloom_filter` | exact sets cost more memory; no delete |
 
 Questions to ask in order:
-1. Do old versions have to stay valid? If not, a local `var seq` or `Table` inside one routine is
+1. Do old versions have to stay valid (is an older value read or popped again after a newer one was made)? If not, a local `var seq` or `Table` inside one routine is
    simpler and faster (ADR-NCK-0002 S5 allows local mutation).
 2. Is access by position, by order, by key, or by prefix?
 3. Where do elements enter and leave: front, back, both, by priority?
