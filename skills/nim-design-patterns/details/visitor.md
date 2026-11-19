@@ -52,16 +52,16 @@ also rejects NaN. Areas are `float`, compared with a tolerance:
 import std/[math, options]
 
 type
-  OpenShape = object
-    area: proc(): float {.noSideEffect, raises: [].}
-    label: proc(): string {.noSideEffect, raises: [].}
+  OpenShape* = object         # exported with its fields: another module can add a kind
+    area*: proc(): float {.noSideEffect, raises: [].}
+    label*: proc(): string {.noSideEffect, raises: [].}
 
-func square(side: float): Option[OpenShape] {.raises: [].} =
+func square*(side: float): Option[OpenShape] {.raises: [].} =
   if not (side > 0.0): return none(OpenShape)
   some OpenShape(area: proc(): float {.noSideEffect, raises: [].} = side * side,
                  label: proc(): string {.noSideEffect, raises: [].} = "square")
 
-func triangle(a, b, c: float): Option[OpenShape] {.raises: [].} =
+func triangle*(a, b, c: float): Option[OpenShape] {.raises: [].} =   # could live in another module
   if not (a > 0.0 and b > 0.0 and c > 0.0 and a + b > c and b + c > a and a + c > b):
     return none(OpenShape)
   let s = (a + b + c) / 2

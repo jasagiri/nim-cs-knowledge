@@ -6,7 +6,9 @@ A persistent unordered map. The key's hash is consumed five bits at a time; each
 ## Use when / avoid when
 - Use it for large maps that are updated functionally and need only lookup, insert and remove.
 - Use it when old versions of the map must stay valid (snapshots, transactions, backtracking).
-- Avoid it when you need ordered traversal or range queries: use `rb_tree`.
+- Avoid it when you need range queries or ordered traversal of a map you never `remove` from: use
+  `rb_tree`. With `remove`, keep the `hamt` and sort when reading (`toSortedSeq`), since `rb_tree` has
+  no `remove` here.
 - Avoid it when keys have no cheap, well-spread hash.
 
 ## Nim shape

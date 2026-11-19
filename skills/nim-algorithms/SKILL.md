@@ -55,7 +55,21 @@ test "Given any list, when sorted, then no element is greater than the next":
 `Result` comes from `nimcs/fp/result`: `ok(value, ErrorType)`, `err(ValueType, error)`, `isOk`,
 `isErr`, `.value`, `.error`, `valueOr`. A module whose exported routines return `Result` writes
 `export result`; otherwise its callers must import `nimcs/fp/result` themselves, and `r.isErr` fails
-with "undeclared field".
+with "undeclared field". The type argument names the other side of the `Result`:
+
+```nim
+import nimcs/fp/result
+
+type OrderError = enum oeCycle, oeBadVertex
+
+func firstOf(xs: seq[int]): Result[int, OrderError] {.raises: [].} =
+  if xs.len == 0: err(int, oeBadVertex)     # err(ValueType, error)
+  else: ok(xs[0], OrderError)               # ok(value, ErrorType)
+
+let r = firstOf(@[])
+doAssert r.isErr and r.error == oeBadVertex  # read .error only after isErr
+doAssert firstOf(@[4]).value == 4
+```
 2. **Cross-check against a slower obvious version.** Naive search for KMP / Z / Rabin–Karp,
    brute force over subsets for Kruskal and knapsack, Bellman–Ford for Dijkstra, trial division for
    the sieve. The obvious version is the oracle; the fast one must agree on generated inputs.

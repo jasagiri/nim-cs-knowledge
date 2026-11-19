@@ -119,6 +119,9 @@ doAssert step(green, emergency) == red
 
 ## Pitfalls shared by many patterns
 
-- An object variant gets no automatic `==`; write one when tests compare variants.
+- An object variant gets no automatic `==`; write one when tests compare variants. A plain object,
+  `seq` fields included, gets `==` field by field.
+- A source field named after a Nim keyword (`type`, `object`, `method`) is renamed in the port (`kind`),
+  with the original name in a comment.
 - A proc field type must spell its effects (`{.noSideEffect, raises: [].}`) or a `func` cannot call it.
 - A record of procs is the escape hatch for open extension; prefer a variant while the set of cases is closed.

@@ -226,6 +226,8 @@ shrunk counterexample. Idempotence (`details/idempotence.md`) and the monoid law
 A value with several fields is generated as a `pair` (or a `seqOf` for a list) turned into the
 record with `map`. A type sealed by a smart constructor cannot be generated directly: generate the
 raw input, pass it through the constructor, and treat `Err` as "nothing to check" (return `true`).
+That holds only for raw input the constructor may reject; when the generator makes only valid input
+(`intIn(1, 65535)` for a port), `Err` is a failure and the property returns `false`.
 The round trip is then printing and parsing again. `isErr` and `.value` come from
 `nimcs/fp/result`, so import it next to the constructor's module:
 
