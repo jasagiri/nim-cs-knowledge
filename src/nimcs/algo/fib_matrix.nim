@@ -1,4 +1,4 @@
-## Fast Fibonacci by raising the matrix [[1, 1], [1, 0]] to the n-th power: its entries are
+## Fast Fibonacci by raising the matrix `[[1, 1], [1, 0]]` to the n-th power: its entries are
 ## F(n+1), F(n), F(n), F(n-1), and repeated squaring needs O(log n) multiplications.
 ##
 ## `fibMatrix` is exact and returns none beyond F(92), the last value that fits a signed 64-bit

@@ -30,7 +30,7 @@ func zFindAll*(text, pattern: string): seq[int] {.raises: [].} =
   ## Start offsets of all occurrences of `pattern` in `text`, ascending. An empty pattern occurs
   ## at every offset 0 .. text.len (STR-ZALGO-03, STR-ZALGO-04).
   ##
-  ## Z is computed on `pattern & text` with no separator: a value z[i] >= pattern.len at
+  ## Z is computed on `pattern & text` with no separator: a value `z[i] >= pattern.len` at
   ## i >= pattern.len means `s[i ..< i + m]` equals the pattern, and that range lies inside `text`.
   result = @[]
   let m = pattern.len
