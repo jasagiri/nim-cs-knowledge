@@ -47,6 +47,31 @@ doAssert bus.unsubscribe("add").publish(5, "go") == 10
 doAssert bus.ids == @["add", "dbl"]            # the original bus is intact
 ```
 
+When the listeners are fixed (a port of `CounterListener` and `LogListener`), skip the bus: one
+state record with a field per listener and one reducer. Use the bus when listeners are added and
+removed while running. This form needs no import, so it also works outside this repository:
+
+```nim
+type
+  Event = object
+    kind, payload: string
+  Listeners = object
+    clicks: int          # was CounterListener
+    log: seq[string]     # was LogListener
+
+func step(s: Listeners; e: Event): Listeners {.raises: [].} =
+  result = s
+  if e.kind == "Click": inc result.clicks
+  result.log.add e.kind & ":" & e.payload
+
+func replay(events: openArray[Event]): Listeners {.raises: [].} =
+  for e in events: result = result.step(e)
+
+let events = [Event(kind: "Click", payload: "a"), Event(kind: "Key", payload: "x")]
+doAssert replay(events).clicks == 1
+doAssert replay(events) == replay(events)
+```
+
 ## Laws and invariants
 - Replaying one log twice from the same state gives equal states (GOF-OBSERVER-01).
 - `publish` is the fold of the subscribers in subscription order (GOF-OBSERVER-02); with no subscribers the state is unchanged (GOF-OBSERVER-03).

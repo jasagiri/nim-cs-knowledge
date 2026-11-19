@@ -17,6 +17,10 @@ functions, sum types, value semantics, generics. Nim has all four, so a pattern 
 smaller, more direct shape or disappears. Every pattern here has a tested module
 `src/nimcs/patterns/<name>.nim` and a details page; read the page before using the pattern.
 
+Inside this repository, import the module (`import nimcs/<area>/<name>`). In another project the
+modules are not a published package: copy the shape from the details page into your own file, or
+add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
+
 ## The translation table
 
 | OO building block | Functional Nim |
@@ -56,10 +60,12 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | many parties, central rules | Mediator → a pure routing function | [details/mediator.md](details/mediator.md) |
 | snapshot and restore | Memento → old values (persistence makes it free) | [details/memento.md](details/memento.md) |
 | react to happenings | Observer → events folded by reducers | [details/observer.md](details/observer.md) |
+| several stateful listeners on one event stream | one state record with a field per listener, one reducer `step(state, event)` | [details/observer.md](details/observer.md) |
 | behaviour depends on mode | State → variant + `step(s, event): Result` | [details/state.md](details/state.md) |
 | interchangeable step | Strategy → a proc value | [details/strategy.md](details/strategy.md) |
 | fixed skeleton, varying steps | Template Method → higher-order `func` | [details/template_method.md](details/template_method.md) |
 | new operations over a closed family | Visitor → variant + `case` | [details/visitor.md](details/visitor.md) |
+| new kinds added by other modules (an open family) | a record of procs per value: each kind is a constructor returning the record | [details/visitor.md](details/visitor.md) (open form) |
 | keep decisions testable, effects at the edge | Functional core, imperative shell | [details/functional_core.md](details/functional_core.md) |
 | history as the source of truth | Event sourcing | [details/event_sourcing.md](details/event_sourcing.md) |
 | separate write model and read models | CQRS | [details/cqrs.md](details/cqrs.md) |
