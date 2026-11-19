@@ -17,11 +17,42 @@ make. The house style is ADR-NCK-0002 (skill `nim-functional-core`): public rout
 `{.raises: [].}`, the input is an `openArray` or an immutable value, the output is a new value, and
 working arrays, queues and DP tables are local `var`s nobody outside can see.
 
+Inside this repository, import the module (`import nimcs/<area>/<name>`). In another project the
+modules are not a published package: copy the shape from the details page into your own file, or
+add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
+
 ## How to write one
 
 1. **State the contract as laws first.** A sort: the output is ordered, is a permutation of the
    input, is stable if promised, and `sort(sort(x)) == sort(x)`. A shortest path: no arc can improve
-   any distance. Write each as a property test (nim-propcheck) before the body.
+   any distance. Write each as a property test before the body: `import propcheck`, then
+   `check(gen, property)` with generators such as `intIn(lo, hi)` and `seqOf(gen, minLen, maxLen)`
+   (the whole API is in nim-functional-core, S6).
+
+A complete property test (propcheck's `check` returns a `CheckResult`; assert its `.passed`). There
+are no tuple or graph generators: draw a `seq[int]` and read it as `n` followed by pairs `(a mod n,
+b mod n)`. Compare with an oracle: Bellman–Ford for shortest paths, "every arc goes forward" for a
+topological order, a reachability search for "a cycle exists".
+
+```nim
+import std/[algorithm, unittest]
+import propcheck
+
+test "Given any list, when sorted, then no element is greater than the next":
+  let outcome = check(seqOf(intIn(-50, 50), 0, 30),
+    proc(xs: seq[int]): bool {.raises: [CatchableError].} =
+      let s = xs.sorted
+      result = true
+      for i in 1 ..< s.len:
+        if s[i - 1] > s[i]: result = false)
+  checkpoint describe(outcome)
+  check outcome.passed
+```
+
+`Result` comes from `nimcs/fp/result`: `ok(value, ErrorType)`, `err(ValueType, error)`, `isOk`,
+`isErr`, `.value`, `.error`, `valueOr`. A module whose exported routines return `Result` writes
+`export result`; otherwise its callers must import `nimcs/fp/result` themselves, and `r.isErr` fails
+with "undeclared field".
 2. **Cross-check against a slower obvious version.** Naive search for KMP / Z / Rabin–Karp,
    brute force over subsets for Kruskal and knapsack, Bellman–Ford for Dijkstra, trial division for
    the sieve. The obvious version is the oracle; the fast one must agree on generated inputs.
@@ -66,7 +97,7 @@ working arrays, queues and DP tables are local `var`s nobody outside can see.
 | all primes up to n | sieve of Eratosthenes | [details/sieve.md](details/sieve.md) |
 | the n-th Fibonacci number in O(log n) | matrix power | [details/fib_matrix.md](details/fib_matrix.md) |
 | enumerate permutations, combinations, n-queens | backtracking as a generator | [details/backtracking.md](details/backtracking.md) |
-| local choice provably optimal (interval scheduling) | greedy + exchange argument | [details/greedy.md](details/greedy.md) |
+| local choice provably optimal (interval scheduling, fractional knapsack) | greedy + exchange argument | [details/greedy.md](details/greedy.md) |
 | split, solve, combine; recurrences | divide and conquer | [details/divide_conquer.md](details/divide_conquer.md) |
 
 ## Shape of a module
