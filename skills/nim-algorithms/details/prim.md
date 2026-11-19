@@ -1,0 +1,61 @@
+# Prim's minimum spanning tree
+
+## Intent
+
+Grow one tree from a start vertex. At each step add the cheapest edge that leaves the tree. A heap of candidate edges keeps the cheapest on top; candidates whose far end is already in the tree are skipped when popped.
+
+## Use when / avoid when
+
+- Use when: you want a minimum spanning tree of an undirected weighted graph and the graph is dense or already stored as adjacency lists.
+- Avoid when: the graph is directed: it is refused with `geNotUndirected`.
+- Prefer `kruskal` when the edges are already a sorted list.
+
+## Nim shape
+
+`src/nimcs/algo/prim.nim`: `prim(g): Result[SpanningForest, GraphError]`. When a tree is finished a new one starts at the smallest unvisited vertex, so a disconnected graph gives a forest. Edges are normalised (smaller endpoint first) and returned in ascending (weight, source, target) order.
+
+```nim
+import nimcs/fp/result
+import nimcs/algo/graph
+import nimcs/algo/prim
+
+let g = buildGraph(5, @[edge(0, 1, 5), edge(1, 2, 1), edge(0, 2, 2), edge(3, 4, 7)], gkUndirected).value
+let forest = prim(g).value
+assert forest.edges == @[edge(1, 2, 1), edge(0, 2, 2), edge(3, 4, 7)]
+assert forest.components == 2
+assert forest.totalWeight == 10
+```
+
+## Laws and invariants
+
+- The result is a spanning forest, one tree per component (GRAPH-PRIM-01; total weight agrees with Kruskal, GRAPH-KRUSKAL-03).
+- A directed graph is refused with `geNotUndirected` (GRAPH-PRIM-02).
+
+## Complexity
+
+- Time: O(E log V) with a binary heap. Space: O(E) for the candidate heap.
+
+## Pitfalls
+
+Starting only from vertex 0: on a disconnected graph the other components are silently left out.
+
+```nim bad
+var candidates = initHeapQueue[(int, int, int)]()
+# push the arcs of vertex 0, grow the tree, return: vertices in other components never appear
+```
+
+The fix is the outer loop over all start vertices, counting a new component each time an unvisited one begins a tree.
+
+## Related
+
+- `kruskal.nim`, `graph.nim`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `e8a751ae9f8ed52b` Learning Algorithm
+- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2

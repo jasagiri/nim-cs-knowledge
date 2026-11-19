@@ -1,0 +1,55 @@
+# Fibonacci by matrix power
+
+## Intent
+The matrix [[1, 1], [1, 0]] raised to the n-th power holds F(n+1), F(n), F(n), F(n-1). Repeated squaring computes that power with O(log n)
+matrix products, so F(n) needs logarithmically many steps instead of n. The same idea computes any linear recurrence.
+
+## Use when / avoid when
+- Use it for F(n) mod m with a very large n (hundreds of digits of n are fine for a modulus; here n is a machine integer up to `high(int)`).
+- Use it as the standard example of "a linear recurrence is a matrix power".
+- Use the loop `memoization.md` (`fibTable`) for small n: simpler and just as fast in practice.
+
+## Nim shape
+`fibMatrix(n)` is exact and returns `Option[int]`: none outside 0..92, because F(93) does not fit a signed 64-bit integer. `fibMod(n, m)` works modulo `m`
+(1..3037000499) for any n >= 0. The exact version uses `uint64` entries and never squares the base past what the exponent needs, so nothing wraps. Module: `src/nimcs/algo/fib_matrix.nim`.
+
+```nim
+import std/options
+import nimcs/algo/fib_matrix
+
+doAssert fibMatrix(10) == some(55)
+doAssert fibMatrix(93).isNone
+doAssert fibMod(1_000_000_000_000, 1_000_000_007).isSome
+doAssert fibMod(100, 10) == fibMod(40, 10)   # Pisano period 60
+```
+
+## Laws and invariants
+- `fibMatrix(n)` equals the iterative value for every n in 0..92 (NUM-FIBM-01).
+- `fibMod(n, m)` equals the iterative value taken mod m (NUM-FIBM-02).
+- Outside 0..92 the exact form gives `none`, and F(n) = F(n-1) + F(n-2) holds inside (NUM-FIBM-03).
+- F(n) mod 10 repeats with period 60 for huge n; an invalid n or modulus gives `none` (NUM-FIBM-04).
+
+## Complexity
+O(log n) matrix products, each 8 multiplications of fixed-size integers: O(log n) time, O(1) space. The iterative loop is O(n).
+
+## Pitfalls
+Unsigned arithmetic wraps without warning, and the usual exponentiation loop squares the base one time too many:
+
+```nim bad
+while e > 0:
+  if (e and 1) == 1: acc = mul(acc, base)
+  base = mul(base, base)       # computes M^(2^(k+1)) even when it is never used
+  e = e shr 1
+```
+
+Fix: square only while bits remain (`if e > 0`), and bound the input so that every entry fits, as `fibMatrix` does. In the modular version,
+reduce after each product and keep `m` within `maxFibModulus`, or the sum of two products overflows.
+
+## Related
+`number_theory.md` (`powMod` is the scalar version of the same loop), `memoization.md`, `sieve.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `61811291625a13a9` Algorithms for Competitive Programming

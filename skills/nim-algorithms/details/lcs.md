@@ -1,0 +1,61 @@
+# Longest common subsequence
+
+## Intent
+Given two sequences, find the longest sequence that appears in both in the same order, though not
+necessarily next to each other. A table of lengths for every pair of prefixes answers the question, and walking
+back through it recovers one such subsequence.
+
+## Use when / avoid when
+- Use it for diffs, similarity of ordered data (DNA, edit histories) and as the engine of a line-based diff.
+- Use `edit_distance.md` when substitutions are allowed and a cost is wanted.
+- Use `kmp.md` or `suffix_array.md` when the match must be contiguous (a substring, not a subsequence).
+- Avoid the full table when only the length is needed: `lcsLength` keeps two rows.
+
+## Nim shape
+The module `src/nimcs/algo/lcs.nim` is generic over the element type (anything with `==`) and has a `string` overload.
+The table is a local `var`; the public routines are `func`s that return values.
+
+```nim
+import nimcs/algo/lcs
+
+doAssert lcsLength("abcbdab", "bdcaba") == 4
+let common = lcs("abcbdab", "bdcaba")
+doAssert common.len == 4
+doAssert isSubsequence(common, "abcbdab") and isSubsequence(common, "bdcaba")
+doAssert lcs(@[1, 2, 3, 4], @[2, 4, 6]) == @[2, 4]
+```
+
+## Laws and invariants
+- `lcs(a, b)` is a subsequence of both `a` and `b` (DP-LCS-02).
+- Its length equals `lcsLength(a, b)`, which is the best over all subsequences, checked by brute force (DP-LCS-03).
+- The length is symmetric in the arguments and at most the shorter length (DP-LCS-04).
+- `lcs(a, a) == a`, and the answer is the same on every call (DP-LCS-05).
+- Known pairs give hand-worked lengths (DP-LCS-01).
+
+## Complexity
+Time O(len a * len b). Space O(min-row) for `lcsLength` (two rows) and O(len a * len b) for `lcs`, which keeps the whole table to backtrack.
+
+## Pitfalls
+Taking the table's last cell as the answer is correct for the length only; reading characters off while
+filling the table does not give a valid subsequence:
+
+```nim bad
+for i in 1 .. a.len:
+  for j in 1 .. b.len:
+    if a[i - 1] == b[j - 1]:
+      result.add a[i - 1]   # collects every match, not a consistent path
+```
+
+Fix: record lengths, then backtrack from the bottom-right: on a match take the element and move diagonally,
+otherwise move toward the larger neighbour. Another trap is confusing subsequence with substring: the answer for
+"abc" and "axbxc" is "abc", which is not a substring of the second.
+
+## Related
+`edit_distance.md`, `kmp.md`, `suffix_array.md`, `memoization.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `e8a751ae9f8ed52b` Learning Algorithm

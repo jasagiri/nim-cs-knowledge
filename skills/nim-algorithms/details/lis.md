@@ -1,0 +1,55 @@
+# Longest increasing subsequence
+
+## Intent
+Find the longest subsequence whose elements strictly increase. For each length L keep the smallest last value
+of any increasing subsequence of that length seen so far; these values are sorted, so each new element is
+placed by binary search and either extends the longest run or lowers one tail.
+
+## Use when / avoid when
+- Use it for patience-sorting problems, "fewest removals to make a sequence sorted" and longest chains.
+- Use the O(n^2) table only as a test oracle (the tests do); it is simpler but slow.
+- Avoid it when the elements are not totally ordered or when a non-strict order is needed without adapting the comparison (use the first tail greater than the element).
+
+## Nim shape
+`lisIndices` returns the indices of one longest subsequence; `lis` returns the values; `lisLength` the length. All are
+generic over any type with `<`. A `parent` array records, for every element, the index that precedes it. Module: `src/nimcs/algo/lis.nim`.
+
+```nim
+import nimcs/algo/lis
+
+let xs = @[10, 9, 2, 5, 3, 7, 101, 18]
+doAssert lisLength(xs) == 4
+doAssert lis(xs) == @[2, 3, 7, 18]
+doAssert lisIndices(xs) == @[2, 4, 5, 7]
+```
+
+## Laws and invariants
+- The length equals the O(n^2) table's length on any sequence (DP-LIS-02).
+- The result is strictly increasing and read off the input at ascending indices (DP-LIS-03).
+- When several longest subsequences exist the same one is returned every time (DP-LIS-04).
+- Hand-worked lengths, including constant, decreasing and empty input (DP-LIS-01).
+
+## Complexity
+Time O(n log n): one binary search per element. Space O(n) for the tails and parents.
+
+## Pitfalls
+The tails array is not the subsequence: its entries can come from different candidate runs.
+
+```nim bad
+let answer = tails            # tails[k] is the best end of length k+1, not a valid path
+```
+
+Fix: store indices in the tails and follow `parent` links back from the last tail, as `lisIndices` does.
+Another slip is using `<=` in the search, which turns "strictly increasing" into "non-decreasing" and changes every answer on repeated values.
+
+## Related
+`lcs.md` (the LIS of one sequence relates to the LCS with its sorted copy), `knapsack.md`, `memoization.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `e8a751ae9f8ed52b` Learning Algorithm

@@ -1,0 +1,62 @@
+# Quick sort (functional)
+
+## Intent
+
+Pick a pivot, split the input into elements smaller than, equal to and larger than it, sort the outer parts recursively and concatenate. Writing it as three new sequences shows divide and conquer without in-place index juggling.
+
+## Use when / avoid when
+
+- Use when: you want to show or study divide and conquer, or the three-way split on duplicate-heavy data.
+- Avoid when: a worst-case bound matters (an adversarial input gives O(n^2) time and O(n) recursion depth); use `merge_sort` or `heap_sort`.
+- Avoid when: memory traffic matters: this form allocates new sequences at every level.
+
+## Nim shape
+
+`src/nimcs/algo/quick_sort.nim`: a private `pivotOf` (median of first, middle and last element) and the public `quickSort`. Because each part keeps input order and equal elements all go to the middle part, this version is stable.
+
+```nim
+import nimcs/algo/quick_sort
+
+assert quickSort(@[5, 2, 9, 2, 7, 5, 1]) == @[1, 2, 2, 5, 5, 7, 9]
+assert quickSort(@[3, 1, 2], proc(a, b: int): bool {.noSideEffect, raises: [].} = a > b) == @[3, 2, 1]
+```
+
+## Laws and invariants
+
+- `quickSort(xs) == sorted(xs)` for integers (SORT-QUICK-01).
+- A descending comparator gives the input sorted descending (SORT-QUICK-02).
+- Idempotent (SORT-QUICK-03); empty and one-element inputs are unchanged (SORT-QUICK-04).
+- Equal elements keep their input order (SORT-QUICK-05).
+
+## Complexity
+
+- Time: O(n log n) average, O(n^2) worst case. Space: live memory O(n) average (each ancestor on the stack still holds its parts, and sizes shrink geometrically) and O(n^2) worst case; total allocation over the run O(n log n) average; recursion depth O(log n) average, O(n) worst. Not measured.
+
+## Pitfalls
+
+Splitting into only two parts loops forever when every element equals the pivot, because neither part gets smaller.
+
+```nim bad
+for x in xs:
+  if less(x, pivot): smaller.add x
+  else: larger.add x          # equal elements land in `larger`: if all are equal, larger == xs
+```
+
+The fix is the third part: elements neither less nor greater go to `equal` and are not sorted again, so both recursive calls get strictly fewer elements.
+
+## Related
+
+- `merge_sort.nim`, `heap_sort.nim`, `insertion_sort.nim`, `radix_sort.nim`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `29ca95172575b79a` Algorithms and Data Structures
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `473f0313d72c526b` Algorithms, 4th Edition
+- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
+- `464f1aa168823232` Computer Science I
+- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
+- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
+- `e8a751ae9f8ed52b` Learning Algorithm

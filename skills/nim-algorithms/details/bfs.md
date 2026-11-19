@@ -1,0 +1,67 @@
+# Breadth-first search
+
+## Intent
+
+Visit the vertices in rings: first the source, then everything one edge away, then two edges away, using a queue. The first time a vertex is reached is along a path with the fewest edges, so recording the predecessor gives shortest paths in hops.
+
+## Use when / avoid when
+
+- Use when: you need fewest-edge paths, reachability, or connected rings of a graph.
+- Avoid when: edges have different costs; use `dijkstra` (non-negative) or `bellman_ford` (negative allowed). BFS ignores weights.
+- Avoid when: you need a topological order or cycle structure; use `dfs.nim` / `topo_sort.nim`.
+
+## Nim shape
+
+`src/nimcs/algo/bfs.nim`: `bfs(g, source): Result[PathTree, GraphError]`. The queue is a local `seq` with a head index. The tree answers `distance(v)` (an `Option`) and `pathTo(v)`.
+
+```nim
+import std/options
+import nimcs/fp/result
+import nimcs/algo/graph
+import nimcs/algo/bfs
+
+let g = buildGraph(5, @[edge(0, 1), edge(1, 2), edge(0, 3), edge(3, 2)], gkDirected).value
+let tree = bfs(g, 0).value
+assert tree.distance(2) == some(2)
+assert tree.pathTo(2) == some(@[0, 1, 2])   # via 1: neighbours are tried in ascending order
+assert tree.distance(4).isNone
+```
+
+## Laws and invariants
+
+- Distances are the fewest edges from the source; a bad source is `geVertexOutOfRange`; equally short ways in are resolved by neighbour order (GRAPH-BFS-01).
+- A reported path starts at the source, ends at `v`, uses existing arcs and has `distance + 1` vertices; unreachable means none (GRAPH-PATH-01).
+
+## Complexity
+
+- Time: O(V + E). Space: O(V).
+
+## Pitfalls
+
+Marking a vertex visited when it is taken off the queue instead of when it is put on: the same vertex gets queued many times and the distance of a later duplicate can overwrite a shorter one.
+
+```nim bad
+let u = queue[head]
+inc head
+if visited[u]: continue      # too late: u may already be in the queue many times
+visited[u] = true
+```
+
+The fix, used in the module: set the distance when a vertex is first discovered and test `dist[target].isNone` before queueing.
+
+## Related
+
+- `graph.nim`, `dfs.nim`, `dijkstra.nim`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `6f31dd50eef1beba` Algorithmic Thinking
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
+- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `c6a234b79d2a7c88` Computer Science II
+- `e8a751ae9f8ed52b` Learning Algorithm
+- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2

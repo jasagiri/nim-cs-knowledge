@@ -1,0 +1,62 @@
+# Suffix array and LCP array
+
+## Intent
+List the start offsets of all suffixes of a string in sorted order, and next to it the length of the prefix each suffix shares with its
+predecessor. Together they answer substring questions without a tree: a pattern occurs where a run of sorted suffixes starts with it, and
+the LCP array measures repetition.
+
+## Use when / avoid when
+- Use it when one text is queried many times (binary search for patterns), to count distinct substrings, or to find the longest repeated substring.
+- Use `kmp.md` or `z_algorithm.md` for a single search; building the array costs more than one pass.
+- Avoid the O(n log^2 n) prefix-doubling build for multi-megabyte inputs; use a linear-time construction there.
+
+## Nim shape
+`suffixArray(s)` ranks suffixes by their first 1, 2, 4, ... characters, sorting pairs of ranks until all are different. `lcpArray(s, sa)` is Kasai's
+method and returns `Option`: it refuses an array that is not the suffix array of `s`. `countDistinctSubstrings` shows a use: all `n(n+1)/2`
+substrings minus the repeats. Module: `src/nimcs/algo/suffix_array.nim`.
+
+```nim
+import std/options
+import nimcs/algo/suffix_array
+
+let sa = suffixArray("banana")
+doAssert sa == @[5, 3, 1, 0, 4, 2]
+doAssert lcpArray("banana", sa).get == @[0, 1, 3, 0, 0, 2]
+doAssert lcpArray("banana", [0, 1, 2, 3, 4, 5]).isNone
+doAssert countDistinctSubstrings("banana") == 15
+```
+
+## Laws and invariants
+- The array is a permutation of 0..n-1 and the suffixes appear in strictly ascending order, equal to sorting the suffix strings (STR-SA-01).
+- Hand-worked arrays: banana gives `[5, 3, 1, 0, 4, 2]` (STR-SA-02).
+- `lcp[i]` is the shared prefix length of the suffixes at `sa[i-1]` and `sa[i]`, and 0 for i = 0 (STR-SA-03).
+- A wrong array (wrong length, repeated or out-of-range offset, wrong order) is rejected with `none` (STR-SA-04).
+- `countDistinctSubstrings` equals the size of the set of all substrings (STR-SA-05).
+
+## Complexity
+Build: O(log n) rounds of doubling, each an O(n log n) sort, so O(n log^2 n) time, O(n) space. LCP by Kasai: O(n) time and space, and so is the validation of the array it is given.
+
+## Pitfalls
+Sorting by the suffix strings themselves copies every suffix and is quadratic in memory:
+
+```nim bad
+var suffixes: seq[(string, int)]
+for i in 0 ..< s.len: suffixes.add (s[i .. ^1], i)   # O(n^2) characters stored
+```
+
+Fix: sort offsets by rank pairs, as `suffixArray` does. Also, when the second key runs past the end of the string
+it must rank below every real rank (here -1), or "a" would sort after "ab".
+
+## Related
+`kmp.md`, `z_algorithm.md`, `rabin_karp.md`, `lcs.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `473f0313d72c526b` Algorithms, 4th Edition
+- `7508271bf7980bd3` Data Structures
+- `5ea7cdc2c5670fd7` Data Structures and Algorithms
+- `8230f061e9c86571` E-olymp
+- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2

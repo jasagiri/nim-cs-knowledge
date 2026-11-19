@@ -1,0 +1,82 @@
+# Memoization
+
+## Intent
+A recursive definition often asks the same sub-question many times; memoization remembers each
+answer so it is computed once. The functional version has no hidden cache: the table of answers is a
+value that goes into the call and comes back out, so the call stays a pure function of its arguments.
+
+## Use when / avoid when
+- Use it when sub-problems overlap and the recursion is the natural way to state the solution (Fibonacci, grid paths, partitions).
+- Use the bottom-up table (`fibTable`, `gridPathsTable`) when every sub-problem is needed anyway and the dependency order is obvious: no recursion depth, no table lookups.
+- Avoid a global cache or a `{.global.}` table inside a `func`: the result then depends on call history and the routine is no longer pure.
+- Avoid it when sub-problems never repeat (plain divide and conquer, see `divide_conquer.md`).
+
+## Nim shape
+`Memo[K, V]` wraps a `Table`; `get` returns `Option[V]` and `put` returns a new memo. A recursive
+step takes the memo, returns the value together with the memo it grew, and passes that memo to its next
+call, so each sub-problem is stored exactly once. The main module is `src/nimcs/algo/memoization.nim`.
+
+```nim
+import std/options
+import nimcs/algo/memoization
+
+let first = fibMemo(50, initMemo[int, int]()).get
+doAssert first.value == 12586269025
+let second = fibMemo(60, first.memo).get   # reuses every sub-problem already answered
+doAssert second.value == fibTable(60).get
+doAssert second.memo.len == 59   # entries for 2 .. 60
+```
+
+The bottom-up form is a loop with local state and needs no memo at all:
+
+```nim
+import std/options
+import nimcs/algo/memoization
+
+doAssert gridPathsTable(3, 3) == some(6)
+let top = gridPathsMemo(3, 3, initMemo[(int, int), int]()).get
+doAssert top.paths == 6
+```
+
+## Laws and invariants
+- Top-down with a fresh memo equals bottom-up for every n in 0..92 (DP-MEMO-02) and for every grid size (DP-MEMO-05).
+- `put` does not change the memo it was called on, and `get` finds what `put` stored (DP-MEMO-03).
+- Repeating a call with the memo it returned gives the same value and the same memo (idempotence, DP-MEMO-06).
+- Computing fib(n) stores exactly the sub-problems 2..n (DP-MEMO-07).
+- Arguments outside the range where the answer fits an `int` give `none` (DP-MEMO-04).
+
+## Complexity
+Top-down: O(n) sub-problems for Fibonacci, O(rows * cols) for the grid, each computed once; recursion depth O(n).
+`put` copies the table, so threading the memo by value costs O(size) per insertion in this teaching version;
+a persistent map (see the data-structures skill) removes that cost. Bottom-up: same number of steps, O(1) extra space for Fibonacci and O(cols) for the grid.
+
+## Pitfalls
+A function that mutates a hidden table looks pure and is not:
+
+```nim bad
+var cache: Table[int, int]            # global mutable state
+proc fib(n: int): int =
+  if n < 2: return n
+  if n in cache: return cache[n]
+  result = fib(n - 1) + fib(n - 2)
+  cache[n] = result
+```
+
+The fix is to hand the table in and take it back (`fibMemo(n, memo)` returns `FibResult` with the new memo), or to fill a local table bottom-up.
+Also: forgetting to return the grown memo from the first recursive call makes the second call start from the old one and silently loses sharing; the result stays correct but the cost goes back to exponential.
+
+## Related
+`lcs.md`, `edit_distance.md`, `knapsack.md` (bottom-up tables for the same idea), `fib_matrix.md` (another way to compute Fibonacci).
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `6f31dd50eef1beba` Algorithmic Thinking
+- `b6deea26499dcff1` Algorithms
+- `c1b93dc13846e70a` Algorithms Course Materials
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `42a1cb32a5e35bad` An Open Guide to Data Structures and Algorithms
+- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
+- `63ad3e14455a34af` Competitive Programmer's Handbook

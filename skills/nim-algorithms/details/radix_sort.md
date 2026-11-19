@@ -1,0 +1,66 @@
+# Radix sort and counting sort
+
+## Intent
+
+Sort by integer keys without comparing elements. Counting sort tallies how many elements have each key and places them by prefix sums. LSD radix sort applies one stable counting pass per byte of the number, least significant byte first.
+
+## Use when / avoid when
+
+- Use when: keys are non-negative integers, or map to a small range `0 ..< k` (counting sort), or are fixed-width numbers (radix sort).
+- Use `countingSortBy` to sort records by a small integer key stably.
+- Avoid when: keys are arbitrary (strings, floats, custom orders); use `merge_sort` with a comparator.
+- Avoid when: the key range `k` is far larger than `n`: counting sort allocates `k` counters, so it refuses a bound above `maxCountingBound` (2^24) with `skBoundTooLarge`.
+
+## Nim shape
+
+`src/nimcs/algo/radix_sort.nim`. Bad keys are values, not exceptions: the routines return `Result[seq[...], SortKeyError]` with `skNegative`, `skOutOfRange`, `skBadBound` or `skBoundTooLarge`.
+
+```nim
+import nimcs/fp/result
+import nimcs/algo/radix_sort
+
+let big = radixSort(@[70_000, 255, 256, 3])
+assert big == ok(@[3, 255, 256, 70_000], SortKeyError)
+assert radixSort(@[1, -1]) == err(seq[int], skNegative)
+
+let grades = @[(3, "c"), (1, "a"), (3, "b"), (2, "d")]
+let byGrade = countingSortBy(grades, 4, proc(g: (int, string)): int {.noSideEffect, raises: [].} = g[0])
+assert byGrade.value == @[(1, "a"), (2, "d"), (3, "c"), (3, "b")]
+```
+
+## Laws and invariants
+
+- For non-negative integers `radixSort(xs)` is `ok(sorted(xs))` (SORT-RADIX-01).
+- A negative element gives `skNegative` (SORT-RADIX-02).
+- `countingSortBy` is stable; `countingSort(xs, k)` equals `sorted(xs)` below the bound (SORT-RADIX-03).
+- A key at or above the bound gives `skOutOfRange`, a negative key `skNegative`, a bound below 1 `skBadBound` (SORT-RADIX-04).
+- A bound above `maxCountingBound` gives `skBoundTooLarge` before anything is allocated (SORT-RADIX-06).
+- Idempotent (SORT-RADIX-05).
+
+## Complexity
+
+- Counting sort: time O(n + k), space O(n + k). Radix sort: time O(n * b) for b bytes in the largest key, space O(n).
+
+## Pitfalls
+
+Letting a negative number through a shift-and-mask pass: `(x shr shift) and 255` of a negative `int` is an arithmetic shift, so negatives land in high buckets and sort after the positives.
+
+```nim bad
+for x in xs:
+  inc counts[((x shr shift) and 255) + 1]   # no check that x >= 0
+```
+
+The fix is to reject negatives first and say so in the result (`err(seq[int], skNegative)`), or to offset all keys by the minimum before sorting.
+
+## Related
+
+- `merge_sort.nim` (comparison sorts), `binary_search.nim`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
+- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
+- `e8a751ae9f8ed52b` Learning Algorithm
+- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2

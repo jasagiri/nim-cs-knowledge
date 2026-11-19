@@ -1,0 +1,67 @@
+# Number theory: gcd, Bezout, modular exponentiation and inverses
+
+## Intent
+Euclid's algorithm computes the greatest common divisor by repeated remainders; tracking coefficients on the way
+gives integers x and y with `a*x + b*y = gcd(a, b)` (Bezout). Repeated squaring computes `b^e mod m` in O(log e) multiplications, and the
+Bezout identity is what makes a modular inverse exist exactly when the numbers are coprime.
+
+## Use when / avoid when
+- Use them for modular arithmetic, fractions in lowest terms, hashing, toy RSA and the Chinese remainder theorem.
+- Avoid them for moduli beyond about 3.0e9 or for cryptographic sizes: use a big-integer library.
+- Use `sieve.md` when many primes are needed rather than gcds.
+
+## Nim shape
+A `Modulus` is a `distinct int` built by `modulus(m)` (`Option`, range 1..3037000499, the largest value whose residue products fit an `int`), so
+a zero or negative modulus cannot reach `powMod` or `modInverse`. `gcd`, `lcm` and `extGcd` return `Option` because `low(int)` has no representable magnitude
+and lcm can overflow. Module: `src/nimcs/algo/number_theory.nim`.
+
+```nim
+import std/options
+import nimcs/algo/number_theory
+
+let m = modulus(1_000_000_007).get
+doAssert gcd(12, -18) == some(6)
+let b = extGcd(240, 46).get
+doAssert 240 * b.x + 46 * b.y == b.g
+doAssert powMod(2, 100, m).isSome
+doAssert modInverse(3, modulus(11).get) == some(4)
+doAssert modInverse(2, modulus(4).get).isNone
+```
+
+## Laws and invariants
+- `gcd` is non-negative, symmetric, divides both arguments and leaves coprime quotients; `low(int)` gives `none` (NUM-NT-01).
+- `gcd(a, b) * lcm(a, b) == abs(a * b)`; overflow gives `none` (NUM-NT-02).
+- Bezout: `a*x + b*y == g` for every pair, negatives and zeros included (NUM-NT-03).
+- `powMod` equals repeated multiplication, and Fermat's little theorem holds for primes; a negative exponent gives `none` (NUM-NT-04).
+- `modInverse(a, m)` exists exactly when `gcd(a, m) = 1`, and then `a * x ≡ 1 (mod m)` (NUM-NT-05).
+- Moduli outside 1..3037000499 are rejected (NUM-NT-06).
+
+## Complexity
+`gcd` and `extGcd`: O(log min(|a|, |b|)) steps. `powMod`: O(log exp) multiplications. `modInverse`: one `extGcd`.
+
+## Pitfalls
+Multiplying two residues in a type too small for the product wraps or traps; and a plain `mod` of a negative number is negative in Nim:
+
+```nim bad
+let r = (-3) mod 7            # -3, not 4
+let big = 3_037_000_500 * 3_037_000_500   # overflows
+```
+
+Fix: reduce with `residue(a, m)`, which adds the modulus back, and keep the modulus within `maxModulus` so that `(m-1)*(m-1)` fits.
+Also, `modInverse` returning `none` is the normal answer for non-coprime inputs, not an error to catch.
+
+## Related
+`sieve.md`, `fib_matrix.md` (modular matrix power), `rabin_karp.md` (hashing mod a prime).
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `b8f40165091faa5d` CSES Problem Set
+- `5ea7cdc2c5670fd7` Data Structures and Algorithms
+- `254fe28ac0bfd53e` Last Moment DSA Sheet(79) – Ace Interviews
+- `04a7132319218b7b` Matters Computational: Ideas, Algorithms, Source Code
+- `07aa8e8bb90a95ce` MIT's Mathematics for Computer Science
+- `81c6122da5a53e33` Principles of Algorithmic Problem Solving

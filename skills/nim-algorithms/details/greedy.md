@@ -1,0 +1,80 @@
+# Greedy algorithms and the exchange argument
+
+## Intent
+A greedy algorithm makes the locally best choice at each step and never reconsiders it. It is only correct when an argument shows the local choice cannot hurt.
+For interval scheduling the rule is "take the compatible interval that finishes first", and the exchange argument proves it optimal.
+
+## Use when / avoid when
+- Use it when the problem has a greedy-choice property that you can prove, e.g. interval scheduling, Huffman coding, minimum spanning trees.
+- Avoid it by default: for 0/1 knapsack the value-per-weight rule is wrong (`knapsack.md`); use dynamic programming or `backtracking.md` when no argument exists.
+- Test a greedy rule against brute force on small inputs, as this repository does, before trusting it.
+
+## Nim shape
+`Interval` is a half-open range `[start, finish)` with private fields, built only by `interval(start, finish)`, which returns `Option` (empty or reversed ranges give `none`); read the ends with `start` and `finish`. Touching intervals do not overlap.
+`scheduleIndices` sorts by `(finish, start, index)` and scans once; the full tie-break keeps the answer deterministic. Module: `src/nimcs/algo/greedy.nim`.
+
+```nim
+import std/options
+import nimcs/algo/greedy
+
+let xs = [interval(1, 4).get, interval(3, 5).get, interval(0, 6).get,
+          interval(5, 7).get, interval(8, 9).get, interval(5, 9).get]
+doAssert scheduleIndices(xs) == @[0, 3, 4]
+doAssert interval(3, 3).isNone
+doAssert not overlaps(xs[0], interval(4, 6).get)
+```
+
+The second example is the fractional knapsack: lots may be cut, and taking them by decreasing value per unit of weight is optimal.
+`fractionalKnapsack` returns the lots taken whole, at most one cut lot, and the exact value as a fraction.
+
+```nim
+import std/options
+import nimcs/algo/greedy
+
+let r = fractionalKnapsack([Lot(weight: 10, value: 60), Lot(weight: 20, value: 100),
+                            Lot(weight: 30, value: 120)], 50).get
+doAssert r.whole == @[0, 1]
+doAssert r.partial == some(Share(index: 2, taken: 20))
+doAssert r.valueNum == 240 * r.valueDen
+```
+
+The exchange argument. Let G be the greedy schedule and O any optimal schedule, both sorted by time. Suppose they first differ at position k. G's k-th interval
+finishes no later than O's k-th interval (G picks the earliest finish among those compatible with the same first k-1). Replacing O's k-th interval by G's keeps O
+compatible with its (k+1)-th, which starts after O's k-th finished, hence after G's k-th finished. The new schedule is still optimal and agrees with G for one more position. Repeating this
+turns O into G without losing size, so G is optimal.
+
+## Laws and invariants
+- Intervals that only touch do not overlap; a worked example gives the expected schedule (TECH-GREEDY-01).
+- The chosen intervals are pairwise disjoint, and no other interval can be added (TECH-GREEDY-02).
+- The schedule size equals the optimum over all subsets, and the schedule is deterministic (TECH-GREEDY-03).
+- An empty or reversed range is rejected by `interval`, and the private fields leave no other way to build one (TECH-GREEDY-04).
+- Fractional knapsack: the classic instance gives exactly 240 (TECH-GREEDY-05); the weight fits, at most one lot is cut, every taken lot has at least the ratio of every untaken one (TECH-GREEDY-06); the value is at least the best whole-item value (TECH-GREEDY-07); negative inputs give `none` (TECH-GREEDY-08).
+
+## Complexity
+Time O(n log n) for the sort, O(n) for the scan. Space O(n) for the sorted keys.
+
+## Pitfalls
+Sorting by start time (or by duration) looks natural and is wrong:
+
+```nim bad
+intervals.sort(proc(a, b: Interval): int = cmp(a.start, b.start))   # a long early interval blocks many short ones
+```
+
+Fix: sort by finish time. Another slip is treating `[a, b]` and `[b, c]` as overlapping when the ranges are half-open; decide the convention once (here half-open) and
+write it in the type's documentation.
+
+## Related
+`knapsack.md`, `backtracking.md`, `divide_conquer.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `6f31dd50eef1beba` Algorithmic Thinking
+- `b6deea26499dcff1` Algorithms
+- `c1b93dc13846e70a` Algorithms Course Materials
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `5ea7cdc2c5670fd7` Data Structures and Algorithms
+- `8230f061e9c86571` E-olymp

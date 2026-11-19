@@ -1,0 +1,64 @@
+# Kruskal's minimum spanning tree
+
+## Intent
+
+Sort the edges by weight and take each one that joins two vertices not yet connected; skip the rest. A union-find forest (union by size, path halving) answers "already connected?" in inverse-Ackermann amortized time, which is near-constant. On a disconnected graph the result is a minimum spanning forest.
+
+## Use when / avoid when
+
+- Use when: you want the cheapest set of edges that connects an undirected weighted graph (cabling, clustering).
+- Avoid when: the graph is directed: this refuses it with `geNotUndirected` (a minimum spanning arborescence is a different problem).
+- Prefer `prim` when the graph is dense and given as adjacency lists; the total weight is the same.
+
+## Nim shape
+
+`src/nimcs/algo/kruskal.nim`: `kruskal(g): Result[SpanningForest, GraphError]`. The union-find is a pair of local `seq[int]` (parents and set sizes): the smaller tree hangs under the larger, and lookups halve the path. The forest lists edges in ascending (weight, source, target) order.
+
+```nim
+import nimcs/fp/result
+import nimcs/algo/graph
+import nimcs/algo/kruskal
+
+let g = buildGraph(4, @[edge(0, 1, 1), edge(1, 2, 2), edge(0, 2, 9), edge(2, 3, 4)], gkUndirected).value
+let forest = kruskal(g).value
+assert forest.totalWeight == 7
+assert forest.components == 1
+assert forest.edges.len == 3
+```
+
+## Laws and invariants
+
+- The result is a spanning forest: edges from the graph, acyclic, same connectivity, consistent totals (GRAPH-KRUSKAL-01).
+- Its total equals the cheapest forest found by brute force (GRAPH-KRUSKAL-02).
+- Kruskal and Prim agree on total weight, component count and edge count (GRAPH-KRUSKAL-03).
+- A directed graph is refused with `geNotUndirected` (GRAPH-KRUSKAL-04).
+
+## Complexity
+
+- Time: O(E log E) for the sort, plus near-constant (inverse-Ackermann amortized) union-find work per edge. Space: O(V + E).
+
+## Pitfalls
+
+Checking connectivity by searching the partial forest for every edge: correct but O(V) per edge.
+
+```nim bad
+for e in sortedEdges:
+  if not reachable(forest, e.source, e.target):   # a full search per edge: O(V * E)
+    forest.add e
+```
+
+The fix is a union-find with union by size and path halving, as in the module.
+
+## Related
+
+- `prim.nim`, `graph.nim`, `scc.nim` (connected components).
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `e8a751ae9f8ed52b` Learning Algorithm
+- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2

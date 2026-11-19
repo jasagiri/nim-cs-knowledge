@@ -1,0 +1,64 @@
+# Floyd-Warshall all-pairs shortest paths
+
+## Intent
+
+Let `d(i, j)` be the best known distance. For each vertex k in turn, allow k as an intermediate stop: `d(i, j)` becomes the smaller of itself and `d(i, k) + d(k, j)`. After all k, `d` holds shortest distances between every pair. Remembering the first hop gives the paths.
+
+## Use when / avoid when
+
+- Use when: you need distances or paths between all pairs on a small graph (a few hundred vertices at most), possibly with negative weights.
+- Avoid when: you need one source on a big sparse graph; use `dijkstra` or `bellman_ford`.
+- Avoid when: memory is tight: it stores V^2 entries.
+
+## Nim shape
+
+`src/nimcs/algo/floyd_warshall.nim`: `floydWarshall(g): Result[AllPairs, FloydError]`. `AllPairs` answers `distance(u, v)` (an `Option`) and `pathBetween(u, v)`. A negative cycle is reported by the first pass after which some `d(v, v)` is negative; the check each pass keeps values from doubling.
+
+```nim
+import std/options
+import nimcs/fp/result
+import nimcs/algo/graph
+import nimcs/algo/floyd_warshall
+
+let g = buildGraph(4, @[edge(0, 1, 3), edge(1, 2, -1), edge(0, 2, 5)], gkDirected).value
+let all = floydWarshall(g).value
+assert all.distance(0, 2) == some(2)
+assert all.pathBetween(0, 2) == some(@[0, 1, 2])
+assert all.distance(2, 0).isNone
+```
+
+## Laws and invariants
+
+- With non-negative weights every row equals Dijkstra from that source (GRAPH-FLOYD-01).
+- It fails exactly when some source sees a negative cycle; a negative self-loop names its vertex (GRAPH-FLOYD-02).
+- `pathBetween(u, v)` follows real arcs with the distance as its weight, none when unreachable (GRAPH-FLOYD-03).
+
+## Complexity
+
+- Time: O(V^3). Space: O(V^2).
+
+## Pitfalls
+
+Putting the intermediate vertex loop inside instead of outside: the three loops are not interchangeable.
+
+```nim bad
+for i in 0 ..< n:
+  for j in 0 ..< n:
+    for k in 0 ..< n:      # k must be the OUTERMOST loop
+      relax(i, j, k)
+```
+
+The fix is `for k` outermost, as in the module: after round k, every path whose intermediates are among the first k vertices is final.
+
+## Related
+
+- `dijkstra.nim`, `bellman_ford.nim`, `graph.nim`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `61811291625a13a9` Algorithms for Competitive Programming
+- `a8882bbba7213b23` Algorithms Notes for Professionals
+- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `e8a751ae9f8ed52b` Learning Algorithm
