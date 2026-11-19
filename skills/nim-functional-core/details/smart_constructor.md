@@ -1,0 +1,84 @@
+# Smart constructors
+
+## Intent
+A domain value (a username, a quantity, an email) is checked once, at the boundary, by a constructor that returns `Result`. After that, the program carries a type that cannot be wrong, so no other function checks again. This is "parse, don't validate": the output of parsing is a different type from its input, and the type is the proof. The proof only holds if no other code can build the type: a `distinct` type does not give that (see Pitfalls), a sealed object does.
+
+## Use when / avoid when
+- Use for every value that has rules: ranges, lengths, alphabets, units, identifiers.
+- Make the type a sealed object (private field, `{.requiresInit.}`) when it must guarantee a rule; use a `distinct` type for units and identifiers that only need to stay apart from other types.
+- Avoid validating in many places "to be safe": that spreads the rule and lets copies drift apart.
+- Avoid a sealed type for values with no rule and no mixing risk; a plain type is enough.
+- Avoid trusting `distinct` alone to carry an invariant: `Quantity(5000)` compiles anywhere, and `var q: Quantity` is 0.
+
+## Nim shape
+`src/nimcs/fp/smart_constructor.nim`: `Username`, `Quantity` (objects with a private field and `{.requiresInit.}`), `ParseError`, and `parseUsername`, `parseQuantity`, `parseQuantityText`, `parseOrder`. The accessor is `value`.
+
+```nim
+import nimcs/fp/[result, smart_constructor]
+
+let order = parseOrder("  Alice ", 3)
+if order.isOk:                      # `.value` is only read once isOk is known
+  doAssert order.value.who.value == "alice"
+  doAssert order.value.qty.value == 3
+else:
+  doAssert false, "unreachable for this input"
+
+doAssert parseOrder("al", 3).error == tooShort
+doAssert parseOrder("alice", 0).error == outOfRange
+doAssert parseQuantityText("x1").error == notANumber
+```
+
+Functions that take a `Quantity` do not test its range again:
+
+```nim
+import nimcs/fp/[result, smart_constructor]
+
+func isBulk(q: Quantity): bool {.raises: [].} =
+  q.value >= 100        # no need to ask whether q is positive
+
+let r = parseQuantity(150)
+doAssert r.isOk and r.value.isBulk
+doAssert parseQuantity(1001).isErr
+```
+
+## Laws and invariants
+- `parseUsername` accepts exactly 3 to 16 characters of `a-z 0-9 _` (FP-SMARTCONSTRUCTOR-01) and names what is wrong otherwise (FP-SMARTCONSTRUCTOR-02).
+- Parsing is idempotent: the value of a parsed username parses to itself (FP-SMARTCONSTRUCTOR-03).
+- `parseQuantity(n)` is `ok` exactly for 1 to 1000, and the value round-trips (FP-SMARTCONSTRUCTOR-04).
+- `parseQuantityText` handles text, spaces and non-numbers without raising (FP-SMARTCONSTRUCTOR-05).
+- `plus` stays in range or is `outOfRange`, never wraps (FP-SMARTCONSTRUCTOR-06).
+- `parseOrder` reports the first failing field (FP-SMARTCONSTRUCTOR-07).
+- The sealed types cannot be built, left unset or mixed with their base type outside the module (FP-SMARTCONSTRUCTOR-08).
+
+## Complexity
+Parsing a username is O(length); a quantity is O(1). A sealed object with one field has the size of that field; a `distinct` type has no run-time cost at all.
+
+## Pitfalls
+`distinct` stops accidental mixing, not invalid values: `Quantity(5000)` compiles anywhere, and `var q: Quantity` is 0, which is out of range. A type that is supposed to carry a rule therefore needs more than `distinct`.
+
+```nim bad
+type Cents = distinct int
+let c = Cents(-5)             # compiles: the rule "not negative" is not in the type
+var unset: Cents              # 0, whether or not 0 is allowed
+```
+
+```nim
+import nimcs/fp/[result, smart_constructor]
+
+# Quantity has a private field and {.requiresInit.}: neither forging nor leaving it unset compiles.
+let q = parseQuantity(-5)     # the only way in; the failure is a value
+doAssert q.isErr
+doAssert not compiles(Quantity(n: 5))
+doAssert not compiles(block:
+  var unset: Quantity
+  unset)
+```
+
+Keep `distinct` for what it is good at (a `Meters` that cannot be added to a `Seconds`); when the type also has a rule, define it as an object with a private field in the module that owns the constructor.
+
+## Related
+`result.md`, `option_ops.md`, `adt.md`, `idempotence.md`.
+
+## Sources
+
+None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.

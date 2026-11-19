@@ -1,0 +1,79 @@
+# Option operations
+
+## Intent
+`Option[T]` states in the type that a value may be absent. Compared with a sentinel (`-1`, `""`, `nil`) it cannot be mistaken for real data, and the compiler makes the caller look at it. The standard library covers the basics; `nimcs/fp/option_ops` adds what is missing when options meet each other or meet `Result`.
+
+## Use when / avoid when
+- Use when "not found" or "not given" is an ordinary answer.
+- Use `okOr` when the caller needs a reason; the absence then joins a `Result` railway.
+- Avoid sentinels: a `-1` index flows into arithmetic without a complaint.
+- Avoid `Option` when the reason matters: use `Result` (see `result.md`).
+
+## Nim shape
+
+Module: `src/nimcs/fp/option_ops.nim`.
+
+Use `std/options` for `some`, `none`, `isSome`, `get`, `map`, `flatMap`, `filter`; use `option_ops` for the rest.
+
+```nim
+import std/options
+import nimcs/fp/[result, option_ops]
+
+func lookup(table: seq[(string, int)]; key: string): Option[int] {.raises: [].} =
+  for (k, v) in table:
+    if k == key:
+      return some(v)
+  none(int)
+
+let prices = @[("tea", 3), ("milk", 2)]
+let total = both(lookup(prices, "tea"), lookup(prices, "milk"))
+doAssert total.isSome and total.get == (3, 2)
+doAssert lookup(prices, "rice").okOr("no price") == err(int, "no price")
+doAssert sequence([lookup(prices, "tea"), lookup(prices, "rice")]).isNone
+```
+
+The standard `map`, `flatMap` and `filter` are procs taking a callback (`some(2).map(proc(x: int): int = x + 1)`, or `sugar`'s `=>`). `get(default)` leaves the option for good.
+
+## Laws and invariants
+- `okOr` maps `some` to `ok` and `none` to the given error (FP-OPTIONOPS-01); `toOption` forgets the reason (FP-OPTIONOPS-02).
+- `orElse` is left-biased, associative, and `none` is its identity (FP-OPTIONOPS-03).
+- `both` is `some` exactly when both inputs are (FP-OPTIONOPS-04).
+- `sequence` gives all values in order when all are present, else `none` (FP-OPTIONOPS-05).
+- `catSome` keeps the present values in order (FP-OPTIONOPS-06); `firstSome` is its head (FP-OPTIONOPS-07).
+- `map`, `flatMap` and `filter` leave `none` as `none`; `map` with identity changes nothing (FP-OPTIONOPS-08).
+
+## Complexity
+All operations are O(1), except `sequence`, `catSome` and `firstSome`, which are O(n) in the list length (`firstSome` stops at the first hit). `sequence` and `catSome` allocate one result sequence.
+
+## Pitfalls
+`get` on a `none` raises `UnpackDefect`. A sentinel looks harmless until it is used:
+
+```nim bad
+proc indexOfTea(names: seq[string]): int =
+  for i, n in names:
+    if n == "tea": return i
+  -1                       # callers forget to test for -1
+echo names[indexOfTea(names)]   # IndexDefect when absent
+```
+
+```nim
+import std/options
+
+func indexOfTea(names: seq[string]): Option[int] {.raises: [].} =
+  for i, n in names:
+    if n == "tea":
+      return some(i)
+  none(int)
+
+let names = @["milk", "tea"]
+echo indexOfTea(names).get(-1)
+```
+
+## Related
+`result.md`, `smart_constructor.md`, `monoid.md` (`orElse` is a monoid).
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `c59d2a0bec136dcc` Effective Scala

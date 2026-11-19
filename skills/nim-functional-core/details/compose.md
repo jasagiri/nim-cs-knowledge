@@ -1,0 +1,70 @@
+# Composition and pipelines
+
+## Intent
+Small functions become a program by being composed: the output of one is the input of the next. Composition is associative and has a neutral element (`identity`), so a pipeline can be grouped any way, split into pieces and reassembled without changing its meaning. `compose(f, g)` is "g, then f"; `andThen(f, g)` is the same function in reading order.
+
+## Use when / avoid when
+- Use when the same chain of steps is applied in many places or built from a list at run time.
+- Use plain method-call chains (`input.parse.validate.render`) when the steps are fixed at the call site; Nim's call syntax is already a pipeline.
+- Avoid composing functions that can fail with unrelated error types: chain them with `flatMap` on `Result` (see `result.md`).
+- Avoid deep closure stacks in hot code: each composed step is a closure call.
+
+## Nim shape
+`src/nimcs/fp/compose.nim`: `Fn[A, B]` (a pure function value), `identity`, `compose`, `andThen`, `composeAll`.
+
+```nim
+import std/strutils
+import nimcs/fp/compose
+
+func trim(s: string): string {.raises: [].} = s.strip
+func shout(s: string): string {.raises: [].} = s.toUpperAscii
+func exclaim(s: string): string {.raises: [].} = s & "!"
+
+let viaCalls = "  hi ".trim.shout.exclaim
+let pipeline = andThen(trim, shout).andThen(exclaim)
+let steps = @[Fn[string, string](trim), Fn[string, string](shout), Fn[string, string](exclaim)]
+doAssert viaCalls == "HI!"
+doAssert pipeline("  hi ") == "HI!"
+doAssert composeAll(steps)("  hi ") == "HI!"
+```
+
+## Laws and invariants
+- `compose(f, g)(x) == f(g(x))`; `andThen(f, g)(x) == g(f(x))` (FP-COMPOSE-01).
+- Composition is associative (FP-COMPOSE-02).
+- `identity` is a left and right unit (FP-COMPOSE-03).
+- `andThen(f, g)` and `compose(g, f)` are the same function (FP-COMPOSE-04).
+- `composeAll` runs first to last; an empty list is `identity` (FP-COMPOSE-05).
+- Map fusion: `xs.map(g).map(f) == xs.map(compose(f, g))`, one pass instead of two (FP-COMPOSE-06).
+
+## Complexity
+Building a composition is O(1) (`composeAll`: O(k) to copy k steps). Calling it costs the sum of its steps plus one closure call per step. Fusing two maps halves the number of passes and the intermediate sequences.
+
+## Pitfalls
+Mixing up the order: `compose` reads right to left. If you think in reading order, use `andThen`.
+
+```nim bad
+let f = compose(shout, trim)     # runs shout first, then trim: probably not what was meant
+```
+
+```nim
+import std/strutils
+import nimcs/fp/compose
+
+func trim(s: string): string {.raises: [].} = s.strip
+func shout(s: string): string {.raises: [].} = s.toUpperAscii
+
+let f = compose(shout, trim)     # trim first, then shout
+let g = andThen(trim, shout)     # the same function, in reading order
+doAssert f(" a ") == g(" a ")
+```
+
+The function types need `{.noSideEffect, raises: [].}`: a `proc` that echoes or may raise is rejected by the compiler, on purpose.
+
+## Related
+`fold.md` (`composeAll` is a fold over the steps), `monoid.md` (endofunctions under composition form a monoid), `lazy_stream.md`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `90944eadae97da9a` Learning Scalaz
