@@ -20,6 +20,10 @@ public routines are `func` with `{.raises: [].}`, absence is `Option`, a failure
 source or a hash order. Each structure has a details page with its laws, complexity and pitfalls;
 the laws are spec IDs (`docs/spec/ds.md`) checked by property tests.
 
+Inside this repository, import the module (`import nimcs/<area>/<name>`). In another project the
+modules are not a published package: copy the shape from the details page into your own file, or
+add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
+
 ## Which structure for which access pattern
 
 | You need | Reach for | Why not the neighbour |
@@ -31,6 +35,7 @@ the laws are spec IDs (`docs/spec/ds.md`) checked by property tests.
 | Priority queue, reason like binary addition | `binomial_heap` | worst-case O(log n) insert and merge |
 | Ordered map or set, sorted iteration | `rb_tree` | `hamt` has no key order |
 | Unordered map with `remove`, large and updated functionally | `hamt` | `rb_tree` has deeper paths and no `remove` here |
+| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n)); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate | `rb_tree` here has no `remove` |
 | Indexed sequence, push at the back, update by index | `pvector` | `seq` copies O(n) per version |
 | Indexed stack (push, pop and index at the front) | `skew_list` | `cons_list` indexes in O(n) |
 | Prefix search, autocompletion | `trie` | `hamt` finds whole keys only |
@@ -80,6 +85,10 @@ doAssert base.toSeq == @[2, 3]         # base never changed
 - **Iterate explicitly in generic code.** In a generic routine, write `for x in items(xs)` when `items`
   comes from another module; a bare `for x in xs` is resolved where the routine is instantiated and
   fails if the caller did not import that module.
+- **A wrapper does not pass its imports on.** A module that wraps a structure (a task queue over a
+  heap) must `export` the structure module, or its callers must import it too, before they can call
+  `len`, `findMin` and the like on the wrapped value. A wrapper's pop returns
+  `tuple[item: Option[T], rest: Wrapper]`: `none` and the empty wrapper when it is empty.
 - **Build with a local `var`, return a value.** A routine may loop with a local `var` and return it;
   no caller sees the mutation. Never take `var` parameters in public routines.
 - **Failure is a value.** `get(i)` is `Option[T]`; popping an empty structure returns the empty structure;
