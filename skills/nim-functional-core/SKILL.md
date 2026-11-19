@@ -22,6 +22,33 @@ about how the pieces fit together.
 Build with Nim 2.4.2 and `--mm:orc`. Every module compiles with `--styleCheck:error` and the warnings
 as errors listed in `nim.cfg`; fix a warning, never switch it off.
 
+Your own task (a scratch directory, another project): the page's Public API section lists every
+exported signature of its module. When the task fixes names, fields or a signature the module does
+not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
+in your file from the page's shape and laws: the algorithm, the laws and the tests carry over, the
+type and routine names do not. Do not convert between your types and the module's on every call;
+a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
+`TaskQueue` over `leftist_heap`) is fine. The
+spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
+a module to this repository; for your own code, put `std/unittest` tests with Given-When-Then names
+in `test_<name>.nim` beside it, with no spec file. `propcheck` and `std/unittest` both define
+`check`; they take different arguments, so both work in one file. Import by default: if
+`import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
+use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
+
+```nim
+type Result*[T, E] = object
+  case isOk*: bool
+  of true: value*: T
+  of false: error*: E
+
+func ok*[T, E](v: T; _: typedesc[E]): Result[T, E] {.raises: [].} = Result[T, E](isOk: true, value: v)
+func err*[T, E](_: typedesc[T]; e: E): Result[T, E] {.raises: [].} = Result[T, E](isOk: false, error: e)
+func isErr*[T, E](r: Result[T, E]): bool {.raises: [].} = not r.isOk
+
+doAssert ok(3, string).value == 3 and err(int, "bad").isErr
+```
+
 ## How to use the rules
 
 1. Write the signature first: `func`, argument types, return type, `{.raises: [].}`.
@@ -80,8 +107,27 @@ Chain fallible steps with `flatMap`; the first error stops the chain. Library co
 stdlib exception into an error value (for example `parseInt`) catches that one exception type, names
 it, and returns `err`; it does not swallow it. `parseInt` raises `ValueError` both for text that is
 not a number and for a number that does not fit an `int`, so one `except ValueError` covers both
-(`parseQuantityText` in `details/smart_constructor.md`). Read `.value` or `.error` only after
-checking `isOk` or `isErr`, in tests too. See `details/result.md`, `details/option_ops.md`.
+(the body of `parseQuantityText` in `src/nimcs/fp/smart_constructor.nim`); a `{.raises: [].}` func
+may call it this way, since the `try` handles what it raises:
+
+```nim
+import std/strutils
+import nimcs/fp/result
+
+type NumError = enum notANumber
+
+func parseWhole(raw: string): Result[int, NumError] {.raises: [].} =
+  try:
+    ok(parseInt(raw), NumError)
+  except ValueError:        # not a number, or too big for an int
+    err(int, notANumber)
+
+doAssert parseWhole("80").value == 80 and parseWhole("8x").isErr
+```
+
+`parseInt` accepts a sign (`+80`, `-1`), leading zeros (`080`) and underscores (`1_000`), and
+rejects surrounding spaces and the empty string; check any form the task forbids before calling it.
+Read `.value` or `.error` only after checking `isOk` or `isErr`, in tests too. See `details/result.md`, `details/option_ops.md`.
 
 ## S3. Data: value objects, variants, distinct types
 
@@ -149,7 +195,7 @@ let q = parseQuantity(12)
 if q.isOk:
   doAssert q.value.value == 12
 doAssert parseQuantity(0).isErr
-doAssert not compiles(Quantity(n: 5000))     # the field is private: no way to forge one
+doAssert not compiles(Quantity(n: 5000))     # `n` is the private field: no way to forge one; read it as `.value`
 ```
 
 See `details/adt.md`, `details/smart_constructor.md`.
@@ -226,7 +272,9 @@ shrunk counterexample. Idempotence (`details/idempotence.md`) and the monoid law
 A value with several fields is generated as a `pair` (or a `seqOf` for a list) turned into the
 record with `map`. A type sealed by a smart constructor cannot be generated directly: generate the
 raw input, pass it through the constructor, and treat `Err` as "nothing to check" (return `true`).
-That holds only for raw input the constructor may reject; when the generator makes only valid input
+For a list whose elements must agree (one amount per id), make the dependent field a function of
+the key inside `map` (`cents = id * 7`) so every generated list is valid, and cover the conflict
+with an example test. The `Err`-means-skip rule holds only for raw input the constructor may reject; when the generator makes only valid input
 (`intIn(1, 65535)` for a port), `Err` is a failure and the property returns `false`.
 The round trip is then printing and parsing again. `isErr` and `.value` come from
 `nimcs/fp/result`, so import it next to the constructor's module:
@@ -296,7 +344,9 @@ direction, can be split into halves and merged, and an empty input has a defined
 
 ## Checking your work
 
-Run, from the repository root:
+For your own task, run `nim c -r --hints:off test_<name>.nim` and
+`<repo>/../beautifulnim/beautifulnim check --min-level:warning *.nim` in your directory. Inside the
+repository, run, from its root:
 
 ```sh
 nim c -r --hints:off tests/test_fp_<concept>.nim

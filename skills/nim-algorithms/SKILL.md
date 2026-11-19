@@ -24,13 +24,43 @@ signature the module does not have (`topo(n, deps)` instead of `topoSort(g)`), w
 in your own file from the page's shape and laws; do not wrap the module behind a converting layer.
 Edges are directed (`a -> b`) unless the task says otherwise; for an undirected road add both arcs.
 
+Your own task (a scratch directory, another project): the page's Public API section lists every
+exported signature of its module. When the task fixes names, fields or a signature the module does
+not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
+in your file from the page's shape and laws: the algorithm, the laws and the tests carry over, the
+type and routine names do not. Do not convert between your types and the module's on every call;
+a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
+`TaskQueue` over `leftist_heap`) is fine. The
+spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
+a module to this repository; for your own code, put `std/unittest` tests with Given-When-Then names
+in `test_<name>.nim` beside it, with no spec file. `propcheck` and `std/unittest` both define
+`check`; they take different arguments, so both work in one file. Import by default: if
+`import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
+use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
+
+```nim
+type Result*[T, E] = object
+  case isOk*: bool
+  of true: value*: T
+  of false: error*: E
+
+func ok*[T, E](v: T; _: typedesc[E]): Result[T, E] {.raises: [].} = Result[T, E](isOk: true, value: v)
+func err*[T, E](_: typedesc[T]; e: E): Result[T, E] {.raises: [].} = Result[T, E](isOk: false, error: e)
+func isErr*[T, E](r: Result[T, E]): bool {.raises: [].} = not r.isOk
+
+doAssert ok(3, string).value == 3 and err(int, "bad").isErr
+```
+
 ## How to write one
 
 1. **State the contract as laws first.** A sort: the output is ordered, is a permutation of the
    input, is stable if promised, and `sort(sort(x)) == sort(x)`. A shortest path: no arc can improve
    any distance. Write each as a property test before the body: `import propcheck`, then
    `check(gen, property)` with generators such as `intIn(lo, hi)` and `seqOf(gen, minLen, maxLen)`
-   (the whole API is in nim-functional-core, S6).
+   (`import propcheck`: `check(gen, proc(x: T): bool {.raises: [CatchableError].})` returns a result
+   with `.passed` and `describe(result)`; generators `intIn(lo, hi)`, `pick(values)`,
+   `seqOf(gen, minLen, maxLen)`, `pair(genA, genB)`, `gen.map(f)`; in a test, `checkpoint
+   describe(outcome)` then `check outcome.passed`).
 
 A complete property test (propcheck's `check` returns a `CheckResult`; assert its `.passed`). There
 are no tuple or graph generators: draw a `seq[int]` and read it as `n` followed by pairs `(a mod n,
@@ -75,12 +105,19 @@ doAssert firstOf(@[4]).value == 4
    the sieve. The obvious version is the oracle; the fast one must agree on generated inputs.
 3. **Put the failure in the type.** A cycle in a topological sort, a negative cycle in
    Bellman–Ford, an unreachable vertex, a modulus out of range: `Result` or `Option`, never an
-   exception or a sentinel like `-1` or `high(int)`. When the signature is fixed and has no error
+   exception or a sentinel like `-1` or `high(int)`. `Option` when "none" is a normal answer with
+   one meaning (not found, unreachable); `Result` with an enum when the caller must tell reasons
+   apart or the input was wrong (a cycle, a bad vertex). When the signature is fixed and has no error
    channel (`seq[Option[int]]`), state the precondition in the doc comment, keep the routine total
-   (skip an arc that names a vertex outside `0 ..< n`, or one the algorithm cannot take, such as a
+   (an invalid start gives all `none`, a negative `n` an empty result; skip an arc that names a
+   vertex outside `0 ..< n`, or one the algorithm cannot take, such as a
    negative weight for Dijkstra; never index out of range; write the edge direction and these skips
    in the doc comment), and add a checked
    companion that returns `Result` and calls it (`fastestChecked(...): Result[seq[Option[int]], E]`).
+   A page that says its module refuses an input with an error (Dijkstra's `geNegativeWeight`)
+   describes a routine that returns `Result`; with no error channel, skip instead. When the task
+   leaves the error type open and the error must carry a value (which vertex), use an object with a
+   `kind` enum and the value (`OrderError = object` with `kind: OrderErrorKind` and `vertex: int`).
 4. **Keep mutation local.** In-place partition, heap sift-down, DP table filling and union-find are
    fine inside the routine; the signature stays pure.
 5. **Mind the integer range.** Sums and products of `int` can overflow (`OverflowDefect`); either

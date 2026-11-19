@@ -24,6 +24,33 @@ Inside this repository, import the module (`import nimcs/<area>/<name>`). In ano
 modules are not a published package: copy the shape from the details page into your own file, or
 add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
 
+Your own task (a scratch directory, another project): the page's Public API section lists every
+exported signature of its module. When the task fixes names, fields or a signature the module does
+not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
+in your file from the page's shape and laws: the algorithm, the laws and the tests carry over, the
+type and routine names do not. Do not convert between your types and the module's on every call;
+a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
+`TaskQueue` over `leftist_heap`) is fine. The
+spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
+a module to this repository; for your own code, put `std/unittest` tests with Given-When-Then names
+in `test_<name>.nim` beside it, with no spec file. `propcheck` and `std/unittest` both define
+`check`; they take different arguments, so both work in one file. Import by default: if
+`import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
+use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
+
+```nim
+type Result*[T, E] = object
+  case isOk*: bool
+  of true: value*: T
+  of false: error*: E
+
+func ok*[T, E](v: T; _: typedesc[E]): Result[T, E] {.raises: [].} = Result[T, E](isOk: true, value: v)
+func err*[T, E](_: typedesc[T]; e: E): Result[T, E] {.raises: [].} = Result[T, E](isOk: false, error: e)
+func isErr*[T, E](r: Result[T, E]): bool {.raises: [].} = not r.isOk
+
+doAssert ok(3, string).value == 3 and err(int, "bad").isErr
+```
+
 ## Which structure for which access pattern
 
 | You need | Reach for | Why not the neighbour |
@@ -32,11 +59,12 @@ add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
 | FIFO queue, each version used once | `bankers_queue` | amortized O(1); repeated pops from one old version re-pay the reversal |
 | Both ends push and pop | `deque` | `bankers_queue` pops only the front |
 | FIFO queue whose old versions are reused (backtracking search) | a local `seq` with a head index inside one routine, or `leftist_heap` keyed by an insertion counter | `bankers_queue` and `deque` are amortized and re-pay their rebuild on each reuse |
-| Priority queue, merge two queues often | `leftist_heap` (worst case), `pairing_heap` (usually fastest) | |
+| Priority queue whose old versions are reused (undo), or merged often | `leftist_heap` (worst-case O(log n)) | `pairing_heap` is amortized: popping an old version again re-pays |
+| Priority queue, each version used once | `pairing_heap` (usually fastest) or `leftist_heap` | |
 | Priority queue, reason like binary addition | `binomial_heap` | worst-case O(log n) insert and merge |
 | Ordered map or set, sorted iteration, no `remove` | `rb_tree` | `hamt` has no key order; with `remove`, see below |
 | Unordered map with `remove`, large and updated functionally | `hamt` | `rb_tree` has deeper paths and no `remove` here |
-| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n), gives `(key, value)` pairs); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate; when the mix is unknown, `hamt` | `rb_tree` here has no `remove` |
+| Ordered map that also needs `remove` | default `hamt`, sorting keys when read (`toSortedSeq`, O(n log n), gives `(key, value)` pairs); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate; when the mix is unknown, `hamt` | `rb_tree` here has no `remove` |
 | Indexed sequence, push at the back, update by index | `pvector` | `seq` copies O(n) per version |
 | Indexed stack (push, pop and index at the front) | `skew_list` | `cons_list` indexes in O(n) |
 | Prefix search, autocompletion | `trie` | `hamt` finds whole keys only |
@@ -91,7 +119,8 @@ doAssert base.toSeq == @[2, 3]         # base never changed
 - **A wrapper does not pass its imports on.** A module that wraps a structure (a task queue over a
   heap) must `export` the structure module, or its callers must import it too, before they can call
   `len`, `findMin` and the like on the wrapped value. Export it when the structure's type shows in
-  your signatures; when the wrapper hides it in a private field (below), there is nothing to export. A wrapper's pop returns
+  an exported routine's signature or an exported field; when it sits only in a private field of a
+  public object (below), there is nothing to export. A wrapper's pop returns
   `tuple[item: Option[T], rest: Wrapper]`: `none` and the empty wrapper when it is empty.
 - **A different order is a wrapper element with its own `<`.** The heaps and trees compare with `<`,
   resolved where the generic is instantiated, so a `<` declared in your module before the first use
