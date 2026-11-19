@@ -6,7 +6,7 @@ A first-in-first-out queue with no mutation, built from two persistent lists: th
 ## Use when / avoid when
 - Use it for breadth-first search, work lists and producer/consumer pipelines in functional code where each version of the queue is used once.
 - Use it when you need `len` in O(1) alongside push and pop.
-- Avoid it when the same old version is popped repeatedly (persistent use): the reversal cost is paid again each time and the amortized bound no longer holds. Use `deque` for double-ended needs, or a real-time queue (lazy rotations) for a worst-case bound.
+- Avoid it when the same old version is popped repeatedly (persistent use): the reversal cost is paid again each time and the amortized bound no longer holds. `deque` has the same problem. For a worst-case bound, this repository has no real-time queue (Okasaki's lazy rotations), so either keep the queue ephemeral inside one routine (a local `seq` with a head index), or use a `leftist_heap` keyed by an insertion counter, which is O(log n) in the worst case.
 - Avoid it when the queue is a priority queue: use `pairing_heap`.
 
 ## Nim shape

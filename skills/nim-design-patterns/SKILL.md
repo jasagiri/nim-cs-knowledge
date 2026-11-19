@@ -20,7 +20,9 @@ smaller, more direct shape or disappears. Every pattern here has a tested module
 
 Inside this repository, import the module (`import nimcs/<area>/<name>`). In another project the
 modules are not a published package: copy the shape from the details page into your own file, or
-add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
+add this repository's `src/` to the compiler path (`--path:"<repo>/src"`). With that path set, importing is the default; copy
+only when the task fixes a different signature. The `Result` in the pages is `nimcs/fp/result`: build it with
+`ok(value, ErrorType)` and `err(ValueType, error)`, and read `.value` or `.error` only after `isOk` or `isErr`.
 
 ## The translation table
 

@@ -31,6 +31,7 @@ add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
 | Stack, "build then reverse", shared tails | `cons_list` | O(1) at the front only |
 | FIFO queue, each version used once | `bankers_queue` | amortized O(1); repeated pops from one old version re-pay the reversal |
 | Both ends push and pop | `deque` | `bankers_queue` pops only the front |
+| FIFO queue whose old versions are reused (backtracking search) | a local `seq` with a head index inside one routine, or `leftist_heap` keyed by an insertion counter | `bankers_queue` and `deque` are amortized and re-pay their rebuild on each reuse |
 | Priority queue, merge two queues often | `leftist_heap` (worst case), `pairing_heap` (usually fastest) | |
 | Priority queue, reason like binary addition | `binomial_heap` | worst-case O(log n) insert and merge |
 | Ordered map or set, sorted iteration, no `remove` | `rb_tree` | `hamt` has no key order; with `remove`, see below |

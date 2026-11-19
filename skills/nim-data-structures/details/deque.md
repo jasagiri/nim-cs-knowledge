@@ -6,7 +6,7 @@ A double-ended queue with no mutation. Two lists hold the two ends; whenever one
 ## Use when / avoid when
 - Use it when elements enter or leave at both ends: sliding windows, undo/redo buffers, palindromes, 0-1 BFS.
 - Use it when each version is used once (ephemeral use): the O(n) split happens only after Omega(n) cheap operations, so the amortized cost is O(1).
-- Do not rely on the bound when one old version is pushed to or popped from again and again: from a version just short of a rebalance every operation costs O(n). Use a real-time deque (lazy rotations) when you need a worst-case bound.
+- Do not rely on the bound when one old version is pushed to or popped from again and again: from a version just short of a rebalance every operation costs O(n). This repository has no real-time deque (lazy rotations); for a worst-case bound keep the deque ephemeral inside one routine, or see `bankers_queue` for a FIFO alternative.
 - Avoid it when only one end pops: `bankers_queue` is simpler.
 - Avoid it for indexed access: use `pvector` or `skew_list`.
 
