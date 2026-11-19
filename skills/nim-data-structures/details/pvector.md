@@ -1,0 +1,77 @@
+# Persistent vector
+
+## Intent
+A persistent array: a trie with 32 children per node, indexed five bits at a time. A read follows one root-to-leaf path; an update copies that one path and shares everything else, so the old vector stays valid.
+
+## Use when / avoid when
+- Use it for large indexed collections updated functionally: editors, snapshots, undo histories, state in a reducer.
+- Use it when cheap `push` at the end and `get`/`updated` by index are all you need.
+- Avoid it for front insertion and removal: use `skew_list` or `deque`.
+- Avoid it when a plain `seq` is mutated locally and never shared: copying a `seq` is faster for small sizes.
+
+## Nim shape
+`PVector[T]` has a `root` node, a `shift` (0 when the root is a leaf) and a `size`. A node carries either `items` (leaf) or `kids` (interior). `push` descends along the path to the next free slot, creating nodes as needed, and adds a new root level when the trie is full. `get` and `updated` return `Option`, so an out-of-range index is a value. The tail buffer that production tries use is left out to keep the code short.
+
+```nim
+import std/options
+import nimcs/ds/pvector
+
+var v = emptyVector[int]()
+for i in 0 ..< 100:
+  v = v.push(i * i)
+doAssert v.len == 100
+doAssert v.get(10) == some(100)
+let w = v.updated(10, -1).get
+doAssert w.get(10) == some(-1)
+doAssert v.get(10) == some(100)        # the old vector is unchanged
+doAssert v.get(100).isNone
+```
+
+The main module is `src/nimcs/ds/pvector.nim`.
+
+## Laws and invariants
+- Pushed items come back in order from `toSeq` and `get(i)`; out of range is none (DS-PVECTOR-01).
+- `updated(i, x)` changes only index i and leaves the original unchanged (DS-PVECTOR-02).
+- `push` leaves the old vector with its length and contents (DS-PVECTOR-03).
+- Around the 32-way boundaries (31, 32, 33, 1024, 1025 elements) every element stays reachable and depth grows one level per factor 32 (DS-PVECTOR-04).
+- The empty vector has no elements and its updates are none (DS-PVECTOR-05).
+- A 33,000-element vector (four trie levels) agrees with a `seq` model under random updates and the original stays unchanged (DS-PVECTOR-06).
+
+## Complexity
+| Operation | Time | Space |
+|---|---|---|
+| `get` | O(log32 n) | O(1) |
+| `push`, `updated` | O(log32 n) nodes visited; each copied node holds up to 32 slots | O(log32 n) new nodes |
+| `toSeq` | O(n log32 n) | O(n) |
+
+## Pitfalls
+Copying a whole `seq` for each update is O(n) per version.
+
+```nim bad
+import std/options
+
+func updatedCopy(xs: seq[int]; i, x: int): Option[seq[int]] =
+  if i < 0 or i >= xs.len: return none(seq[int])
+  var copy = xs                        # O(n) per update, so n updates cost O(n^2)
+  copy[i] = x
+  some(copy)
+```
+
+Share the unchanged nodes with a persistent vector.
+
+```nim
+import std/options
+import nimcs/ds/pvector
+
+var v = fromSeq(newSeq[int](10_000))
+for i in 0 ..< 10_000:
+  v = v.updated(i, i).get              # O(log32 n) each
+doAssert v.get(9_999) == some(9_999)
+```
+
+## Related
+`skew_list.nim`, `hamt.nim`, `segment_tree.nim`.
+
+## Sources
+
+None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.

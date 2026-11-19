@@ -1,0 +1,75 @@
+# Pairing heap
+
+## Intent
+A mergeable persistent min-heap with a very small implementation. A node is an element plus the list of its child heaps. Merging makes the larger root a child of the smaller one; deleting the minimum merges the children in pairs from left to right and then folds the results from right to left.
+
+## Use when / avoid when
+- Use it as the default priority queue in functional code: `insert` and `merge` are O(1), `findMin` is O(1).
+- Use it for Dijkstra, Prim, event simulation and heap sort when old versions are not reused heavily.
+- Avoid it when you need a worst-case bound on `deleteMin` for persistent use: its O(log n) is amortized and holds for ephemeral use. Use `leftist_heap` or `binomial_heap` for a worst-case O(log n).
+
+## Nim shape
+`PairingHeap[T]` is a value object (`root`, `size`). `Node` holds the element and `children: ConsList[Node[T]]`. `mergePairs` is written as two loops, not recursion, so a node with many children cannot overflow the stack. The element type needs `<`.
+
+```nim
+import std/options
+import nimcs/ds/pairing_heap
+
+var h = emptyHeap[string]()
+for w in ["pear", "apple", "fig"]:
+  h = h.insert(w)
+doAssert h.findMin == some("apple")
+doAssert h.deleteMin.findMin == some("fig")
+doAssert h.toSortedSeq == @["apple", "fig", "pear"]
+```
+
+The main module is `src/nimcs/ds/pairing_heap.nim`. Descending inserts build a chain as deep as the heap is large, so a custom `=destroy` dismantles nodes with a work list (using `isUnshared` of `cons_list` to stop at shared cells) instead of recursing; measured in a release build with an 8 MB stack, five million ascending or five million descending inserts build and drop without a crash. It shares the names of `leftist_heap` and `binomial_heap`: see the import note on `leftist_heap.md` (qualify `emptyHeap` and `fromSeq` with the module name when several are imported).
+
+## Laws and invariants
+- Inserting items and draining with `deleteMin` yields them sorted (DS-PAIRINGHEAP-01).
+- `merge` holds exactly the union of both heaps, in either order (DS-PAIRINGHEAP-02).
+- `findMin` is the minimum and `deleteMin` removes one copy of it (DS-PAIRINGHEAP-03).
+- Updates leave the old heap unchanged (DS-PAIRINGHEAP-04).
+- The empty heap has no minimum and `deleteMin` leaves it empty (DS-PAIRINGHEAP-05).
+- 300,000 ascending inserts (a very wide node) and 300,000 descending inserts (a very deep chain) can be used and dropped without overflowing the stack (DS-PAIRINGHEAP-06).
+
+## Complexity
+| Operation | Time | Space |
+|---|---|---|
+| `insert`, `merge`, `findMin` | O(1) | O(1) new |
+| `deleteMin` | O(log n) amortized (ephemeral use) | O(log n) new |
+| `toSortedSeq` | O(n log n) | O(n) |
+
+## Pitfalls
+Merging the children left to right in one pass (instead of pairwise, then right to left) degrades `deleteMin` to O(n).
+
+```nim bad
+import nimcs/ds/cons_list
+
+# One-pass merge of children: each step merges the accumulator with the next child,
+# so the accumulator keeps growing in depth; sorted input makes it a linear chain.
+func mergeAll[T](children: ConsList[T]; link: proc(a, b: T): T {.noSideEffect, raises: [].}): T =
+  var acc = children.head.get
+  for c in items(children.tail):
+    acc = link(acc, c)
+  acc
+```
+
+Pair the children first and fold the pairs from the right, as `mergePairs` does; the module's tests drain 40-element heaps to check the order.
+
+```nim
+import nimcs/ds/pairing_heap
+
+let h = fromSeq([4, 3, 2, 1])
+doAssert h.deleteMin.deleteMin.toSortedSeq == @[3, 4]
+```
+
+## Related
+`leftist_heap.nim`, `binomial_heap.nim`, `cons_list.nim`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `7508271bf7980bd3` Data Structures
+- `ed8c50dad686e4d3` Elementary Algorithms

@@ -1,0 +1,83 @@
+# Binomial heap
+
+## Intent
+A persistent min-heap whose structure mirrors a binary number. A binomial tree of rank r has 2^r nodes; the heap holds at most one tree per rank, exactly the set bits of the element count. Merging two heaps is binary addition: equal ranks are linked into one tree of the next rank (a carry).
+
+## Use when / avoid when
+- Use it when you want a worst-case O(log n) bound for insert, merge and deleteMin, also for persistent use, and like to reason with the binary-addition picture.
+- Use it as a teaching structure for amortized versus worst-case analysis.
+- Avoid it when constants matter: `pairing_heap` is simpler and usually faster.
+- Avoid it when you need decrease-key or arbitrary removal.
+
+## Nim shape
+`BinomialHeap[T]` holds `trees: ConsList[Tree[T]]` in increasing rank and a size. `link` joins two trees of equal rank, keeping the smaller root on top. `insertTree` and `mergeTrees` are the carry propagation. A tree's children are stored with the highest rank first, so `deleteMin` reverses them before merging them back into the remaining trees. `rankProfile` lists the ranks present and `invariantsHold` checks rank order, node counts and heap order.
+
+```nim
+import std/options
+import nimcs/ds/binomial_heap
+
+var h = emptyHeap[int]()
+for x in [7, 3, 5, 1, 9, 2, 8]:
+  h = h.insert(x)
+doAssert h.len == 7
+doAssert h.rankProfile == @[0, 1, 2]    # 7 = 0b111
+doAssert h.findMin == some(1)
+doAssert h.deleteMin.toSortedSeq == @[2, 3, 5, 7, 8, 9]
+```
+
+The main module is `src/nimcs/ds/binomial_heap.nim`. It shares the names of `leftist_heap` and `pairing_heap`: see the import note on `leftist_heap.md` (qualify `emptyHeap` and `fromSeq` with the module name when several are imported).
+
+## Laws and invariants
+- Inserting items and draining with `deleteMin` yields them sorted (DS-BINOMIALHEAP-01).
+- `merge` holds exactly the union of both heaps, in either order (DS-BINOMIALHEAP-02).
+- `findMin` is the minimum and `deleteMin` removes one copy of it (DS-BINOMIALHEAP-03).
+- Updates leave the old heap unchanged (DS-BINOMIALHEAP-04).
+- The empty heap has no minimum and `deleteMin` leaves it empty (DS-BINOMIALHEAP-05).
+- Ranks strictly increase, each tree has 2^rank nodes and is heap ordered, after every insert and deleteMin (DS-BINOMIALHEAP-06).
+- For n elements the tree ranks are the set bits of n (DS-BINOMIALHEAP-07).
+
+## Complexity
+| Operation | Time | Space |
+|---|---|---|
+| `insert` | O(log n) worst case; O(1) amortized only for ephemeral use (each version used once) | O(log n) new |
+| `merge`, `deleteMin` | O(log n) worst case | O(log n) new |
+| `findMin` | O(log n) (scan of the roots) | O(1) |
+| `len` | O(1) | O(1) |
+
+## Pitfalls
+Linking trees of different ranks breaks the 2^rank size law and with it the logarithmic bound.
+
+```nim bad
+import nimcs/ds/cons_list
+
+type Tree = ref object
+  rank: int
+  elem: int
+
+# Merging by "put every tree of b in front of a" keeps several trees of the same rank,
+# so a heap of n elements may hold O(n) trees and findMin degrades to O(n).
+func mergeBadly(a, b: ConsList[Tree]): ConsList[Tree] =
+  a.append(b)
+```
+
+Always merge through `mergeTrees`, which links equal ranks; check `invariantsHold` in tests.
+
+```nim
+import nimcs/ds/binomial_heap
+
+let a = fromSeq([3, 1])
+let b = fromSeq([2])
+doAssert a.merge(b).invariantsHold
+doAssert a.merge(b).rankProfile == @[0, 1]
+```
+
+## Related
+`leftist_heap.nim`, `pairing_heap.nim`, `cons_list.nim`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `7508271bf7980bd3` Data Structures
+- `ed8c50dad686e4d3` Elementary Algorithms
+- `e443a6b88b011f39` Purely Functional Data Structures

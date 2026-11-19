@@ -1,0 +1,81 @@
+# Persistent trie
+
+## Intent
+A set of strings stored as a tree of characters: the path from the root spells a word, and a flag marks where a word ends. Words with a common prefix share the nodes of that prefix, so prefix queries are a walk plus a traversal.
+
+## Use when / avoid when
+- Use it for autocompletion, prefix search, dictionary lookups and longest-prefix matching.
+- Use it when the sorted list of words with a prefix is the answer you want.
+- Avoid it for whole-key lookup only: `hamt` or `rb_tree` use less memory per key.
+- Avoid it for huge alphabets with sparse children where a sorted `seq` of children would be scanned linearly; switch the child table to a map.
+
+## Nim shape
+`Trie` has a root node and a word count. A node has `terminal: bool` and `kids: seq[(char, Node)]` sorted by character, so a traversal visits children in order and the output is already in byte-wise sorted order. `insert` copies the nodes along the word (one per character) and shares all other branches; inserting a present word returns the same trie.
+
+```nim
+import nimcs/ds/trie
+
+let t = fromSeq(["car", "cart", "cat", "dog"])
+doAssert t.contains("cat")
+doAssert not t.contains("ca")
+doAssert t.hasPrefix("ca")
+doAssert t.keysWithPrefix("car") == @["car", "cart"]
+doAssert t.insert("cow").len == 5
+doAssert t.len == 4
+```
+
+The main module is `src/nimcs/ds/trie.nim`.
+
+## Laws and invariants
+- `contains` is true exactly for inserted words (DS-TRIE-01).
+- `keysWithPrefix(p)` is the sorted distinct list of words starting with `p` (DS-TRIE-02).
+- Inserting a present word changes neither size nor content (DS-TRIE-03).
+- `insert` leaves the old trie unchanged (DS-TRIE-04).
+- A word that is a prefix of another is a word only if it was inserted itself (DS-TRIE-05).
+- The empty trie lists nothing; the empty string is a legal word (DS-TRIE-06).
+
+## Complexity
+| Operation | Time | Space |
+|---|---|---|
+| `contains`, `hasPrefix` | O(L x alphabet) for a word of length L (linear scan of sorted children) | O(1) |
+| `insert` | O(L x alphabet) | O(L) new nodes |
+| `keysWithPrefix` | O(L + size of the output subtree) | O(output) |
+
+## Pitfalls
+A word is a path, and `insert`, `contains` and dropping the trie recurse once per character. Measured: a 40,000-character word is fine in a release build with an 8 MB stack and a 60,000-character word crashes; a debug build stops near 2,000 characters (call depth limit). Index natural-language words and identifiers, not megabyte strings.
+
+Filtering a list of words for a prefix scans every word on every query.
+
+```nim bad
+import std/strutils
+
+func withPrefix(words: seq[string]; prefix: string): seq[string] =
+  for w in words:                      # O(total characters) per query
+    if w.startsWith(prefix):
+      result.add w
+```
+
+Walk to the prefix once, then list the subtree.
+
+```nim
+import nimcs/ds/trie
+
+let t = fromSeq(["apple", "apply", "ape"])
+doAssert t.keysWithPrefix("app") == @["apple", "apply"]
+```
+
+## Related
+`rb_tree.nim`, `hamt.nim`, `zipper.nim`.
+
+## Sources
+
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `29ca95172575b79a` Algorithms and Data Structures
+- `473f0313d72c526b` Algorithms, 4th Edition
+- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `7508271bf7980bd3` Data Structures
+- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
+- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
+- `5ea7cdc2c5670fd7` Data Structures and Algorithms
+- `ed8c50dad686e4d3` Elementary Algorithms
