@@ -1,6 +1,6 @@
 import std/[unittest, options, algorithm, sets, tables, sequtils]
 import propcheck
-import nimcs/ds/rb_tree
+import nimcs/ds/rb_tree {.all.}   # the private graft builds invalid trees for DS-RBTREE-08
 
 proc keys(): Gen[seq[int]] {.raises: [ValueError].} =
   seqOf(intIn(-40, 40), 0, 60)

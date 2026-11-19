@@ -27,7 +27,7 @@ doAssert s.toSeq == @[1, 3, 5]
 doAssert 3 in s
 ```
 
-The main module is `src/nimcs/ds/rb_tree.nim`. `graft` is a low-level constructor that joins two maps under a node of a chosen colour without any rebalancing; it exists to rebuild a stored tree or to build a deliberately broken one and watch `invariantsHold` reject it.
+The main module is `src/nimcs/ds/rb_tree.nim`. Every exported constructor keeps the invariants, so no caller can build an invalid map. The tests build deliberately broken trees with the private `graft` (a node of a chosen colour over two subtrees, no rebalancing), reached through `import nimcs/ds/rb_tree {.all.}`, and watch `invariantsHold` reject them. To rebuild a stored tree, use `fromPairs`.
 
 ## Laws and invariants
 - A set built from any keys lists the sorted distinct keys (DS-RBTREE-01).

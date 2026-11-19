@@ -11,7 +11,7 @@
 import std/options
 
 type
-  Color* = enum
+  Color = enum
     cRed, cBlack
   Node[K, V] = ref object
     red: bool
@@ -86,10 +86,10 @@ func put*[K, V](m: RbMap[K, V]; key: K; val: V): RbMap[K, V] {.raises: [].} =
   let root = mk(false, grown.key, grown.val, grown.left, grown.right)  # the root is always black
   RbMap[K, V](root: root, size: if m.contains(key): m.size else: m.size + 1)
 
-func graft*[K, V](color: Color; key: K; val: V; left, right: RbMap[K, V]): RbMap[K, V] {.raises: [].} =
-  ## Low level: a node of the given colour over two subtrees, with no rebalancing and no check that
-  ## the result is a valid red-black tree. Use `put` for normal insertion; use `graft` to rebuild a
-  ## stored tree or to build a deliberately broken one and see `invariantsHold` say no.
+func graft[K, V](color: Color; key: K; val: V; left, right: RbMap[K, V]): RbMap[K, V] {.raises: [].} =
+  ## Test-only: a node of the given colour over two subtrees, with no rebalancing and no check that
+  ## the result is a valid red-black tree. Not exported, so no caller can build an invalid map; the
+  ## tests reach it through `import nimcs/ds/rb_tree {.all.}` to show `invariantsHold` saying no.
   RbMap[K, V](root: mk(color == cRed, key, val, left.root, right.root),
     size: left.size + right.size + 1)
 
