@@ -93,5 +93,103 @@
    "free-programming-playgrounds"
   ],
   "hillsideCore": true
- }
+ },
+ "listed": [
+  {
+   "url": "https://hypirion.com/musings/understanding-persistent-vector-pt-1",
+   "title": "Understanding Clojure's Persistent Vectors, part 1",
+   "section": [
+    "Persistent data structures",
+    "Persistent vector"
+   ]
+  },
+  {
+   "url": "https://okmij.org/ftp/tagless-final/course/lecture.pdf",
+   "title": "Typed Tagless Final Interpreters (lecture notes)",
+   "section": [
+    "Functional design",
+    "Tagless final"
+   ]
+  },
+  {
+   "url": "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/",
+   "title": "Exponential Backoff And Jitter",
+   "section": [
+    "Resilience",
+    "Retry"
+   ]
+  },
+  {
+   "url": "https://wiki.haskell.org/Smart_constructors",
+   "title": "Smart constructors (HaskellWiki)",
+   "section": [
+    "Functional design",
+    "Smart constructor"
+   ]
+  },
+  {
+   "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+   "title": "RFC 9110: HTTP Semantics",
+   "section": [
+    "Idempotence",
+    "HTTP methods"
+   ]
+  },
+  {
+   "url": "https://www.ietf.org/archive/id/draft-ietf-httpapi-idempotency-key-header-07.html",
+   "title": "The Idempotency-Key HTTP Header Field (IETF draft)",
+   "section": [
+    "Idempotence",
+    "Idempotency key"
+   ]
+  },
+  {
+   "url": "https://jaspervdj.be/posts/2018-03-08-handle-pattern.html",
+   "title": "The Handle Pattern",
+   "section": [
+    "Functional design",
+    "Record of functions"
+   ]
+  },
+  {
+   "url": "https://erlang.org/download/armstrong_thesis_2003.pdf",
+   "title": "Making reliable distributed systems in the presence of software errors (Armstrong thesis)",
+   "section": [
+    "Concurrency",
+    "Message passing and supervision"
+   ]
+  },
+  {
+   "url": "https://www.erlang.org/doc/system/sup_princ.html",
+   "title": "Erlang/OTP: Supervisor Behaviour",
+   "section": [
+    "Concurrency",
+    "Supervisor"
+   ]
+  },
+  {
+   "url": "http://www.erights.org/talks/thesis/markm-thesis.pdf",
+   "title": "Robust Composition (Miller thesis)",
+   "section": [
+    "Security",
+    "Object capabilities"
+   ]
+  },
+  {
+   "url": "https://papers.agoric.com/assets/pdf/papers/capability-myths-demolished.pdf",
+   "title": "Capability Myths Demolished",
+   "section": [
+    "Security",
+    "Object capabilities"
+   ]
+  },
+  {
+   "url": "https://arxiv.org/abs/1008.1459",
+   "title": "Actor Model of Computation: Scalable Robust Information Systems (Hewitt)",
+   "section": [
+    "Concurrency",
+    "Actor model"
+   ]
+  }
+ ]
 }

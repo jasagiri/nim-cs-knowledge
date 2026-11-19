@@ -74,4 +74,6 @@ doAssert v.get(9_999) == some(9_999)
 
 ## Sources
 
-None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `f31b0e60216ebe20` Understanding Clojure's Persistent Vectors, part 1

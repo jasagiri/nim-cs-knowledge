@@ -81,4 +81,6 @@ Keep `distinct` for what it is good at (a `Meters` that cannot be added to a `Se
 
 ## Sources
 
-None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `9431f0540eb98bfa` Smart constructors (HaskellWiki)

@@ -93,4 +93,6 @@ Also validate the policy once: a cap below the base or a jitter over 100 percent
 
 ## Sources
 
-None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `bc60002635039782` Exponential Backoff And Jitter

@@ -89,4 +89,6 @@ Do not annotate the logic `func` when the record's procs have effects; the compi
 
 ## Sources
 
-None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `75f066ba7f7db4d2` The Handle Pattern

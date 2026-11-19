@@ -68,4 +68,7 @@ Also: the key must come from the request (client-chosen or derived from its cont
 
 ## Sources
 
-None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `3e3407367a2d5466` RFC 9110: HTTP Semantics
+- `f6c5d8cfc5500f9b` The Idempotency-Key HTTP Header Field (IETF draft)

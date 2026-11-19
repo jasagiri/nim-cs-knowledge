@@ -12,6 +12,14 @@
   {
    "round": "1b-lead",
    "method": "e443a6b88b011f39 (Okasaki, Purely Functional Data Structures, thesis): table of contents read by the lead; banker's-method queues and deques, binomial heaps, skew binary random-access lists, streams, bottom-up mergesort."
+  },
+  {
+   "round": "2-listed",
+   "method": "Seven concepts that no table of contents named were given sources listed in catalog/config.json (\"listed\"): the lead fetched each page on 2026-11-19 and read the part that covers the concept. 3e3407367a2d5466 (RFC 9110, section 9.2.2 Idempotent Methods), f6c5d8cfc5500f9b (Idempotency-Key header draft: a key identifies retries of one request), bc60002635039782 (exponential backoff with full, equal and decorrelated jitter), 9431f0540eb98bfa (smart constructors: runtime checking and sealed types), e7006963b9de8203 (typed tagless final: interpreters as type-class instances), f31b0e60216ebe20 (bitmapped vector trie with 32-way branching, tail and path copying), 75f066ba7f7db4d2 (Handle pattern: a record of functions as the dependencies of a module). Not adopted: Bagwell, Ideal Hash Trees (about hash tries, not vectors; it fits hamt only)."
+  },
+  {
+   "round": "3-listed",
+   "method": "Six actor and capability pages were given sources listed in catalog/config.json (\"listed\"); the text of each was fetched on 2026-11-20 and searched for the concept. f2b0c2a6b0908171 (Armstrong thesis: processes with mailboxes, rpc over messages, section 5.2 supervision hierarchies; it never uses the word actor, so it is cited for message passing, supervisor and request_reply only), 1b179470b870e5fe (OTP Supervisor Behaviour: restart strategies and intensity), 1e2d20b92c98ae15 (Miller thesis: sealer-unsealer pairs, section 9.3 Redell's caretaker, object capabilities), ace3a1130eba6d54 (Capability Myths Demolished: capabilities, revocation; no sealer or caretaker by name), d8b43bb6711561da (Hewitt, Actor model: addresses, message passing). Not adopted: Agha, ACTORS (MIT DSpace, 1721.1/6952): the handle page loads but its PDF returned HTTP 429 on every attempt over about 20 minutes, so the text was not read."
   }
  ],
  "concepts": {
@@ -340,7 +348,9 @@
    "7508271bf7980bd3",
    "ed8c50dad686e4d3"
   ],
-  "ds/pvector": [],
+  "ds/pvector": [
+   "f31b0e60216ebe20"
+  ],
   "ds/rb_tree": [
    "7508271bf7980bd3",
    "ed8c50dad686e4d3",
@@ -411,7 +421,10 @@
    "731b2d900bf6d003",
    "90944eadae97da9a"
   ],
-  "fp/idempotence": [],
+  "fp/idempotence": [
+   "3e3407367a2d5466",
+   "f6c5d8cfc5500f9b"
+  ],
   "fp/immutable_update": [
    "04c90d5ac6a2d0db"
   ],
@@ -437,11 +450,17 @@
   "fp/result": [
    "04c90d5ac6a2d0db"
   ],
-  "fp/smart_constructor": [],
+  "fp/smart_constructor": [
+   "9431f0540eb98bfa"
+  ],
   "patterns/abstract_factory": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
+  ],
+  "patterns/actor": [
+   "d8b43bb6711561da",
+   "f2b0c2a6b0908171"
   ],
   "patterns/adapter": [
    "0789f21330e7f72a",
@@ -457,6 +476,10 @@
    "0789f21330e7f72a",
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
+  ],
+  "patterns/caretaker": [
+   "1e2d20b92c98ae15",
+   "ace3a1130eba6d54"
   ],
   "patterns/chain_of_responsibility": [
    "0789f21330e7f72a",
@@ -482,7 +505,9 @@
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
   ],
-  "patterns/dependency_record": [],
+  "patterns/dependency_record": [
+   "75f066ba7f7db4d2"
+  ],
   "patterns/event_sourcing": [
    "5009e42d6ca146f2",
    "cdbf277d93825bc0"
@@ -509,7 +534,10 @@
   "patterns/functional_core": [
    "57f76eb4ea4f92e1"
   ],
-  "patterns/idempotent_command": [],
+  "patterns/idempotent_command": [
+   "f6c5d8cfc5500f9b",
+   "3e3407367a2d5466"
+  ],
   "patterns/interpreter": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",
@@ -536,6 +564,10 @@
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
   ],
+  "patterns/object_capability": [
+   "1e2d20b92c98ae15",
+   "ace3a1130eba6d54"
+  ],
   "patterns/observer": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",
@@ -557,7 +589,15 @@
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
   ],
-  "patterns/retry_backoff": [],
+  "patterns/request_reply": [
+   "f2b0c2a6b0908171"
+  ],
+  "patterns/retry_backoff": [
+   "bc60002635039782"
+  ],
+  "patterns/sealer_unsealer": [
+   "1e2d20b92c98ae15"
+  ],
   "patterns/singleton": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",
@@ -576,7 +616,13 @@
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
   ],
-  "patterns/tagless_final": [],
+  "patterns/supervisor": [
+   "f2b0c2a6b0908171",
+   "1b179470b870e5fe"
+  ],
+  "patterns/tagless_final": [
+   "e7006963b9de8203"
+  ],
   "patterns/template_method": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",

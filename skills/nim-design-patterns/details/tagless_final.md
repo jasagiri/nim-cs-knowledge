@@ -65,4 +65,6 @@ Give each interpretation its own `distinct` type, as `Eval` and `Size` do. A sec
 
 ## Sources
 
-None in the catalog: no table of contents among the 450 core sources examined so far (catalog/concepts.json) names this concept.
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `e7006963b9de8203` Typed Tagless Final Interpreters (lecture notes)
