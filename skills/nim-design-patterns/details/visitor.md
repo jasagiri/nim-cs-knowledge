@@ -80,6 +80,7 @@ func triangle*(a, b, c: float): Option[OpenShape] {.raises: [].} =
                  perimeter: proc(): float {.noSideEffect, raises: [].} = a + b + c,
                  label: proc(): string {.noSideEffect, raises: [].} = "triangle")
 
+# test_shapes.nim: import shapes, plugin (and std/[math, options])
 let shapes = [square(3.0).get, triangle(3.0, 4.0, 5.0).get]
 doAssert abs(shapes[0].area() + shapes[1].area() - 15.0) < 1e-9
 doAssert shapes[1].label() == "triangle" and shapes[1].perimeter() == 12.0

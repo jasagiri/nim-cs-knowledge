@@ -102,7 +102,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | walk a collection | Iterator → Nim `iterator` | [details/iterator_pattern.md](details/iterator_pattern.md) |
 | many parties, central rules | Mediator → a pure routing function | [details/mediator.md](details/mediator.md) |
 | snapshot and restore | Memento → old values (persistence makes it free) | [details/memento.md](details/memento.md) |
-| react to happenings | Observer → events folded by reducers | [details/observer.md](details/observer.md) |
+| react to happenings | Observer → events folded by reducers: listeners fixed in the code → one record and `step` (row below); listeners added and removed while running → the `Bus` | [details/observer.md](details/observer.md) |
 | several stateful listeners on one event stream | one state record with a field per listener, one reducer `step(state, event)` | [details/observer.md](details/observer.md) |
 | behaviour depends on mode | State → variant + `step(s, event): Result` | [details/state.md](details/state.md) |
 | interchangeable step | Strategy → a proc value | [details/strategy.md](details/strategy.md) |

@@ -272,7 +272,8 @@ test "FP-IDEMPOTENCE-01 Given any text, when normalizeSpaces is applied twice, t
 The propcheck API (`import propcheck`; the sibling package nim-propcheck, on the path through
 `nim.cfg`): `check(gen, property): CheckResult[T]` where `property` is
 `proc(x: T): bool {.raises: [CatchableError].}`, the result has `.passed` and `describe(result)` says
-why it failed; generators (each a `Gen[T]`) `intIn(lo, hi)`, `pick(values)`, `seqOf(gen, minLen, maxLen)`,
+why it failed; generators (each a `Gen[T]`) `intIn(lo, hi: int)`, `pick(values: openArray[T])` (a `seq` or an
+array literal; empty raises `ValueError`), `seqOf(gen: Gen[T]; minLen, maxLen: int)`,
 `stringOf(alphabet, minLen, maxLen)`, `pair(genA, genB)` and `gen.map(f)` with `f: proc(a: A): B {.raises: [].}`. In a
 `std/unittest` file, `check(gen, property)` with two arguments is propcheck's; its result must be
 used, and `check outcome.passed` is unittest's assertion. Build generators inside the test body
@@ -285,7 +286,8 @@ record with `map`. A type sealed by a smart constructor cannot be generated dire
 raw input, pass it through the constructor, and treat `Err` as "nothing to check" (return `true`).
 For a list whose elements must agree (one amount per id), make the dependent field a function of
 the key inside `map` (`cents = id * 7`) so every generated list is valid, and cover the conflict
-with an example test. The `Err`-means-skip rule holds only for raw input the constructor may reject; when the generator makes only valid input
+with an example test. A second property may also generate conflicting lists; a fold that returns
+`Err` for one is the skip case below (return `true`), and the valid-list property stays. The `Err`-means-skip rule holds only for raw input the constructor may reject; when the generator makes only valid input
 (`intIn(1, 65535)` for a port), `Err` is a failure and the property returns `false`.
 The round trip is then printing and parsing again. `isErr` and `.value` come from
 `nimcs/fp/result`, so import it next to the constructor's module:
