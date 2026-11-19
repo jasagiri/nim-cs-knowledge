@@ -19,13 +19,8 @@ Also from the IDs in the first cell of the table rows of
 
 | ID | test files (count) |
 |---|---|
-| NCK-CAT-01 | tests/test_catalog.nim (2) |
-| NCK-CAT-02 | tests/test_catalog.nim (3) |
-| NCK-CAT-03 | tests/test_catalog.nim (2) |
-| NCK-CAT-04 | tests/test_catalog.nim (2) |
-| NCK-CAT-05 | tests/test_catalog.nim (2) |
-| NCK-CAT-06 | tests/test_catalog.nim (2) |
-| NCK-CAT-07 | tests/test_catalog.nim (1) |
+| NCK-CAT-01 | tests/test_catalog.nim (1) |
+| NCK-CAT-02 | tests/test_catalog.nim (1) |
 | NCK-KNOW-01 | tests/test_pages.nim (1) |
 | NCK-KNOW-02 | tests/test_pages.nim (1) |
 | NCK-KNOW-03 | tests/test_pages.nim (1) |
@@ -565,7 +560,7 @@ Also from the IDs in the first cell of the table rows of
 | FP-MONOID-06 | tests/test_fp_monoid.nim (1) |
 | FP-MONOID-07 | tests/test_fp_monoid.nim (1) |
 
-Declared: 545  Covered: 545  Uncovered: 0
+Declared: 540  Covered: 540  Uncovered: 0
 
 ## Uncovered declared IDs
 

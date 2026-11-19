@@ -66,3 +66,12 @@ Option 3.
 ## Rejected alternatives
 
 Options 1 and 2 above.
+
+## 訂正 (2026-11-19)
+
+- The catalog code (parsing, triage, crawl, build) and the tools `catalog_fetch` and `catalog_build`
+  moved to the sibling package free-books-catalog (ADR-FBC-0001), which a second repository also
+  uses. This repository keeps its keywords and start points in `catalog/config.json`. The decisions
+  above (start points, depth 2, politeness, facts only) are unchanged. The rebuild with the moved
+  code gave byte-identical `catalog/` files (NCK-CAT-01). Where this ADR names
+  `tools/catalog_fetch.nim`, read free-books-catalog's `tools/catalog_fetch.nim`.

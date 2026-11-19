@@ -1,7 +1,7 @@
 # Development tasks (`nim <task>`); listed at the end of `nim help`.
 #
 #   nim test           every tests/test_*.nim (knowledge modules, catalog, pages, dataset, style)
-#   nim catalog        rebuild catalog/ from the fetched pages (no network; see tools/catalog_fetch.nim)
+#   nim catalog        rebuild catalog/ from the fetched pages with ../free-books-catalog (no network)
 #   nim dataset        rebuild dataset/ from skills/, src/, tests/ and catalog/
 #   nim specCoverage   G1 table → docs/quality/g1-spec-coverage.md
 #
@@ -19,7 +19,7 @@ proc testFiles(): seq[string] =
 
 proc buildTools() =
   mkDir("bin")
-  exec "nim c --hints:off -d:release -o:bin/catalog_build tools/catalog_build.nim"
+  exec "nim c --hints:off -d:release -o:bin/catalog_build ../free-books-catalog/tools/catalog_build.nim"
   exec "nim c --hints:off -d:release -o:bin/dataset_build tools/dataset_build.nim"
 
 task test, "all tests":
@@ -30,7 +30,7 @@ task test, "all tests":
 
 task catalog, "rebuild catalog/ from raw/":
   buildTools()
-  exec "bin/catalog_build"
+  exec "bin/catalog_build --config:catalog/config.json"
 
 task dataset, "rebuild dataset/":
   buildTools()
