@@ -49,7 +49,7 @@ suite "NCK-K pages and modules":
 
   # SPEC: NCK-KNOW-02
   test "NCK-KNOW-02 Given every nim block of the skills, when compiled alone under the lint settings, then nim check passes":
-    let work = getTempDir() / "nck-examples"
+    let work = getTempDir() / "nck-examples-" & $getCurrentProcessId()
     var cfg = "--path:\"" & root / "src" & "\"\n"
     for line in readFile(root / "nim.cfg").splitLines:
       if line.startsWith("--") and "--path" notin line: cfg.add line & "\n"
@@ -82,6 +82,7 @@ suite "NCK-K pages and modules":
             check rc == 0
         elif inside:
           code.add line & "\n"
+    removeDir(work)
     check n > 0
 
   # SPEC: NCK-KNOW-03
