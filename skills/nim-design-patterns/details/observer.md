@@ -6,6 +6,9 @@ Several parties must react when something happens. The OO pattern keeps a mutabl
 ## Use when / avoid when
 - Use for reactive models: UI state, projections of an event log, audit trails, metrics derived from events.
 - Use when you want to reproduce a state from a log of events (replay) or test reactions without callbacks.
+- Listeners fixed when the program is written: one record with a field per listener (the last block
+  of "Nim shape"; `subscribe` disappears and `publish` becomes `step`). Listeners added and removed
+  while running: the `Bus` (first block).
 - Avoid when a subscriber must perform I/O: keep the reducers pure and let the program's edge read the new state after `publish` and do the I/O there.
 - Avoid when there is a single reaction: call a function.
 

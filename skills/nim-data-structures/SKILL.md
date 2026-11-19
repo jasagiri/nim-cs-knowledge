@@ -33,7 +33,7 @@ add this repository's `src/` to the compiler path (`--path:"<repo>/src"`).
 | Both ends push and pop | `deque` | `bankers_queue` pops only the front |
 | Priority queue, merge two queues often | `leftist_heap` (worst case), `pairing_heap` (usually fastest) | |
 | Priority queue, reason like binary addition | `binomial_heap` | worst-case O(log n) insert and merge |
-| Ordered map or set, sorted iteration | `rb_tree` | `hamt` has no key order |
+| Ordered map or set, sorted iteration, no `remove` | `rb_tree` | `hamt` has no key order; with `remove`, see below |
 | Unordered map with `remove`, large and updated functionally | `hamt` | `rb_tree` has deeper paths and no `remove` here |
 | Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n), gives `(key, value)` pairs); or `rb_tree` rebuilt without the key (O(n)) when ordered reads dominate; when the mix is unknown, `hamt` | `rb_tree` here has no `remove` |
 | Indexed sequence, push at the back, update by index | `pvector` | `seq` copies O(n) per version |

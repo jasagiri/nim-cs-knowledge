@@ -13,7 +13,7 @@ Keep the best known distance to every vertex and repeatedly settle the unsettled
 
 ## Nim shape
 
-`src/nimcs/algo/dijkstra.nim`: `dijkstra(g, source): Result[PathTree, GraphError]`. The heap is a local `HeapQueue[(int, int)]` of (distance, vertex); unreachable vertices have distance none. Distances are `int`: keep sums below `high(int)`.
+`src/nimcs/algo/dijkstra.nim`: `dijkstra(g, source): Result[PathTree, GraphError]`. The heap is a local `HeapQueue[(int, int)]` (`import std/heapqueue`) of (distance, vertex); unreachable vertices have distance none. Distances are `int`: keep sums below `high(int)`.
 
 ```nim
 import std/options

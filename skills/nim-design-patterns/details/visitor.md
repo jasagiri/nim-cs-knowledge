@@ -6,7 +6,9 @@ Add new operations to a family of types without editing them. The OO pattern sim
 ## Use when / avoid when
 - Use the plain `case` function when the set of shapes is fixed (or changes rarely) and operations keep growing: bounds, rendering, counting, transformations.
 - Use `ShapeFold` (a fold packaged as a first-class value, applied by `accept`) when an operation is built, stored or chosen at run time, or when callers should not write the recursion themselves. It does not open the shape set: a new shape still means changing `Shape`, `accept` and every `ShapeFold` value.
-- If the set of shapes must be open (other modules add shapes), do not use a shared variant: give each shape value its own procs (second block below).
+- If the set of shapes must be open (other modules add shapes), do not use a shared variant: give each shape value its own procs (the last block of "Nim shape").
+  Export the record and its fields (`OpenShape* = object` with `area*`, `label*`) so a constructor in
+  another module can build one; adding a kind is then a new module, with no edit to the first.
 - Avoid when the structure is not a tree of a closed set of kinds: use `iterator_pattern` for plain traversal.
 - Avoid a class hierarchy with `method` and double dispatch; Nim has no need for it.
 
