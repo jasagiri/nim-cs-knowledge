@@ -10,6 +10,7 @@ and every `# SPEC: ID` tag under `tests/**`. Do not hand-edit -- re-run
 Also from the IDs in the first cell of the table rows of
 `docs/specification.md`
 `docs/spec/ds.md`
+`docs/spec/patterns-actors.md`
 `docs/spec/patterns-gof-cs.md`
 `docs/spec/algo-b.md`
 `docs/spec/algo-a.md`
@@ -133,6 +134,44 @@ Also from the IDs in the first cell of the table rows of
 | DS-BLOOM-05 | tests/test_ds_bloom_filter.nim (1) |
 | DS-BLOOM-06 | tests/test_ds_bloom_filter.nim (1) |
 | DS-BLOOM-07 | tests/test_ds_bloom_filter.nim (1) |
+| PAT-ACTOR-01 | tests/test_patterns_actor.nim (1) |
+| PAT-ACTOR-02 | tests/test_patterns_actor.nim (1) |
+| PAT-ACTOR-03 | tests/test_patterns_actor.nim (1) |
+| PAT-ACTOR-04 | tests/test_patterns_actor.nim (1) |
+| PAT-ACTOR-05 | tests/test_patterns_actor.nim (1) |
+| PAT-ACTOR-06 | tests/test_patterns_actor.nim (1) |
+| PAT-ACTOR-07 | tests/test_patterns_actor.nim (1) |
+| PAT-SUPERVISOR-01 | tests/test_patterns_supervisor.nim (1) |
+| PAT-SUPERVISOR-02 | tests/test_patterns_supervisor.nim (1) |
+| PAT-SUPERVISOR-03 | tests/test_patterns_supervisor.nim (1) |
+| PAT-SUPERVISOR-04 | tests/test_patterns_supervisor.nim (1) |
+| PAT-SUPERVISOR-05 | tests/test_patterns_supervisor.nim (1) |
+| PAT-SUPERVISOR-06 | tests/test_patterns_supervisor.nim (1) |
+| PAT-SUPERVISOR-07 | tests/test_patterns_supervisor.nim (1) |
+| PAT-SUPERVISOR-08 | tests/test_patterns_supervisor.nim (1) |
+| PAT-REQREPLY-01 | tests/test_patterns_request_reply.nim (1) |
+| PAT-REQREPLY-02 | tests/test_patterns_request_reply.nim (1) |
+| PAT-REQREPLY-03 | tests/test_patterns_request_reply.nim (1) |
+| PAT-REQREPLY-04 | tests/test_patterns_request_reply.nim (1) |
+| PAT-REQREPLY-05 | tests/test_patterns_request_reply.nim (1) |
+| PAT-REQREPLY-06 | tests/test_patterns_request_reply.nim (1) |
+| PAT-REQREPLY-07 | tests/test_patterns_request_reply.nim (1) |
+| PAT-OBJCAP-01 | tests/test_patterns_object_capability.nim (1) |
+| PAT-OBJCAP-02 | tests/test_patterns_object_capability.nim (1) |
+| PAT-OBJCAP-03 | tests/test_patterns_object_capability.nim (1) |
+| PAT-OBJCAP-04 | tests/test_patterns_object_capability.nim (1) |
+| PAT-OBJCAP-05 | tests/test_patterns_object_capability.nim (1) |
+| PAT-OBJCAP-06 | tests/test_patterns_object_capability.nim (1) |
+| PAT-CARETAKER-01 | tests/test_patterns_caretaker.nim (1) |
+| PAT-CARETAKER-02 | tests/test_patterns_caretaker.nim (1) |
+| PAT-CARETAKER-03 | tests/test_patterns_caretaker.nim (1) |
+| PAT-CARETAKER-04 | tests/test_patterns_caretaker.nim (1) |
+| PAT-CARETAKER-05 | tests/test_patterns_caretaker.nim (1) |
+| PAT-CARETAKER-06 | tests/test_patterns_caretaker.nim (1) |
+| PAT-SEALER-01 | tests/test_patterns_sealer_unsealer.nim (1) |
+| PAT-SEALER-02 | tests/test_patterns_sealer_unsealer.nim (1) |
+| PAT-SEALER-03 | tests/test_patterns_sealer_unsealer.nim (1) |
+| PAT-SEALER-04 | tests/test_patterns_sealer_unsealer.nim (1) |
 | GOF-FACTORYMETHOD-01 | tests/test_patterns_factory_method.nim (2) |
 | GOF-FACTORYMETHOD-02 | tests/test_patterns_factory_method.nim (1) |
 | GOF-FACTORYMETHOD-03 | tests/test_patterns_factory_method.nim (1) |
@@ -560,7 +599,7 @@ Also from the IDs in the first cell of the table rows of
 | FP-MONOID-06 | tests/test_fp_monoid.nim (1) |
 | FP-MONOID-07 | tests/test_fp_monoid.nim (1) |
 
-Declared: 540  Covered: 540  Uncovered: 0
+Declared: 578  Covered: 578  Uncovered: 0
 
 ## Uncovered declared IDs
 
