@@ -106,3 +106,16 @@ Each row is a law or an externally visible behaviour; each ID has at least one t
 | DS-BLOOM-05 | bloom_filter | Given invalid sizes or mismatched shapes, when constructing or merging, then an error value says why |
 | DS-BLOOM-06 | bloom_filter | Given a well sized filter, when probing absent keys, then false positives are rare |
 | DS-BLOOM-07 | bloom_filter | Given any bit count including non powers of two, when adding one key, then it sets exactly min(hashes, bits) distinct bits |
+| DS-MERKLE-01 | merkle_tree | Given any bytes, when put and read back, then get returns the bytes and the name is their hash |
+| DS-MERKLE-02 | merkle_tree | Given a store, when the same bytes are put twice, then one copy is kept and the old store is unchanged |
+| DS-MERKLE-03 | merkle_tree | Given a missing name or a stored copy that no longer hashes to its name, when reading, then get says missing or corrupt |
+| DS-MERKLE-04 | merkle_tree | Given any blocks, when proving each leaf, then the proof verifies against the root |
+| DS-MERKLE-05 | merkle_tree | Given a valid proof, when the block, index, root or path is wrong, then verification fails |
+| DS-MERKLE-06 | merkle_tree | Given blocks, when any one leaf changes or one is added or dropped, then the root changes |
+| DS-MERKLE-07 | merkle_tree | Given a tree, when a leaf is updated or a block appended, then the result equals a tree built from scratch and the old tree is unchanged |
+| DS-MERKLE-08 | merkle_tree | Given n leaves, when one is updated or one appended, then only the nodes on one path are rebuilt and the rest is shared |
+| DS-MERKLE-09 | merkle_tree | Given no blocks or one block, when building, proving and updating, then the results are defined |
+| DS-MERKLE-10 | merkle_tree | Given an inner node's two digests, when they are offered as one leaf block, then the root differs from the real tree's |
+| DS-MERKLE-11 | merkle_tree | Given a hash with collisions, when a colliding block is substituted, then get and the root accept it |
+| DS-MERKLE-12 | merkle_tree | Given blocks with a repeated last block, when building, then the root differs from the shorter list |
+| DS-MERKLE-13 | merkle_tree | Given no hash procedure or an empty name, when building a hasher, then an error says why |

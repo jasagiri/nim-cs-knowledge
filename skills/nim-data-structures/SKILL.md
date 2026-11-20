@@ -3,7 +3,7 @@ name: nim-data-structures
 description: >-
   Choose, write and review persistent (functional) data structures in Nim: cons list, banker's
   queue, deque, leftist/pairing/binomial heaps, red-black tree, skew-binary list, persistent
-  vector, HAMT, trie, zipper, persistent union-find, segment tree and Bloom filter. Load it when
+  vector, HAMT, trie, zipper, persistent union-find, segment tree, Bloom filter and Merkle tree with a content-addressed store. Load it when
   a task needs a queue, priority queue, ordered or hash map, indexed sequence or prefix search
   whose old versions must stay valid, when an update must not mutate its argument, or when you
   must pick a structure for an access pattern. Every structure is a Nim 2.4 module with
@@ -86,6 +86,7 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | Group membership with undo or backtracking | `union_find` | the array version with path compression loses old states |
 | Range sum, min or gcd with point updates | `segment_tree` | a prefix-sum array cannot be updated cheaply |
 | "Certainly absent" test with small memory | `bloom_filter` | exact sets cost more memory; no delete |
+| Name data by its hash, detect corruption, or let one root digest identify a whole state and prove one part of it | `merkle_tree` (`CasStore`, `MerkleTree`) | a `hamt` of bytes does not notice rot; a hash of a flat list rehashes everything on each change |
 
 Each row names one structure; take that one.
 
@@ -264,5 +265,6 @@ doAssert q.popHighest.rest.popHighest.item == some((5, "b"))
 | Persistent union-find | [details/union_find.md](details/union_find.md) | `src/nimcs/ds/union_find.nim` |
 | Segment tree | [details/segment_tree.md](details/segment_tree.md) | `src/nimcs/ds/segment_tree.nim` |
 | Bloom filter | [details/bloom_filter.md](details/bloom_filter.md) | `src/nimcs/ds/bloom_filter.nim` |
+| Merkle tree and content-addressed store | [details/merkle_tree.md](details/merkle_tree.md) | `src/nimcs/ds/merkle_tree.nim` |
 
 Specification rows: `docs/spec/ds.md`. Tests: `tests/test_ds_<concept>.nim`.

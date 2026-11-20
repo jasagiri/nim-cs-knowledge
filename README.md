@@ -13,7 +13,7 @@ structural invariants) is a property test.
 | Path | What it is |
 |---|---|
 | `src/nimcs/fp/` | functional foundations: Result, Option, folds, composition, lazy streams, ADTs, smart constructors, idempotence, monoids |
-| `src/nimcs/ds/` | persistent data structures: lists, queues, deques, heaps, red-black trees, skew lists, vectors, HAMT, tries, zippers, union-find, segment trees, Bloom filters |
+| `src/nimcs/ds/` | persistent data structures: lists, queues, deques, heaps, red-black trees, skew lists, vectors, HAMT, tries, zippers, union-find, segment trees, Bloom filters, Merkle trees and content-addressed stores |
 | `src/nimcs/algo/` | sorting, searching, graphs, dynamic programming, string search, number theory, backtracking, greedy, divide and conquer |
 | `src/nimcs/patterns/` | the 23 GoF patterns in functional form (and which ones disappear), plus functional architecture patterns: functional core, event sourcing, CQRS, interpreters, tagless final, lenses, parser combinators, idempotent commands, and refactoring and migration patterns (parallel change, strangler fig, branch by abstraction, anti-corruption layer, seam) |
 | `skills/*/SKILL.md`, `details/` | agent skills (Agent Skills format), one details page per concept |
