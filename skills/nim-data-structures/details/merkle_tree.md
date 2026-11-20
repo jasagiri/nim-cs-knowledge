@@ -225,8 +225,6 @@ Two smaller points. The root does not authenticate a block's position by itself 
 
 Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
 
-- `e52e6b835f6d8607` Pro Git (the Git Internals chapter: objects named by the hash of their content, tree objects)
-- `5490b23c80115e87` Git from the Bottom Up (blobs, trees and commits as content-addressed objects)
-- `30f2ca04a8c28811` Bitcoin and Cryptocurrency Technologies (hash pointers, Merkle trees and proof of membership)
+- `e52e6b835f6d8607` Pro Git (section 10.2 Git Objects: "Git is a content-addressable filesystem"; a tree entry is "the SHA-1 hash of a blob or subtree")
 
-Searched 2026-11-21 by title for merkle, content-addressable, hash, git, blockchain and bitcoin; no catalog title names Merkle trees or content addressing itself, so the three above are the books whose chapters cover it. The page copies no text from them; the CVE-2012-2459 remark is the reported behaviour of Bitcoin's block tree, stated without a catalog ID.
+Read 2026-11-21 (catalog/concepts.json, round 4-lead). Not cited: Git from the Bottom Up (`5490b23c80115e87`), whose headings name blobs and trees but not addressing by hash, and whose chapters were not read; Bitcoin and Cryptocurrency Technologies (`30f2ca04a8c28811`), whose table of contents is only in a PDF that was not read. The CVE-2012-2459 remark is the reported behaviour of Bitcoin's block tree, stated without a catalog ID.
