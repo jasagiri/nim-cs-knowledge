@@ -137,6 +137,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | a shape many callers use must change without a moment when one of them breaks | Parallel change (expand, migrate, contract) → both shapes written in step, `backfill`, then a `contract` that refuses while a row would lose data | [details/parallel_change.md](details/parallel_change.md) |
 | a whole system must be replaced while it keeps serving, and one front door sees every request | Strangler fig → a route table from prefixes to old or new, moved one prefix at a time, with a fallback to the old | [details/strangler_fig.md](details/strangler_fig.md) |
 | an implementation must be replaced inside one program over many commits, without a long-lived branch | Branch by abstraction → callers take a record of procs; a stage value (old, shadow, new) picks the implementation | [details/branch_by_abstraction.md](details/branch_by_abstraction.md) |
+| a foreign model (a partner's message, a legacy schema) must not shape yours | Anti-corruption layer → a translating `func` per foreign version, built through your smart constructor, refusals as values | [details/anti_corruption_layer.md](details/anti_corruption_layer.md) |
 
 ## Why the functional form
 
