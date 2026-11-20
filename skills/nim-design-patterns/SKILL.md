@@ -126,6 +126,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | waits, deadlines and timestamps that must not break when the clock jumps (rather than how to inject the clock: dependency record) | Time as input → wall and monotonic as distinct types, one `Now` read at the edge, `none` for a time not yet come | [details/time_as_input.md](details/time_as_input.md) |
 | middleware around handlers | Pipeline | [details/pipeline.md](details/pipeline.md) |
 | at-least-once delivery, no double effects | Idempotent command | [details/idempotent_command.md](details/idempotent_command.md) |
+| a reader must see the old file or the new one, never half, even across a crash | Atomic publish → temporary name in the same directory, fsync, rename, fsync the directory; a hash as the name when the content can name itself | [details/atomic_publish.md](details/atomic_publish.md) |
 | update deep inside immutable data | Lens | [details/lens.md](details/lens.md) |
 | parse text into an AST | Parser combinators | [details/parser_combinator.md](details/parser_combinator.md) |
 | retry failed calls politely | Retry with backoff | [details/retry_backoff.md](details/retry_backoff.md) |
