@@ -15,6 +15,7 @@ Also from the IDs in the first cell of the table rows of
 `docs/spec/algo-b.md`
 `docs/spec/algo-a.md`
 `docs/spec/patterns-fp.md`
+`docs/spec/patterns-refactoring.md`
 `docs/spec/patterns-gof-b.md`
 `docs/spec/fp.md`
 
@@ -27,6 +28,7 @@ Also from the IDs in the first cell of the table rows of
 | NCK-KNOW-03 | tests/test_pages.nim (1) |
 | NCK-KNOW-04 | tests/test_pages.nim (1) |
 | NCK-KNOW-05 | tests/test_pages.nim (1) |
+| NCK-KNOW-06 | tests/test_pages.nim (1) |
 | NCK-STYLE-01 | tests/test_pages.nim (1) |
 | NCK-STYLE-02 | tests/test_pages.nim (1) |
 | NCK-DATA-01 | tests/test_dataset.nim (2) |
@@ -438,6 +440,28 @@ Also from the IDs in the first cell of the table rows of
 | PAT-PARSERCOMBINATOR-05 | tests/test_patterns_parser_combinator.nim (1) |
 | PAT-PARSERCOMBINATOR-07 | tests/test_patterns_parser_combinator.nim (2) |
 | PAT-PARSERCOMBINATOR-06 | tests/test_patterns_parser_combinator.nim (2) |
+| PAT-PARALLELCHANGE-01 | tests/test_patterns_parallel_change.nim (1) |
+| PAT-PARALLELCHANGE-02 | tests/test_patterns_parallel_change.nim (1) |
+| PAT-PARALLELCHANGE-03 | tests/test_patterns_parallel_change.nim (1) |
+| PAT-PARALLELCHANGE-04 | tests/test_patterns_parallel_change.nim (1) |
+| PAT-PARALLELCHANGE-05 | tests/test_patterns_parallel_change.nim (1) |
+| PAT-STRANGLERFIG-01 | tests/test_patterns_strangler_fig.nim (1) |
+| PAT-STRANGLERFIG-02 | tests/test_patterns_strangler_fig.nim (1) |
+| PAT-STRANGLERFIG-03 | tests/test_patterns_strangler_fig.nim (1) |
+| PAT-STRANGLERFIG-04 | tests/test_patterns_strangler_fig.nim (1) |
+| PAT-STRANGLERFIG-05 | tests/test_patterns_strangler_fig.nim (1) |
+| PAT-BRANCHBYABSTRACTION-01 | tests/test_patterns_branch_by_abstraction.nim (1) |
+| PAT-BRANCHBYABSTRACTION-02 | tests/test_patterns_branch_by_abstraction.nim (1) |
+| PAT-BRANCHBYABSTRACTION-03 | tests/test_patterns_branch_by_abstraction.nim (1) |
+| PAT-BRANCHBYABSTRACTION-04 | tests/test_patterns_branch_by_abstraction.nim (1) |
+| PAT-ANTICORRUPTIONLAYER-01 | tests/test_patterns_anti_corruption_layer.nim (1) |
+| PAT-ANTICORRUPTIONLAYER-02 | tests/test_patterns_anti_corruption_layer.nim (1) |
+| PAT-ANTICORRUPTIONLAYER-03 | tests/test_patterns_anti_corruption_layer.nim (1) |
+| PAT-ANTICORRUPTIONLAYER-04 | tests/test_patterns_anti_corruption_layer.nim (1) |
+| PAT-SEAM-01 | tests/test_patterns_seam.nim (1) |
+| PAT-SEAM-02 | tests/test_patterns_seam.nim (1) |
+| PAT-SEAM-03 | tests/test_patterns_seam.nim (1) |
+| PAT-SEAM-04 | tests/test_patterns_seam.nim (1) |
 | GOF-STRATEGY-01 | tests/test_patterns_strategy.nim (1) |
 | GOF-STRATEGY-02 | tests/test_patterns_strategy.nim (2) |
 | GOF-STRATEGY-03 | tests/test_patterns_strategy.nim (1) |
@@ -599,7 +623,7 @@ Also from the IDs in the first cell of the table rows of
 | FP-MONOID-06 | tests/test_fp_monoid.nim (1) |
 | FP-MONOID-07 | tests/test_fp_monoid.nim (1) |
 
-Declared: 578  Covered: 578  Uncovered: 0
+Declared: 601  Covered: 601  Uncovered: 0
 
 ## Uncovered declared IDs
 
