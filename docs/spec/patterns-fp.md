@@ -41,6 +41,11 @@ Modules in `src/nimcs/patterns/`; tests in `tests/test_patterns_<module>.nim`. E
 | PAT-DEPENDENCYRECORD-02 | dependency_record | When the sender fails on its kth call, a `RemindError` is returned with the sender's reason and the ids of the k - 1 messages already sent, and no later invoice is tried. |
 | PAT-DEPENDENCYRECORD-03 | dependency_record | `withClock` replaces only the clock; paid invoices, and invoices not yet due under the clock, are never sent. |
 | PAT-DEPENDENCYRECORD-04 | dependency_record | The same invoices and equivalent fakes give equal results and equal messages on every run. |
+| PAT-TIMEASINPUT-01 | time_as_input | For any sender and `Now`, moving only the wall clock (`wallJumped`) by any amount changes neither `decide` nor the `retryAt` a failed `sent` sets. |
+| PAT-TIMEASINPUT-02 | time_as_input | With a pending change and no wait running, `decide` is `acSend` exactly when the monotonic time since the last change is at least `quiet`; with nothing pending it is `acWait`. |
+| PAT-TIMEASINPUT-03 | time_as_input | After a failed send at `t`, the change stays pending and `decide` is `acSend` exactly when at least `retryAfter` has passed since `t`. |
+| PAT-TIMEASINPUT-04 | time_as_input | A successful send clears what was pending except a change made after the `Now` it was decided at; the same inputs give the same decision; `stamp` is the wall clock of the same reading. |
+| PAT-TIMEASINPUT-05 | time_as_input | `initSendPolicy` rejects a span that is not positive; `(t + d) - t == d`; the policy's fields are not readable outside the module, and wall and monotonic times neither subtract nor compare with each other. |
 | PAT-PIPELINE-01 | pipeline | The identity middleware leaves a handler's answer to every request unchanged. |
 | PAT-PIPELINE-02 | pipeline | `andThen` is associative: either grouping of three stacks answers every request the same way. |
 | PAT-PIPELINE-03 | pipeline | `identity` is a left and right unit of `andThen`. |

@@ -113,6 +113,7 @@ Do not annotate the logic `func` when the record's procs have effects; the compi
 - `functional_core.md` (keeping decisions out of effectful code)
 - `pipeline.md`
 - `retry_backoff.md` (the shell loop that would call a `Sender`)
+- `time_as_input.md` (what kind of time the injected clock gives, and reading it once)
 
 ## Sources
 

@@ -123,6 +123,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | a program as a value, many interpreters | Free interpreter | [details/free_interpreter.md](details/free_interpreter.md) |
 | one program, meaning chosen by type | Tagless final | [details/tagless_final.md](details/tagless_final.md) |
 | inject clock, mail, storage | Dependency record | [details/dependency_record.md](details/dependency_record.md) |
+| waits, deadlines and timestamps that must not break when the clock jumps (rather than how to inject the clock: dependency record) | Time as input → wall and monotonic as distinct types, one `Now` read at the edge, `none` for a time not yet come | [details/time_as_input.md](details/time_as_input.md) |
 | middleware around handlers | Pipeline | [details/pipeline.md](details/pipeline.md) |
 | at-least-once delivery, no double effects | Idempotent command | [details/idempotent_command.md](details/idempotent_command.md) |
 | update deep inside immutable data | Lens | [details/lens.md](details/lens.md) |
