@@ -3,7 +3,10 @@ name: nim-data-structures
 description: >-
   Choose, write and review persistent (functional) data structures in Nim: cons list, banker's
   queue, deque, leftist/pairing/binomial heaps, red-black tree, skew-binary list, persistent
-  vector, HAMT, trie, zipper, persistent union-find, segment tree, Bloom filter and Merkle tree with a content-addressed store. Load it when
+  vector, HAMT, trie, zipper, persistent union-find, segment tree and Bloom filter, Merkle tree with a content-addressed store, plus the
+  classic textbook structures as values (hash table, binary heap, stack and queue, arena linked
+  list, BST, AVL tree, B-tree, treap, splay tree, k-d tree, Fenwick tree, sparse table, bit vector,
+  suffix trie). Load it when
   a task needs a queue, priority queue, ordered or hash map, indexed sequence or prefix search
   whose old versions must stay valid, when an update must not mutate its argument, or when you
   must pick a structure for an access pattern. Every structure is a Nim 2.4 module with
@@ -12,9 +15,12 @@ description: >-
 
 # Nim data structures: persistent and functional
 
-Every structure in `src/nimcs/ds/` is **persistent**: an update returns a new value and the old
-one stays valid. Unchanged parts are shared through `ref` to immutable nodes, so an update copies
-only a path, not the whole structure. The modules follow the repository's style (ADR-NCK-0002):
+Every structure in `src/nimcs/ds/` is a **value**: an update returns a new value and the old
+one stays valid. The tree and list structures are **persistent**: unchanged parts are shared through
+`ref` to immutable nodes, so an update copies only a path, not the whole structure. The flat
+textbook structures (`hash_table`, `binary_heap`, `stack_queue`, `linked_list`, `fenwick_tree`,
+`sparse_table`, `bit_vector`) keep one `seq` and copy it on each update, O(n); build them in one call
+(`fromPairs`, `fromSeq`, ...) or keep a `var` local to one routine, and see their pages for the cost. The modules follow the repository's style (ADR-NCK-0002):
 public routines are `func` with `{.raises: [].}`, absence is `Option`, a failure with a reason is
 `Result` (`nimcs/fp/result`), shapes are plain `object`s, nothing reads the clock, a random
 source or a hash order. Each structure has a details page with its laws, complexity and pitfalls;
@@ -87,6 +93,20 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | Range sum, min or gcd with point updates | `segment_tree` | a prefix-sum array cannot be updated cheaply |
 | "Certainly absent" test with small memory | `bloom_filter` | exact sets cost more memory; no delete |
 | Name data by its hash, detect corruption, or let one root digest identify a whole state and prove one part of it | `merkle_tree` (`CasStore`, `MerkleTree`) | a `hamt` of bytes does not notice rot; a hash of a flat list rehashes everything on each change |
+| How a hash table works (probing, load factor), or an immutable snapshot with sorted iteration | `hash_table` | inside one routine `std/tables` is faster; old versions cheap: `hamt` |
+| Priority queue inside one routine, heap sort, top-k | `binary_heap` | old versions reused: `leftist_heap` |
+| Plain LIFO/FIFO inside one routine, next greater element (monotonic stack) | `stack_queue` | shared old versions: `cons_list`, `bankers_queue` |
+| O(1) insert and remove next to a known node, LRU order | `linked_list` (arena of indices) | `cons_list` has no back links |
+| Ordered set to learn BST insert, delete and traversal | `bst` (unbalanced; sorted input degrades to a chain) | balanced: `avl_tree`, `rb_tree`, `treap` |
+| Ordered set with `delete` and guaranteed O(log n) | `avl_tree` | `rb_tree` here has no `remove` |
+| Ordered set whose nodes hold many keys (disk-page model) | `b_tree` (insert only) | in memory, `avl_tree` is simpler |
+| Ordered set with `split` and `merge` by key | `treap` (priorities from a seed, deterministic) | `avl_tree` has no split here |
+| Ordered set where recently used keys are found faster | `splay_tree` | amortized; persistent reuse of old versions re-pays |
+| Nearest point or points in a rectangle, fixed point set | `kd_tree` | high dimensions degrade to a scan |
+| Prefix sums with point updates over integers, small memory | `fenwick_tree` | min or max: `segment_tree`; static min/max: `sparse_table` |
+| Range min, max or gcd over a static array, O(1) per query | `sparse_table` | updates: `segment_tree` |
+| Dense set of small integers, popcount, set algebra | `bit_vector` | sparse or large keys: `hamt` |
+| Substring counts and longest repeat for short texts | `suffix_trie` (O(n²) nodes) | long texts need a suffix array or tree (not here) |
 
 Each row names one structure; take that one.
 
@@ -266,5 +286,19 @@ doAssert q.popHighest.rest.popHighest.item == some((5, "b"))
 | Segment tree | [details/segment_tree.md](details/segment_tree.md) | `src/nimcs/ds/segment_tree.nim` |
 | Bloom filter | [details/bloom_filter.md](details/bloom_filter.md) | `src/nimcs/ds/bloom_filter.nim` |
 | Merkle tree and content-addressed store | [details/merkle_tree.md](details/merkle_tree.md) | `src/nimcs/ds/merkle_tree.nim` |
+| Hash table | [details/hash_table.md](details/hash_table.md) | `src/nimcs/ds/hash_table.nim` |
+| Binary heap | [details/binary_heap.md](details/binary_heap.md) | `src/nimcs/ds/binary_heap.nim` |
+| Stack and queue | [details/stack_queue.md](details/stack_queue.md) | `src/nimcs/ds/stack_queue.nim` |
+| Linked list (arena) | [details/linked_list.md](details/linked_list.md) | `src/nimcs/ds/linked_list.nim` |
+| Binary search tree | [details/bst.md](details/bst.md) | `src/nimcs/ds/bst.nim` |
+| AVL tree | [details/avl_tree.md](details/avl_tree.md) | `src/nimcs/ds/avl_tree.nim` |
+| B-tree | [details/b_tree.md](details/b_tree.md) | `src/nimcs/ds/b_tree.nim` |
+| Treap | [details/treap.md](details/treap.md) | `src/nimcs/ds/treap.nim` |
+| Splay tree | [details/splay_tree.md](details/splay_tree.md) | `src/nimcs/ds/splay_tree.nim` |
+| k-d tree | [details/kd_tree.md](details/kd_tree.md) | `src/nimcs/ds/kd_tree.nim` |
+| Fenwick tree | [details/fenwick_tree.md](details/fenwick_tree.md) | `src/nimcs/ds/fenwick_tree.nim` |
+| Sparse table | [details/sparse_table.md](details/sparse_table.md) | `src/nimcs/ds/sparse_table.nim` |
+| Bit vector | [details/bit_vector.md](details/bit_vector.md) | `src/nimcs/ds/bit_vector.nim` |
+| Suffix trie | [details/suffix_trie.md](details/suffix_trie.md) | `src/nimcs/ds/suffix_trie.nim` |
 
 Specification rows: `docs/spec/ds.md`. Tests: `tests/test_ds_<concept>.nim`.
