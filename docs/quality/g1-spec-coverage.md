@@ -62,6 +62,7 @@ Also from the IDs in the first cell of the table rows of
 | DS-LEFTISTHEAP-05 | tests/test_ds_leftist_heap.nim (1) |
 | DS-LEFTISTHEAP-06 | tests/test_ds_leftist_heap.nim (1) |
 | DS-LEFTISTHEAP-07 | tests/test_ds_leftist_heap.nim (1) |
+| DS-LEFTISTHEAP-08 | tests/test_ds_leftist_heap.nim (1) |
 | DS-PAIRINGHEAP-01 | tests/test_ds_pairing_heap.nim (1) |
 | DS-PAIRINGHEAP-02 | tests/test_ds_pairing_heap.nim (1) |
 | DS-PAIRINGHEAP-03 | tests/test_ds_pairing_heap.nim (1) |
@@ -628,7 +629,7 @@ Also from the IDs in the first cell of the table rows of
 | FP-MONOID-06 | tests/test_fp_monoid.nim (1) |
 | FP-MONOID-07 | tests/test_fp_monoid.nim (1) |
 
-Declared: 606  Covered: 606  Uncovered: 0
+Declared: 607  Covered: 607  Uncovered: 0
 
 ## Uncovered declared IDs
 

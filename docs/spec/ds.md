@@ -31,6 +31,7 @@ Each row is a law or an externally visible behaviour; each ID has at least one t
 | DS-LEFTISTHEAP-05 | leftist_heap | Given the empty heap, when asking for the minimum or deleting, then findMin is none and it stays empty |
 | DS-LEFTISTHEAP-06 | leftist_heap | Given random inserts and deleteMins, when checking the structure, then its invariants hold at every step |
 | DS-LEFTISTHEAP-07 | leftist_heap | Given one million descending inserts, when the heap is used and dropped, then nothing overflows the stack |
+| DS-LEFTISTHEAP-08 | leftist_heap | Given a wrapper module that orders its elements with its own `<`, when the wrapper is used from another module, then the heap uses that `<` if the wrapper is not generic or the `<` is exported, and compiling fails with a type mismatch if a generic wrapper keeps it private |
 | DS-PAIRINGHEAP-01 | pairing_heap | Given any items, when inserted and drained by deleteMin, then they come out sorted |
 | DS-PAIRINGHEAP-02 | pairing_heap | Given two heaps, when merged in either order, then both hold exactly the union of their elements |
 | DS-PAIRINGHEAP-03 | pairing_heap | Given any items, when asking findMin, then it is the minimum and deleteMin removes one copy of it |

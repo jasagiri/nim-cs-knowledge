@@ -158,6 +158,35 @@ let h = emptyHeap[ByPriority]().insert(ByPriority(priority: 1, name: "a"))
 doAssert h.findMin.get.name == "a" and h.findMin.get.priority == 5
 ```
 
+  A generic wrapper (an `LruCache[K, V]` over `LeftistHeap[Recency[K]]`) is instantiated in the
+  module that uses it, and that module cannot see a private `<`: compiling it fails with a
+  `type mismatch` inside the heap. Export the `<`; the element type can stay private. A wrapper
+  that is not generic, like the task queue below, is instantiated in its own module, so its `<`
+  stays private.
+
+```nim
+import std/options
+import nimcs/ds/leftist_heap
+
+type
+  Recency[K] = object             # private; only its `<` is exported
+    stamp: int
+    key: K
+  Oldest*[K] = object
+    heap: LeftistHeap[Recency[K]]
+
+func `<`*[K](a, b: Recency[K]): bool {.raises: [].} = a.stamp < b.stamp
+
+func emptyOldest*[K](): Oldest[K] {.raises: [].} = Oldest[K](heap: emptyHeap[Recency[K]]())
+
+func touch*[K](o: Oldest[K]; stamp: int; key: K): Oldest[K] {.raises: [].} =
+  Oldest[K](heap: o.heap.insert(Recency[K](stamp: stamp, key: key)))
+
+func oldest*[K](o: Oldest[K]): Option[K] {.raises: [].} =
+  let top = o.heap.findMin
+  if top.isSome: some(top.get.key) else: none(K)
+```
+
   When the element type is fixed as a tuple, give the order to a private object that holds it, and
   keep the tuple in the public signature:
 

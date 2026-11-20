@@ -104,6 +104,7 @@ func invariantsHold[T](h: LeftistHeap[T]): bool
 - The empty heap has no minimum and `deleteMin` leaves it empty (DS-LEFTISTHEAP-05).
 - Heap order, leftist property and ranks hold after every insert and deleteMin (DS-LEFTISTHEAP-06).
 - One million descending inserts (a left spine as long as the heap) can be used and dropped without overflowing the stack (DS-LEFTISTHEAP-07).
+- The heap orders elements with the `<` visible where it is instantiated: a wrapper's own `<` is found from another module when the wrapper is not generic or the `<` is exported; a generic wrapper with a private `<` fails to compile there with a type mismatch (DS-LEFTISTHEAP-08).
 
 ## Complexity
 | Operation | Time | Space |

@@ -1,4 +1,4 @@
-import std/[unittest, options, algorithm]
+import std/[unittest, options, algorithm, os, osproc, strutils]
 import propcheck
 import nimcs/ds/leftist_heap
 
@@ -78,3 +78,58 @@ suite "leftist_heap":
       check h.findMin == some(1)
       check h.len == 1_000_000
     check true
+
+  # SPEC: DS-LEFTISTHEAP-08
+  test "DS-LEFTISTHEAP-08 Given a wrapper with its own `<`, when used from another module, then the heap finds it unless a generic wrapper keeps it private":
+    let root = currentSourcePath().parentDir.parentDir
+    let work = getTempDir() / "nck-wrapper-lt-" & $getCurrentProcessId()
+    const
+      generic = """
+import std/options
+import nimcs/ds/leftist_heap
+type
+  Recency[K] = object
+    stamp: int
+    key: K
+  Box*[K] = object
+    heap: LeftistHeap[Recency[K]]
+func `<`EXPORT[K](a, b: Recency[K]): bool = a.stamp < b.stamp
+func emptyBox*[K](): Box[K] = Box[K](heap: emptyHeap[Recency[K]]())
+func add*[K](b: Box[K]; stamp: int; key: K): Box[K] =
+  Box[K](heap: b.heap.insert(Recency[K](stamp: stamp, key: key)))
+func first*[K](b: Box[K]): K = b.heap.findMin.get.key
+"""
+      concrete = """
+import std/options
+import nimcs/ds/leftist_heap
+type
+  Recency = object
+    stamp: int
+    key: string
+  Box* = object
+    heap: LeftistHeap[Recency]
+func `<`(a, b: Recency): bool = a.stamp < b.stamp
+func emptyBox*(): Box = Box(heap: emptyHeap[Recency]())
+func add*(b: Box; stamp: int; key: string): Box =
+  Box(heap: b.heap.insert(Recency(stamp: stamp, key: key)))
+func first*(b: Box): string = b.heap.findMin.get.key
+"""
+      useGeneric = "import wrap\ndoAssert emptyBox[string]().add(2, \"b\").add(1, \"a\").first == \"a\"\n"
+      useConcrete = "import wrap\ndoAssert emptyBox().add(2, \"b\").add(1, \"a\").first == \"a\"\n"
+    proc run(wrap, use: string): tuple[output: string, exitCode: int] =
+      removeDir(work)
+      createDir(work)
+      writeFile(work / "wrap.nim", wrap)
+      writeFile(work / "use.nim", use)
+      execCmdEx("nim c -r --hints:off --path:\"" & root / "src" & "\" use.nim", workingDir = work)
+    let exported = run(generic.replace("EXPORT", "*"), useGeneric)
+    checkpoint exported.output
+    check exported.exitCode == 0
+    let nonGeneric = run(concrete, useConcrete)
+    checkpoint nonGeneric.output
+    check nonGeneric.exitCode == 0
+    let private = run(generic.replace("EXPORT", ""), useGeneric)
+    checkpoint private.output
+    check private.exitCode != 0
+    check "type mismatch" in private.output
+    removeDir(work)
