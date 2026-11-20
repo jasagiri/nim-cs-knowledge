@@ -49,7 +49,8 @@ func fromSeq(words: openArray[string]): Trie
 
 ## Laws and invariants
 - `contains` is true exactly for inserted words (DS-TRIE-01).
-- `keysWithPrefix(p)` is the sorted distinct list of words starting with `p` (DS-TRIE-02).
+- `keysWithPrefix(p)` is the sorted distinct list of words starting with `p` (DS-TRIE-02); every word
+  starts with the empty prefix, so `keysWithPrefix("")` lists them all.
 - Inserting a present word changes neither size nor content (DS-TRIE-03).
 - `insert` leaves the old trie unchanged (DS-TRIE-04).
 - A word that is a prefix of another is a word only if it was inserted itself (DS-TRIE-05).

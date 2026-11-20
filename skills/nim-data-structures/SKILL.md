@@ -43,7 +43,8 @@ signature that says `proc(i: int): bool`, since a `func` cannot call a callback 
 effects or raise. Import only what the file uses (an unused import is a compile error under the
 strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`, and a file whose exported
 routines return `Result` also writes `export result`, or a test that imports only that file fails
-with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
+with "undeclared field: 'isErr'"; that test then needs no import of its own. Guard clauses with an early
+`return err(...)` are fine in a `func`. A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
 `{.requiresInit.}`) included; an object variant does not. `opt.get` on
 `none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. A `func`
 may change its own `result` and its local variables (`result.log.add x`), never what its caller sees. When the file
@@ -77,7 +78,7 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | Priority queue, reason like binary addition | `binomial_heap` | worst-case O(log n) insert and merge |
 | Ordered map or set, sorted iteration, no `remove` | `rb_tree` | `hamt` has no key order; with `remove`, see below |
 | Unordered map with `remove`, large and updated functionally | `hamt` | `rb_tree` has deeper paths and no `remove` here |
-| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n), gives `(key, value)` pairs) | `rb_tree` here has no `remove` |
+| Ordered map that also needs `remove` | `hamt`, sorting keys when read (`toSortedSeq`, O(n log n), gives `(key, value)` pairs; the keys alone: `for (k, _) in m.toSortedSeq: result.add k`) | `rb_tree` here has no `remove` |
 | Indexed sequence, push at the back, update by index | `pvector` | `seq` copies O(n) per version |
 | Indexed stack (push, pop and index at the front) | `skew_list` | `cons_list` indexes in O(n) |
 | Prefix search, autocompletion | `trie` | `hamt` finds whole keys only |
@@ -86,9 +87,7 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | Range sum, min or gcd with point updates | `segment_tree` | a prefix-sum array cannot be updated cheaply |
 | "Certainly absent" test with small memory | `bloom_filter` | exact sets cost more memory; no delete |
 
-Each row names one structure. The one exception to the table: an ordered map with `remove` may use
-`rb_tree`, rebuilt without the key (O(n) per `remove`), only when the task says ordered reads far
-outnumber removes.
+Each row names one structure; take that one.
 
 Questions to ask in order:
 1. Do old versions have to stay valid (is an older value read or popped again after a newer one was made)? If not, a local `var seq` or `Table` inside one routine is

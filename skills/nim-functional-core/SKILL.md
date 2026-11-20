@@ -41,7 +41,8 @@ signature that says `proc(i: int): bool`, since a `func` cannot call a callback 
 effects or raise. Import only what the file uses (an unused import is a compile error under the
 strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`, and a file whose exported
 routines return `Result` also writes `export result`, or a test that imports only that file fails
-with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
+with "undeclared field: 'isErr'"; that test then needs no import of its own. Guard clauses with an early
+`return err(...)` are fine in a `func`. A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
 `{.requiresInit.}`) included; an object variant does not. `opt.get` on
 `none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. A `func`
 may change its own `result` and its local variables (`result.log.add x`), never what its caller sees. When the file
@@ -264,8 +265,8 @@ variable to "remember" something between calls.
 
 A concept with a law states it as a spec row with an ID and tests it with nim-propcheck. Typical laws:
 idempotence `f(f(x)) == f(x)`, round trip `decode(encode(x)) == x`, associativity and identity of a
-combine, commutativity, and structure invariants. The test name is Given-When-Then and the line above
-it names the spec ID.
+combine, commutativity, and structure invariants. The test name is Given-When-Then; in a repository
+module the line above it names the spec ID (your own code has no spec file and no such line).
 
 ```nim
 import std/unittest

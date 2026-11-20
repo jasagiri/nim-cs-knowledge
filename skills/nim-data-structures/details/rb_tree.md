@@ -7,7 +7,7 @@ A balanced binary search tree kept balanced by node colours: the root is black, 
 - Use `RbMap` or `RbSet` when you need ordered iteration, a deterministic order or sorted output together with fast lookup.
 - Use it when old versions of the map must stay valid.
 - Avoid it for lookup-only maps with large keys sets where order does not matter: `hamt` has shallower paths.
-- Avoid it if you need deletion in this package: it is not provided. Rebuild from `toSeq` without the key, or use `hamt` (which has `remove`).
+- Avoid it if you need deletion in this package: it is not provided. Use `hamt` (which has `remove`) and sort when reading (`toSortedSeq`).
 
 ## Nim shape
 `RbMap[K, V]` is a value object (`root`, `size`) over `ref` nodes with a `red` flag. `ins` walks down and `balance` repairs a red-red violation by rotating the four possible shapes into one. `put` paints the root black. The key type needs `<`; equal keys are keys where neither is smaller. `RbSet[K]` is a map whose value is an empty object. `invariantsHold` checks the colour rules, that every key lies strictly between the keys of its nearest ancestors on each side (the full search order, not only parent against child) and the stored size, and `height` supports the logarithmic-height test.

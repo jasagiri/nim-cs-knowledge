@@ -45,7 +45,8 @@ signature that says `proc(i: int): bool`, since a `func` cannot call a callback 
 effects or raise. Import only what the file uses (an unused import is a compile error under the
 strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`, and a file whose exported
 routines return `Result` also writes `export result`, or a test that imports only that file fails
-with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
+with "undeclared field: 'isErr'"; that test then needs no import of its own. Guard clauses with an early
+`return err(...)` are fine in a `func`. A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
 `{.requiresInit.}`) included; an object variant does not. `opt.get` on
 `none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. A `func`
 may change its own `result` and its local variables (`result.log.add x`), never what its caller sees. When the file
@@ -78,7 +79,8 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 
 A complete property test (propcheck's `check` returns a `CheckResult`; assert its `.passed`). There
 are no tuple or graph generators: draw a `seq[int]` and read it as `n` followed by pairs `(a mod n,
-b mod n)`. Compare with an oracle: Bellman–Ford for shortest paths, "every arc goes forward" for a
+b mod n)`. `seqOf` may give an empty list and `x mod k` may give 0, so take `n = 1 + abs(x) mod k`
+and return `true` for a list too short to read. Compare with an oracle: Bellman–Ford for shortest paths, "every arc goes forward" for a
 topological order, a reachability search for "a cycle exists".
 
 ```nim

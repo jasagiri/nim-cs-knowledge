@@ -43,7 +43,8 @@ signature that says `proc(i: int): bool`, since a `func` cannot call a callback 
 effects or raise. Import only what the file uses (an unused import is a compile error under the
 strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`, and a file whose exported
 routines return `Result` also writes `export result`, or a test that imports only that file fails
-with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
+with "undeclared field: 'isErr'"; that test then needs no import of its own. Guard clauses with an early
+`return err(...)` are fine in a `func`. A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
 `{.requiresInit.}`) included; an object variant does not. `opt.get` on
 `none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. A `func`
 may change its own `result` and its local variables (`result.log.add x`), never what its caller sees. When the file
@@ -109,6 +110,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | react to happenings | Observer → events folded by reducers: listeners fixed in the code → one record and `step` (row below); listeners added and removed while running → the `Bus` | [details/observer.md](details/observer.md) |
 | several stateful listeners on one event stream | one state record with a field per listener, one reducer `step(state, event)` | [details/observer.md](details/observer.md) |
 | behaviour depends on mode | State → variant + `step(s, event): Result` | [details/state.md](details/state.md) |
+| a closed set of states whose transitions never fail but emit effects (a log line) | `step(s, event): tuple[next: State, effect: Option[E]]`, and `run` folds it collecting the effects; with a fixed signature that has no `Result`, an unknown input is logged, not raised | [details/state.md](details/state.md) |
 | interchangeable step | Strategy → a proc value | [details/strategy.md](details/strategy.md) |
 | fixed skeleton, varying steps | Template Method → higher-order `func` | [details/template_method.md](details/template_method.md) |
 | new operations over a closed family (no other module adds kinds) | Visitor → variant + `case` | [details/visitor.md](details/visitor.md) |
