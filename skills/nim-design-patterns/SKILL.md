@@ -5,7 +5,8 @@ description: >-
   architecture patterns (functional core / imperative shell, event sourcing, CQRS, state machines,
   free and tagless-final interpreters, dependency records, middleware pipelines, idempotent
   commands, lenses, parser combinators, retry with backoff) and actor- and capability-based designs
-  (actors, supervisors, request/reply, object capabilities, caretakers, sealer/unsealer). Use whenever Nim code reaches for
+  (actors, supervisors, request/reply, object capabilities, caretakers, sealer/unsealer) and refactoring and migration patterns (parallel change, strangler fig,
+  branch by abstraction, anti-corruption layer, seam). Use whenever Nim code reaches for
   classes, inheritance, `method`, callbacks, global singletons or mutable shared state, when a
   design is being ported from Java/C#/C++/Python, or when a request names a pattern. Shows what
   each pattern becomes in functional Nim, and which ones disappear.
@@ -133,6 +134,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | what a caller may do must be limited (rather than swappable: dependency record) | Object capability → sealed value, attenuation, delegation by passing | [details/object_capability.md](details/object_capability.md) |
 | a grant must be taken back | Caretaker → forwarder plus revoker, revocation state threaded as data | [details/caretaker.md](details/caretaker.md) |
 | a value must pass through parties that must not read or forge it | Sealer/unsealer → a matched pair over a sealed box | [details/sealer_unsealer.md](details/sealer_unsealer.md) |
+| a shape many callers use must change without a moment when one of them breaks | Parallel change (expand, migrate, contract) → both shapes written in step, `backfill`, then a `contract` that refuses while a row would lose data | [details/parallel_change.md](details/parallel_change.md) |
 
 ## Why the functional form
 
