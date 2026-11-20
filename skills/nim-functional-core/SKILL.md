@@ -26,7 +26,10 @@ Your own task (a scratch directory, another project): the page's Public API sect
 exported signature of its module. When the task fixes names, fields or a signature the module does
 not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
 in your file from the page's shape and laws: the algorithm, the laws, the tests and the example's
-layout (its fields and steps) carry over, the type and routine names do not (use the task's names: `circle`, not the example's `square`). Do not convert between your types and the module's on every call;
+layout (its fields and steps) carry over, the type and routine names do not (use the task's names:
+`circle`, not the example's `square`). A formula the task fixes wins over a module law that differs
+(a rounding direction); say the difference in the doc comment. An optional parameter of the source
+(`pct?: number`) becomes `Option[T] = none(T)`. Do not convert between your types and the module's on every call;
 a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
 `TaskQueue` over `leftist_heap`) is fine. The
 spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
@@ -138,7 +141,9 @@ doAssert parseWhole("80").value == 80 and parseWhole("8x").isErr
 rejects surrounding spaces and the empty string. For a stricter grammar (ASCII digits only), check
 `raw.len > 0 and raw.allCharsInSet(Digits)` (`std/strutils`) first and keep the `try` for overflow.
 When the task does not say whether leading zeros or a sign are allowed, choose, and write the choice
-in the doc comment and in one example test.
+in the doc comment and in one example test. `parseInt` inside `try` is one way, not a rule: a
+hand-written digit loop with an explicit bound check is as good when each failure needs its own
+reason (a fixed-decimal amount like `12.34`, digits after the point counted).
 This also reports the two causes apart: text that fails the check is "not digits", and a
 `ValueError` after the check can only be a number too big for an `int` (out of range).
 Read `.value` or `.error` only after checking `isOk` or `isErr`, in tests too. See `details/result.md`, `details/option_ops.md`.
@@ -211,7 +216,8 @@ if q.isOk:
 doAssert parseQuantity(0).isErr
 doAssert not compiles(Quantity(n: 5000))     # `n` is the private field: no way to forge one; read it as `.value`
 # The pages name the private field and its accessor differently (`n`/`value`, `points`/`points`); any
-# names work as long as the field stays private and one exported accessor reads it.
+# names work as long as the field stays private and one exported accessor reads it. A one-sided rule
+# (cents >= 0) is sealed the same way: the constructor returns `Result` and rejects the other side.
 ```
 
 See `details/adt.md`, `details/smart_constructor.md`.

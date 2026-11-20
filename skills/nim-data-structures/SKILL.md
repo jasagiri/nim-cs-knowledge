@@ -28,7 +28,10 @@ Your own task (a scratch directory, another project): the page's Public API sect
 exported signature of its module. When the task fixes names, fields or a signature the module does
 not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
 in your file from the page's shape and laws: the algorithm, the laws, the tests and the example's
-layout (its fields and steps) carry over, the type and routine names do not (use the task's names: `circle`, not the example's `square`). Do not convert between your types and the module's on every call;
+layout (its fields and steps) carry over, the type and routine names do not (use the task's names:
+`circle`, not the example's `square`). A formula the task fixes wins over a module law that differs
+(a rounding direction); say the difference in the doc comment. An optional parameter of the source
+(`pct?: number`) becomes `Option[T] = none(T)`. Do not convert between your types and the module's on every call;
 a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
 `TaskQueue` over `leftist_heap`) is fine. The
 spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
@@ -65,6 +68,7 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | You need | Reach for | Why not the neighbour |
 |---|---|---|
 | Stack, "build then reverse", shared tails | `cons_list` | O(1) at the front only |
+| Undo and redo history (every version kept) | two `cons_list` stacks, past and future, plus the present value; an edit clears the future | a `seq` of versions copies on each edit |
 | FIFO queue, each version used once | `bankers_queue` | amortized O(1); repeated pops from one old version re-pay the reversal |
 | Both ends push and pop | `deque` | `bankers_queue` pops only the front |
 | FIFO queue whose old versions are reused (backtracking search) | a local `seq` with a head index inside one routine, or `leftist_heap` keyed by an insertion counter (compiled in `details/leftist_heap.md`) | `bankers_queue` and `deque` are amortized and re-pay their rebuild on each reuse |

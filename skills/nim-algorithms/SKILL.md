@@ -30,7 +30,10 @@ Your own task (a scratch directory, another project): the page's Public API sect
 exported signature of its module. When the task fixes names, fields or a signature the module does
 not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
 in your file from the page's shape and laws: the algorithm, the laws, the tests and the example's
-layout (its fields and steps) carry over, the type and routine names do not (use the task's names: `circle`, not the example's `square`). Do not convert between your types and the module's on every call;
+layout (its fields and steps) carry over, the type and routine names do not (use the task's names:
+`circle`, not the example's `square`). A formula the task fixes wins over a module law that differs
+(a rounding direction); say the difference in the doc comment. An optional parameter of the source
+(`pct?: number`) becomes `Option[T] = none(T)`. Do not convert between your types and the module's on every call;
 a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
 `TaskQueue` over `leftist_heap`) is fine. The
 spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
@@ -177,6 +180,11 @@ let r = hopsChecked(3, [(0, 1), (0, 9)], 0)
 doAssert r.isErr and r.error.kind == hfBadArc and r.error.value == 1
 doAssert hopsChecked(-1, newSeq[Arc](), 0).error.value == -1
 ```
+   An algorithm with no row in the table below (selection of the k-th smallest, for one) is written
+   from its laws and an oracle, borrowing the nearest page's shape (quick_sort's three-way partition
+   for selection). A randomized algorithm stays a `func` by taking its randomness as a parameter (a
+   seed, or a `Rand` state from `std/random` passed in and returned); without one, use a
+   deterministic choice (median of three) and state the worst case in the doc comment.
 4. **Keep mutation local.** In-place partition, heap sift-down, DP table filling and union-find are
    fine inside the routine; the signature stays pure.
 5. **Mind the integer range.** Sums and products of `int` can overflow (`OverflowDefect`); either

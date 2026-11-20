@@ -28,7 +28,10 @@ Your own task (a scratch directory, another project): the page's Public API sect
 exported signature of its module. When the task fixes names, fields or a signature the module does
 not have (`Payment(id, cents)` instead of `Command(key, amount)`), write your own types and routines
 in your file from the page's shape and laws: the algorithm, the laws, the tests and the example's
-layout (its fields and steps) carry over, the type and routine names do not (use the task's names: `circle`, not the example's `square`). Do not convert between your types and the module's on every call;
+layout (its fields and steps) carry over, the type and routine names do not (use the task's names:
+`circle`, not the example's `square`). A formula the task fixes wins over a module law that differs
+(a rounding direction); say the difference in the doc comment. An optional parameter of the source
+(`pct?: number`) becomes `Option[T] = none(T)`. Do not convert between your types and the module's on every call;
 a thin wrapper that only names the module's operations for the task (an `OrderedMap` over `hamt`, a
 `TaskQueue` over `leftist_heap`) is fine. The
 spec-row steps in this skill (`docs/spec`, `# SPEC:` lines, `tests/test_<area>_*.nim`) are for adding
