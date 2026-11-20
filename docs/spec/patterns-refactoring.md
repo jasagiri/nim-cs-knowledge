@@ -14,3 +14,7 @@ Modules in `src/nimcs/patterns/`; tests in `tests/test_patterns_<module>.nim`. E
 | PAT-STRANGLERFIG-03 | strangler_fig | `withRoute` is idempotent and the last write for a prefix wins; `retreat` after `strangle` of a prefix the table sent to legacy routes every request as the original table did. |
 | PAT-STRANGLERFIG-04 | strangler_fig | A table whose fallback and every entry name the modern system never routes a request to legacy (`isRetired`); a table with a legacy entry or fallback is not retired. |
 | PAT-STRANGLERFIG-05 | strangler_fig | `withRoute` rejects an empty prefix. |
+| PAT-BRANCHBYABSTRACTION-01 | branch_by_abstraction | For any items and any two implementations that satisfy the same contract, the client gives the same total at every stage of the migration. |
+| PAT-BRANCHBYABSTRACTION-02 | branch_by_abstraction | At the shadow stage the answer is always the old implementation's answer, and a mismatch is reported exactly when the two implementations differ on the items. |
+| PAT-BRANCHBYABSTRACTION-03 | branch_by_abstraction | At the new stage the answer is the new implementation's answer whatever the old one returns, and at the old stage the old one's. |
+| PAT-BRANCHBYABSTRACTION-04 | branch_by_abstraction | `advance` moves old to shadow to new and stays at new; `retreat` moves back one step and stays at old; advancing then retreating from old or shadow returns to the start. |

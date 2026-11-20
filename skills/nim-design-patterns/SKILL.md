@@ -136,6 +136,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | a value must pass through parties that must not read or forge it | Sealer/unsealer → a matched pair over a sealed box | [details/sealer_unsealer.md](details/sealer_unsealer.md) |
 | a shape many callers use must change without a moment when one of them breaks | Parallel change (expand, migrate, contract) → both shapes written in step, `backfill`, then a `contract` that refuses while a row would lose data | [details/parallel_change.md](details/parallel_change.md) |
 | a whole system must be replaced while it keeps serving, and one front door sees every request | Strangler fig → a route table from prefixes to old or new, moved one prefix at a time, with a fallback to the old | [details/strangler_fig.md](details/strangler_fig.md) |
+| an implementation must be replaced inside one program over many commits, without a long-lived branch | Branch by abstraction → callers take a record of procs; a stage value (old, shadow, new) picks the implementation | [details/branch_by_abstraction.md](details/branch_by_abstraction.md) |
 
 ## Why the functional form
 
