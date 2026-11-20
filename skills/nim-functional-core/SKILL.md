@@ -221,7 +221,7 @@ doAssert not compiles(Quantity(n: 5000))     # `n` is the private field: no way 
 # (cents >= 0) is sealed the same way: the constructor returns `Result` and rejects the other side.
 ```
 
-See `details/adt.md`, `details/smart_constructor.md`.
+See `details/adt.md`, `details/smart_constructor.md`; a value that must also be in the right state for an operation is `details/typestate.md`.
 
 ## S4. Persistence: an update returns a new value
 
@@ -392,6 +392,7 @@ Both must exit with 0. Each `nim` block in this skill and in `details/` compiles
 | Lazy streams | `details/lazy_stream.md` | `src/nimcs/fp/lazy_stream.nim` | FP-LAZYSTREAM-01 to 08 |
 | Algebraic data types | `details/adt.md` | `src/nimcs/fp/adt.nim` | FP-ADT-01 to 07 |
 | Smart constructors | `details/smart_constructor.md` | `src/nimcs/fp/smart_constructor.nim` | FP-SMARTCONSTRUCTOR-01 to 08 |
+| Typestate | `details/typestate.md` | `src/nimcs/fp/typestate.nim` | FP-TYPESTATE-01 to 08 |
 | Idempotence | `details/idempotence.md` | `src/nimcs/fp/idempotence.nim` | FP-IDEMPOTENCE-01 to 09 |
 | Monoid | `details/monoid.md` | `src/nimcs/fp/monoid.nim` | FP-MONOID-01 to 07 |
 

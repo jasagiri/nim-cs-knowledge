@@ -62,6 +62,14 @@ in `tests/test_fp_<concept>.nim`.
 | FP-SMARTCONSTRUCTOR-06 | smart_constructor | `plus` stays in range or is `outOfRange`; it never wraps. |
 | FP-SMARTCONSTRUCTOR-07 | smart_constructor | `parseOrder` reports the error of the first failing field. |
 | FP-SMARTCONSTRUCTOR-08 | smart_constructor | The sealed types cannot be forged (private field), left unset (`requiresInit`) or mixed with their base type outside the module. |
+| FP-TYPESTATE-01 | typestate | What is written to a draft, in any pieces, is exactly what the published blob reads. |
+| FP-TYPESTATE-02 | typestate | An operation of the other state does not compile: no `write` or `publish` on a published blob, no `contentId` on a draft, no forged or unset published blob. |
+| FP-TYPESTATE-03 | typestate | Publishing is deterministic and content-addressed (equal content, equal id, however written), and writing to a stale draft after `publish` does not change the published blob. |
+| FP-TYPESTATE-04 | typestate | The runtime bridge accepts exactly a draft record as a draft and a published record whose id matches its bytes as published, naming the reason otherwise. |
+| FP-TYPESTATE-05 | typestate | `store` then `asDraft` or `asPublished` gives back the same blob in the same state and is refused for the other state. |
+| FP-TYPESTATE-06 | typestate | `writeStored` and `publishStored` agree with the typed `write` and `publish`, and answer a published record with `seNotDraft` instead of failing to compile. |
+| FP-TYPESTATE-07 | typestate | With `=copy` disabled, using a draft after it was moved into `publish` is a compile error under the repository's `nim.cfg`; the repository's `Result` cannot carry such a type, so `Blob` stays copyable and the reuse compiles. |
+| FP-TYPESTATE-08 | typestate | The state tags cost nothing at run time: a typed blob is as large as its bytes. |
 | FP-IDEMPOTENCE-01 | idempotence | `normalizeSpaces(normalizeSpaces(s)) == normalizeSpaces(s)`. |
 | FP-IDEMPOTENCE-02 | idempotence | `setInsert` is idempotent and keeps the set sorted, unique, containing `x`. |
 | FP-IDEMPOTENCE-03 | idempotence | `upsertByKey` is idempotent and leaves exactly one entry for the key, even if the input held duplicates. |
