@@ -155,7 +155,8 @@ func leftovers*(d: Disk): seq[string] {.raises: [].} =
     if isTemp(name): result.add name
 
 func cleanup*(d: Disk): Disk {.raises: [].} =
-  ## The directory without the temporary files, and without anything else changed.
+  ## The directory without the temporary files, and without anything else changed. The removal is
+  ## durable: a real cleanup unlinks the files and then fsyncs the directory.
   result = d
   for name in d.leftovers:
     result.dir.del name

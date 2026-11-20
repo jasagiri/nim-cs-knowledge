@@ -92,6 +92,7 @@ test "PAT-ATOMICPUBLISH-04 Given a stop at any step, when the directory is read,
     let cleaned = after.cleanup
     after.leftovers == temps and cleaned.snapshot == others and cleaned.leftovers.len == 0 and
       cleaned.cleanup.snapshot == cleaned.snapshot and
+      cleaned.crash(0, dcLost).leftovers.len == 0 and   # the removal survives a later stop
       (k < 5 or after.leftovers.len == 0))
   checkpoint describe(outcome)
   check outcome.passed
