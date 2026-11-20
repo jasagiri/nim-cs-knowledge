@@ -219,7 +219,7 @@ doAssert insecureFnv1a64().name == "insecure-fnv1a64"      # the shipped hash sa
 Two smaller points. The root does not authenticate a block's position by itself unless `verifyInclusion` is given the leaf count from a trusted source (a signed root with its size, for example); and a proof for index i only shows that a block equal to the one given sits at i, so two equal blocks are interchangeable. The store names blobs by the bare hash of their bytes: if one store also holds tree nodes or other kinds of object, tag the kinds (git hashes a header such as the kind and the length before the bytes) so that a blob cannot be passed off as a node.
 
 ## Related
-`hamt.md` (the persistent map under `CasStore`, and the same path-copying idea), `pvector.md` (a persistent sequence by index; the tree here is a sequence addressed by hash), `idempotent_command.md` and `event_sourcing.md` in the design patterns (a put is idempotent by construction, which is why a retried upload is safe; an event log whose root digest is the audit trail).
+`hamt.md` (the persistent map under `CasStore`, and the same path-copying idea), `pvector.md` (a persistent sequence by index; the tree here is a sequence addressed by hash), `idempotent_command.md` and `event_sourcing.md` in the design patterns (a put is idempotent by construction, which is why a retried upload is safe; an event log whose root digest is the audit trail), `atomic_publish.md` in the design patterns (writing a blob under its hash so a reader never sees it half written).
 
 ## Sources
 

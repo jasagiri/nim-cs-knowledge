@@ -190,4 +190,4 @@ Fix: `publishFile`, or the same steps in your own edge: a unique temporary name 
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title or listed contents covers crash consistency, fsync or atomic rename (searched 2026-11-21 by title for operating system, file system, crash, durab, storage, unix and rename; the one operating-systems textbook, Operating Systems: Three Easy Pieces, 24c2ca14b8ed5bf2, lists no contents in the catalog, so the page does not cite it); the page cites no source it has not read.
+None in the catalog: no source in catalog/sources.jsonl was found whose contents cover an application's temporary-name, fsync and rename protocol (searched 2026-11-21 by title for operating system, file system, crash, durab, storage, unix and rename). Operating Systems: Three Easy Pieces (`24c2ca14b8ed5bf2`) has a chapter 42, FSCK and Journaling, on the crash consistency of the file system itself, and no chapter heading names rename or fsync; its text was not read, so the page does not cite it (catalog/concepts.json, round 4-lead).

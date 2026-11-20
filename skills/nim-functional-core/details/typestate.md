@@ -192,6 +192,7 @@ A generic routine `proc write[S](b: Blob[S]; ...)` is also a hole: `S` is then u
 - `src/nimcs/fp/result.nim` and `result.md` (what the bridge returns)
 - `state.md` and `state_machine.md` in nim-design-patterns (the run-time forms of states and transitions; this page moves the legal ones into the type)
 - `object_capability.md` and `sealer_unsealer.md` in nim-design-patterns (other ways to make a forbidden operation unwritable)
+- `atomic_publish.md` in nim-design-patterns (the protocol whose published file must stop being writable, the defect this page starts from)
 
 ## Sources
 

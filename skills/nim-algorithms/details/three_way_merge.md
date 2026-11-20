@@ -164,4 +164,8 @@ Smaller traps: a clean merge is not a correct one (non-overlapping edits can sti
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title or table of contents covers three-way merge or diff3 (searched 2026-11-21 by title for diff, merge, version control, git and patience; the catalog has Git tutorials and a podcast named "Merge Conflict", but none lists the algorithm, and the page cites no source it has not read).
+Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+
+- `e52e6b835f6d8607` Pro Git (section 3.2 Basic Branching and Merging: "Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two", and its Basic Merge Conflicts)
+
+Read 2026-11-21 (catalog/concepts.json, round 4-lead). It covers the keyed merge of snapshots and conflicts, not the diff3 alignment; no catalog source was found for diff3 itself (searched by title for diff, merge, version control, git and patience). The laws of diff3 that do not hold are those reported by Khanna, Kunal and Pierce, "A Formal Investigation of Diff3", which is not in the catalog.

@@ -20,6 +20,10 @@
   {
    "round": "3-listed",
    "method": "Six actor and capability pages were given sources listed in catalog/config.json (\"listed\"); the text of each was fetched on 2026-11-20 and searched for the concept. f2b0c2a6b0908171 (Armstrong thesis: processes with mailboxes, rpc over messages, section 5.2 supervision hierarchies; it never uses the word actor, so it is cited for message passing, supervisor and request_reply only), 1b179470b870e5fe (OTP Supervisor Behaviour: restart strategies and intensity), 1e2d20b92c98ae15 (Miller thesis: sealer-unsealer pairs, section 9.3 Redell's caretaker, object capabilities), ace3a1130eba6d54 (Capability Myths Demolished: capabilities, revocation; no sealer or caretaker by name), d8b43bb6711561da (Hewitt, Actor model: addresses, message passing). Not adopted: Agha, ACTORS (MIT DSpace, 1721.1/6952): the handle page loads but its PDF returned HTTP 429 on every attempt over about 20 minutes, so the text was not read."
+  },
+  {
+   "round": "4-lead",
+   "method": "Four pages added on 2026-11-21 (merkle_tree, three_way_merge, atomic_publish, typestate). The tables of contents of candidate sources were fetched and, where a heading was not enough, the page text. e52e6b835f6d8607 (Pro Git): 10.2 Git Objects says \"Git is a content-addressable filesystem\" and that a tree entry is \"the SHA-1 hash of a blob or subtree\" (merkle_tree); 3.2 Basic Branching and Merging says \"Git does a simple three-way merge\" (three_way_merge). Not adopted: 5490b23c80115e87 (Git from the Bottom Up), headings name blobs and trees but not addressing by hash, chapters not read; 30f2ca04a8c28811 (Bitcoin and Cryptocurrency Technologies), table of contents only in a PDF that was not read; 24c2ca14b8ed5bf2 (Operating Systems: Three Easy Pieces), chapter 42 FSCK and Journaling is file-system crash consistency and no heading names rename or fsync, text not read. typestate: no candidate found by title."
   }
  ],
  "concepts": {
@@ -294,6 +298,9 @@
    "7508271bf7980bd3",
    "8230f061e9c86571"
   ],
+  "algo/three_way_merge": [
+   "e52e6b835f6d8607"
+  ],
   "algo/topo_sort": [
    "5ea7cdc2c5670fd7",
    "61811291625a13a9",
@@ -343,6 +350,9 @@
   ],
   "ds/leftist_heap": [
    "7508271bf7980bd3"
+  ],
+  "ds/merkle_tree": [
+   "e52e6b835f6d8607"
   ],
   "ds/pairing_heap": [
    "7508271bf7980bd3",
@@ -694,6 +704,7 @@
   "21a878bd1e78232f": "read",
   "22c62fb8f14f865c": "no_toc",
   "234c8e8fafc08c50": "read",
+  "24c2ca14b8ed5bf2": "read",
   "24ecd309574dbec6": "no_toc",
   "253339d34dc0d34e": "read",
   "254fe28ac0bfd53e": "read",
@@ -726,6 +737,7 @@
   "3020c057a8d82e66": "read",
   "304a5b4bccddd1c7": "read",
   "305d4ff9ea2622af": "read",
+  "30f2ca04a8c28811": "no_toc",
   "311822e80d0de9b6": "unreachable",
   "3183faa2242f6b56": "no_toc",
   "31ce4485a05927ee": "no_toc",
@@ -776,6 +788,7 @@
   "51e899c696c12487": "no_toc",
   "52d03152d76f2cc0": "no_toc",
   "535230a3b79993b3": "read",
+  "5490b23c80115e87": "read",
   "55a5513226337928": "no_toc",
   "55dcf27597d5d92a": "read",
   "56b43057b3cfd4b4": "no_toc",
@@ -1036,6 +1049,7 @@
   "e416fd538daa1d5a": "read",
   "e443a6b88b011f39": "read",
   "e484da14e0bd6e5e": "no_toc",
+  "e52e6b835f6d8607": "read",
   "e5316931ea572ded": "no_toc",
   "e5c6c4d97ee52606": "no_toc",
   "e620ce181dd52227": "read",
