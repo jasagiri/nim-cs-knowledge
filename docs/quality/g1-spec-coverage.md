@@ -408,6 +408,11 @@ Also from the IDs in the first cell of the table rows of
 | PAT-DEPENDENCYRECORD-02 | tests/test_patterns_dependency_record.nim (1) |
 | PAT-DEPENDENCYRECORD-03 | tests/test_patterns_dependency_record.nim (2) |
 | PAT-DEPENDENCYRECORD-04 | tests/test_patterns_dependency_record.nim (1) |
+| PAT-TIMEASINPUT-01 | tests/test_patterns_time_as_input.nim (1) |
+| PAT-TIMEASINPUT-02 | tests/test_patterns_time_as_input.nim (1) |
+| PAT-TIMEASINPUT-03 | tests/test_patterns_time_as_input.nim (1) |
+| PAT-TIMEASINPUT-04 | tests/test_patterns_time_as_input.nim (1) |
+| PAT-TIMEASINPUT-05 | tests/test_patterns_time_as_input.nim (1) |
 | PAT-PIPELINE-01 | tests/test_patterns_pipeline.nim (1) |
 | PAT-PIPELINE-02 | tests/test_patterns_pipeline.nim (1) |
 | PAT-PIPELINE-03 | tests/test_patterns_pipeline.nim (1) |
@@ -623,7 +628,7 @@ Also from the IDs in the first cell of the table rows of
 | FP-MONOID-06 | tests/test_fp_monoid.nim (1) |
 | FP-MONOID-07 | tests/test_fp_monoid.nim (1) |
 
-Declared: 601  Covered: 601  Uncovered: 0
+Declared: 606  Covered: 606  Uncovered: 0
 
 ## Uncovered declared IDs
 
