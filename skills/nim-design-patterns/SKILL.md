@@ -42,7 +42,8 @@ strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`
 routines return `Result` also writes `export result`, or a test that imports only that file fails
 with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
 `{.requiresInit.}`) included; an object variant does not. `opt.get` on
-`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. When the file
+`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. A `func`
+may change its own `result` and its local variables (`result.log.add x`), never what its caller sees. When the file
 uses `Result`, import it by default: if `import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
 use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
 

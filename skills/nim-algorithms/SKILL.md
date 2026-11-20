@@ -23,6 +23,8 @@ add this repository's `src/` to the compiler path (`--path:"<repo>/src"`). When 
 signature the module does not have (`topo(n, deps)` instead of `topoSort(g)`), write the algorithm
 in your own file from the page's shape and laws; do not wrap the module behind a converting layer.
 Edges are directed (`a -> b`) unless the task says otherwise; for an undirected road add both arcs.
+A word such as "road" or "link" alone does not make the graph undirected; only "two-way" or
+"undirected" does. Write the direction you chose in the doc comment.
 
 Your own task (a scratch directory, another project): the page's Public API section lists every
 exported signature of its module. When the task fixes names, fields or a signature the module does
@@ -42,7 +44,8 @@ strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`
 routines return `Result` also writes `export result`, or a test that imports only that file fails
 with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
 `{.requiresInit.}`) included; an object variant does not. `opt.get` on
-`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. When the file
+`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. A `func`
+may change its own `result` and its local variables (`result.log.add x`), never what its caller sees. When the file
 uses `Result`, import it by default: if `import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
 use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
 
@@ -126,10 +129,60 @@ doAssert firstOf(@[4]).value == 4
    describes a routine that returns `Result`; with no error channel, skip instead. When the task
    leaves the error type open and the error must carry a value (which vertex), use an object with a
    `kind` enum and the value (a negative `n` or a vertex outside `0 ..< n` is the bad-input kind) (`OrderError = object` with `kind: OrderErrorKind` and `vertex: int`).
+   The comment on the value field says what it holds for every kind. The whole shape, compiled
+   (a hop count stands in for any fixed signature; Dijkstra adds weights and a heap):
+
+```nim
+import std/[deques, options]
+import nimcs/fp/result
+export result
+
+type
+  Arc* = tuple[src, dst: int]
+  HopFault* = enum hfNegativeCount, hfBadStart, hfBadArc
+  HopError* = object
+    kind*: HopFault
+    value*: int   # hfNegativeCount: n; hfBadStart: start; hfBadArc: the arc's index in `arcs`
+
+func hops*(n: int; arcs: openArray[Arc]; start: int): seq[Option[int]] {.raises: [].} =
+  ## Fewest arcs from `start` to each vertex. Arcs are directed (a two-way road is two arcs).
+  ## Total: a negative `n` gives @[], a bad `start` all none, an arc outside 0 ..< n is skipped.
+  if n < 0: return @[]
+  result = newSeq[Option[int]](n)
+  if start notin 0 ..< n: return
+  var adj = newSeq[seq[int]](n)
+  for a in arcs:
+    if a.src in 0 ..< n and a.dst in 0 ..< n: adj[a.src].add a.dst
+  var queue = [start].toDeque
+  result[start] = some(0)
+  while queue.len > 0:
+    let v = queue.popFirst
+    for w in adj[v]:
+      if result[w].isNone:
+        result[w] = some(result[v].get + 1)
+        queue.addLast w
+
+func hopsChecked*(n: int; arcs: openArray[Arc]; start: int): Result[seq[Option[int]], HopError] {.raises: [].} =
+  ## `hops`, but the first bad input is an error instead of a skip: `n`, then `start`, then arcs in order.
+  if n < 0: return err(seq[Option[int]], HopError(kind: hfNegativeCount, value: n))
+  if start notin 0 ..< n: return err(seq[Option[int]], HopError(kind: hfBadStart, value: start))
+  for i, a in arcs:
+    if a.src notin 0 ..< n or a.dst notin 0 ..< n:
+      return err(seq[Option[int]], HopError(kind: hfBadArc, value: i))
+  ok(hops(n, arcs, start), HopError)
+
+doAssert hops(3, [(0, 1), (1, 2), (0, 9)], 0) == @[some(0), some(1), some(2)]
+doAssert hops(3, newSeq[Arc](), 7) == @[none(int), none(int), none(int)]
+let r = hopsChecked(3, [(0, 1), (0, 9)], 0)
+doAssert r.isErr and r.error.kind == hfBadArc and r.error.value == 1
+doAssert hopsChecked(-1, newSeq[Arc](), 0).error.value == -1
+```
 4. **Keep mutation local.** In-place partition, heap sift-down, DP table filling and union-find are
    fine inside the routine; the signature stays pure.
 5. **Mind the integer range.** Sums and products of `int` can overflow (`OverflowDefect`); either
-   take a modulus, return `Option`, or state the caller's precondition in the doc comment.
+   take a modulus, return `Option`, or state the caller's precondition in the doc comment. With a
+   fixed signature and no error channel, state the precondition (sums stay below `high(int)`) and
+   say in the same comment whether the checked companion detects it.
 
 ## Which algorithm
 

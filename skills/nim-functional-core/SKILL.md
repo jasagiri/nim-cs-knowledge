@@ -40,7 +40,8 @@ strict settings): `Option` needs `std/options`, `Result` needs `nimcs/fp/result`
 routines return `Result` also writes `export result`, or a test that imports only that file fails
 with "undeclared field: 'isErr'". A plain object (no `case`) gets `==` field by field, a sealed one (private fields,
 `{.requiresInit.}`) included; an object variant does not. `opt.get` on
-`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. When the file
+`none` is a defect, not an exception, so a `{.raises: [].}` func may call it after `isSome`. A `func`
+may change its own `result` and its local variables (`result.log.add x`), never what its caller sees. When the file
 uses `Result`, import it by default: if `import nimcs/fp/result` compiles (a prepared run directory's `nim.cfg` puts `src/` on the path),
 use it. Only when it does not, copy this `Result` (the repository's adds `map`, `flatMap` and `==`):
 
@@ -136,6 +137,8 @@ doAssert parseWhole("80").value == 80 and parseWhole("8x").isErr
 `parseInt` accepts a sign (`+80`, `-1`), leading zeros (`080`) and underscores (`1_000`), and
 rejects surrounding spaces and the empty string. For a stricter grammar (ASCII digits only), check
 `raw.len > 0 and raw.allCharsInSet(Digits)` (`std/strutils`) first and keep the `try` for overflow.
+When the task does not say whether leading zeros or a sign are allowed, choose, and write the choice
+in the doc comment and in one example test.
 This also reports the two causes apart: text that fails the check is "not digits", and a
 `ValueError` after the check can only be a number too big for an `int` (out of range).
 Read `.value` or `.error` only after checking `isOk` or `isErr`, in tests too. See `details/result.md`, `details/option_ops.md`.
@@ -207,6 +210,8 @@ if q.isOk:
   doAssert q.value.value == 12
 doAssert parseQuantity(0).isErr
 doAssert not compiles(Quantity(n: 5000))     # `n` is the private field: no way to forge one; read it as `.value`
+# The pages name the private field and its accessor differently (`n`/`value`, `points`/`points`); any
+# names work as long as the field stays private and one exported accessor reads it.
 ```
 
 See `details/adt.md`, `details/smart_constructor.md`.
