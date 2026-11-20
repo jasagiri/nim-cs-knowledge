@@ -52,6 +52,18 @@ Every ID has at least one test tagged `# SPEC: <ID>` in `tests/test_algo_<module
 | STR-SA-04 | suffix_array | `lcpArray` gives `none` for an array that is not the suffix array of the string (wrong length, repeat, out of range, wrong order). |
 | STR-SA-05 | suffix_array | `countDistinctSubstrings` equals the size of the set of all substrings. |
 | STR-SA-06 | suffix_array | `isSuffixArrayOf` runs in O(n) and agrees with comparing the suffix strings on every candidate array (valid or not); validation does not make `lcpArray` quadratic on repetitive input. |
+| STR-MERGE3-01 | three_way_merge | `mergeKeyed`: a key unchanged, changed on one side only, or changed the same way on both sides (modification, deletion, addition) takes that value and the merge is clean. |
+| STR-MERGE3-02 | three_way_merge | A key changed differently on both sides (delete against modify and two different additions included) is returned as a `KeyConflict` value with its base, ours and theirs versions (`none` for absent), in ascending key order; the keys settled cleanly are kept in `resolved`; nothing is raised. |
+| STR-MERGE3-03 | three_way_merge | The conflicting keys are exactly the keys whose ours and theirs versions both differ from the base and from each other. |
+| STR-MERGE3-04 | three_way_merge | merge(b, b, b) = b; merge(b, x, b) = x; merge(b, b, x) = x; merge(b, x, x) = x, all clean. |
+| STR-MERGE3-05 | three_way_merge | Swapping ours and theirs gives the same clean map, or the same conflicts with ours and theirs exchanged (`swapSides`). |
+| STR-MERGE3-06 | three_way_merge | In a clean keyed merge every key either side changed carries that side's version, a deletion removing the key. |
+| STR-MERGE3-07 | three_way_merge | `merge3` on hand-worked line edits: edits in different places merge, the same change on both sides is clean, delete against modify, two insertions into one gap and edits on neighbouring lines are conflict hunks. |
+| STR-MERGE3-08 | three_way_merge | merge3(b, b, b) is the single stable chunk b (none for an empty b); merge3(b, x, b), merge3(b, b, x) and merge3(b, x, x) are clean and read as x. |
+| STR-MERGE3-09 | three_way_merge | Swapping ours and theirs gives the same chunks with clean sides and every conflict's ours and theirs exchanged (`swapSides`). |
+| STR-MERGE3-10 | three_way_merge | When edits use unique lines and the merge is clean, the merged lines are exactly the lines both sides kept plus every line either side inserted, none that either side deleted, and each side's remaining lines keep their order. |
+| STR-MERGE3-11 | three_way_merge | No two stable chunks are adjacent or empty, and in every conflict hunk ours, theirs and base are pairwise different. |
+| STR-MERGE3-12 | three_way_merge | `render` writes a clean merge as its lines, each ended by a newline, and fences a conflict as `<<<<<<< ours`, `||||||| base`, `=======`, `>>>>>>> theirs` with the labels replaceable; `toLines` and `mergeLines` and `conflictCount` agree with it. |
 | NUM-NT-01 | number_theory | `gcd` is non-negative, symmetric, divides both arguments, leaves coprime quotients, `gcd(0,0)=0`, and gives `none` for `low(int)`. |
 | NUM-NT-02 | number_theory | `gcd * lcm == abs(a * b)`; `lcm` with 0 is 0; overflow and `low(int)` give `none`. |
 | NUM-NT-03 | number_theory | `extGcd` returns g, x, y with `a*x + b*y == g` and g equal to `gcd` (Bezout), for negative and zero arguments too. |

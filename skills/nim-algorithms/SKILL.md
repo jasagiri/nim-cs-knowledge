@@ -217,6 +217,7 @@ doAssert hopsChecked(-1, newSeq[Arc](), 0).error.value == -1
 | repeated sub-problems | memoization / bottom-up table | [details/memoization.md](details/memoization.md) |
 | diff two sequences | longest common subsequence | [details/lcs.md](details/lcs.md) |
 | how different two strings are | edit distance | [details/edit_distance.md](details/edit_distance.md) |
+| merge two edits of one original (files, maps, directory trees) | three-way merge (diff3) | [details/three_way_merge.md](details/three_way_merge.md) |
 | best subset under a weight limit | 0/1 knapsack | [details/knapsack.md](details/knapsack.md) |
 | longest increasing run (not contiguous) | LIS in O(n log n) | [details/lis.md](details/lis.md) |
 | every occurrence of a pattern | KMP | [details/kmp.md](details/kmp.md) |
