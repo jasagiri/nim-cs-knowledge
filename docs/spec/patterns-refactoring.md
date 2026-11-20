@@ -22,3 +22,7 @@ Modules in `src/nimcs/patterns/`; tests in `tests/test_patterns_<module>.nim`. E
 | PAT-ANTICORRUPTIONLAYER-02 | anti_corruption_layer | For any supplier record, translation is either a specific refusal or an order whose id is not empty and whose total is not negative; an unknown status code, a malformed amount and an empty id are each refused with their own error. |
 | PAT-ANTICORRUPTIONLAYER-03 | anti_corruption_layer | The inner model's operations do not accept a supplier record: passing one is a compile error. |
 | PAT-ANTICORRUPTIONLAYER-04 | anti_corruption_layer | `translateAll` keeps accepted orders in input order and lists each refusal with its input index, so that accepted plus refused equals the input length. |
+| PAT-SEAM-01 | seam | For any list of known SKUs, the total through the default seam equals the total of the hard-wired routine it replaced (the one difference, an unknown SKU, is PAT-SEAM-03). |
+| PAT-SEAM-02 | seam | For any price function supplied as the seam, the total of a list of known SKUs equals the sum of its prices with the bulk discount, as an independent model computes it. |
+| PAT-SEAM-03 | seam | A SKU the seam does not know makes the total an error naming the first such SKU; no price is invented. |
+| PAT-SEAM-04 | seam | Pins taken from a routine hold for that routine; for a routine that differs on some pinned input, `firstDifference` is the index of the first such input and `holds` is false. |
