@@ -16,6 +16,8 @@ undecided, test_owed or spec_question. The modules written before that round are
 | `ds/write_ahead_log.nim` | 69 | 63 | 67 | 0 | 2 (equivalent) | `survivors-ds.json` |
 | `ds/consistent_hashing.nim` | 71 | 47 | 58 | 6 | 7 (equivalent) | `survivors-ds.json` |
 | `ds/crdt.nim` | 134 | 97 | 119 | 9 | 6 (equivalent) | `survivors-ds.json` |
+| `ds/slot_map.nim` | 80 | 56 of 73 | 66 | 0 | 14 (6 equivalent, 8 unreached) | `survivors-ds.json` |
+| `patterns/command_buffer.nim` | 38 | 28 | 33 | 0 | 5 (equivalent) | `survivors-patterns.json` |
 
 Timeouts are mutants that never finish (a dropped `inc`, or `mid + 1` changed in a binary search);
 they are detected, and counted apart from killed.
@@ -29,6 +31,12 @@ How the numbers came about:
 - The 4 `return err(..., <first value>)` survivors are equivalent because `default(Result)` is the
   error variant holding the first enum value. Reordering those enums would make them killable.
 - Equivalence was argued by reading the code; the reasons are in the ledgers.
+- `slot_map` and `command_buffer` were measured on 2026-11-22, the day they were added. The tests
+  written for the survivors of `==` built a map from the zero value and found that
+  `default(SlotMap[T])` was not an empty map (its free head was slot 0, so the first `insert`
+  raised `IndexDefect`). The free-list links now hold an index plus one, DS-SLOTMAP-01 covers the
+  zero value, and the module was measured again: 80 mutants instead of 73. Its 8 unreached
+  survivors are the failure branches of `invariantsHold`, which no public routine can reach.
 
 ## Running it again
 

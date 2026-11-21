@@ -131,6 +131,146 @@
       "reason": "the new tag only has to be larger than every tag the replica used; top + 2 is too, and tags are private"
     },
     {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:SDL:112a6bd2c2dcffd8:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 41,
+      "mutator": "SDL",
+      "original": "SlotMap[T]()",
+      "replacement": "discard",
+      "class": "equivalent",
+      "reason": "without the statement the result is default(SlotMap[T]), which is the same value: the free-list links store index + 1, so the zero value is the empty map (DS-SLOTMAP-01)"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:LOR:6a9cbf22050731a3:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 109,
+      "mutator": "LOR",
+      "original": "a.count != b.count or a.freeHead != b.freeHead or a.slots.len != b.slots.len",
+      "replacement": "<or -> and>",
+      "class": "equivalent",
+      "reason": "the outer or becoming and only matters when count or free head differ and the lengths are equal; then the slots differ as well (live flags or nextFree), so the loop returns false; when the lengths differ the and is true as before"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:LOR:fdbb197bf0d81c20:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 109,
+      "mutator": "LOR",
+      "original": "a.count != b.count or a.freeHead != b.freeHead",
+      "replacement": "<or -> and>",
+      "class": "equivalent",
+      "reason": "for maps built by the public routines a difference in count or in the free head with equal lengths always shows in the slots: a different count means different live flags, a different head over the same dead set means a different nextFree somewhere, so the slot loop returns false as the early exit does"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:BLR:c2d4f965c1cd59aa:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 122,
+      "mutator": "BLR",
+      "original": "false",
+      "replacement": "true",
+      "class": "unreached",
+      "reason": "invariantsHold checks a map built from outside the public routines; SlotMap fields are private and every routine (emptySlotMap, insert, remove, put) keeps generations non-negative, count equal to the live slots and the free list over dead slots only (DS-SLOTMAP-11 checks it after random operations), so this branch is never taken from the API"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:RVR:663395daaf3eb58a:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 122,
+      "mutator": "RVR",
+      "original": "return false",
+      "replacement": "<return default>",
+      "class": "equivalent",
+      "reason": "return default(bool) is return false"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:BLR:cce3c2d566151996:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 124,
+      "mutator": "BLR",
+      "original": "false",
+      "replacement": "true",
+      "class": "unreached",
+      "reason": "invariantsHold checks a map built from outside the public routines; SlotMap fields are private and every routine (emptySlotMap, insert, remove, put) keeps generations non-negative, count equal to the live slots and the free list over dead slots only (DS-SLOTMAP-11 checks it after random operations), so this branch is never taken from the API"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:RVR:48f6819d6308bdf6:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 124,
+      "mutator": "RVR",
+      "original": "return false",
+      "replacement": "<return default>",
+      "class": "equivalent",
+      "reason": "return default(bool) is return false"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:BLR:abdb0be59251d30f:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 129,
+      "mutator": "BLR",
+      "original": "false",
+      "replacement": "true",
+      "class": "unreached",
+      "reason": "invariantsHold checks a map built from outside the public routines; SlotMap fields are private and every routine (emptySlotMap, insert, remove, put) keeps generations non-negative, count equal to the live slots and the free list over dead slots only (DS-SLOTMAP-11 checks it after random operations), so this branch is never taken from the API"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:LOR:0fdd6314b2e48caa:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 129,
+      "mutator": "LOR",
+      "original": "i < 0 or i >= m.slots.len",
+      "replacement": "<or -> and>",
+      "class": "unreached",
+      "reason": "invariantsHold checks a map built from outside the public routines; SlotMap fields are private and every routine (emptySlotMap, insert, remove, put) keeps generations non-negative, count equal to the live slots and the free list over dead slots only (DS-SLOTMAP-11 checks it after random operations), so this branch is never taken from the API"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:LOR:28915e9e1294da8b:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 129,
+      "mutator": "LOR",
+      "original": "i < 0 or i >= m.slots.len or m.slots[i].live",
+      "replacement": "<or -> and>",
+      "class": "unreached",
+      "reason": "invariantsHold checks a map built from outside the public routines; SlotMap fields are private and every routine (emptySlotMap, insert, remove, put) keeps generations non-negative, count equal to the live slots and the free list over dead slots only (DS-SLOTMAP-11 checks it after random operations), so this branch is never taken from the API"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:LOR:4b48dd2e922035dd:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 129,
+      "mutator": "LOR",
+      "original": "i < 0 or i >= m.slots.len or m.slots[i].live or free > m.slots.len",
+      "replacement": "<or -> and>",
+      "class": "unreached",
+      "reason": "invariantsHold checks a map built from outside the public routines; SlotMap fields are private and every routine (emptySlotMap, insert, remove, put) keeps generations non-negative, count equal to the live slots and the free list over dead slots only (DS-SLOTMAP-11 checks it after random operations), so this branch is never taken from the API"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:ROR:a14ccab03c6fa8dc:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 129,
+      "mutator": "ROR",
+      "original": "free > m.slots.len",
+      "replacement": "<> -> >=>",
+      "class": "unreached",
+      "reason": "invariantsHold checks a map built from outside the public routines; SlotMap fields are private and every routine (emptySlotMap, insert, remove, put) keeps generations non-negative, count equal to the live slots and the free list over dead slots only (DS-SLOTMAP-11 checks it after random operations), so this branch is never taken from the API; the walk ends after at most slots.len links, so free never exceeds or equals slots.len while a link remains"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:ROR:d154517faf4e7146:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 129,
+      "mutator": "ROR",
+      "original": "i >= m.slots.len",
+      "replacement": "<>= -> >>",
+      "class": "unreached",
+      "reason": "invariantsHold checks a map built from outside the public routines; SlotMap fields are private and every routine (emptySlotMap, insert, remove, put) keeps generations non-negative, count equal to the live slots and the free list over dead slots only (DS-SLOTMAP-11 checks it after random operations), so this branch is never taken from the API; a link is at most slots.len, so i equals slots.len never"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/slot_map.nim:RVR:5bee6ca78fbc626f:0",
+      "file": "src/nimcs/ds/slot_map.nim",
+      "line": 129,
+      "mutator": "RVR",
+      "original": "return false",
+      "replacement": "<return default>",
+      "class": "equivalent",
+      "reason": "return default(bool) is return false"
+    },
+    {
       "fingerprint": "src/nimcs/ds/write_ahead_log.nim:RVR:300a277fc028bfbf:0",
       "file": "src/nimcs/ds/write_ahead_log.nim",
       "line": 99,

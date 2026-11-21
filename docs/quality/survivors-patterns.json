@@ -31,6 +31,56 @@
       "reason": "a half-open breaker without a probe in flight is never built: allow makes half-open only with probing true, the fields are private, so no public call reaches this branch"
     },
     {
+      "fingerprint": "src/nimcs/patterns/command_buffer.nim:ROR:b7ed4653e239f059:0",
+      "file": "src/nimcs/patterns/command_buffer.nim",
+      "line": 81,
+      "mutator": "ROR",
+      "original": "hp < low(int) + amount",
+      "replacement": "<< -> <=>",
+      "class": "equivalent",
+      "reason": "when hp = low(int) + amount the original computes hp - amount = low(int) and the mutant returns low(int): the same value"
+    },
+    {
+      "fingerprint": "src/nimcs/patterns/command_buffer.nim:ROR:f4660aae6f5a0c4d:0",
+      "file": "src/nimcs/patterns/command_buffer.nim",
+      "line": 81,
+      "mutator": "ROR",
+      "original": "amount > 0",
+      "replacement": "<> -> >=>",
+      "class": "equivalent",
+      "reason": "with amount = 0 the added case is hp < low(int), which is never true, so satSub falls through to hp - 0 as before"
+    },
+    {
+      "fingerprint": "src/nimcs/patterns/command_buffer.nim:CVR:65c93f21386cb16d:0",
+      "file": "src/nimcs/patterns/command_buffer.nim",
+      "line": 82,
+      "mutator": "CVR",
+      "original": "0",
+      "replacement": "1",
+      "class": "equivalent",
+      "reason": "amount < 1 adds only amount = 0, where hp > high(int) is never true; satSub falls through to hp - 0 as before"
+    },
+    {
+      "fingerprint": "src/nimcs/patterns/command_buffer.nim:ROR:c0ddbbedfdd5267b:0",
+      "file": "src/nimcs/patterns/command_buffer.nim",
+      "line": 82,
+      "mutator": "ROR",
+      "original": "hp > high(int) + amount",
+      "replacement": "<> -> >=>",
+      "class": "equivalent",
+      "reason": "when hp = high(int) + amount (amount < 0) the original computes hp - amount = high(int) and the mutant returns high(int): the same value"
+    },
+    {
+      "fingerprint": "src/nimcs/patterns/command_buffer.nim:ROR:f8685d2371800a68:0",
+      "file": "src/nimcs/patterns/command_buffer.nim",
+      "line": 82,
+      "mutator": "ROR",
+      "original": "amount < 0",
+      "replacement": "<< -> <=>",
+      "class": "equivalent",
+      "reason": "with amount = 0 the added case is hp > high(int), which is never true, so satSub falls through to hp - 0 as before"
+    },
+    {
       "fingerprint": "src/nimcs/patterns/token_bucket.nim:ROR:d557e364237699de:0",
       "file": "src/nimcs/patterns/token_bucket.nim",
       "line": 59,
