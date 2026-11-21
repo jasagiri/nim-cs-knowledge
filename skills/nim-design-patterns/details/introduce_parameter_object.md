@@ -87,6 +87,24 @@ doAssert f.maxPrice == high(int) and f.limit == 2
 
 Also keep the "no restriction" value of each field as the neutral element of narrowing, so that combining filters never loosens one.
 
+When callers build the record with a literal and name only the fields they mean, give the fields
+defaults in the type (Nim 2 object field defaults) instead of a `noFilter()` constructor. A range
+whose minimum exceeds its maximum matches nothing here, which is not an error; when a caller can
+build such a range by mistake, reject it in a constructor that returns `Result` instead.
+
+```nim
+type Query = object
+  minStops: int = 0
+  maxStops: int = high(int)
+
+func matches(q: Query; stops: int): bool {.raises: [].} =
+  stops >= q.minStops and stops <= q.maxStops
+
+doAssert Query(maxStops: 1).matches(1)
+doAssert not Query(maxStops: 1).matches(2)
+doAssert not Query(minStops: 3, maxStops: 1).matches(2)   # min > max matches nothing
+```
+
 ## Related
 - `extract_function.md` (arguments gathered when a block is extracted)
 - `extract_type.md` (fields that carry rules, not only defaults)

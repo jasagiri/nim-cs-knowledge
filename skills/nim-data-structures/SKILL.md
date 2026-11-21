@@ -3,7 +3,7 @@ name: nim-data-structures
 description: >-
   Choose, write and review persistent (functional) data structures in Nim: cons list, banker's
   queue, deque, leftist/pairing/binomial heaps, red-black tree, skew-binary list, persistent
-  vector, HAMT, trie, zipper, persistent union-find, segment tree and Bloom filter, Merkle tree with a content-addressed store, plus the
+  vector, HAMT, trie, zipper, persistent union-find, segment tree, Bloom filter and Merkle tree with a content-addressed store, plus the
   classic textbook structures as values (hash table, binary heap, stack and queue, arena linked
   list, BST, AVL tree, B-tree, treap, splay tree, k-d tree, Fenwick tree, sparse table, bit vector,
   suffix trie). Load it when
@@ -94,7 +94,7 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | "Certainly absent" test with small memory | `bloom_filter` | exact sets cost more memory; no delete |
 | Name data by its hash, detect corruption, or let one root digest identify a whole state and prove one part of it | `merkle_tree` (`CasStore`, `MerkleTree`) | a `hamt` of bytes does not notice rot; a hash of a flat list rehashes everything on each change |
 | How a hash table works (probing, load factor), or an immutable snapshot with sorted iteration | `hash_table` | inside one routine `std/tables` is faster; old versions cheap: `hamt` |
-| Priority queue inside one routine, heap sort, top-k | `binary_heap` | old versions reused: `leftist_heap` |
+| Priority queue inside one routine, heap sort, top-k | `std/heapqueue` in a local `var` (O(log n) per push and pop) | `binary_heap` shows how the heap works, but as a value each `push` and `pop` copies the array (O(n)), so k pops cost O(n·k); old versions reused: `leftist_heap` |
 | Plain LIFO/FIFO inside one routine, next greater element (monotonic stack) | `stack_queue` | shared old versions: `cons_list`, `bankers_queue` |
 | O(1) insert and remove next to a known node, LRU order | `linked_list` (arena of indices) | `cons_list` has no back links |
 | Ordered set to learn BST insert, delete and traversal | `bst` (unbalanced; sorted input degrades to a chain) | balanced: `avl_tree`, `rb_tree`, `treap` |
