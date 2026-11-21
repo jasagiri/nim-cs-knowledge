@@ -21,9 +21,11 @@ Also from the IDs in the first cell of the table rows of
 `docs/spec/algo-a.md`
 `docs/spec/algo-d.md`
 `docs/spec/patterns-fp.md`
+`docs/spec/ds-e.md`
 `docs/spec/fp-b.md`
 `docs/spec/patterns-refactoring.md`
 `docs/spec/patterns-gof-b.md`
+`docs/spec/patterns-resilience.md`
 `docs/spec/fp.md`
 `docs/spec/ds-d.md`
 
@@ -739,6 +741,46 @@ Also from the IDs in the first cell of the table rows of
 | PAT-PARSERCOMBINATOR-05 | tests/test_patterns_parser_combinator.nim (1) |
 | PAT-PARSERCOMBINATOR-07 | tests/test_patterns_parser_combinator.nim (2) |
 | PAT-PARSERCOMBINATOR-06 | tests/test_patterns_parser_combinator.nim (2) |
+| DS-WRITEAHEADLOG-01 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-WRITEAHEADLOG-02 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-WRITEAHEADLOG-03 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-WRITEAHEADLOG-04 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-WRITEAHEADLOG-05 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-WRITEAHEADLOG-06 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-WRITEAHEADLOG-07 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-WRITEAHEADLOG-08 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-WRITEAHEADLOG-09 | tests/test_ds_write_ahead_log.nim (1) |
+| DS-CONSISTENTHASHING-01 | tests/test_ds_consistent_hashing.nim (1) |
+| DS-CONSISTENTHASHING-02 | tests/test_ds_consistent_hashing.nim (1) |
+| DS-CONSISTENTHASHING-03 | tests/test_ds_consistent_hashing.nim (1) |
+| DS-CONSISTENTHASHING-04 | tests/test_ds_consistent_hashing.nim (1) |
+| DS-CONSISTENTHASHING-05 | tests/test_ds_consistent_hashing.nim (1) |
+| DS-CONSISTENTHASHING-06 | tests/test_ds_consistent_hashing.nim (1) |
+| DS-CONSISTENTHASHING-07 | tests/test_ds_consistent_hashing.nim (1) |
+| DS-CONSISTENTHASHING-08 | tests/test_ds_consistent_hashing.nim (1) |
+| DS-CRDT-01 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-02 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-03 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-04 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-05 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-06 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-07 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-08 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-09 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-10 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-11 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-12 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-13 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-14 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-15 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-16 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-17 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-18 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-19 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-20 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-21 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-22 | tests/test_ds_crdt.nim (1) |
+| DS-CRDT-23 | tests/test_ds_crdt.nim (1) |
 | FP-FUNCTORMONAD-01 | tests/test_fp_functor_monad.nim (1) |
 | FP-FUNCTORMONAD-02 | tests/test_fp_functor_monad.nim (1) |
 | FP-FUNCTORMONAD-03 | tests/test_fp_functor_monad.nim (1) |
@@ -897,6 +939,46 @@ Also from the IDs in the first cell of the table rows of
 | GOF-VISITOR-05 | tests/test_patterns_visitor.nim (1) |
 | GOF-VISITOR-06 | tests/test_patterns_visitor.nim (1) |
 | GOF-VISITOR-07 | tests/test_patterns_visitor.nim (1) |
+| PAT-CIRCUITBREAKER-01 | tests/test_patterns_circuit_breaker.nim (1) |
+| PAT-CIRCUITBREAKER-02 | tests/test_patterns_circuit_breaker.nim (1) |
+| PAT-CIRCUITBREAKER-03 | tests/test_patterns_circuit_breaker.nim (1) |
+| PAT-CIRCUITBREAKER-04 | tests/test_patterns_circuit_breaker.nim (2) |
+| PAT-CIRCUITBREAKER-05 | tests/test_patterns_circuit_breaker.nim (1) |
+| PAT-CIRCUITBREAKER-06 | tests/test_patterns_circuit_breaker.nim (1) |
+| PAT-CIRCUITBREAKER-07 | tests/test_patterns_circuit_breaker.nim (1) |
+| PAT-CIRCUITBREAKER-08 | tests/test_patterns_circuit_breaker.nim (1) |
+| PAT-CIRCUITBREAKER-09 | tests/test_patterns_circuit_breaker.nim (1) |
+| PAT-BULKHEAD-01 | tests/test_patterns_bulkhead.nim (1) |
+| PAT-BULKHEAD-02 | tests/test_patterns_bulkhead.nim (1) |
+| PAT-BULKHEAD-03 | tests/test_patterns_bulkhead.nim (1) |
+| PAT-BULKHEAD-04 | tests/test_patterns_bulkhead.nim (1) |
+| PAT-BULKHEAD-05 | tests/test_patterns_bulkhead.nim (1) |
+| PAT-BULKHEAD-06 | tests/test_patterns_bulkhead.nim (1) |
+| PAT-BULKHEAD-07 | tests/test_patterns_bulkhead.nim (1) |
+| PAT-TOKENBUCKET-01 | tests/test_patterns_token_bucket.nim (1) |
+| PAT-TOKENBUCKET-02 | tests/test_patterns_token_bucket.nim (1) |
+| PAT-TOKENBUCKET-03 | tests/test_patterns_token_bucket.nim (2) |
+| PAT-TOKENBUCKET-04 | tests/test_patterns_token_bucket.nim (1) |
+| PAT-TOKENBUCKET-05 | tests/test_patterns_token_bucket.nim (1) |
+| PAT-TOKENBUCKET-06 | tests/test_patterns_token_bucket.nim (1) |
+| PAT-TOKENBUCKET-07 | tests/test_patterns_token_bucket.nim (2) |
+| PAT-TOKENBUCKET-08 | tests/test_patterns_token_bucket.nim (1) |
+| PAT-SAGA-01 | tests/test_patterns_saga.nim (1) |
+| PAT-SAGA-02 | tests/test_patterns_saga.nim (1) |
+| PAT-SAGA-03 | tests/test_patterns_saga.nim (1) |
+| PAT-SAGA-04 | tests/test_patterns_saga.nim (1) |
+| PAT-SAGA-05 | tests/test_patterns_saga.nim (1) |
+| PAT-SAGA-06 | tests/test_patterns_saga.nim (1) |
+| PAT-SAGA-07 | tests/test_patterns_saga.nim (1) |
+| PAT-SAGA-08 | tests/test_patterns_saga.nim (1) |
+| PAT-SAGA-09 | tests/test_patterns_saga.nim (1) |
+| PAT-TXOUTBOX-01 | tests/test_patterns_transactional_outbox.nim (1) |
+| PAT-TXOUTBOX-02 | tests/test_patterns_transactional_outbox.nim (1) |
+| PAT-TXOUTBOX-03 | tests/test_patterns_transactional_outbox.nim (1) |
+| PAT-TXOUTBOX-04 | tests/test_patterns_transactional_outbox.nim (1) |
+| PAT-TXOUTBOX-05 | tests/test_patterns_transactional_outbox.nim (1) |
+| PAT-TXOUTBOX-06 | tests/test_patterns_transactional_outbox.nim (1) |
+| PAT-TXOUTBOX-07 | tests/test_patterns_transactional_outbox.nim (1) |
 | FP-RESULT-01 | tests/test_fp_result.nim (2) |
 | FP-RESULT-02 | tests/test_fp_result.nim (2) |
 | FP-RESULT-03 | tests/test_fp_result.nim (3) |
@@ -1021,7 +1103,7 @@ Also from the IDs in the first cell of the table rows of
 | DS-SUFFIXTRIE-07 | tests/test_ds_suffix_trie.nim (1) |
 | DS-SUFFIXTRIE-08 | tests/test_ds_suffix_trie.nim (1) |
 
-Declared: 991  Covered: 991  Uncovered: 0
+Declared: 1071  Covered: 1071  Uncovered: 0
 
 ## Uncovered declared IDs
 

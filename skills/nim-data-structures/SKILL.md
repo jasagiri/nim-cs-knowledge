@@ -3,7 +3,8 @@ name: nim-data-structures
 description: >-
   Choose, write and review persistent (functional) data structures in Nim: cons list, banker's
   queue, deque, leftist/pairing/binomial heaps, red-black tree, skew-binary list, persistent
-  vector, HAMT, trie, zipper, persistent union-find, segment tree, Bloom filter and Merkle tree with a content-addressed store, plus the
+  vector, HAMT, trie, zipper, persistent union-find, segment tree, Bloom filter, Merkle tree with a content-addressed store, write-ahead log,
+  consistent hashing and CRDTs, plus the
   classic textbook structures as values (hash table, binary heap, stack and queue, arena linked
   list, BST, AVL tree, B-tree, treap, splay tree, k-d tree, Fenwick tree, sparse table, bit vector,
   suffix trie). Load it when
@@ -93,6 +94,9 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | Range sum, min or gcd with point updates | `segment_tree` | a prefix-sum array cannot be updated cheaply |
 | "Certainly absent" test with small memory | `bloom_filter` | exact sets cost more memory; no delete |
 | Name data by its hash, detect corruption, or let one root digest identify a whole state and prove one part of it | `merkle_tree` (`CasStore`, `MerkleTree`) | a `hamt` of bytes does not notice rot; a hash of a flat list rehashes everything on each change |
+| Rebuild state after a crash from an append-only record of changes, dropping a torn last record | `write_ahead_log` | a snapshot alone loses the changes since it was taken |
+| Spread keys over nodes so that adding or removing a node moves only its share | `consistent_hashing` | `hash mod n` moves most keys when n changes |
+| Replicas that change independently and must agree after exchanging state, in any order | `crdt` (`GCounter`, `PNCounter`, `LwwRegister`, `OrSet`) | a last-writer-wins value for a counter loses increments |
 | How a hash table works (probing, load factor), or an immutable snapshot with sorted iteration | `hash_table` | inside one routine `std/tables` is faster; old versions cheap: `hamt` |
 | Priority queue inside one routine, heap sort, top-k | `std/heapqueue` in a local `var` (O(log n) per push and pop) | `binary_heap` shows how the heap works, but as a value each `push` and `pop` copies the array (O(n)), so k pops cost O(n·k); old versions reused: `leftist_heap` |
 | Plain LIFO/FIFO inside one routine, next greater element (monotonic stack) | `stack_queue` | shared old versions: `cons_list`, `bankers_queue` |
@@ -286,6 +290,9 @@ doAssert q.popHighest.rest.popHighest.item == some((5, "b"))
 | Segment tree | [details/segment_tree.md](details/segment_tree.md) | `src/nimcs/ds/segment_tree.nim` |
 | Bloom filter | [details/bloom_filter.md](details/bloom_filter.md) | `src/nimcs/ds/bloom_filter.nim` |
 | Merkle tree and content-addressed store | [details/merkle_tree.md](details/merkle_tree.md) | `src/nimcs/ds/merkle_tree.nim` |
+| Write-ahead log | [details/write_ahead_log.md](details/write_ahead_log.md) | `src/nimcs/ds/write_ahead_log.nim` |
+| Consistent hashing | [details/consistent_hashing.md](details/consistent_hashing.md) | `src/nimcs/ds/consistent_hashing.nim` |
+| CRDTs (G-Counter, PN-Counter, LWW-Register, OR-Set) | [details/crdt.md](details/crdt.md) | `src/nimcs/ds/crdt.nim` |
 | Hash table | [details/hash_table.md](details/hash_table.md) | `src/nimcs/ds/hash_table.nim` |
 | Binary heap | [details/binary_heap.md](details/binary_heap.md) | `src/nimcs/ds/binary_heap.nim` |
 | Stack and queue | [details/stack_queue.md](details/stack_queue.md) | `src/nimcs/ds/stack_queue.nim` |

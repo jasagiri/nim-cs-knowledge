@@ -28,6 +28,10 @@
   {
    "round": "4-gap",
    "method": "Reverse check on 2026-11-21: the tables of contents of in-scope catalog sources were fetched again (one request per host, robots.txt honoured) and every in-scope topic that no concept covered was listed per source; topics named by two or more sources became new concepts. Each new concept's sources are the sources that named its topic or a synonym (for example 'two pointer technique' and 'sliding window' for two_pointers). Only topic names and source IDs are kept."
+  },
+  {
+   "round": "5-handover",
+   "method": "2026-11-21: concepts handed over by another session (resilience patterns and replicated or recoverable data) were added; each concept's sources are the catalog sources whose table of contents, in the concept index of round 4-gap, names its topic; concepts with none say so on their page."
   }
  ],
  "concepts": {
@@ -491,6 +495,10 @@
    "9e0afdfae6157d74",
    "aeeff780b0fc104f"
   ],
+  "ds/consistent_hashing": [
+   "6f31dd50eef1beba"
+  ],
+  "ds/crdt": [],
   "ds/deque": [
    "04a7132319218b7b",
    "5ea7cdc2c5670fd7",
@@ -628,6 +636,7 @@
    "81c6122da5a53e33",
    "b8cf0456394ed527"
   ],
+  "ds/write_ahead_log": [],
   "ds/zipper": [
    "14e1135a7e563bfa",
    "90944eadae97da9a",
@@ -759,6 +768,9 @@
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
   ],
+  "patterns/bulkhead": [
+   "d6608bb8bc6985b4"
+  ],
   "patterns/caretaker": [
    "1e2d20b92c98ae15",
    "ace3a1130eba6d54"
@@ -767,6 +779,9 @@
    "0789f21330e7f72a",
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
+  ],
+  "patterns/circuit_breaker": [
+   "d6608bb8bc6985b4"
   ],
   "patterns/command": [
    "0789f21330e7f72a",
@@ -911,6 +926,9 @@
   "patterns/retry_backoff": [
    "bc60002635039782"
   ],
+  "patterns/saga": [
+   "d6608bb8bc6985b4"
+  ],
   "patterns/sealer_unsealer": [
    "1e2d20b92c98ae15"
   ],
@@ -944,6 +962,8 @@
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
   ],
+  "patterns/token_bucket": [],
+  "patterns/transactional_outbox": [],
   "patterns/visitor": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",

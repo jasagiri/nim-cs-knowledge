@@ -8,7 +8,8 @@ description: >-
   (actors, supervisors, request/reply, object capabilities, caretakers, sealer/unsealer) and refactoring and migration patterns (parallel change, strangler fig,
   branch by abstraction, anti-corruption layer, seam), small refactorings (replace conditional
   with polymorphism, decompose conditional, extract function, extract type, introduce parameter
-  object) and architecture styles (layered architecture, model-view-update, load shedding). Use whenever Nim code reaches for
+  object) and architecture styles (layered architecture, model-view-update, load shedding) and resilience patterns (circuit breaker, bulkhead, token
+  bucket, saga, transactional outbox). Use whenever Nim code reaches for
   classes, inheritance, `method`, callbacks, global singletons or mutable shared state, when a
   design is being ported from Java/C#/C++/Python, or when a request names a pattern. Shows what
   each pattern becomes in functional Nim, and which ones disappear.
@@ -151,6 +152,11 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | rules, application service and I/O must depend in one direction only | Layered architecture → domain, service and shell modules; imports point down | [details/layered_architecture.md](details/layered_architecture.md) |
 | an interactive program (UI, TUI, game loop) | Model-view-update → one model value, messages, pure `update` and `view` | [details/model_view_update.md](details/model_view_update.md) |
 | a service must refuse work it cannot finish in time instead of queueing it | Load shedding → a pure admit decision on queue length, priority and deadline, with a reason | [details/load_shedding.md](details/load_shedding.md) |
+| calls to a failing dependency must stop for a while instead of piling up (rather than retrying each call: retry with backoff) | Circuit breaker → closed, open and half-open as a variant; the clock as an argument; a pure transition returning the decision | [details/circuit_breaker.md](details/circuit_breaker.md) |
+| one partition's load must not take the capacity of the others (rather than refusing by queue length: load shedding) | Bulkhead → permits per compartment, a pure admit and release over the value | [details/bulkhead.md](details/bulkhead.md) |
+| at most N actions per period, with bursts up to a limit | Token bucket → refill computed from the elapsed time passed in, `tryTake` returns the new bucket and the answer | [details/token_bucket.md](details/token_bucket.md) |
+| a change spans several services and cannot be one transaction | Saga → steps with compensations, a pure interpreter returning effects as data, compensations in reverse order | [details/saga.md](details/saga.md) |
+| a state change and the messages it must send must not part (rather than writing then sending: lost on a crash) | Transactional outbox → change and messages as one value, a relay that delivers at least once, an idempotent receiver | [details/transactional_outbox.md](details/transactional_outbox.md) |
 
 ## Why the functional form
 
