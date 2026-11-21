@@ -137,6 +137,19 @@ Also from the IDs in the first cell of the table rows of
 | DS-BLOOM-05 | tests/test_ds_bloom_filter.nim (1) |
 | DS-BLOOM-06 | tests/test_ds_bloom_filter.nim (1) |
 | DS-BLOOM-07 | tests/test_ds_bloom_filter.nim (1) |
+| DS-MERKLE-01 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-02 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-03 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-04 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-05 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-06 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-07 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-08 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-09 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-10 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-11 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-12 | tests/test_ds_merkle_tree.nim (1) |
+| DS-MERKLE-13 | tests/test_ds_merkle_tree.nim (1) |
 | PAT-ACTOR-01 | tests/test_patterns_actor.nim (1) |
 | PAT-ACTOR-02 | tests/test_patterns_actor.nim (1) |
 | PAT-ACTOR-03 | tests/test_patterns_actor.nim (1) |
@@ -271,6 +284,18 @@ Also from the IDs in the first cell of the table rows of
 | STR-SA-04 | tests/test_algo_suffix_array.nim (1) |
 | STR-SA-05 | tests/test_algo_suffix_array.nim (1) |
 | STR-SA-06 | tests/test_algo_suffix_array.nim (2) |
+| STR-MERGE3-01 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-02 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-03 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-04 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-05 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-06 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-07 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-08 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-09 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-10 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-11 | tests/test_algo_three_way_merge.nim (1) |
+| STR-MERGE3-12 | tests/test_algo_three_way_merge.nim (1) |
 | NUM-NT-01 | tests/test_algo_number_theory.nim (1) |
 | NUM-NT-02 | tests/test_algo_number_theory.nim (1) |
 | NUM-NT-03 | tests/test_algo_number_theory.nim (1) |
@@ -414,6 +439,14 @@ Also from the IDs in the first cell of the table rows of
 | PAT-TIMEASINPUT-03 | tests/test_patterns_time_as_input.nim (1) |
 | PAT-TIMEASINPUT-04 | tests/test_patterns_time_as_input.nim (1) |
 | PAT-TIMEASINPUT-05 | tests/test_patterns_time_as_input.nim (1) |
+| PAT-ATOMICPUBLISH-01 | tests/test_patterns_atomic_publish.nim (1) |
+| PAT-ATOMICPUBLISH-02 | tests/test_patterns_atomic_publish.nim (1) |
+| PAT-ATOMICPUBLISH-03 | tests/test_patterns_atomic_publish.nim (1) |
+| PAT-ATOMICPUBLISH-04 | tests/test_patterns_atomic_publish.nim (1) |
+| PAT-ATOMICPUBLISH-05 | tests/test_patterns_atomic_publish.nim (1) |
+| PAT-ATOMICPUBLISH-06 | tests/test_patterns_atomic_publish.nim (1) |
+| PAT-ATOMICPUBLISH-07 | tests/test_patterns_atomic_publish.nim (1) |
+| PAT-ATOMICPUBLISH-08 | tests/test_patterns_atomic_publish.nim (1) |
 | PAT-PIPELINE-01 | tests/test_patterns_pipeline.nim (1) |
 | PAT-PIPELINE-02 | tests/test_patterns_pipeline.nim (1) |
 | PAT-PIPELINE-03 | tests/test_patterns_pipeline.nim (1) |
@@ -612,6 +645,14 @@ Also from the IDs in the first cell of the table rows of
 | FP-SMARTCONSTRUCTOR-06 | tests/test_fp_smart_constructor.nim (1) |
 | FP-SMARTCONSTRUCTOR-07 | tests/test_fp_smart_constructor.nim (1) |
 | FP-SMARTCONSTRUCTOR-08 | tests/test_fp_smart_constructor.nim (1) |
+| FP-TYPESTATE-01 | tests/test_fp_typestate.nim (1) |
+| FP-TYPESTATE-02 | tests/test_fp_typestate.nim (1) |
+| FP-TYPESTATE-03 | tests/test_fp_typestate.nim (1) |
+| FP-TYPESTATE-04 | tests/test_fp_typestate.nim (1) |
+| FP-TYPESTATE-05 | tests/test_fp_typestate.nim (1) |
+| FP-TYPESTATE-06 | tests/test_fp_typestate.nim (1) |
+| FP-TYPESTATE-07 | tests/test_fp_typestate.nim (1) |
+| FP-TYPESTATE-08 | tests/test_fp_typestate.nim (1) |
 | FP-IDEMPOTENCE-01 | tests/test_fp_idempotence.nim (1) |
 | FP-IDEMPOTENCE-02 | tests/test_fp_idempotence.nim (1) |
 | FP-IDEMPOTENCE-03 | tests/test_fp_idempotence.nim (1) |
@@ -629,7 +670,7 @@ Also from the IDs in the first cell of the table rows of
 | FP-MONOID-06 | tests/test_fp_monoid.nim (1) |
 | FP-MONOID-07 | tests/test_fp_monoid.nim (1) |
 
-Declared: 607  Covered: 607  Uncovered: 0
+Declared: 648  Covered: 648  Uncovered: 0
 
 ## Uncovered declared IDs
 
