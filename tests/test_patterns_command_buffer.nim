@@ -19,7 +19,7 @@ func build(ops: seq[int]): Built =
     else:
       result.world = result.world.applyCmd(despawnCmd(result.issued[op mod result.issued.len]))
 
-func cmdsOf(ops: seq[int]; issued: seq[Handle]): seq[Cmd] =
+func cmdsOf(ops: seq[int]; issued: seq[Handle]): seq[WorldCmd] =
   ## Spawns, despawns and damages on issued handles (live or stale) and on one unknown handle.
   for op in ops:
     let h = if issued.len == 0 or op == 29: Handle(index: 999, generation: 0) else: issued[op mod issued.len]
@@ -47,7 +47,7 @@ proc allocsOfApply(n, k: int; despawn: bool): AllocStats =
     let r = w.spawn(Unit(hp: 100, splits: false))
     w = r.world
     hs.add r.handle
-  var cmds: seq[Cmd]
+  var cmds: seq[WorldCmd]
   for j in 0 ..< k:
     cmds.add(if despawn: despawnCmd(hs[j]) else: damageCmd(hs[j], 1))
   let before = getAllocStats()
@@ -120,7 +120,7 @@ suite "command_buffer":
         let cmds = plan(w, a[1])
         var born: seq[Unit]
         for c in cmds:
-          if c.kind == ckSpawn: born.add c.unit
+          if c.kind == wcSpawn: born.add c.unit
         let after = applyAll(w, cmds)
         var found: seq[Unit]
         for (h, u) in liveUnits(after):
@@ -192,7 +192,7 @@ suite "command_buffer":
     proc childrenOf(hp: int; splits: bool; damage: int): seq[Unit] =
       let w = emptyWorld().spawn(Unit(hp: hp, splits: splits)).world
       for c in plan(w, damage):
-        if c.kind == ckSpawn: result.add c.unit
+        if c.kind == wcSpawn: result.add c.unit
     check childrenOf(4, true, 1) == @[Unit(hp: 3, splits: false)]     # 4 -> 3: reaches the threshold
     check childrenOf(5, true, 4) == @[Unit(hp: 1, splits: false)]     # well below it
     check childrenOf(5, true, 1).len == 0                             # 5 -> 4: still above it

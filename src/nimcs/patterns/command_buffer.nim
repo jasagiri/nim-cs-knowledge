@@ -4,7 +4,7 @@
 ## to the collection it is reading. In Nim that fails at run time (the `for` loop over a `seq`
 ## asserts that the length did not change), and the ways around it that compile are a copy of the
 ## collection per frame or a `ref` per unit that several places mutate. This module splits the work
-## in two. `plan` only reads the world and returns the changes as data: a `seq[Cmd]`. `applyAll`
+## in two. `plan` only reads the world and returns the changes as data: a `seq[WorldCmd]`. `applyAll`
 ## applies them in order to a world the caller moves in. Units live in a `SlotMap`, so a command
 ## names its target by `Handle`; a command whose handle is stale (the unit was despawned earlier in
 ## the batch, or before it) does nothing, which makes a double despawn harmless and a damage after a
@@ -31,17 +31,17 @@ type
     splits*: bool
   World* = object
     units*: SlotMap[Unit]
-  CmdKind* = enum
-    ckSpawn, ckDespawn, ckDamage
-  Cmd* = object
-    ## A change to the world, as data. `ckDamage` lowers `hp` and never removes the unit;
-    ## removal is a separate `ckDespawn`, which `plan` emits.
-    case kind*: CmdKind
-    of ckSpawn:
+  WorldCmdKind* = enum
+    wcSpawn, wcDespawn, wcDamage
+  WorldCmd* = object
+    ## A change to the world, as data (not `command.Cmd`, so both modules import together). `wcDamage` lowers `hp` and never removes the unit;
+    ## removal is a separate `wcDespawn`, which `plan` emits.
+    case kind*: WorldCmdKind
+    of wcSpawn:
       unit*: Unit
-    of ckDespawn:
+    of wcDespawn:
       target*: Handle
-    of ckDamage:
+    of wcDamage:
       victim*: Handle
       amount*: int
 
@@ -54,24 +54,24 @@ func `==`*(a, b: Unit): bool {.raises: [].} =
 func `==`*(a, b: World): bool {.raises: [].} =
   a.units == b.units
 
-func `==`*(a, b: Cmd): bool {.raises: [].} =
+func `==`*(a, b: WorldCmd): bool {.raises: [].} =
   if a.kind != b.kind: return false
   case a.kind
-  of ckSpawn: a.unit == b.unit
-  of ckDespawn: a.target == b.target
-  of ckDamage: a.victim == b.victim and a.amount == b.amount
+  of wcSpawn: a.unit == b.unit
+  of wcDespawn: a.target == b.target
+  of wcDamage: a.victim == b.victim and a.amount == b.amount
 
-func spawnCmd*(unit: Unit): Cmd {.raises: [].} =
-  Cmd(kind: ckSpawn, unit: unit)
+func spawnCmd*(unit: Unit): WorldCmd {.raises: [].} =
+  WorldCmd(kind: wcSpawn, unit: unit)
 
-func despawnCmd*(target: Handle): Cmd {.raises: [].} =
-  Cmd(kind: ckDespawn, target: target)
+func despawnCmd*(target: Handle): WorldCmd {.raises: [].} =
+  WorldCmd(kind: wcDespawn, target: target)
 
-func damageCmd*(victim: Handle; amount: int): Cmd {.raises: [].} =
-  Cmd(kind: ckDamage, victim: victim, amount: amount)
+func damageCmd*(victim: Handle; amount: int): WorldCmd {.raises: [].} =
+  WorldCmd(kind: wcDamage, victim: victim, amount: amount)
 
 func spawn*(w: sink World; unit: Unit): tuple[world: World, handle: Handle] {.raises: [].} =
-  ## Adds a unit directly and returns its handle (a `ckSpawn` command does not report one).
+  ## Adds a unit directly and returns its handle (a `wcSpawn` command does not report one).
   var cur = w
   let r = move(cur.units).insert(unit)
   (World(units: r.map), r.handle)
@@ -82,7 +82,7 @@ func satSub(hp, amount: int): int =
   elif amount < 0 and hp > high(int) + amount: high(int)
   else: hp - amount
 
-func plan*(w: World; damage: int): seq[Cmd] {.raises: [].} =
+func plan*(w: World; damage: int): seq[WorldCmd] {.raises: [].} =
   ## Reads only: the commands one step with `damage` would apply, in slot order.
   if damage <= 0: return @[]
   for h, u in w.units.pairs:
@@ -94,23 +94,23 @@ func plan*(w: World; damage: int): seq[Cmd] {.raises: [].} =
       if u.splits and u.hp > SplitThreshold and left <= SplitThreshold:
         result.add spawnCmd(Unit(hp: left, splits: false))
 
-func applyCmd*(w: sink World; c: Cmd): World {.raises: [].} =
+func applyCmd*(w: sink World; c: WorldCmd): World {.raises: [].} =
   ## One command. A handle that is stale or unknown changes nothing.
   var cur = w
   case c.kind
-  of ckSpawn:
+  of wcSpawn:
     let r = move(cur.units).insert(c.unit)
     World(units: r.map)
-  of ckDespawn:
+  of wcDespawn:
     let r = move(cur.units).remove(c.target)
     World(units: r.map)
-  of ckDamage:
+  of wcDamage:
     let u = cur.units.get(c.victim)
     if u.isNone: return cur
     let r = move(cur.units).put(c.victim, Unit(hp: satSub(u.get.hp, c.amount), splits: u.get.splits))
     World(units: r.map)
 
-func applyAll*(w: sink World; cmds: openArray[Cmd]): World {.raises: [].} =
+func applyAll*(w: sink World; cmds: openArray[WorldCmd]): World {.raises: [].} =
   ## The commands in order; the same as folding `applyCmd` over them.
   var cur = w
   for c in cmds:

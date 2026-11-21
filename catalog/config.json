@@ -4,6 +4,7 @@
  "rawDefault": "~/.cache/nim-cs-knowledge/raw",
  "fpbCommit": "10e33dd516cc53864e6bece7e6bd51f2a035d06c",
  "hillside": true,
+ "fpb": true,
  "triage": {
   "sectionKeywords": [
    "algorithm",

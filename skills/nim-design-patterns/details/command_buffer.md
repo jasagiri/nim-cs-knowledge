@@ -10,7 +10,7 @@ A step often has to remove the things that die and add the things that split, an
 - Avoid it when the pass changes only the element it is looking at and nothing else depends on it: update in place or build a new `seq` with `map`.
 
 ## Nim shape
-The world keeps its units in a `SlotMap` (`slot_map`), so a command names its target by `Handle` and a handle to a unit that is gone is rejected. `Cmd` is an object variant: `ckSpawn` carries a unit, `ckDespawn` a handle, `ckDamage` a handle and an amount. `plan(w, damage)` takes the world by value and only reads it; it returns the commands in slot order. `applyAll(w, cmds)` takes the world as `sink` and applies the commands in order; a command whose handle is stale does nothing. `step` is `plan` and then `applyAll`.
+The world keeps its units in a `SlotMap` (`slot_map`), so a command names its target by `Handle` and a handle to a unit that is gone is rejected. `WorldCmd` (named apart from `command`'s `Cmd`, so both modules can be imported in one file) is an object variant: `wcSpawn` carries a unit, `wcDespawn` a handle, `wcDamage` a handle and an amount. `plan(w, damage)` takes the world by value and only reads it; it returns the commands in slot order. `applyAll(w, cmds)` takes the world as `sink` and applies the commands in order; a command whose handle is stale does nothing. `step` is `plan` and then `applyAll`.
 
 The rules of the example: a unit whose `hp` is at most the damage is despawned (and does not split); any other unit takes the damage; a unit with `splits` whose `hp` falls from above `SplitThreshold` (3) to that or below spawns one child with its new `hp` and `splits` unset, so a unit splits at most once. A damage of zero or less plans nothing. The children are not visited by the step that made them, because the plan was computed before any of it was applied.
 
@@ -60,28 +60,28 @@ type Unit = object
   splits*: bool
 type World = object
   units*: SlotMap[Unit]
-type CmdKind = enum
-  ckSpawn, ckDespawn, ckDamage
-type Cmd = object
-  case kind*: CmdKind
-  of ckSpawn:
+type WorldCmdKind = enum
+  wcSpawn, wcDespawn, wcDamage
+type WorldCmd = object
+  case kind*: WorldCmdKind
+  of wcSpawn:
     unit*: Unit
-  of ckDespawn:
+  of wcDespawn:
     target*: Handle
-  of ckDamage:
+  of wcDamage:
     victim*: Handle
     amount*: int
 func emptyWorld(): World
 func `==`(a, b: Unit): bool
 func `==`(a, b: World): bool
-func `==`(a, b: Cmd): bool
-func spawnCmd(unit: Unit): Cmd
-func despawnCmd(target: Handle): Cmd
-func damageCmd(victim: Handle; amount: int): Cmd
+func `==`(a, b: WorldCmd): bool
+func spawnCmd(unit: Unit): WorldCmd
+func despawnCmd(target: Handle): WorldCmd
+func damageCmd(victim: Handle; amount: int): WorldCmd
 func spawn(w: sink World; unit: Unit): tuple[world: World, handle: Handle]
-func plan(w: World; damage: int): seq[Cmd]
-func applyCmd(w: sink World; c: Cmd): World
-func applyAll(w: sink World; cmds: openArray[Cmd]): World
+func plan(w: World; damage: int): seq[WorldCmd]
+func applyCmd(w: sink World; c: WorldCmd): World
+func applyAll(w: sink World; cmds: openArray[WorldCmd]): World
 func step(w: sink World; damage: int): World
 ```
 

@@ -158,7 +158,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | one partition's load must not take the capacity of the others (rather than refusing by queue length: load shedding) | Bulkhead → permits per compartment, a pure admit and release over the value | [details/bulkhead.md](details/bulkhead.md) |
 | at most N actions per period, with bursts up to a limit | Token bucket → refill computed from the elapsed time passed in, `tryTake` returns the new bucket and the answer | [details/token_bucket.md](details/token_bucket.md) |
 | a change spans several services and cannot be one transaction | Saga → steps with compensations, a pure interpreter returning effects as data, compensations in reverse order | [details/saga.md](details/saga.md) |
-| a pass over a collection must add or remove elements or change what others refer to (not an in-place update of the element at hand) | Command buffer → `plan` only reads and returns `seq[Cmd]` over handles, `applyAll` writes after the loop, a stale handle is a no-op | [details/command_buffer.md](details/command_buffer.md) |
+| a pass over a collection must add or remove elements or change what others refer to (not an in-place update of the element at hand) | Command buffer → `plan` only reads and returns `seq[WorldCmd]` over handles, `applyAll` writes after the loop, a stale handle is a no-op | [details/command_buffer.md](details/command_buffer.md) |
 | a state change and the messages it must send must not part (rather than writing then sending: lost on a crash) | Transactional outbox → change and messages as one value, a relay that delivers at least once, an idempotent receiver | [details/transactional_outbox.md](details/transactional_outbox.md) |
 
 ## Why the functional form
