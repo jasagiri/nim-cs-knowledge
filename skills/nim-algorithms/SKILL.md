@@ -2,8 +2,11 @@
 name: nim-algorithms
 description: >-
   Choose, write, test or review a classic algorithm in Nim — sorting, binary search, graph
-  traversal and shortest paths, minimum spanning trees, dynamic programming, string search,
-  number theory, backtracking, greedy and divide and conquer — as a pure `func` over immutable
+  traversal and shortest paths, minimum spanning trees, maximum flow and matching, lowest common
+  ancestor, Euler paths, cycle detection, dynamic programming, string search (KMP to
+  Aho-Corasick), prefix sums and two pointers, convex hull, Huffman coding, meet in the middle,
+  external sorting, approximation, number theory, backtracking, greedy, divide and conquer and the
+  analysis of running time — as a pure `func` over immutable
   input whose correctness laws are property tests. Use whenever a Nim task needs one of these,
   even when the request only names the problem ("find the shortest route", "dedupe and sort",
   "match a pattern in text"). Pairs with nim-functional-core and nim-data-structures.
@@ -202,7 +205,7 @@ doAssert hopsChecked(-1, newSeq[Arc](), 0).error.value == -1
 | sort, stable, predictable O(n log n) | merge sort | [details/merge_sort.md](details/merge_sort.md) |
 | sort, many duplicates, functional partition | three-way quick sort | [details/quick_sort.md](details/quick_sort.md) |
 | sort in O(1) extra space | heap sort | [details/heap_sort.md](details/heap_sort.md) |
-| sort small non-negative integer keys | counting / radix sort | [details/radix_sort.md](details/radix_sort.md) |
+| sort non-negative integer keys digit by digit (LSD radix) | radix sort | [details/radix_sort.md](details/radix_sort.md) |
 | find a boundary in sorted data or a monotone predicate | binary search | [details/binary_search.md](details/binary_search.md) |
 | represent a graph as a value | immutable adjacency lists | [details/graph.md](details/graph.md) |
 | fewest edges, unweighted | BFS | [details/bfs.md](details/bfs.md) |
@@ -230,6 +233,21 @@ doAssert hopsChecked(-1, newSeq[Arc](), 0).error.value == -1
 | enumerate permutations, combinations, n-queens | backtracking as a generator | [details/backtracking.md](details/backtracking.md) |
 | local choice provably optimal (interval scheduling, fractional knapsack) | greedy + exchange argument | [details/greedy.md](details/greedy.md) |
 | split, solve, combine; recurrences | divide and conquer | [details/divide_conquer.md](details/divide_conquer.md) |
+| sort to learn the O(n²) baselines, few swaps, or gap sequences | selection sort, Shell sort | [details/elementary_sorts.md](details/elementary_sorts.md) |
+| sort small integer keys in O(n + k), stable | counting sort | [details/counting_sort.md](details/counting_sort.md) |
+| sort more data than fits in memory (runs, k-way merge) | external merge sort | [details/external_sort.md](details/external_sort.md) |
+| count steps, compare growth rates, amortized cost (potential method) | analysis of algorithms | [details/analysis.md](details/analysis.md) |
+| many range-sum queries on a fixed array; many range adds then read | prefix sums, difference array | [details/prefix_sum.md](details/prefix_sum.md) |
+| pair with a sum in sorted data, longest window under a limit | two pointers, sliding window | [details/two_pointers.md](details/two_pointers.md) |
+| repeated cycle in an iterated function or linked structure, O(1) memory | Floyd's tortoise and hare | [details/cycle_detection.md](details/cycle_detection.md) |
+| path that uses every edge once | Hierholzer's Euler path | [details/eulerian_path.md](details/eulerian_path.md) |
+| lowest common ancestor, distance in a tree, k-th ancestor | binary lifting | [details/lca.md](details/lca.md) |
+| maximum flow, minimum cut, bipartite matching | Edmonds–Karp | [details/max_flow.md](details/max_flow.md) |
+| every occurrence of many patterns in one pass | Aho–Corasick | [details/aho_corasick.md](details/aho_corasick.md) |
+| smallest convex polygon around points | monotone chain convex hull | [details/convex_hull.md](details/convex_hull.md) |
+| optimal prefix code, compression | Huffman coding | [details/huffman.md](details/huffman.md) |
+| subset sum with n ≈ 40 | meet in the middle | [details/meet_in_middle.md](details/meet_in_middle.md) |
+| NP-hard cover with a proven bound (vertex cover within 2×) | approximation | [details/approximation.md](details/approximation.md) |
 
 ## Shape of a module
 
