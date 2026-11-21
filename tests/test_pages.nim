@@ -27,6 +27,13 @@ proc knowledgeModules(): seq[string] =
   for a in Areas:
     for f in walkFiles(root / "src" / "nimcs" / a / "*.nim"): result.add f
 
+proc knowledgeSources(): seq[string] =
+  ## Every Nim file under the areas, sub-directories included: a concept may split into files
+  ## (patterns/layered_architecture/), and NCK-STYLE-02 holds for all of them.
+  for a in Areas:
+    for f in walkDirRec(root / "src" / "nimcs" / a):
+      if f.endsWith(".nim"): result.add f
+
 suite "NCK-K pages and modules":
   let pages = detailsPages()
 
@@ -154,7 +161,7 @@ suite "NCK-S style":
 
   # SPEC: NCK-STYLE-02
   test "NCK-STYLE-02 Given every exported routine of the knowledge modules, when its header is read, then it is a func, iterator or template, or a proc with raises: [] and a reason":
-    for m in knowledgeModules():
+    for m in knowledgeSources():
       let lines = readFile(m).splitLines
       for i, line in lines:
         if not line.startsWith("proc "): continue

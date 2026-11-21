@@ -1,5 +1,5 @@
 {
- "date": "2026-11-19",
+ "date": "2026-11-21",
  "rounds": [
   {
    "round": "1",
@@ -24,9 +24,35 @@
   {
    "round": "4-lead",
    "method": "Four pages added on 2026-11-21 (merkle_tree, three_way_merge, atomic_publish, typestate). The tables of contents of candidate sources were fetched and, where a heading was not enough, the page text. e52e6b835f6d8607 (Pro Git): 10.2 Git Objects says \"Git is a content-addressable filesystem\" and that a tree entry is \"the SHA-1 hash of a blob or subtree\" (merkle_tree); 3.2 Basic Branching and Merging says \"Git does a simple three-way merge\" (three_way_merge). Not adopted: 5490b23c80115e87 (Git from the Bottom Up), headings name blobs and trees but not addressing by hash, chapters not read; 30f2ca04a8c28811 (Bitcoin and Cryptocurrency Technologies), table of contents only in a PDF that was not read; 24c2ca14b8ed5bf2 (Operating Systems: Three Easy Pieces), chapter 42 FSCK and Journaling is file-system crash consistency and no heading names rename or fsync, text not read. typestate: no candidate found by title."
+  },
+  {
+   "round": "4-gap",
+   "method": "Reverse check on 2026-11-21: the tables of contents of in-scope catalog sources were fetched again (one request per host, robots.txt honoured) and every in-scope topic that no concept covered was listed per source; topics named by two or more sources became new concepts. Each new concept's sources are the sources that named its topic or a synonym (for example 'two pointer technique' and 'sliding window' for two_pointers). Only topic names and source IDs are kept."
   }
  ],
  "concepts": {
+  "algo/aho_corasick": [
+   "5ea7cdc2c5670fd7",
+   "61811291625a13a9",
+   "e024287b414c64e3"
+  ],
+  "algo/analysis": [
+   "19250093425bb17e",
+   "5b1535e53ceaa7c4",
+   "6f359c1814ec309e",
+   "81c6122da5a53e33",
+   "b609569e40e49e47",
+   "b6deea26499dcff1",
+   "b8cf0456394ed527",
+   "c1b93dc13846e70a",
+   "e842c4dbba02a07e",
+   "e8a751ae9f8ed52b",
+   "ffb222d148114a4f"
+  ],
+  "algo/approximation": [
+   "b6deea26499dcff1",
+   "c1b93dc13846e70a"
+  ],
   "algo/backtracking": [
    "254fe28ac0bfd53e",
    "5ea7cdc2c5670fd7",
@@ -69,6 +95,22 @@
    "c6a234b79d2a7c88",
    "e74186e619e9e9de"
   ],
+  "algo/convex_hull": [
+   "5c9fa6665b83ce3f",
+   "61811291625a13a9",
+   "b8f40165091faa5d"
+  ],
+  "algo/counting_sort": [
+   "19250093425bb17e",
+   "6f31dd50eef1beba",
+   "b609569e40e49e47",
+   "e8a751ae9f8ed52b"
+  ],
+  "algo/cycle_detection": [
+   "63ad3e14455a34af",
+   "7f34194abd61a6fc",
+   "b8f40165091faa5d"
+  ],
   "algo/dfs": [
    "61811291625a13a9",
    "63ad3e14455a34af",
@@ -98,6 +140,21 @@
    "a8882bbba7213b23",
    "b609569e40e49e47",
    "e8a751ae9f8ed52b"
+  ],
+  "algo/elementary_sorts": [
+   "19250093425bb17e",
+   "473f0313d72c526b",
+   "6f359c1814ec309e",
+   "cb7c39b58c54bd29",
+   "e8a751ae9f8ed52b"
+  ],
+  "algo/eulerian_path": [
+   "63ad3e14455a34af",
+   "81c6122da5a53e33"
+  ],
+  "algo/external_sort": [
+   "19250093425bb17e",
+   "cb7c39b58c54bd29"
   ],
   "algo/fib_matrix": [
    "61811291625a13a9"
@@ -159,6 +216,16 @@
    "cb7c39b58c54bd29",
    "e8a751ae9f8ed52b"
   ],
+  "algo/huffman": [
+   "19250093425bb17e",
+   "3020c057a8d82e66",
+   "473f0313d72c526b",
+   "5b1535e53ceaa7c4",
+   "6f31dd50eef1beba",
+   "6f359b1814ec2eeb",
+   "cb7c39b58c54bd29",
+   "e024287b414c64e3"
+  ],
   "algo/insertion_sort": [
    "1cbc332178e5a52f",
    "464f1aa168823232",
@@ -191,6 +258,10 @@
    "a8882bbba7213b23",
    "e8a751ae9f8ed52b"
   ],
+  "algo/lca": [
+   "63ad3e14455a34af",
+   "b8f40165091faa5d"
+  ],
   "algo/lcs": [
    "a8882bbba7213b23",
    "e8a751ae9f8ed52b"
@@ -200,6 +271,20 @@
    "63ad3e14455a34af",
    "a8882bbba7213b23",
    "e8a751ae9f8ed52b"
+  ],
+  "algo/max_flow": [
+   "473f0313d72c526b",
+   "63ad3e14455a34af",
+   "6f359b1814ec2eeb",
+   "81c6122da5a53e33",
+   "b8f40165091faa5d",
+   "c1b93dc13846e70a",
+   "e024287b414c64e3"
+  ],
+  "algo/meet_in_middle": [
+   "63ad3e14455a34af",
+   "81c6122da5a53e33",
+   "c1b93dc13846e70a"
   ],
   "algo/memoization": [
    "19250093425bb17e",
@@ -248,6 +333,10 @@
    "81c6122da5a53e33",
    "b8f40165091faa5d",
    "e74186e619e9e9de"
+  ],
+  "algo/prefix_sum": [
+   "5ea7cdc2c5670fd7",
+   "6f31dd50eef1beba"
   ],
   "algo/prim": [
    "61811291625a13a9",
@@ -308,21 +397,85 @@
    "6f359b1814ec2eeb",
    "81c6122da5a53e33"
   ],
+  "algo/two_pointers": [
+   "3277c50924f59d16",
+   "5ea7cdc2c5670fd7",
+   "63ad3e14455a34af",
+   "6f31dd50eef1beba",
+   "7f34194abd61a6fc",
+   "81c6122da5a53e33",
+   "b8f40165091faa5d"
+  ],
   "algo/z_algorithm": [
    "61811291625a13a9",
    "63ad3e14455a34af"
   ],
+  "ds/avl_tree": [
+   "3020c057a8d82e66",
+   "5ea7cdc2c5670fd7",
+   "7508271bf7980bd3",
+   "b8cf0456394ed527",
+   "ffb222d148114a4f"
+  ],
+  "ds/b_tree": [
+   "19250093425bb17e",
+   "473f0313d72c526b",
+   "5ea7cdc2c5670fd7",
+   "7508271bf7980bd3",
+   "cb7c39b58c54bd29"
+  ],
   "ds/bankers_queue": [
    "e443a6b88b011f39"
+  ],
+  "ds/binary_heap": [
+   "04a7132319218b7b",
+   "19250093425bb17e",
+   "5ea7cdc2c5670fd7",
+   "6f31dd50eef1beba",
+   "81c6122da5a53e33",
+   "b609569e40e49e47",
+   "b8cf0456394ed527",
+   "cb7c39b58c54bd29",
+   "cc6ccd12f41004bf",
+   "e024287b414c64e3",
+   "e842c4dbba02a07e",
+   "ffb222d148114a4f"
   ],
   "ds/binomial_heap": [
    "7508271bf7980bd3",
    "e443a6b88b011f39",
    "ed8c50dad686e4d3"
   ],
+  "ds/bit_vector": [
+   "04a7132319218b7b",
+   "19250093425bb17e",
+   "29ca95172575b79a",
+   "6f31dd50eef1beba",
+   "b8cf0456394ed527",
+   "cb7c39b58c54bd29"
+  ],
   "ds/bloom_filter": [
    "5ea7cdc2c5670fd7",
    "7508271bf7980bd3"
+  ],
+  "ds/bst": [
+   "19250093425bb17e",
+   "3020c057a8d82e66",
+   "473f0313d72c526b",
+   "4b0dad6bfcfbe438",
+   "5ea7cdc2c5670fd7",
+   "66b45c74c2786dc9",
+   "6f31dd50eef1beba",
+   "6f359c1814ec309e",
+   "7508271bf7980bd3",
+   "7fd69b31060d80f1",
+   "9e0afdfae6157d74",
+   "b8cf0456394ed527",
+   "cb7c39b58c54bd29",
+   "cc6ccd12f41004bf",
+   "e842c4dbba02a07e",
+   "e8a751ae9f8ed52b",
+   "ffb222d148114a4f"
   ],
   "ds/cons_list": [
    "04c90d5ac6a2d0db",
@@ -345,11 +498,51 @@
    "e443a6b88b011f39",
    "fc4e34ece13d1024"
   ],
+  "ds/fenwick_tree": [
+   "5ea7cdc2c5670fd7",
+   "61811291625a13a9",
+   "63ad3e14455a34af",
+   "b8f40165091faa5d"
+  ],
   "ds/hamt": [
+   "7508271bf7980bd3"
+  ],
+  "ds/hash_table": [
+   "04c90d5ac6a2d0db",
+   "19250093425bb17e",
+   "473f0313d72c526b",
+   "4b0dad6bfcfbe438",
+   "5ea7cdc2c5670fd7",
+   "66b45c74c2786dc9",
+   "6f31dd50eef1beba",
+   "6f359c1814ec309e",
+   "7508271bf7980bd3",
+   "81c6122da5a53e33",
+   "9e0afdfae6157d74",
+   "ab4202744fa78598",
+   "b609569e40e49e47",
+   "b8cf0456394ed527",
+   "cb7c39b58c54bd29",
+   "e024287b414c64e3",
+   "e842c4dbba02a07e",
+   "e8a751ae9f8ed52b",
+   "ec523d1543fdd6aa",
+   "f3c825e89e068871",
+   "ffb222d148114a4f"
+  ],
+  "ds/kd_tree": [
+   "6f359c1814ec309e",
    "7508271bf7980bd3"
   ],
   "ds/leftist_heap": [
    "7508271bf7980bd3"
+  ],
+  "ds/linked_list": [
+   "6f31dd50eef1beba",
+   "cb7c39b58c54bd29",
+   "cc6ccd12f41004bf",
+   "e842c4dbba02a07e",
+   "ffb222d148114a4f"
   ],
   "ds/merkle_tree": [
    "e52e6b835f6d8607"
@@ -375,6 +568,38 @@
   ],
   "ds/skew_list": [
    "e443a6b88b011f39"
+  ],
+  "ds/sparse_table": [
+   "61811291625a13a9",
+   "b8f40165091faa5d"
+  ],
+  "ds/splay_tree": [
+   "7508271bf7980bd3",
+   "c1b93dc13846e70a"
+  ],
+  "ds/stack_queue": [
+   "04a7132319218b7b",
+   "473f0313d72c526b",
+   "5ea7cdc2c5670fd7",
+   "6f31dd50eef1beba",
+   "6f359c1814ec309e",
+   "81c6122da5a53e33",
+   "b609569e40e49e47",
+   "b8cf0456394ed527",
+   "cb7c39b58c54bd29",
+   "cc6ccd12f41004bf",
+   "e842c4dbba02a07e",
+   "ffb222d148114a4f"
+  ],
+  "ds/suffix_trie": [
+   "61811291625a13a9",
+   "7508271bf7980bd3",
+   "e024287b414c64e3"
+  ],
+  "ds/treap": [
+   "61811291625a13a9",
+   "7508271bf7980bd3",
+   "c1b93dc13846e70a"
   ],
   "ds/trie": [
    "19250093425bb17e",
@@ -424,12 +649,35 @@
   "fp/compose": [
    "90944eadae97da9a"
   ],
+  "fp/equational_reasoning": [
+   "14f064178f32050b",
+   "2766d61d1e588fe4",
+   "73d14d6fafde7152",
+   "ba7c262763893951"
+  ],
   "fp/fold": [
    "04bc6d730024731d",
    "0a6f20dc60d4d0f3",
    "14e1135a7e563bfa",
    "731b2d900bf6d003",
    "90944eadae97da9a"
+  ],
+  "fp/functor_monad": [
+   "04c90d5ac6a2d0db",
+   "14e1135a7e563bfa",
+   "14f064178f32050b",
+   "1e69fad0f89139aa",
+   "2c70c7f6766f72ea",
+   "59257807fe1f8114",
+   "65a54f748168d49c",
+   "73d14d6fafde7152",
+   "8718d4a05b5ef7db",
+   "90944eadae97da9a",
+   "93b1903990c81385",
+   "9ef987c93e3e3529",
+   "ba7c262763893951",
+   "c59d2a0bec136dcc",
+   "c63513da03e6053c"
   ],
   "fp/idempotence": [
    "3e3407367a2d5466",
@@ -457,11 +705,35 @@
   "fp/option_ops": [
    "c59d2a0bec136dcc"
   ],
+  "fp/phantom_type": [
+   "14e1135a7e563bfa",
+   "90944eadae97da9a",
+   "ba7c262763893951"
+  ],
   "fp/result": [
    "04c90d5ac6a2d0db"
   ],
   "fp/smart_constructor": [
    "9431f0540eb98bfa"
+  ],
+  "fp/tail_recursion": [
+   "04c90d5ac6a2d0db",
+   "1c3cfc8cea1f7147",
+   "65a54f748168d49c",
+   "66b45c74c2786dc9"
+  ],
+  "fp/type_class": [
+   "14f064178f32050b",
+   "21a878bd1e78232f",
+   "2766d61d1e588fe4",
+   "2c70c7f6766f72ea",
+   "5f760d582444d1a5",
+   "65a54f748168d49c",
+   "90944eadae97da9a",
+   "ba7c262763893951",
+   "c63513da03e6053c",
+   "d2df76348332e22c",
+   "eb5bc22e024bf3c6"
   ],
   "patterns/abstract_factory": [
    "0789f21330e7f72a",
@@ -510,6 +782,10 @@
    "5009e42d6ca146f2",
    "cdbf277d93825bc0"
   ],
+  "patterns/decompose_conditional": [
+   "0789f21330e7f72a",
+   "690b10bb5f31ac02"
+  ],
   "patterns/decorator": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",
@@ -521,6 +797,14 @@
   "patterns/event_sourcing": [
    "5009e42d6ca146f2",
    "cdbf277d93825bc0"
+  ],
+  "patterns/extract_function": [
+   "0789f21330e7f72a",
+   "690b10bb5f31ac02"
+  ],
+  "patterns/extract_type": [
+   "0789f21330e7f72a",
+   "690b10bb5f31ac02"
   ],
   "patterns/facade": [
    "0789f21330e7f72a",
@@ -554,15 +838,27 @@
    "57d435a932247e45",
    "5b1535e53ceaa7c4"
   ],
+  "patterns/introduce_parameter_object": [
+   "0789f21330e7f72a",
+   "690b10bb5f31ac02"
+  ],
   "patterns/iterator_pattern": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",
    "690b10bb5f31ac02",
    "90944eadae97da9a"
   ],
+  "patterns/layered_architecture": [
+   "253339d34dc0d34e",
+   "d6608bb8bc6985b4"
+  ],
   "patterns/lens": [
    "04bc6d730024731d",
    "90944eadae97da9a"
+  ],
+  "patterns/load_shedding": [
+   "508f524942e0a35a",
+   "dd1831d989512a40"
   ],
   "patterns/mediator": [
    "0789f21330e7f72a",
@@ -573,6 +869,11 @@
    "0789f21330e7f72a",
    "25f90d554113e6d5",
    "690b10bb5f31ac02"
+  ],
+  "patterns/model_view_update": [
+   "3c6220b5e0cafc8b",
+   "60c40163fc52f9a8",
+   "a6bcf3b6d002b8b8"
   ],
   "patterns/object_capability": [
    "1e2d20b92c98ae15",
@@ -597,6 +898,11 @@
   "patterns/proxy": [
    "0789f21330e7f72a",
    "25f90d554113e6d5",
+   "690b10bb5f31ac02"
+  ],
+  "patterns/replace_conditional_with_polymorphism": [
+   "0789f21330e7f72a",
+   "234c8e8fafc08c50",
    "690b10bb5f31ac02"
   ],
   "patterns/request_reply": [
@@ -721,7 +1027,7 @@
   "278d3e1cf32d0e5f": "unreachable",
   "27c977b7e8bae2e0": "read",
   "288f779650ec4704": "no_toc",
-  "28c5bf610daee5e9": "no_toc",
+  "28c5bf610daee5e9": "read",
   "28db21a1d24274f8": "no_toc",
   "299a0c1c52c9417c": "no_toc",
   "29ca95172575b79a": "read",
@@ -739,7 +1045,7 @@
   "305d4ff9ea2622af": "read",
   "30f2ca04a8c28811": "no_toc",
   "311822e80d0de9b6": "unreachable",
-  "3183faa2242f6b56": "no_toc",
+  "3183faa2242f6b56": "read",
   "31ce4485a05927ee": "no_toc",
   "3277c50924f59d16": "read",
   "33159e784062e973": "unreachable",
@@ -819,7 +1125,7 @@
   "5f7ae6c5eb793c4d": "no_toc",
   "60c40163fc52f9a8": "read",
   "60c9d0fdde0c1633": "no_toc",
-  "613bdcf0051620f9": "unreachable",
+  "613bdcf0051620f9": "read",
   "61811291625a13a9": "read",
   "63ad3e14455a34af": "read",
   "63b3609ff8e72986": "no_toc",
@@ -845,7 +1151,7 @@
   "6cfb5709c7b39bb9": "no_toc",
   "6d0e69bb5a7ca6db": "no_toc",
   "6d628a0ce38895e4": "no_toc",
-  "6dfc39b882cb9c29": "unreachable",
+  "6dfc39b882cb9c29": "read",
   "6e47dbfa708eb7f3": "no_toc",
   "6e98f33fdaea2961": "no_toc",
   "6ea0222e9268e1ed": "read",
@@ -853,6 +1159,7 @@
   "6f31dd50eef1beba": "read",
   "6f359b1814ec2eeb": "read",
   "6f359c1814ec309e": "read",
+  "6f5fe085675339d7": "unreachable",
   "70e08e9db68dddd5": "no_toc",
   "730da3e33097f71e": "no_toc",
   "731b2d900bf6d003": "read",
@@ -871,12 +1178,13 @@
   "7a63871030085a73": "unreachable",
   "7c29eaaf0e028377": "no_toc",
   "7c79236bb604938d": "no_toc",
+  "7d3c5e3a66fd5d6a": "unreachable",
   "7d5f6ab94f797b5b": "unreachable",
   "7d885c3cfb8af907": "no_toc",
   "7ec77bb7d4baf10c": "read",
   "7f34194abd61a6fc": "read",
   "7f344d34c41adaa0": "read",
-  "7f5670a24239df3c": "no_toc",
+  "7f5670a24239df3c": "read",
   "7f9dd53b1b38c396": "read",
   "7fd69b31060d80f1": "read",
   "8039dd0261b94ad7": "read",
@@ -903,6 +1211,7 @@
   "91ab6a0d9d6a094f": "no_toc",
   "91af2dcf37553751": "no_toc",
   "9293fcf29515f189": "no_toc",
+  "929b2a4809c33a08": "unreachable",
   "92ecc9a5a2c27f42": "no_toc",
   "93b1903990c81385": "read",
   "93b21dde3f6d4850": "read",
