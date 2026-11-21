@@ -6,7 +6,9 @@ description: >-
   free and tagless-final interpreters, dependency records, middleware pipelines, idempotent
   commands, lenses, parser combinators, retry with backoff) and actor- and capability-based designs
   (actors, supervisors, request/reply, object capabilities, caretakers, sealer/unsealer) and refactoring and migration patterns (parallel change, strangler fig,
-  branch by abstraction, anti-corruption layer, seam). Use whenever Nim code reaches for
+  branch by abstraction, anti-corruption layer, seam), small refactorings (replace conditional
+  with polymorphism, decompose conditional, extract function, extract type, introduce parameter
+  object) and architecture styles (layered architecture, model-view-update, load shedding). Use whenever Nim code reaches for
   classes, inheritance, `method`, callbacks, global singletons or mutable shared state, when a
   design is being ported from Java/C#/C++/Python, or when a request names a pattern. Shows what
   each pattern becomes in functional Nim, and which ones disappear.
@@ -141,6 +143,14 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | an implementation must be replaced inside one program over many commits, without a long-lived branch | Branch by abstraction → callers take a record of procs; a stage value (old, shadow, new) picks the implementation | [details/branch_by_abstraction.md](details/branch_by_abstraction.md) |
 | a foreign model (a partner's message, a legacy schema) must not shape yours | Anti-corruption layer → a translating `func` per foreign version, built through your smart constructor, refusals as values | [details/anti_corruption_layer.md](details/anti_corruption_layer.md) |
 | code that reaches for its dependencies from inside must be changed but cannot yet be tested | Seam → pass the dependency in as a proc, check old against new, pin today's behaviour before refactoring | [details/seam.md](details/seam.md) |
+| a record with a tag and every kind's fields, branched on in `if` chains that end in a default | Replace conditional with polymorphism → one variant per kind, `case` without `else` | [details/replace_conditional_with_polymorphism.md](details/replace_conditional_with_polymorphism.md) |
+| one condition mixes several ideas (age, weekday, flag) | Decompose conditional → a named `func` per idea, the decision reads as their combination | [details/decompose_conditional.md](details/decompose_conditional.md) |
+| a long routine with comments between its steps | Extract function → one `func` per step, the original becomes their composition | [details/extract_function.md](details/extract_function.md) |
+| fields that always travel together with rules between them (amount and currency) | Extract type → a sealed value object with a smart constructor | [details/extract_type.md](details/extract_type.md) |
+| a routine with many same-typed arguments in a row | Introduce parameter object → a named record with defaults | [details/introduce_parameter_object.md](details/introduce_parameter_object.md) |
+| rules, application service and I/O must depend in one direction only | Layered architecture → domain, service and shell modules; imports point down | [details/layered_architecture.md](details/layered_architecture.md) |
+| an interactive program (UI, TUI, game loop) | Model-view-update → one model value, messages, pure `update` and `view` | [details/model_view_update.md](details/model_view_update.md) |
+| a service must refuse work it cannot finish in time instead of queueing it | Load shedding → a pure admit decision on queue length, priority and deadline, with a reason | [details/load_shedding.md](details/load_shedding.md) |
 
 ## Why the functional form
 
