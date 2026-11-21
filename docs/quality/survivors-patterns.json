@@ -1,0 +1,44 @@
+{
+  "survivors": [
+    {
+      "fingerprint": "src/nimcs/patterns/bulkhead.nim:RVR:62f45a841f6f2c2b:0",
+      "file": "src/nimcs/patterns/bulkhead.nim",
+      "line": 38,
+      "mutator": "RVR",
+      "original": "return err(Bulkhead, seNoCompartments)",
+      "replacement": "<return default>",
+      "class": "equivalent",
+      "reason": "default(Result) is the error variant (isOk false) holding the first enum value, which is seNoCompartments; holds while SetupError keeps it first"
+    },
+    {
+      "fingerprint": "src/nimcs/patterns/bulkhead.nim:RVR:89ee7aed3d22d8c3:0",
+      "file": "src/nimcs/patterns/bulkhead.nim",
+      "line": 81,
+      "mutator": "RVR",
+      "original": "return err(Bulkhead, reUnknownCompartment)",
+      "replacement": "<return default>",
+      "class": "equivalent",
+      "reason": "default(Result) is the error variant (isOk false) holding the first enum value, which is reUnknownCompartment; holds while ReleaseError keeps it first"
+    },
+    {
+      "fingerprint": "src/nimcs/patterns/circuit_breaker.nim:BLR:288f8b22b93ab9c9:0",
+      "file": "src/nimcs/patterns/circuit_breaker.nim",
+      "line": 91,
+      "mutator": "BLR",
+      "original": "true",
+      "replacement": "false",
+      "class": "unreached",
+      "reason": "a half-open breaker without a probe in flight is never built: allow makes half-open only with probing true, the fields are private, so no public call reaches this branch"
+    },
+    {
+      "fingerprint": "src/nimcs/patterns/token_bucket.nim:ROR:d557e364237699de:0",
+      "file": "src/nimcs/patterns/token_bucket.nim",
+      "line": 59,
+      "mutator": "ROR",
+      "original": "now <= b.updated",
+      "replacement": "<<= -> <>",
+      "class": "equivalent",
+      "reason": "at now == updated elapsed is 0: units stay (or are already capUnits when full) and updated is set to the same tick, so the bucket is unchanged either way"
+    }
+  ]
+}

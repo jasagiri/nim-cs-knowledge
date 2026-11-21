@@ -124,3 +124,21 @@ test "PAT-TOKENBUCKET-08 Given parameters out of range, when the config is built
   let huge = initConfig(MaxParam, MaxParam, 1)
   check huge.isOk
   check fullBucket(huge.value, 0).available(high(int) div 2) == MaxParam
+
+# SPEC: PAT-TOKENBUCKET-08
+test "PAT-TOKENBUCKET-08 Given parameters at and just beyond 1_000_000, when the config is built, then 1_000_000 is accepted and one more is refused":
+  check initConfig(1_000_000, 1, 1).isOk
+  check initConfig(1, 1_000_000, 1).isOk
+  check initConfig(1, 1, 1_000_000).isOk
+  check initConfig(1_000_001, 1, 1).error == ceCapacityOutOfRange
+  check initConfig(1, 1_000_001, 1).error == ceRefillTokensOutOfRange
+  check initConfig(1, 1, 1_000_001).error == ceRefillTicksOutOfRange
+
+# SPEC: PAT-TOKENBUCKET-01
+test "PAT-TOKENBUCKET-01 Given buckets that differ in one part, when they are compared, then they are unequal":
+  let c = cfgOf(2, 1, 1)
+  let b = fullBucket(c, 0)
+  check b == fullBucket(c, 0)
+  check b != fullBucket(c, 1)                 # updated only
+  check b != fullBucket(cfgOf(2, 5, 1), 0)    # configuration only: same units, same time
+  check b != b.tryTake(0, 1).bucket           # units only

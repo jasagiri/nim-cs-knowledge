@@ -1,0 +1,154 @@
+{
+  "survivors": [
+    {
+      "fingerprint": "src/nimcs/ds/consistent_hashing.nim:LOR:6a450c6381f07d7b:0",
+      "file": "src/nimcs/ds/consistent_hashing.nim",
+      "line": 65,
+      "mutator": "LOR",
+      "original": "a.points[i].pos != b.points[i].pos or a.points[i].node != b.points[i].node",
+      "replacement": "<or -> and>",
+      "class": "equivalent",
+      "reason": "with the same vnode count and length, a node's positions are fixed by its name; if every differing index kept the node, the node sequences and so the positions would be equal; only a 64-bit position collision between two names could tell the mutant apart"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/consistent_hashing.nim:CVR:9213bc65708435bc:0",
+      "file": "src/nimcs/ds/consistent_hashing.nim",
+      "line": 69,
+      "mutator": "CVR",
+      "original": "-1",
+      "replacement": "0",
+      "class": "equivalent",
+      "reason": "algorithm.sort only tests the comparison result against 0 (<= 0 and > 0), so -1 and 0 order the same; positions here are distinct so 0 never means a tie that needs the node order"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/consistent_hashing.nim:CVR:bff25936f95e95cc:0",
+      "file": "src/nimcs/ds/consistent_hashing.nim",
+      "line": 69,
+      "mutator": "CVR",
+      "original": "1",
+      "replacement": "2",
+      "class": "equivalent",
+      "reason": "algorithm.sort only tests the comparison result against 0, so 1 and 2 are the same"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/consistent_hashing.nim:ROR:9a0808dfe8b3ecb7:0",
+      "file": "src/nimcs/ds/consistent_hashing.nim",
+      "line": 69,
+      "mutator": "ROR",
+      "original": "a.pos < b.pos",
+      "replacement": "<< -> <=>",
+      "class": "equivalent",
+      "reason": "the branch runs only when a.pos != b.pos, where < and <= agree"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/consistent_hashing.nim:CVR:5464b44360d16b72:0",
+      "file": "src/nimcs/ds/consistent_hashing.nim",
+      "line": 106,
+      "mutator": "CVR",
+      "original": "2",
+      "replacement": "3",
+      "class": "equivalent",
+      "reason": "the binary search is correct and terminates for any mid in [lo, hi); div 3 only changes the number of steps"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/consistent_hashing.nim:LOR:94fb6826e943173d:0",
+      "file": "src/nimcs/ds/consistent_hashing.nim",
+      "line": 119,
+      "mutator": "LOR",
+      "original": "r.points.len == 0 or count < 1",
+      "replacement": "<or -> and>",
+      "class": "equivalent",
+      "reason": "the guard is redundant: with an empty ring or count < 1 the following while loop does not run and the result is @[]"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/consistent_hashing.nim:ROR:7bc9d63d6558551c:0",
+      "file": "src/nimcs/ds/consistent_hashing.nim",
+      "line": 122,
+      "mutator": "ROR",
+      "original": "step < r.points.len",
+      "replacement": "<< -> <=>",
+      "class": "equivalent",
+      "reason": "the extra step looks at points[start] again, whose node is already in the result, so nothing is added"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/crdt.nim:ROR:89eee39012cb449e:0",
+      "file": "src/nimcs/ds/crdt.nim",
+      "line": 140,
+      "mutator": "ROR",
+      "original": "a.stamp < b.stamp",
+      "replacement": "<< -> <=>",
+      "class": "equivalent",
+      "reason": "the branch runs only when the stamps differ, where < and <= agree"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/crdt.nim:ROR:c5e8b33996e633d3:0",
+      "file": "src/nimcs/ds/crdt.nim",
+      "line": 142,
+      "mutator": "ROR",
+      "original": "a.val < b.val",
+      "replacement": "<< -> <=>",
+      "class": "equivalent",
+      "reason": "reached only with equal stamp and replica; with equal values too the two entries are equal, so picking either in merge gives the same register"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/crdt.nim:CVR:5464b44360d16b72:0",
+      "file": "src/nimcs/ds/crdt.nim",
+      "line": 234,
+      "mutator": "CVR",
+      "original": "2",
+      "replacement": "3",
+      "class": "equivalent",
+      "reason": "isMember's binary search is correct and terminates for any mid in [lo, hi)"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/crdt.nim:CVR:f2e49a27157f48a1:0",
+      "file": "src/nimcs/ds/crdt.nim",
+      "line": 278,
+      "mutator": "CVR",
+      "original": "0",
+      "replacement": "1",
+      "class": "equivalent",
+      "reason": "tags are private and only their uniqueness per replica matters; starting the count at 1 makes the first tag 2, still unused, so no public result changes"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/crdt.nim:ROR:a61cef99afd2773e:0",
+      "file": "src/nimcs/ds/crdt.nim",
+      "line": 282,
+      "mutator": "ROR",
+      "original": "t.replica == r",
+      "replacement": "<== -> !=>",
+      "class": "equivalent",
+      "reason": "every tombstone is made from an addition the same set holds (remove tombstones only seen tags, merge unions both lists), so the largest tag of a replica is already found among the additions and the tombstone loop never raises it"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/crdt.nim:CVR:eab691917993a5d1:0",
+      "file": "src/nimcs/ds/crdt.nim",
+      "line": 283,
+      "mutator": "CVR",
+      "original": "1",
+      "replacement": "2",
+      "class": "equivalent",
+      "reason": "the new tag only has to be larger than every tag the replica used; top + 2 is too, and tags are private"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/write_ahead_log.nim:RVR:300a277fc028bfbf:0",
+      "file": "src/nimcs/ds/write_ahead_log.nim",
+      "line": 99,
+      "mutator": "RVR",
+      "original": "return err(Wal, weTooLarge)",
+      "replacement": "<return default>",
+      "class": "equivalent",
+      "reason": "default(Result) is the error variant (isOk false) holding the first enum value, which is weTooLarge; holds while WalError keeps it first"
+    },
+    {
+      "fingerprint": "src/nimcs/ds/write_ahead_log.nim:RVR:62e0f2229fa225cb:0",
+      "file": "src/nimcs/ds/write_ahead_log.nim",
+      "line": 108,
+      "mutator": "RVR",
+      "original": "return err(Wal, weTooLarge)",
+      "replacement": "<return default>",
+      "class": "equivalent",
+      "reason": "default(Result) is the error variant (isOk false) holding the first enum value, which is weTooLarge; holds while WalError keeps it first"
+    }
+  ]
+}

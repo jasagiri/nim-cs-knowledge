@@ -129,3 +129,32 @@ test "PAT-SAGA-09 Given a started saga, when asked what to do, then it names the
   check s.feed(erOk).nextEffect.get == effect("pack")
   check s.feed(erOk).feed(erFailed).nextEffect.get == effect("refund", "42")
   check start(steps) == s
+
+# SPEC: PAT-SAGA-09
+test "PAT-SAGA-09 Given effects and steps that differ in one field, when they are compared, then they are unequal, and equal copies are equal":
+  check effect("charge", "42") == effect("charge", "42")
+  check effect("charge", "42") != effect("charge", "43")
+  check effect("charge", "42") != effect("refund", "42")
+  let base = step("pay", effect("charge", "42"), effect("refund", "42"))
+  check base == step("pay", effect("charge", "42"), effect("refund", "42"))
+  check base != step("ship", effect("charge", "42"), effect("refund", "42"))
+  check base != step("pay", effect("charge", "43"), effect("refund", "42"))
+  check base != step("pay", effect("charge", "42"), effect("refund", "43"))
+
+# SPEC: PAT-SAGA-06
+test "PAT-SAGA-06 Given log entries that differ in one field, when they are compared, then they are unequal":
+  let e = LogEntry(kind: lkAction, step: "pay", effect: effect("charge", "42"), ok: true)
+  check e == LogEntry(kind: lkAction, step: "pay", effect: effect("charge", "42"), ok: true)
+  check e != LogEntry(kind: lkCompensation, step: "pay", effect: effect("charge", "42"), ok: true)
+  check e != LogEntry(kind: lkAction, step: "ship", effect: effect("charge", "42"), ok: true)
+  check e != LogEntry(kind: lkAction, step: "pay", effect: effect("charge", "43"), ok: true)
+  check e != LogEntry(kind: lkAction, step: "pay", effect: effect("charge", "42"), ok: false)
+
+# SPEC: PAT-SAGA-06
+test "PAT-SAGA-06 Given sagas that differ in their steps only or in their progress, when they are compared, then they are unequal":
+  let a = @[step("pay", effect("charge"), effect("refund"))]
+  let b = @[step("ship", effect("charge"), effect("refund"))]
+  check start(a) == start(a)
+  check start(a) != start(b)
+  check start(a) != start(a).feed(erOk)
+  check start(a).feed(erOk) != start(a).feed(erFailed)

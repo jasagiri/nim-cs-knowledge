@@ -137,3 +137,35 @@ test "PAT-CIRCUITBREAKER-09 Given parameters out of range, when the config is bu
   check ok.isOk
   check ok.value.failureThreshold == 3
   check ok.value.openTicks == 10
+
+# SPEC: PAT-CIRCUITBREAKER-09
+test "PAT-CIRCUITBREAKER-09 Given the pause at and just beyond 2^52 ticks, when the config is built, then 2^52 is accepted and one more is refused":
+  check initConfig(3, 4_503_599_627_370_495).isOk
+  check initConfig(3, 4_503_599_627_370_496).isOk
+  check initConfig(3, 4_503_599_627_370_496).value.openTicks == 4_503_599_627_370_496
+  check initConfig(3, 4_503_599_627_370_497).error == ceOpenTicksTooLarge
+
+# SPEC: PAT-CIRCUITBREAKER-06
+test "PAT-CIRCUITBREAKER-06 Given breakers in different states, when they are compared, then they are unequal and each equals itself":
+  let c = cfgOf(1, 10)
+  let closed = closedBreaker()
+  let open = closed.recordFailure(c, 0)
+  let (half, d) = open.allow(c, 10)
+  check d == dAllow
+  check closed != open
+  check closed != half
+  check open != half
+  check closed == closedBreaker()
+  check open == closed.recordFailure(c, 0)
+  check half == open.allow(c, 10).breaker
+  check open != closed.recordFailure(c, 1)
+
+# SPEC: PAT-CIRCUITBREAKER-10
+test "PAT-CIRCUITBREAKER-10 Given a breaker in each state, when its counters are read, then each reads its own value or the stated sentinel":
+  let c = cfgOf(2, 10)
+  let closed = closedBreaker().recordFailure(c, 3)
+  let open = closed.recordFailure(c, 4)
+  let half = open.allow(c, 14).breaker
+  check closed.state == bsClosed and closed.consecutiveFailures == 1 and closed.openedAtOf == -1
+  check open.state == bsOpen and open.consecutiveFailures == 0 and open.openedAtOf == 4
+  check half.state == bsHalfOpen and half.consecutiveFailures == 0 and half.openedAtOf == -1

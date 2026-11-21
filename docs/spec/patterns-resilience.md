@@ -13,6 +13,7 @@ Each row is a law or an externally visible behaviour; each ID has at least one t
 | PAT-CIRCUITBREAKER-07 | circuit_breaker | Given an open breaker, when a late success or failure arrives, then nothing changes |
 | PAT-CIRCUITBREAKER-08 | circuit_breaker | Given any history of events with a growing clock, then a closed breaker has fewer failures than the threshold, a call passes an open breaker only after the pause, and a refusal never changes the breaker |
 | PAT-CIRCUITBREAKER-09 | circuit_breaker | Given parameters out of range, when the config is built, then each gets its own error |
+| PAT-CIRCUITBREAKER-10 | circuit_breaker | Given a breaker in each state, when its counters are read, then `consecutiveFailures` is the closed count and 0 when open or half-open, and `openedAtOf` is the opening tick when open and -1 when closed or half-open |
 | PAT-BULKHEAD-01 | bulkhead | Given a compartment with a free permit, when acquired, then it is admitted and one more permit is in use |
 | PAT-BULKHEAD-02 | bulkhead | Given a full compartment, when acquired, then it is refused and the bulkhead is unchanged |
 | PAT-BULKHEAD-03 | bulkhead | Given any operations on one compartment, when applied, then no other compartment changes |

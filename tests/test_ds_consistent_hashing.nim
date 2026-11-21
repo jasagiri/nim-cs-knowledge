@@ -1,4 +1,4 @@
-import std/[unittest, options, strutils]
+import std/[unittest, options, strutils, algorithm]
 import propcheck
 import nimcs/ds/consistent_hashing
 
@@ -127,3 +127,45 @@ suite "consistent_hashing":
     check r.isOk
     check r.value.addNode("") == err(Ring, reEmptyName)
     check r.value.vnodeCount == 2
+
+  # SPEC: DS-CONSISTENTHASHING-01
+  test "DS-CONSISTENTHASHING-01 Given a ring, when asking for an owner, then it is the node at the first position at or after the key's hash, wrapping to the first position past the top":
+    func modelOwner(vnodes: int; names: seq[string]; key: string): string =
+      var points: seq[(uint64, string)]
+      for n in names:
+        for i in 0 ..< vnodes: points.add (vnodePosition(n, i), n)
+      points.sort()
+      let h = ringHash(key)
+      result = points[0][1]
+      for p in points:
+        if p[0] >= h:
+          result = p[1]
+          break
+    let names = @["a", "b", "c"]
+    for vnodes in 1 .. 4:
+      let r = ringOf(vnodes, names)
+      var keys = keyList(300)
+      for n in names:
+        for i in 0 ..< vnodes: keys.add n & "#" & $i      # a key hashing exactly onto a position
+      for k in keys:
+        check r.owner(k) == some(modelOwner(vnodes, names, k))
+      for n in names:
+        for i in 0 ..< vnodes:
+          check r.owner(n & "#" & $i) == some(n)
+
+  # SPEC: DS-CONSISTENTHASHING-02
+  test "DS-CONSISTENTHASHING-02 Given rings that differ in the virtual node count or in the nodes, when comparing rings, then they are unequal":
+    check newRing(1).value != newRing(2).value           # no nodes, other vnode count
+    check ringOf(1, ["a"]) != ringOf(1, ["b"])           # one position each, other node
+    check ringOf(3, ["a"]) != ringOf(3, ["a", "b"])
+    check ringOf(3, ["a", "b"]) != ringOf(3, ["a"])
+    check ringOf(3, ["a"]) != ringOf(2, ["a"])
+    check ringOf(3, ["a", "b"]) == ringOf(3, ["b", "a"])
+
+  # SPEC: DS-CONSISTENTHASHING-05
+  test "DS-CONSISTENTHASHING-05 Given a ring with a single position, when asking for owners, then the one node is listed":
+    check ringOf(1, ["a"]).owners("k", 3) == @["a"]
+    check ringOf(1, ["a"]).owners("k", 1) == @["a"]
+    check ringOf(1, ["a"]).owners("k", 0).len == 0
+    check ringOf(1, ["a", "b"]).owners("k", 5).len == 2
+    check ringOf(1, ["a"]).removeNode("a").owners("k", 3).len == 0

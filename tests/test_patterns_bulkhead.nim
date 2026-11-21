@@ -102,3 +102,13 @@ test "PAT-BULKHEAD-07 Given invalid compartments, when the bulkhead is built, th
   check good.isOk
   check good.value.usage == @[("a", 0), ("b", 0)]
   check good.value.limit("b") == 2
+
+# SPEC: PAT-BULKHEAD-01
+test "PAT-BULKHEAD-01 Given an admitted acquire, when the bulkheads are compared, then they differ in the permits in use, and in the limits":
+  let b = three(2, 2, 3)
+  let (b2, a) = b.tryAcquire("beta")
+  check a == aAdmitted
+  check b2 != b
+  check b == three(2, 2, 3)
+  check b != three(1, 2, 3)
+  check b != three(2, 2, 4)

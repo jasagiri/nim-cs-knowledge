@@ -269,3 +269,62 @@ suite "crdt":
   # SPEC: DS-CRDT-23
   test "DS-CRDT-23 Given several OR-Sets, when merged in any order and grouping, then the result is the same":
     manyStates(orGen(), OrSet[int])
+
+  # SPEC: DS-CRDT-02
+  test "DS-CRDT-02 Given G-Counters that differ in one replica's count or in the replica, when compared, then they are unequal; incrementing without an amount adds one":
+    let a = emptyGCounter().increment(rid(0), 1)
+    check a == emptyGCounter().increment(rid(0), 1)
+    check a != emptyGCounter().increment(rid(0), 2)      # same replica, other count
+    check a != emptyGCounter().increment(rid(1), 1)      # other replica, same count
+    check a != emptyGCounter()
+    let once = emptyGCounter().increment(rid(0))
+    check once.value == 1 and once.countOf(rid(0)) == 1
+    check once.increment(rid(0)).value == 2
+
+  # SPEC: DS-CRDT-08
+  test "DS-CRDT-08 Given PN-Counters that differ in their increments or in their decrements, when compared, then they are unequal; the default amount is one":
+    let up = emptyPNCounter().increment(rid(0), 1)
+    check up == emptyPNCounter().increment(rid(0), 1)
+    check up != up.decrement(rid(0), 1)                  # same increments, other decrements
+    check up != emptyPNCounter().decrement(rid(0), 1)    # other increments, same decrements
+    check up.decrement(rid(0), 1) != emptyPNCounter().decrement(rid(0), 1)
+    check emptyPNCounter().increment(rid(0)).value == 1
+    check emptyPNCounter().decrement(rid(0)).value == -1
+
+  # SPEC: DS-CRDT-13
+  test "DS-CRDT-13 Given registers that differ in the stamp, the replica, the value, or in being written, when compared, then they are unequal":
+    let w = registerOf(1, rid(0), 1)
+    check w == registerOf(1, rid(0), 1)
+    check w != registerOf(2, rid(0), 1)
+    check w != registerOf(1, rid(1), 1)
+    check w != registerOf(1, rid(0), 2)
+    check w != emptyRegister[int]()
+    check emptyRegister[int]() != w
+    check emptyRegister[int]() == emptyRegister[int]()
+
+  # SPEC: DS-CRDT-19
+  test "DS-CRDT-19 Given an OR-Set with some members, when asking about elements that were never added, then they are not members":
+    let s = emptyOrSet[int]().add(rid(0), 1).add(rid(0), 3)
+    check 1 in s and 3 in s
+    for x in [0, 2, 4]:
+      check x notin s
+    check s.remove(1).elements == @[3]
+    check 1 notin s.remove(1) and 3 in s.remove(1)
+
+  # SPEC: DS-CRDT-20
+  test "DS-CRDT-20 Given OR-Sets that differ in an addition or in a tombstone, when compared, then they are unequal":
+    let none = emptyOrSet[int]()
+    let a1 = none.add(rid(0), 1)
+    let b1 = none.add(rid(1), 1)
+    check a1 == none.add(rid(0), 1)
+    check a1 != none
+    check none != a1
+    check a1 != none.add(rid(0), 2)                      # same size, other element
+    check a1 != b1                                       # same size, other tag
+    # the same two additions on both sides, but a different one cancelled
+    let p = a1.remove(1).merge(b1)
+    let q = b1.remove(1).merge(a1)
+    check p == a1.remove(1).merge(b1)
+    check p != q
+    check p != a1.merge(b1)                              # same additions, no tombstone
+    check a1.merge(b1) != p

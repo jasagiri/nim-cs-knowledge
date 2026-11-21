@@ -110,3 +110,26 @@ test "PAT-TXOUTBOX-07 Given rounds in which acknowledgements are lost, when the 
     o.len == 0 and receiver.balance == once.balance and receiver.entries.len == x[0])
   checkpoint describe(outcome)
   check outcome.passed
+
+# SPEC: PAT-TXOUTBOX-02
+test "PAT-TXOUTBOX-02 Given messages that differ in one field, when they are compared, then they are unequal":
+  let m = Message(id: "p-0", topic: "paid", payload: "42")
+  check m == Message(id: "p-0", topic: "paid", payload: "42")
+  check m != Message(id: "p-1", topic: "paid", payload: "42")
+  check m != Message(id: "p-0", topic: "shipped", payload: "42")
+  check m != Message(id: "p-0", topic: "paid", payload: "43")
+
+# SPEC: PAT-TXOUTBOX-05
+test "PAT-TXOUTBOX-05 Given outboxes that differ in one part, when they are compared, then they are unequal":
+  let o = initOutbox("p")
+  check o == initOutbox("p")
+  check o != initOutbox("q")
+  check o.enqueue("t", "x") != o
+  check o.enqueue("t", "x") == o.enqueue("t", "x")
+  check o.enqueue("t", "x") != o.enqueue("t", "y")
+  # same pending messages, different next sequence: settle drops a message without lowering it
+  let two = o.enqueue("t", "x").enqueue("t", "y")
+  let rest = two.settle([delivery("p-0", dsDelivered)])
+  check rest != two.settle([delivery("p-1", dsDelivered)])
+  check rest.nextSequence == 2
+  check rest != initOutbox("p").enqueue("t", "y")

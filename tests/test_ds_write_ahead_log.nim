@@ -148,3 +148,15 @@ suite "write_ahead_log":
     check r.keptBytes == 0
     check r.droppedBytes == lying.len
     check recover("").droppedBytes == 0
+
+  # SPEC: DS-WRITEAHEADLOG-09
+  test "DS-WRITEAHEADLOG-09 Given payloads of 16 MiB and one byte more, then append and appendAll accept the first and refuse the second, and recover reads the first back":
+    check emptyLog().append(newString(16_777_216)).isOk
+    check emptyLog().append(newString(16_777_217)) == err(Wal, weTooLarge)
+    let batch = emptyLog().appendAll([newString(16_777_216)])
+    check batch.isOk
+    check emptyLog().appendAll([newString(16_777_217)]) == err(Wal, weTooLarge)
+    let r = recover(batch.value.encode)
+    check r.log.len == 1
+    check r.droppedBytes == 0
+    check r.log.at(0).get.payload.len == 16_777_216
