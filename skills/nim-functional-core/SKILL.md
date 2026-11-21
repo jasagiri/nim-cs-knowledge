@@ -7,7 +7,9 @@ description: >-
   associativity, round trips) checked as property tests. Load it before writing or reviewing any
   Nim function, data structure or algorithm for this repository, when asked for "functional",
   "pure", "idempotent", "retry-safe", "monoid", "fold", "Result", "Option" or "parse, don't validate"
-  Nim, and whenever a snippet you are about to write takes a `var` parameter, raises an exception
+  Nim, for functor/applicative/monad shapes (`map`, `ap`, `map2`, `flatMap`) and why Nim has no
+  `Functor[F]`, type classes as concepts, phantom types, tail recursion versus loops, equational
+  reasoning, closures and lazy evaluation, and whenever a snippet you are about to write takes a `var` parameter, raises an exception
   for an expected failure, or mutates global state.
 ---
 
@@ -388,13 +390,18 @@ Both must exit with 0. Each `nim` block in this skill and in `details/` compiles
 | Option operations | `details/option_ops.md` | `src/nimcs/fp/option_ops.nim` | FP-OPTIONOPS-01 to 08 |
 | Fold, scan, unfold | `details/fold.md` | `src/nimcs/fp/fold.nim` | FP-FOLD-01 to 07 |
 | Immutable update | `details/immutable_update.md` | `src/nimcs/fp/immutable_update.nim` | FP-IMMUTABLEUPDATE-01 to 07 |
-| Composition and pipelines | `details/compose.md` | `src/nimcs/fp/compose.nim` | FP-COMPOSE-01 to 06 |
-| Lazy streams | `details/lazy_stream.md` | `src/nimcs/fp/lazy_stream.nim` | FP-LAZYSTREAM-01 to 08 |
-| Algebraic data types | `details/adt.md` | `src/nimcs/fp/adt.nim` | FP-ADT-01 to 07 |
+| Composition, higher-order functions, closures | `details/compose.md` | `src/nimcs/fp/compose.nim` | FP-COMPOSE-01 to 11 |
+| Lazy streams and lazy evaluation | `details/lazy_stream.md` | `src/nimcs/fp/lazy_stream.nim` | FP-LAZYSTREAM-01 to 12 |
+| Algebraic data types, pattern matching | `details/adt.md` | `src/nimcs/fp/adt.nim` | FP-ADT-01 to 10 |
 | Smart constructors | `details/smart_constructor.md` | `src/nimcs/fp/smart_constructor.nim` | FP-SMARTCONSTRUCTOR-01 to 08 |
 | Typestate | `details/typestate.md` | `src/nimcs/fp/typestate.nim` | FP-TYPESTATE-01 to 08 |
 | Idempotence | `details/idempotence.md` | `src/nimcs/fp/idempotence.nim` | FP-IDEMPOTENCE-01 to 09 |
 | Monoid | `details/monoid.md` | `src/nimcs/fp/monoid.nim` | FP-MONOID-01 to 07 |
+| Functor, applicative, monad (and what Nim's types cannot say) | `details/functor_monad.md` | `src/nimcs/fp/functor_monad.nim` | FP-FUNCTORMONAD-01 to 10 |
+| Type classes as concepts | `details/type_class.md` | `src/nimcs/fp/type_class.nim` | FP-TYPECLASS-01 to 07 |
+| Equational reasoning | `details/equational_reasoning.md` | `src/nimcs/fp/equational_reasoning.nim` | FP-EQUATIONALREASONING-01 to 06 |
+| Tail recursion and loops | `details/tail_recursion.md` | `src/nimcs/fp/tail_recursion.nim` | FP-TAILRECURSION-01 to 07 |
+| Phantom types | `details/phantom_type.md` | `src/nimcs/fp/phantom_type.nim` | FP-PHANTOMTYPE-01 to 07 |
 
 Read the details page of a concept before writing code of that kind; each lists use and avoid cases,
 the laws with their spec IDs, complexity, and the wrong shape to avoid.
