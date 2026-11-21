@@ -91,7 +91,6 @@ Fix: the client holds only a forwarder; the target never leaves the caretaker; r
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `ace3a1130eba6d54` Capability Myths Demolished
-- `1e2d20b92c98ae15` Robust Composition (Miller thesis)
+- `f60fd4a334285414` Memento pattern (Wikipedia): originator, memento and caretaker roles for saving and restoring state

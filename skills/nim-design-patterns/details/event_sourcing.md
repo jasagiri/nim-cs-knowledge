@@ -89,7 +89,8 @@ Another trap is an `apply` that reads the clock or calls a service: replay then 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `cdbf277d93825bc0` Designing Event-Driven Systems. Concepts and Patterns for Streaming Services with Apache Kafka
-- `5009e42d6ca146f2` Exploring CQRS and Event Sourcing
+- `bf73fcd9a3f53a30` Event store (Wikipedia): a store that keeps the sequence of events as the record, the storage side of event sourcing
+
+No English Wikipedia article for Event sourcing (404). Event store covers the append-only log; replay as a fold and snapshots are not covered.

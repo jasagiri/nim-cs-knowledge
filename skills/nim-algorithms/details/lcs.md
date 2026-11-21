@@ -70,7 +70,6 @@ otherwise move toward the larger neighbour. Another trap is confusing subsequenc
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `e8a751ae9f8ed52b` Learning Algorithm
+- `dcf17a7de58a4454` Longest common subsequence (Wikipedia): dynamic-programming table and reconstruction

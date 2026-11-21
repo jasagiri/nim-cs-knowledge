@@ -115,10 +115,9 @@ doAssert l.invariantsHold and l.len == 5
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `cc6ccd12f41004bf` Data Structures in C++ - For Beginners
-- `e842c4dbba02a07e` Data Structures
-- `ffb222d148114a4f` ECS 36C: Data Structures, Algorithms, and Programming
+- `37174714b555d156` Doubly linked list (Wikipedia): prev/next links, insertion and removal
+- `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 3, linked lists (DLList)
+
+Arena (index-based) allocation is not covered by these sources.

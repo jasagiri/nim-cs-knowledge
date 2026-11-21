@@ -61,9 +61,8 @@ The fix is `for i in countdown(finish.len - 1, 0)` over the transposed graph.
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `3b463005afa8d22b` Strongly Connected Components and Condensation Graph (cp-algorithms): Kosaraju's algorithm and the condensation graph
+- `135b2b7c405eb17a` Strongly connected component (Wikipedia): definition and algorithms
+- `73daa642c7d48c08` Tarjan's strongly connected components algorithm (Wikipedia): single-pass lowlink algorithm

@@ -96,6 +96,6 @@ Also write `case` over the state enum without `else` when you must branch on it,
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `1cbc332178e5a52f` Data-Oriented Design
+- `6f9825f10e9b70ff` Finite-state machine (Wikipedia): states, transitions and events

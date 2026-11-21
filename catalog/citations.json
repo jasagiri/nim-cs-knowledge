@@ -1,0 +1,1668 @@
+{
+  "pages": {
+    "algo/aho_corasick": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Aho–Corasick_algorithm",
+          "covers": "trie with failure links and the matching loop"
+        },
+        {
+          "url": "https://cp-algorithms.com/string/aho_corasick.html",
+          "covers": "construction of the automaton and its use for multi-pattern search"
+        }
+      ],
+      "note": ""
+    },
+    "algo/analysis": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Big_O_notation",
+          "covers": "asymptotic notation"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Amortized_analysis",
+          "covers": "aggregate, accounting and potential methods"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Time_complexity",
+          "covers": "counting steps as a function of input size"
+        }
+      ],
+      "note": ""
+    },
+    "algo/approximation": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Approximation_algorithm",
+          "covers": "approximation ratio and the idea of a guaranteed bound"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Vertex_cover",
+          "covers": "2-approximation of vertex cover through a maximal matching"
+        }
+      ],
+      "note": ""
+    },
+    "algo/backtracking": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Backtracking",
+          "covers": "depth-first search over partial solutions with pruning"
+        }
+      ],
+      "note": ""
+    },
+    "algo/bellman_ford": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bellman–Ford_algorithm",
+          "covers": "relaxation rounds, negative weights, negative-cycle detection"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/bellman_ford.html",
+          "covers": "algorithm, proof and negative-cycle handling"
+        }
+      ],
+      "note": ""
+    },
+    "algo/bfs": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Breadth-first_search",
+          "covers": "queue-based level order traversal"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/breadth-first-search.html",
+          "covers": "BFS and shortest paths in unweighted graphs"
+        }
+      ],
+      "note": ""
+    },
+    "algo/binary_search": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Binary_search",
+          "covers": "halving search over a sorted array and boundary variants"
+        },
+        {
+          "url": "https://cp-algorithms.com/num_methods/binary_search.html",
+          "covers": "binary search on sorted data and on the answer"
+        }
+      ],
+      "note": ""
+    },
+    "algo/convex_hull": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/geometry/convex-hull.html",
+          "covers": "Monotone chain algorithm (Andrew)"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Convex_hull_algorithms",
+          "covers": "overview including the monotone chain"
+        }
+      ],
+      "note": ""
+    },
+    "algo/counting_sort": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Counting_sort",
+          "covers": "counting occurrences, prefix sums, stable placement"
+        }
+      ],
+      "note": ""
+    },
+    "algo/cycle_detection": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Cycle_detection",
+          "covers": "Floyd's tortoise and hare on a sequence"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/finding-cycle.html",
+          "covers": "three-colour DFS for finding a cycle in a graph"
+        }
+      ],
+      "note": ""
+    },
+    "algo/dfs": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Depth-first_search",
+          "covers": "traversal, discovery and finishing order"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/depth-first-search.html",
+          "covers": "DFS and its edge classification"
+        }
+      ],
+      "note": ""
+    },
+    "algo/dijkstra": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Dijkstra's_algorithm",
+          "covers": "greedy relaxation with a priority queue"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/dijkstra.html",
+          "covers": "algorithm, proof and implementation"
+        }
+      ],
+      "note": ""
+    },
+    "algo/divide_conquer": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm",
+          "covers": "divide, solve, combine"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)",
+          "covers": "solving T(n)=aT(n/b)+f(n)"
+        }
+      ],
+      "note": ""
+    },
+    "algo/edit_distance": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Levenshtein_distance",
+          "covers": "dynamic-programming recurrence for insert, delete, substitute"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Edit_distance",
+          "covers": "edit distance as a family of measures"
+        }
+      ],
+      "note": ""
+    },
+    "algo/elementary_sorts": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Selection_sort",
+          "covers": "selection sort"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Shellsort",
+          "covers": "gap sequences and diminishing-increment insertion sort"
+        }
+      ],
+      "note": ""
+    },
+    "algo/eulerian_path": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Eulerian_path",
+          "covers": "Euler path and circuit conditions and Hierholzer's algorithm"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/euler_path.html",
+          "covers": "constructing an Eulerian path in O(M)"
+        }
+      ],
+      "note": ""
+    },
+    "algo/external_sort": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/External_sorting",
+          "covers": "run generation and k-way merge when data exceeds memory"
+        }
+      ],
+      "note": ""
+    },
+    "algo/fib_matrix": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/algebra/fibonacci-numbers.html",
+          "covers": "Fibonacci by the 2x2 matrix form and fast exponentiation"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Exponentiation_by_squaring",
+          "covers": "the squaring scheme applied to the matrix power"
+        }
+      ],
+      "note": ""
+    },
+    "algo/floyd_warshall": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Floyd–Warshall_algorithm",
+          "covers": "all-pairs shortest paths by dynamic programming over intermediate vertices"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html",
+          "covers": "algorithm, path reconstruction, negative cycles"
+        }
+      ],
+      "note": ""
+    },
+    "algo/graph": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Graph_(abstract_data_type)",
+          "covers": "graph as a data type and adjacency-list representation"
+        }
+      ],
+      "note": "No allowed source on a canonically ordered immutable graph value; this article covers the representation only."
+    },
+    "algo/greedy": {
+      "sources": [
+        {
+          "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf",
+          "covers": "greedy choice and proving it correct by exchange argument"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Greedy_algorithm",
+          "covers": "locally optimal choices and when they are globally optimal"
+        }
+      ],
+      "note": ""
+    },
+    "algo/heap_sort": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Heapsort",
+          "covers": "building a heap and repeated extraction in place"
+        }
+      ],
+      "note": ""
+    },
+    "algo/huffman": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Huffman_coding",
+          "covers": "optimal prefix codes by repeatedly merging the two least frequent symbols"
+        }
+      ],
+      "note": ""
+    },
+    "algo/insertion_sort": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Insertion_sort",
+          "covers": "insertion sort"
+        }
+      ],
+      "note": ""
+    },
+    "algo/kmp": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Knuth–Morris–Pratt_algorithm",
+          "covers": "failure table and the matching loop"
+        },
+        {
+          "url": "https://cp-algorithms.com/string/prefix-function.html",
+          "covers": "prefix function and its use for substring search"
+        }
+      ],
+      "note": ""
+    },
+    "algo/knapsack": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/dynamic_programming/knapsack.html",
+          "covers": "0/1 knapsack dynamic programming"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Knapsack_problem",
+          "covers": "problem statement and dynamic-programming solution"
+        }
+      ],
+      "note": ""
+    },
+    "algo/kruskal": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Kruskal's_algorithm",
+          "covers": "sorted edges with union-find"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/mst_kruskal.html",
+          "covers": "algorithm and proof"
+        }
+      ],
+      "note": ""
+    },
+    "algo/lca": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/graph/lca_binary_lifting.html",
+          "covers": "binary lifting ancestors table"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Lowest_common_ancestor",
+          "covers": "definition and approaches"
+        }
+      ],
+      "note": ""
+    },
+    "algo/lcs": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Longest_common_subsequence",
+          "covers": "dynamic-programming table and reconstruction"
+        }
+      ],
+      "note": ""
+    },
+    "algo/lis": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/dynamic_programming/longest_increasing_subsequence.html",
+          "covers": "O(n log n) and O(n^2) solutions"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Longest_increasing_subsequence",
+          "covers": "patience-style algorithm with binary search"
+        }
+      ],
+      "note": ""
+    },
+    "algo/max_flow": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/graph/edmonds_karp.html",
+          "covers": "Ford-Fulkerson and Edmonds-Karp"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/kuhn_maximum_bipartite_matching.html",
+          "covers": "bipartite matching by augmenting paths"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Maximum_flow_problem",
+          "covers": "max-flow problem and algorithms"
+        }
+      ],
+      "note": ""
+    },
+    "algo/meet_in_middle": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Subset_sum_problem",
+          "covers": "Horowitz and Sahni: two half lists of 2^(n/2) sums, sorted and combined"
+        }
+      ],
+      "note": "Wikipedia has no article titled for the general technique; the Meet-in-the-middle attack article is about cryptanalysis and is not cited."
+    },
+    "algo/memoization": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Memoization",
+          "covers": "caching results of pure function calls"
+        }
+      ],
+      "note": ""
+    },
+    "algo/merge_sort": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Merge_sort",
+          "covers": "top-down and bottom-up merge sort"
+        }
+      ],
+      "note": ""
+    },
+    "algo/number_theory": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/algebra/extended-euclid-algorithm.html",
+          "covers": "gcd, extended Euclid and Bezout coefficients"
+        },
+        {
+          "url": "https://cp-algorithms.com/algebra/binary-exp.html",
+          "covers": "fast (modular) exponentiation"
+        },
+        {
+          "url": "https://cp-algorithms.com/algebra/module-inverse.html",
+          "covers": "modular inverse by extended Euclid and Euler's theorem"
+        }
+      ],
+      "note": ""
+    },
+    "algo/prefix_sum": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Prefix_sum",
+          "covers": "prefix sums and range sums by subtraction"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Summed-area_table",
+          "covers": "two-dimensional prefix sums"
+        }
+      ],
+      "note": "Difference arrays have no dedicated allowed article; Prefix sum only mentions finite differences as the inverse."
+    },
+    "algo/prim": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Prim's_algorithm",
+          "covers": "growing a tree with a priority queue"
+        },
+        {
+          "url": "https://cp-algorithms.com/graph/mst_prim.html",
+          "covers": "algorithm, proof and implementations"
+        }
+      ],
+      "note": ""
+    },
+    "algo/quick_sort": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Quicksort",
+          "covers": "partitioning and recursion"
+        }
+      ],
+      "note": ""
+    },
+    "algo/rabin_karp": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Rabin–Karp_algorithm",
+          "covers": "rolling hash for substring search"
+        },
+        {
+          "url": "https://cp-algorithms.com/string/rabin-karp.html",
+          "covers": "polynomial rolling hash and implementation"
+        }
+      ],
+      "note": ""
+    },
+    "algo/radix_sort": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Radix_sort",
+          "covers": "LSD and MSD digit-wise sorting"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Counting_sort",
+          "covers": "stable counting sort used per digit"
+        }
+      ],
+      "note": ""
+    },
+    "algo/scc": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/graph/strongly-connected-components.html",
+          "covers": "Kosaraju's algorithm and the condensation graph"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Strongly_connected_component",
+          "covers": "definition and algorithms"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Tarjan's_strongly_connected_components_algorithm",
+          "covers": "single-pass lowlink algorithm"
+        }
+      ],
+      "note": ""
+    },
+    "algo/sieve": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html",
+          "covers": "sieve and its complexity"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes",
+          "covers": "the classic algorithm"
+        }
+      ],
+      "note": ""
+    },
+    "algo/suffix_array": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/string/suffix-array.html",
+          "covers": "construction and use of the suffix array"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Suffix_array",
+          "covers": "definition and construction"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/LCP_array",
+          "covers": "LCP array and Kasai's algorithm"
+        }
+      ],
+      "note": ""
+    },
+    "algo/three_way_merge": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Merge_(version_control)",
+          "covers": "three-way merge with a common ancestor"
+        }
+      ],
+      "note": "Wikipedia redirects Three-way_merge to the Three-way merge section of this article."
+    },
+    "algo/topo_sort": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/graph/topological-sort.html",
+          "covers": "DFS-based topological sort"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Topological_sorting",
+          "covers": "definition, Kahn's algorithm and DFS method"
+        }
+      ],
+      "note": ""
+    },
+    "algo/two_pointers": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Subset_sum_problem",
+          "covers": "the two-sum scan with one pointer moving each way over sorted lists (Horowitz and Sahni section)"
+        }
+      ],
+      "note": "No allowed article on two pointers or sliding window as a technique; this covers only the opposite-ends scan, not the sliding window. Sliding window protocol on Wikipedia is about networking and is not cited."
+    },
+    "algo/z_algorithm": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/string/z-function.html",
+          "covers": "Z-function and its linear-time computation"
+        }
+      ],
+      "note": ""
+    },
+    "ds/avl_tree": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/AVL_tree",
+          "covers": "height-balance invariant and rotations"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree",
+          "covers": "context for rebalancing by rotation"
+        }
+      ],
+      "note": "Persistence (path copying) is covered only generally via Persistent data structure; not added."
+    },
+    "ds/b_tree": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/B-tree",
+          "covers": "node structure, search, insertion with splitting, deletion"
+        },
+        {
+          "url": "https://opendatastructures.org/",
+          "covers": "ch. 14, external memory searching (B-trees)"
+        }
+      ],
+      "note": ""
+    },
+    "ds/bankers_queue": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Queue_(abstract_data_type)",
+          "covers": "amortized and persistent functional queues"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Purely_functional_data_structure",
+          "covers": "persistence and amortization in functional data structures"
+        }
+      ],
+      "note": "No allowed source names the banker's method for queues specifically."
+    },
+    "ds/binary_heap": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Binary_heap",
+          "covers": "array layout, sift-up and sift-down, insert and extract-min"
+        },
+        {
+          "url": "https://opendatastructures.org/",
+          "covers": "ch. 10, heaps (BinaryHeap)"
+        }
+      ],
+      "note": ""
+    },
+    "ds/binomial_heap": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Binomial_heap",
+          "covers": "binomial trees, merge by carry, operations"
+        }
+      ],
+      "note": ""
+    },
+    "ds/bit_vector": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bit_array",
+          "covers": "packed bit storage and word-level operations"
+        }
+      ],
+      "note": ""
+    },
+    "ds/bloom_filter": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bloom_filter",
+          "covers": "bit array with k hashes, false-positive rate, no deletion"
+        }
+      ],
+      "note": ""
+    },
+    "ds/bst": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Binary_search_tree",
+          "covers": "ordering invariant, search, insert, delete, degenerate shape"
+        },
+        {
+          "url": "https://opendatastructures.org/",
+          "covers": "ch. 6, binary trees (BinarySearchTree)"
+        }
+      ],
+      "note": "Persistence is not covered by these; see Persistent data structure if wanted."
+    },
+    "ds/cons_list": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Cons",
+          "covers": "cons cells and immutable singly linked lists"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Linked_list",
+          "covers": "singly linked list operations and persistence by sharing tails"
+        }
+      ],
+      "note": ""
+    },
+    "ds/consistent_hashing": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Consistent_hashing",
+          "covers": "hash ring, key to node mapping, remapping on node change"
+        }
+      ],
+      "note": ""
+    },
+    "ds/crdt": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type",
+          "covers": "state-based CRDTs, join-semilattice merge, examples"
+        }
+      ],
+      "note": ""
+    },
+    "ds/deque": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Double-ended_queue",
+          "covers": "operations at both ends, array and linked implementations, functional variants"
+        },
+        {
+          "url": "https://opendatastructures.org/",
+          "covers": "ch. 2, array-based lists (ArrayDeque)"
+        }
+      ],
+      "note": ""
+    },
+    "ds/fenwick_tree": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Fenwick_tree",
+          "covers": "binary indexed tree, prefix sums, point update"
+        },
+        {
+          "url": "https://cp-algorithms.com/data_structures/fenwick.html",
+          "covers": "implementation, range queries and updates"
+        }
+      ],
+      "note": ""
+    },
+    "ds/hamt": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Hash_array_mapped_trie",
+          "covers": "bitmap-indexed nodes, hash trie, persistent variants"
+        }
+      ],
+      "note": ""
+    },
+    "ds/hash_table": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Hash_table",
+          "covers": "hashing, load factor, collision resolution"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Linear_probing",
+          "covers": "open addressing with linear probe sequence"
+        },
+        {
+          "url": "https://opendatastructures.org/",
+          "covers": "ch. 5, hash tables (LinearHashTable)"
+        }
+      ],
+      "note": ""
+    },
+    "ds/kd_tree": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/K-d_tree",
+          "covers": "construction by alternating axes, nearest neighbour and range search"
+        }
+      ],
+      "note": ""
+    },
+    "ds/leftist_heap": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Leftist_tree",
+          "covers": "null-path length, leftist property, merge-based operations"
+        }
+      ],
+      "note": ""
+    },
+    "ds/linked_list": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Doubly_linked_list",
+          "covers": "prev/next links, insertion and removal"
+        },
+        {
+          "url": "https://opendatastructures.org/",
+          "covers": "ch. 3, linked lists (DLList)"
+        }
+      ],
+      "note": "Arena (index-based) allocation is not covered by these sources."
+    },
+    "ds/merkle_tree": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Merkle_tree",
+          "covers": "hash tree, root hash, inclusion proofs"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Content-addressable_storage",
+          "covers": "addressing data by its content hash"
+        }
+      ],
+      "note": ""
+    },
+    "ds/pairing_heap": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Pairing_heap",
+          "covers": "two-pass merge of children, operations and complexity"
+        }
+      ],
+      "note": ""
+    },
+    "ds/pvector": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Persistent_data_structure",
+          "covers": "persistence, path copying, persistent vectors in Clojure"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Hash_array_mapped_trie",
+          "covers": "trie of wide nodes that persistent vectors and maps are built on"
+        }
+      ],
+      "note": "No allowed article is specifically about persistent vectors (en.wikipedia Persistent_vector is absent); coverage is of the broader topics."
+    },
+    "ds/rb_tree": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Red–black_tree",
+          "covers": "colour invariants, rotations, insertion and deletion fix-up"
+        },
+        {
+          "url": "https://opendatastructures.org/",
+          "covers": "ch. 9, red-black trees"
+        }
+      ],
+      "note": ""
+    },
+    "ds/segment_tree": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Segment_tree",
+          "covers": "tree over intervals, range query and update"
+        },
+        {
+          "url": "https://cp-algorithms.com/data_structures/segment_tree.html",
+          "covers": "build, range query, point and range update"
+        }
+      ],
+      "note": ""
+    },
+    "ds/skew_list": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Skew_binary_number_system",
+          "covers": "skew binary representation with O(1) increment"
+        }
+      ],
+      "note": "Only the number system is covered; no allowed source describes Okasaki's random-access list built on it."
+    },
+    "ds/slot_map": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Handle_(computing)",
+          "covers": "opaque handles that refer to resources owned elsewhere"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/ABA_problem",
+          "covers": "reuse of a slot and the generation/tag counter that detects it"
+        }
+      ],
+      "note": "No allowed source describes a generational slot map itself; coverage is of the two underlying ideas."
+    },
+    "ds/sparse_table": {
+      "sources": [
+        {
+          "url": "https://cp-algorithms.com/data_structures/sparse-table.html",
+          "covers": "build in O(n log n), O(1) idempotent range queries (min), O(log n) sums"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Range_minimum_query",
+          "covers": "the problem the table answers"
+        }
+      ],
+      "note": ""
+    },
+    "ds/splay_tree": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Splay_tree",
+          "covers": "splaying by zig, zig-zig, zig-zag; amortized bounds"
+        }
+      ],
+      "note": ""
+    },
+    "ds/stack_queue": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Stack_(abstract_data_type)",
+          "covers": "LIFO operations and implementations"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Queue_(abstract_data_type)",
+          "covers": "FIFO operations and implementations"
+        },
+        {
+          "url": "https://cp-algorithms.com/data_structures/stack_queue_modification.html",
+          "covers": "stack and queue augmented with running minimum"
+        }
+      ],
+      "note": "Monotonic stack is covered only by All_nearest_smaller_values, which is not listed because it is about a related problem."
+    },
+    "ds/suffix_trie": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Suffix_tree",
+          "covers": "suffix tree versus uncompressed suffix trie and size trade-off"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Trie",
+          "covers": "trie structure that a suffix trie is built from"
+        }
+      ],
+      "note": ""
+    },
+    "ds/treap": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Treap",
+          "covers": "BST by key and heap by random priority, split and merge"
+        },
+        {
+          "url": "https://cp-algorithms.com/data_structures/treap.html",
+          "covers": "split, merge, insert, erase"
+        },
+        {
+          "url": "https://opendatastructures.org/",
+          "covers": "ch. 7, random binary search trees (Treap)"
+        }
+      ],
+      "note": ""
+    },
+    "ds/trie": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Trie",
+          "covers": "prefix tree, insert, search, prefix queries"
+        }
+      ],
+      "note": "Persistence is not covered by this article."
+    },
+    "ds/union_find": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Disjoint-set_data_structure",
+          "covers": "union by rank, path compression, persistence note"
+        },
+        {
+          "url": "https://cp-algorithms.com/data_structures/disjoint_set_union.html",
+          "covers": "find with compression, union by size or rank"
+        }
+      ],
+      "note": "Persistent variant is mentioned briefly in the Wikipedia article only."
+    },
+    "ds/write_ahead_log": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Write-ahead_logging",
+          "covers": "log records written before data changes, recovery by replay"
+        }
+      ],
+      "note": ""
+    },
+    "ds/zipper": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Zipper_(data_structure)",
+          "covers": "focus plus context for navigating and editing immutable structures"
+        }
+      ],
+      "note": ""
+    },
+    "fp/adt": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Algebraic_data_type",
+          "covers": "sum and product types, pattern matching"
+        }
+      ],
+      "note": ""
+    },
+    "fp/compose": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Function_composition_(computer_science)",
+          "covers": "composing functions, associativity, identity"
+        }
+      ],
+      "note": ""
+    },
+    "fp/equational_reasoning": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Referential_transparency",
+          "covers": "expressions replaceable by their values; substitution of equals (nearest allowed article)"
+        }
+      ],
+      "note": ""
+    },
+    "fp/fold": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Fold_(higher-order_function)",
+          "covers": "folding a structure with a combining function"
+        }
+      ],
+      "note": ""
+    },
+    "fp/functor_monad": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Functor_(functional_programming)",
+          "covers": "map over a context, functor laws"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Monad_(functional_programming)",
+          "covers": "bind/return and monad laws"
+        }
+      ],
+      "note": ""
+    },
+    "fp/idempotence": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Idempotence",
+          "covers": "f(f(x)) = f(x); repeating an operation has the same effect"
+        }
+      ],
+      "note": ""
+    },
+    "fp/immutable_update": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Immutable_object",
+          "covers": "returning a modified copy instead of mutating"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Persistent_data_structure",
+          "covers": "updates preserve the previous version"
+        }
+      ],
+      "note": ""
+    },
+    "fp/lazy_stream": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Lazy_evaluation",
+          "covers": "deferring computation until needed"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Stream_(abstract_data_type)",
+          "covers": "streams as possibly unbounded sequences"
+        }
+      ],
+      "note": ""
+    },
+    "fp/monoid": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Monoid",
+          "covers": "associative operation with an identity element"
+        }
+      ],
+      "note": ""
+    },
+    "fp/option_ops": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Option_type",
+          "covers": "an explicit type for a value that may be absent, and map/bind over it"
+        }
+      ],
+      "note": ""
+    },
+    "fp/phantom_type": {
+      "sources": [],
+      "note": "English Wikipedia has no Phantom type article (404); Generalized algebraic data type mentions phantom types only twice."
+    },
+    "fp/result": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Result_type",
+          "covers": "a value that is either success or error"
+        }
+      ],
+      "note": ""
+    },
+    "fp/smart_constructor": {
+      "sources": [],
+      "note": "English Wikipedia has no article on smart constructors or Parse, don't validate (404); Abstract data type, Refinement type and Algebraic data type do not cover it."
+    },
+    "fp/tail_recursion": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Tail_call",
+          "covers": "tail position calls, tail-call elimination, tail recursion"
+        }
+      ],
+      "note": ""
+    },
+    "fp/type_class": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Type_class",
+          "covers": "ad hoc polymorphism via constraints on types"
+        }
+      ],
+      "note": ""
+    },
+    "fp/typestate": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Typestate_analysis",
+          "covers": "operations allowed depend on the object's state, checked statically"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/abstract_factory": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Abstract_factory_pattern",
+          "covers": "families of related products created through one factory interface"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/actor": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Actor_model",
+          "covers": "actors as private state plus message passing, mailboxes, becoming a new behaviour, spawning"
+        },
+        {
+          "url": "https://www.erlang.org/doc/apps/stdlib/gen_server.html",
+          "covers": "a process that owns state and handles messages one at a time, with the state returned from each callback"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/adapter": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Adapter_pattern",
+          "covers": "converting one interface into the interface a client expects"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/anti_corruption_layer": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Domain-driven_design",
+          "covers": "names the anticorruption layer as a context-mapping relationship that isolates a system from an upstream model"
+        }
+      ],
+      "note": "No dedicated English Wikipedia article (Anti-corruption_layer is 404). The Domain-driven design article only defines the layer in one list item; translation by smart constructors is not covered."
+    },
+    "patterns/atomic_publish": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Rename_(computing)",
+          "covers": "POSIX rename is atomic: a reader sees the old name or the new one"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Sync_(Unix)",
+          "covers": "fsync and fdatasync flush file data to disk, and the need to check their return values"
+        }
+      ],
+      "note": "No source covers the whole recipe (temporary name, fsync, rename, fsync of the directory); the two articles cover the rename and fsync steps. Directory fsync is not discussed."
+    },
+    "patterns/branch_by_abstraction": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Strangler_fig_pattern",
+          "covers": "replacing a legacy implementation piece by piece instead of all at once"
+        }
+      ],
+      "note": "No English Wikipedia article for Branch by abstraction (404). Strangler fig pattern is the closest broader topic (incremental replacement); it does not describe the abstraction layer or the shadow stage."
+    },
+    "patterns/bridge": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bridge_pattern",
+          "covers": "separating an abstraction from its implementation so each varies on its own"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/builder": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Builder_pattern",
+          "covers": "building a complex object step by step apart from its representation"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/bulkhead": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bulkhead_pattern",
+          "covers": "isolating resource pools per consumer so a failure or overload stays inside one compartment"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/caretaker": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Memento_pattern",
+          "covers": "originator, memento and caretaker roles for saving and restoring state"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/chain_of_responsibility": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern",
+          "covers": "passing a request along handlers until one handles it"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/circuit_breaker": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern",
+          "covers": "closed, open and half-open states that stop calls to a failing dependency"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/command": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Command_pattern",
+          "covers": "encapsulating a request as an object, with queuing, logging and undo"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/command_buffer": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Command_pattern",
+          "covers": "requests as data that can be queued and executed later"
+        }
+      ],
+      "note": "No source covers deferred structural changes to a collection under iteration. The Wikipedia 'Command buffer' title redirects to a computer-graphics glossary entry, which is a different concept. Command pattern only covers commands as queued plain values."
+    },
+    "patterns/composite": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Composite_pattern",
+          "covers": "treating a single object and a group of objects through one interface in a tree"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/cqrs": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation",
+          "covers": "separate models for updating and reading data"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Command–query_separation",
+          "covers": "the principle that a method either changes state or returns data, not both"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/decompose_conditional": {
+      "sources": [],
+      "note": "No allowed source explains this refactoring. Code refactoring (Wikipedia) lists refactoring techniques but does not mention decomposing a conditional."
+    },
+    "patterns/decorator": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Decorator_pattern",
+          "covers": "adding behaviour by wrapping an object that has the same interface"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/dependency_record": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Dependency_injection",
+          "covers": "supplying a component's dependencies from outside instead of having it create them"
+        }
+      ],
+      "note": "A record of procs as the injected dependency is the Nim form; the article covers injection in general."
+    },
+    "patterns/event_sourcing": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Event_store",
+          "covers": "a store that keeps the sequence of events as the record, the storage side of event sourcing"
+        }
+      ],
+      "note": "No English Wikipedia article for Event sourcing (404). Event store covers the append-only log; replay as a fold and snapshots are not covered."
+    },
+    "patterns/extract_function": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Code_refactoring",
+          "covers": "extract method: turn part of a larger routine into a new routine without changing behaviour"
+        }
+      ],
+      "note": "Broader article; extract method is named in one sentence."
+    },
+    "patterns/extract_type": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Code_refactoring",
+          "covers": "extract class: move part of existing code into a new type"
+        }
+      ],
+      "note": "Broader article; extract class is named in one sentence. The Nim value-type rules (smart constructor, distinct) are not covered."
+    },
+    "patterns/facade": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Facade_pattern",
+          "covers": "one simple interface in front of a set of subsystem interfaces"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/factory_method": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Factory_method_pattern",
+          "covers": "a creation operation that subclasses or callers choose the product of"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/flyweight": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Flyweight_pattern",
+          "covers": "sharing identical objects through a factory table to save memory"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/free_interpreter": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Monad_(functional_programming)",
+          "covers": "the free monad section: a program built as data from a functor, run later by an interpreter"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Interpreter_pattern",
+          "covers": "a program as a tree of expressions evaluated by an interpreter"
+        }
+      ],
+      "note": "The Free monad title redirects to a section of the Monad article; the URL has no fragment as the brief requires."
+    },
+    "patterns/functional_core": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Pure_function",
+          "covers": "functions that depend only on their arguments and have no side effects"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Side_effect_(computer_science)",
+          "covers": "what an effect is, and why isolating effects makes code easier to test"
+        }
+      ],
+      "note": "No English Wikipedia article for Functional core, imperative shell (404); these cover the core (pure) and the shell (effects) separately, not the split itself."
+    },
+    "patterns/idempotent_command": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Idempotence",
+          "covers": "an operation that gives the same result when applied once or many times, including in computing and HTTP-style retries"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/interpreter": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Interpreter_pattern",
+          "covers": "representing a grammar as classes or nodes and evaluating a sentence by walking the tree"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/introduce_parameter_object": {
+      "sources": [],
+      "note": "No allowed source explains this refactoring. Code refactoring (Wikipedia) does not mention parameter objects; no English Wikipedia article exists (404)."
+    },
+    "patterns/iterator_pattern": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Iterator_pattern",
+          "covers": "visiting the elements of a collection in order without exposing its representation"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/layered_architecture": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Multitier_architecture",
+          "covers": "layers with one-way dependencies, presentation/application/data tiers"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/lens": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Bidirectional_transformation",
+          "covers": "lenses as get/put pairs for focusing on a part of a structure (broader topic; the article's lens section)"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/load_shedding": {
+      "sources": [],
+      "note": "The Wikipedia article Load shedding is about electric power only; Admission control, Rate limiting and Back pressure were opened and do not describe refusing requests to protect an overloaded service."
+    },
+    "patterns/mediator": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Mediator_pattern",
+          "covers": "the mediator object that centralises communication between colleagues"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/memento": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Memento_pattern",
+          "covers": "capturing and restoring an object's state without exposing it"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/model_view_update": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Elm_(programming_language)",
+          "covers": "The Elm Architecture: model, view and update driven by messages (the example section)"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/object_capability": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Object-capability_model",
+          "covers": "unforgeable references as the only authority; capability discipline"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Capability-based_security",
+          "covers": "capabilities as communicable, unforgeable tokens of authority (broader topic)"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/observer": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Observer_pattern",
+          "covers": "subject notifies registered observers of state changes"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/parallel_change": {
+      "sources": [],
+      "note": "No allowed source explains expand/migrate/contract. Database refactoring and Schema migration were opened and do not describe the three-step compatible change."
+    },
+    "patterns/parser_combinator": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Parser_combinator",
+          "covers": "parsers as functions combined by higher-order functions"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/pipeline": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Pipeline_(software)",
+          "covers": "chains of processing stages where each output feeds the next (related topic; middleware as handler wrappers is not named)"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Function_composition_(computer_science)",
+          "covers": "stacking stages as composition, associativity"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/prototype": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Prototype_pattern",
+          "covers": "creating objects by cloning a prototype instance"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/proxy": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Proxy_pattern",
+          "covers": "a stand-in object that controls access to another"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/replace_conditional_with_polymorphism": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Code_refactoring",
+          "covers": "lists the technique 'Replace conditional with polymorphism' among refactorings (brief)"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/State_pattern",
+          "covers": "replacing conditional statements on state by polymorphic state objects"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/request_reply": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Request–response",
+          "covers": "request and reply message-exchange pattern"
+        },
+        {
+          "url": "https://www.erlang.org/doc/apps/stdlib/gen_server.html",
+          "covers": "call/2 as a synchronous request-reply over asynchronous messages"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/retry_backoff": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Exponential_backoff",
+          "covers": "growing the wait between retries exponentially, with jitter"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/saga": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Long-running_transaction",
+          "covers": "sagas: a sequence of local transactions with compensating actions (the article the Saga pattern redirects to)"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/sealer_unsealer": {
+      "sources": [],
+      "note": "Object-capability model and Capability-based security were opened and do not describe sealer/unsealer pairs."
+    },
+    "patterns/seam": {
+      "sources": [],
+      "note": "No article found in the allowed sources on seams (Dependency injection and Test double were opened and do not name or explain the concept)."
+    },
+    "patterns/singleton": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Singleton_pattern",
+          "covers": "a class with exactly one global instance"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/state": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/State_pattern",
+          "covers": "an object changes behaviour with its internal state via state objects"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/state_machine": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Finite-state_machine",
+          "covers": "states, transitions and events"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/strangler_fig": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Strangler_fig_pattern",
+          "covers": "incrementally replacing a legacy system behind a facade"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/strategy": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Strategy_pattern",
+          "covers": "interchangeable algorithms selected at run time"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/supervisor": {
+      "sources": [
+        {
+          "url": "https://www.erlang.org/doc/system/sup_princ.html",
+          "covers": "restart strategies (one_for_one etc.) and restart intensity"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/tagless_final": {
+      "sources": [],
+      "note": "Expression problem only lists tagless-final as one solution; Initial algebra mentions it once. Neither explains it."
+    },
+    "patterns/template_method": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Template_method_pattern",
+          "covers": "a fixed algorithm skeleton with overridable steps"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/time_as_input": {
+      "sources": [],
+      "note": "Elapsed real time, System time, Unix time and Network Time Protocol were opened; none explains wall clock vs monotonic clock or passing time as an input."
+    },
+    "patterns/token_bucket": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Token_bucket",
+          "covers": "bucket filling at a fixed rate; sending consumes tokens"
+        }
+      ],
+      "note": ""
+    },
+    "patterns/transactional_outbox": {
+      "sources": [],
+      "note": "No allowed source explains the outbox pattern (Message broker, Distributed transaction and Event-driven architecture were opened)."
+    },
+    "patterns/visitor": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Visitor_pattern",
+          "covers": "separating an operation from the object structure it walks, double dispatch"
+        }
+      ],
+      "note": ""
+    }
+  }
+}

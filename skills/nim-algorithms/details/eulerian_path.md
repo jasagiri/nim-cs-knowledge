@@ -65,7 +65,7 @@ Fix: check the degree conditions first, then require the produced trail to have 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
+- `8c716cce20eb0265` Eulerian path (Wikipedia): Euler path and circuit conditions and Hierholzer's algorithm
+- `628f51431c357b81` Finding the Eulerian path in O(M) (cp-algorithms): constructing an Eulerian path in O(M)

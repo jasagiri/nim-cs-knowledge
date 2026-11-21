@@ -105,13 +105,8 @@ The fix is `if g.inRange(v): ... else: ...`, or going through an algorithm that 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `b6deea26499dcff1` Algorithms
-- `29ca95172575b79a` Algorithms and Data Structures
-- `c1b93dc13846e70a` Algorithms Course Materials
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `42a1cb32a5e35bad` An Open Guide to Data Structures and Algorithms
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `a1da01744743a89c` Graph (abstract data type) (Wikipedia): graph as a data type and adjacency-list representation
+
+No allowed source on a canonically ordered immutable graph value; this article covers the representation only.

@@ -132,4 +132,6 @@ Finally, an unflushed log is not a log: the durability of `encode` bytes is the 
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose table of contents names a write-ahead log (searched 2026-11-21 in the concept index for write-ahead log, write ahead log and journal, and by title for database, storage and transaction). `af7e0fe83211007b` Mini-LSM: Build a Database Storage Engine in Rust is a storage-engine tutorial, but its text was not read, so the page does not cite it.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `a9185e6d8497b427` Write-ahead logging (Wikipedia): log records written before data changes, recovery by replay

@@ -92,8 +92,6 @@ else:
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `14e1135a7e563bfa` CS240h: Functional Systems in Haskell
-- `04bc6d730024731d` Haskell Notes for Professionals
-- `90944eadae97da9a` Learning Scalaz
+- `70eabc800658e0ec` Monoid (Wikipedia): associative operation with an identity element

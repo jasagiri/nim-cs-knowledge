@@ -124,22 +124,9 @@ Do not use a plain BST on data that may be ordered (ids, timestamps): that is th
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `3020c057a8d82e66` S-99: Ninety-Nine Scala Problems
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `4b0dad6bfcfbe438` Lisp Tutorial
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `66b45c74c2786dc9` Concurrent Programming in ERLANG
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `6f359c1814ec309e` Princeton University Algorithms, Part 1
-- `7508271bf7980bd3` Data Structures
-- `7fd69b31060d80f1` ML for the Working Programmer, 2nd Edition
-- `9e0afdfae6157d74` OCaml from the Very Beginning
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `cc6ccd12f41004bf` Data Structures in C++ - For Beginners
-- `e842c4dbba02a07e` Data Structures
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `ffb222d148114a4f` ECS 36C: Data Structures, Algorithms, and Programming
+- `b36958ca6fb6d551` Binary search tree (Wikipedia): ordering invariant, search, insert, delete, degenerate shape
+- `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 6, binary trees (BinarySearchTree)
+
+Persistence is not covered by these; see Persistent data structure if wanted.

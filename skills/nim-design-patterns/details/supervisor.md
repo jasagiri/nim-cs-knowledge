@@ -126,7 +126,6 @@ Fix: pass the tick and the history in, return a `Decision`, and let the host act
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `1b179470b870e5fe` Erlang/OTP: Supervisor Behaviour
-- `f2b0c2a6b0908171` Making reliable distributed systems in the presence of software errors (Armstrong thesis)
+- `1b179470b870e5fe` Supervisor Behaviour (Erlang/OTP documentation): restart strategies (one_for_one etc.) and restart intensity

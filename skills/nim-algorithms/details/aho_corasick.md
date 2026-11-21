@@ -75,8 +75,7 @@ Fix: merge the failure node's outputs into each node while building (breadth fir
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `e024287b414c64e3` Data Structures and Algorithms Specialization
+- `bef42d97ad17d164` Aho–Corasick algorithm (Wikipedia): trie with failure links and the matching loop
+- `7c9bae87004ab621` Aho-Corasick algorithm (cp-algorithms): construction of the automaton and its use for multi-pattern search

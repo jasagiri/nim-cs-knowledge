@@ -99,7 +99,6 @@ doAssert f.hashes == 5
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `7508271bf7980bd3` Data Structures
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
+- `413515022ebddaf4` Bloom filter (Wikipedia): bit array with k hashes, false-positive rate, no deletion

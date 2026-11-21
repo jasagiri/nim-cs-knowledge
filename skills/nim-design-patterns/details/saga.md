@@ -145,7 +145,6 @@ Compensations are not rollbacks: the world may have changed between the action a
 
 ## Sources
 
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `d6608bb8bc6985b4` Software Architecture in the AI & Cloud Era
+- `a8bdbf3842cb854d` Long-running transaction (Wikipedia): sagas: a sequence of local transactions with compensating actions (the article the Saga pattern redirects to)

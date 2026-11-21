@@ -80,9 +80,7 @@ moves the same tie-break order every time, otherwise two runs may print differen
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `e8a751ae9f8ed52b` Learning Algorithm
+- `7abc42e6a83e1359` Levenshtein distance (Wikipedia): dynamic-programming recurrence for insert, delete, substitute
+- `1398dddb85ced758` Edit distance (Wikipedia): edit distance as a family of measures

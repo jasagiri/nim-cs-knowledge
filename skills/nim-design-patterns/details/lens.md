@@ -113,7 +113,6 @@ A second trap is rebuilding a record in a setter and forgetting a field: the get
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04bc6d730024731d` Haskell Notes for Professionals
-- `90944eadae97da9a` Learning Scalaz
+- `1ff6c768cd18f607` Bidirectional transformation (Wikipedia): lenses as get/put pairs for focusing on a part of a structure (broader topic; the article's lens section)

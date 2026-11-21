@@ -81,7 +81,6 @@ Fix: refuse a fan-in below 2 (`eeBadFanIn`). Another trap is merging by repeated
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
+- `6abe18a4d21811b2` External sorting (Wikipedia): run generation and k-way merge when data exceeds memory

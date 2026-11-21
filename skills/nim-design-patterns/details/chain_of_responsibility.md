@@ -97,8 +97,6 @@ Fix: the chain is a `seq` and the end of the chain is the end of the loop; the r
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
-- `0789f21330e7f72a` Source Making Design Patterns and UML
-- `690b10bb5f31ac02` The Catalog of Design Patterns
+- `cfed21302ac49e11` Chain-of-responsibility pattern (Wikipedia): passing a request along handlers until one handles it

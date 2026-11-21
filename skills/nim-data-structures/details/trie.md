@@ -91,13 +91,8 @@ doAssert t.keysWithPrefix("app") == @["apple", "apply"]
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `29ca95172575b79a` Algorithms and Data Structures
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `7508271bf7980bd3` Data Structures
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `ed8c50dad686e4d3` Elementary Algorithms
+- `bf13c7c4d518660e` Trie (Wikipedia): prefix tree, insert, search, prefix queries
+
+Persistence is not covered by this article.

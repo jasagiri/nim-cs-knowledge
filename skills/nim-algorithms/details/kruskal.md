@@ -67,10 +67,7 @@ The fix is a union-find with union by size and path halving, as in the module.
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `0b0940e9bca772a9` Kruskal's algorithm (Wikipedia): sorted edges with union-find
+- `5039434dec51cab4` Minimum Spanning Tree - Kruskal (cp-algorithms): algorithm and proof

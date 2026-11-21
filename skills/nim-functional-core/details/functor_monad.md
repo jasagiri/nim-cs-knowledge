@@ -106,20 +106,7 @@ doAssert checked == err((int, int), "name is empty")
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04c90d5ac6a2d0db` Real World OCaml
-- `14e1135a7e563bfa` CS240h: Functional Systems in Haskell
-- `14f064178f32050b` Introduction to Functional Programming (TU Delft OCW)
-- `1e69fad0f89139aa` Elm Programming Language
-- `2c70c7f6766f72ea` A Gentle Introduction to Haskell Version 98
-- `59257807fe1f8114` Haskell Tutorial and Cookbook
-- `65a54f748168d49c` Functional Programming for Mortals
-- `73d14d6fafde7152` Advanced Functional Programming in Haskell
-- `8718d4a05b5ef7db` Learn Haskell Fast and Hard
-- `90944eadae97da9a` Learning Scalaz
-- `93b1903990c81385` Learn You an Elm
-- `9ef987c93e3e3529` Programming in Standard ML, DRAFT
-- `ba7c262763893951` Haskell
-- `c59d2a0bec136dcc` Effective Scala
-- `c63513da03e6053c` Developing Web Applications with Haskell and Yesod
+- `60667cab88e88a2c` Functor (functional programming) (Wikipedia): map over a context, functor laws
+- `af5c8783453c7e24` Monad (functional programming) (Wikipedia): bind/return and monad laws

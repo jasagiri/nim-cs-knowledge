@@ -76,6 +76,4 @@ Fix: seal the content in a `Box[T]` and keep the unsealer with the issuer; a val
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `1e2d20b92c98ae15` Robust Composition (Miller thesis)
+None in the catalog: Object-capability model and Capability-based security were opened and do not describe sealer/unsealer pairs.

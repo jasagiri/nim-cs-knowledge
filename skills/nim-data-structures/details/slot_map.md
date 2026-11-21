@@ -171,7 +171,9 @@ doAssert m.invariantsHold and m.len == 4
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `1cbc332178e5a52f` Data-Oriented Design
-- `22c3d3a350b7b271` Game Programming Patterns (Object Pool, Data Locality)
+- `c075eab36084316e` Handle (computing) (Wikipedia): opaque handles that refer to resources owned elsewhere
+- `3825593c370bd0c8` ABA problem (Wikipedia): reuse of a slot and the generation/tag counter that detects it
+
+No allowed source describes a generational slot map itself; coverage is of the two underlying ideas.

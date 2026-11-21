@@ -97,6 +97,6 @@ Another trap: using a `Result` for a plain miss. `find` returning `err("not foun
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04c90d5ac6a2d0db` Real World OCaml
+- `3e2f9c9c5f6bad38` Result type (Wikipedia): a value that is either success or error

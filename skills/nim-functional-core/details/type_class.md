@@ -104,16 +104,6 @@ Order the whole value, or define `==` on the same key. Run `isTotalOrderOn` over
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `14f064178f32050b` Introduction to Functional Programming (TU Delft OCW)
-- `21a878bd1e78232f` A Tour of Scala - an interactive scala tutorial
-- `2766d61d1e588fe4` The Haskell Road to Logic, Math and Programming
-- `2c70c7f6766f72ea` A Gentle Introduction to Haskell Version 98
-- `5f760d582444d1a5` Clojure Distilled Beginner Guide
-- `65a54f748168d49c` Functional Programming for Mortals
-- `90944eadae97da9a` Learning Scalaz
-- `ba7c262763893951` Haskell
-- `c63513da03e6053c` Developing Web Applications with Haskell and Yesod
-- `d2df76348332e22c` Functional Programming in Haskell
-- `eb5bc22e024bf3c6` Elixir School
+- `15270b25509ca67d` Type class (Wikipedia): ad hoc polymorphism via constraints on types

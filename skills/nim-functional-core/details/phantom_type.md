@@ -120,8 +120,4 @@ A `distinct` type has none of its base type's operations: define `==`, `<` and t
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `14e1135a7e563bfa` CS240h: Functional Systems in Haskell
-- `90944eadae97da9a` Learning Scalaz
-- `ba7c262763893951` Haskell
+None in the catalog: English Wikipedia has no Phantom type article (404); Generalized algebraic data type mentions phantom types only twice.

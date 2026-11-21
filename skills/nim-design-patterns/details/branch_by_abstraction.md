@@ -94,6 +94,8 @@ A mismatch in the shadow stage is a finding, not a failure of the stage: fix the
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title or table of contents covers branch by abstraction (searched 2026-11-20 by title and URL for refactor, abstraction, migrat, legacy and continuous delivery); the page cites no source it has not read.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-The technique was named by Paul Hammant and is described on Martin Fowler's bliki ("BranchByAbstraction") and in Humble and Farley, Continuous Delivery. The page is written for this repository and copies nothing from them.
+- `59217df8cf9ce10e` Strangler fig pattern (Wikipedia): replacing a legacy implementation piece by piece instead of all at once
+
+No English Wikipedia article for Branch by abstraction (404). Strangler fig pattern is the closest broader topic (incremental replacement); it does not describe the abstraction layer or the shadow stage.

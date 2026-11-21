@@ -94,13 +94,9 @@ doAssert u.pathLength(0) <= 4
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `7508271bf7980bd3` Data Structures
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `254fe28ac0bfd53e` Last Moment DSA Sheet(79) – Ace Interviews
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `6f359c1814ec309e` Princeton University Algorithms, Part 1
+- `c1dc4985db70845e` Disjoint-set data structure (Wikipedia): union by rank, path compression, persistence note
+- `273c7482c4c715b8` Disjoint Set Union (cp-algorithms): find with compression, union by size or rank
+
+Persistent variant is mentioned briefly in the Wikipedia article only.

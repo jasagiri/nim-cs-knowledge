@@ -103,8 +103,7 @@ doAssert r == err(SuffixTrie, textTooLong)
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `7508271bf7980bd3` Data Structures
-- `e024287b414c64e3` Data Structures and Algorithms Specialization
+- `dd78d02626bf0b24` Suffix tree (Wikipedia): suffix tree versus uncompressed suffix trie and size trade-off
+- `bf13c7c4d518660e` Trie (Wikipedia): trie structure that a suffix trie is built from

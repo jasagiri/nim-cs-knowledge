@@ -65,6 +65,7 @@ reduce after each product and keep `m` within `maxFibModulus`, or the sum of two
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
+- `402d11649229d101` Fibonacci Numbers (cp-algorithms): Fibonacci by the 2x2 matrix form and fast exponentiation
+- `04c79e1e35914fe8` Exponentiation by squaring (Wikipedia): the squaring scheme applied to the matrix power

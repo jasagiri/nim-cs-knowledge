@@ -111,13 +111,7 @@ A second trap: expecting a stream to remember its elements. It recomputes on eac
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `5f760d582444d1a5` Clojure Distilled Beginner Guide
-- `7fd69b31060d80f1` ML for the Working Programmer, 2nd Edition
-- `9ef987c93e3e3529` Programming in Standard ML, DRAFT
-- `e443a6b88b011f39` Purely Functional Data Structures
-- `1eb0b9c8c52f2942` Scala By Example
-- `4983fd2e157f75bc` Scala Tutorial
-- `5b1535e53ceaa7c4` SICP Distilled - An idiosyncratic tour of SICP in Clojure
-- `ad1dce2b03a88d89` The Scheme Programming Language: Edition 3
+- `486e6acf9a6b74f3` Lazy evaluation (Wikipedia): deferring computation until needed
+- `c9ac1c7790abbf34` Stream (abstract data type) (Wikipedia): streams as possibly unbounded sequences

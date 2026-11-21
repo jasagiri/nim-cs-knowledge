@@ -109,10 +109,7 @@ doAssert oneComparator == byCity
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `6f359c1814ec309e` Princeton University Algorithms, Part 1
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `e8a751ae9f8ed52b` Learning Algorithm
+- `36efee613237a769` Selection sort (Wikipedia): selection sort
+- `fb7e4f1d9c1706a4` Shellsort (Wikipedia): gap sequences and diminishing-increment insertion sort

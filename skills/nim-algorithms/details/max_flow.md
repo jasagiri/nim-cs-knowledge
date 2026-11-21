@@ -109,12 +109,8 @@ doAssert maxFlow(g, 0, 3).value.value == 2
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
-- `b8f40165091faa5d` CSES Problem Set
-- `c1b93dc13846e70a` Algorithms Course Materials
-- `e024287b414c64e3` Data Structures and Algorithms Specialization
+- `a10e7e0b3abea7fb` Maximum flow - Ford-Fulkerson and Edmonds-Karp (cp-algorithms): Ford-Fulkerson and Edmonds-Karp
+- `363675dd645a4daa` Kuhn's Algorithm - Maximum Bipartite Matching (cp-algorithms): bipartite matching by augmenting paths
+- `3f809c7827ad8aad` Maximum flow problem (Wikipedia): max-flow problem and algorithms

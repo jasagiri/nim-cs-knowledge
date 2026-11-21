@@ -84,7 +84,8 @@ The one deliberate difference from the old behaviour (mixed currencies) is a cha
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `0789f21330e7f72a` Source Making Design Patterns and UML
-- `690b10bb5f31ac02` The Catalog of Design Patterns
+- `e0da847236a95912` Code refactoring (Wikipedia): extract class: move part of existing code into a new type
+
+Broader article; extract class is named in one sentence. The Nim value-type rules (smart constructor, distinct) are not covered.

@@ -131,7 +131,6 @@ Another trap: counting every error as a failure. Only report failures that say t
 
 ## Sources
 
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `d6608bb8bc6985b4` Software Architecture in the AI & Cloud Era
+- `b92abb9855f547cc` Circuit breaker design pattern (Wikipedia): closed, open and half-open states that stop calls to a failing dependency

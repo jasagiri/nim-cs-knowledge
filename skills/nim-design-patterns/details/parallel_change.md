@@ -102,6 +102,4 @@ Also do not contract on a calendar date: contract when `contract` accepts the st
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title or table of contents covers expand and contract or parallel change (searched 2026-11-20 by title and URL for refactor, migrat, legacy, evolution and architecture); the page cites no source it has not read.
-
-The technique is described, and credited to Joshua Kerievsky, in Danilo Sato's article "ParallelChange" on Martin Fowler's bliki (2014). The page is written for this repository and copies nothing from it.
+None in the catalog: No allowed source explains expand/migrate/contract. Database refactoring and Schema migration were opened and do not describe the three-step compatible change.

@@ -152,8 +152,6 @@ doAssert escapeAmp("a&b") == "a&amp;b"
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
-- `0789f21330e7f72a` Source Making Design Patterns and UML
-- `690b10bb5f31ac02` The Catalog of Design Patterns
+- `ae149a41a0a65001` Factory method pattern (Wikipedia): a creation operation that subclasses or callers choose the product of

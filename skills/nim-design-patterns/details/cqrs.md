@@ -117,7 +117,7 @@ A second trap: reading the write model to answer queries couples the two sides a
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `cdbf277d93825bc0` Designing Event-Driven Systems. Concepts and Patterns for Streaming Services with Apache Kafka
-- `5009e42d6ca146f2` Exploring CQRS and Event Sourcing
+- `71c13e74827733c2` Command Query Responsibility Segregation (Wikipedia): separate models for updating and reading data
+- `48f95b809a0f0b3b` Command–query separation (Wikipedia): the principle that a method either changes state or returns data, not both

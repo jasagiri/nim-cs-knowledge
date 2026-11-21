@@ -107,8 +107,7 @@ doAssert m.height <= 16
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `7508271bf7980bd3` Data Structures
-- `ed8c50dad686e4d3` Elementary Algorithms
-- `fc4e34ece13d1024` Open Data Structures: An Introduction
+- `7d34e4bf24e3cb08` Red–black tree (Wikipedia): colour invariants, rotations, insertion and deletion fix-up
+- `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 9, red-black trees

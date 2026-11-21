@@ -103,7 +103,4 @@ Also remember that the deadline is an absolute tick and the clock is the caller'
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `508f524942e0a35a` The Site Reliability Workbook
-- `dd1831d989512a40` Site Reliability Engineering
+None in the catalog: The Wikipedia article Load shedding is about electric power only; Admission control, Rate limiting and Back pressure were opened and do not describe refusing requests to protect an overloaded service.

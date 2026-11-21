@@ -110,6 +110,4 @@ Give each interpretation its own `distinct` type, as `Eval` and `Size` do. A sec
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `e7006963b9de8203` Typed Tagless Final Interpreters (lecture notes)
+None in the catalog: Expression problem only lists tagless-final as one solution; Initial algebra mentions it once. Neither explains it.

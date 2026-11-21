@@ -63,7 +63,6 @@ Another pitfall: reading `z[0]` as 0 in a formula that expects the full length.
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `05ac582e205bd9f8` Z-function (cp-algorithms): Z-function and its linear-time computation

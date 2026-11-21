@@ -108,7 +108,7 @@ Fix: take a capability argument whose existence is the permission, and hand it o
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `ace3a1130eba6d54` Capability Myths Demolished
-- `1e2d20b92c98ae15` Robust Composition (Miller thesis)
+- `1a834c59905e2488` Object-capability model (Wikipedia): unforgeable references as the only authority; capability discipline
+- `60e228e8e5a43305` Capability-based security (Wikipedia): capabilities as communicable, unforgeable tokens of authority (broader topic)

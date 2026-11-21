@@ -91,9 +91,6 @@ A second trap: in an `if` expression a subrange-typed branch makes the whole exp
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04c90d5ac6a2d0db` Real World OCaml
-- `1c3cfc8cea1f7147` Scheme Tutorial
-- `65a54f748168d49c` Functional Programming for Mortals
-- `66b45c74c2786dc9` Concurrent Programming in ERLANG
+- `992f110785fdcdd9` Tail call (Wikipedia): tail position calls, tail-call elimination, tail recursion

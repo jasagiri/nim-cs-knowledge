@@ -98,10 +98,7 @@ doAssert tree.query(2, 5) == some(1)
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `b8f40165091faa5d` CSES Problem Set
-- `7508271bf7980bd3` Data Structures
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
+- `e63962521a8e8248` Segment tree (Wikipedia): tree over intervals, range query and update
+- `d74a1064f5770f8f` Segment Tree (cp-algorithms): build, range query, point and range update

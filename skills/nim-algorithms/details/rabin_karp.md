@@ -86,7 +86,7 @@ residue products fit the integer type (the reason for the 2^31-1 bound), and alw
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `e328397a112aae43` Rabin–Karp algorithm (Wikipedia): rolling hash for substring search
+- `a0522eb9caff68b2` Rabin-Karp for String Matching (cp-algorithms): polynomial rolling hash and implementation

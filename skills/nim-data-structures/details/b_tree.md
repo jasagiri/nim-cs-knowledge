@@ -117,10 +117,7 @@ A second pitfall is choosing `t` by habit: the best `t` depends on the node size
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `7508271bf7980bd3` Data Structures
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
+- `e2d46598d62044cf` B-tree (Wikipedia): node structure, search, insertion with splitting, deletion
+- `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 14, external memory searching (B-trees)

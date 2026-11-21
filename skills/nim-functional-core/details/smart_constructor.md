@@ -114,6 +114,4 @@ Keep `distinct` for what it is good at (a `Meters` that cannot be added to a `Se
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `9431f0540eb98bfa` Smart constructors (HaskellWiki)
+None in the catalog: English Wikipedia has no article on smart constructors or Parse, don't validate (404); Abstract data type, Refinement type and Algebraic data type do not cover it.

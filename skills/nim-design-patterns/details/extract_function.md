@@ -88,7 +88,8 @@ Also name the function for what it computes (`discountOf`), not for where it was
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `0789f21330e7f72a` Source Making Design Patterns and UML
-- `690b10bb5f31ac02` The Catalog of Design Patterns
+- `e0da847236a95912` Code refactoring (Wikipedia): extract method: turn part of a larger routine into a new routine without changing behaviour
+
+Broader article; extract method is named in one sentence.

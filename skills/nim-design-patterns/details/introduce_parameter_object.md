@@ -113,7 +113,4 @@ doAssert not Query(minStops: 3, maxStops: 1).matches(2)   # min > max matches no
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `0789f21330e7f72a` Source Making Design Patterns and UML
-- `690b10bb5f31ac02` The Catalog of Design Patterns
+None in the catalog: No allowed source explains this refactoring. Code refactoring (Wikipedia) does not mention parameter objects; no English Wikipedia article exists (404).

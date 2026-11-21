@@ -164,8 +164,8 @@ Smaller traps: a clean merge is not a correct one (non-overlapping edits can sti
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `e52e6b835f6d8607` Pro Git (section 3.2 Basic Branching and Merging: "Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two", and its Basic Merge Conflicts)
+- `adf990e8cba6b2c0` Merge (version control) (Wikipedia): three-way merge with a common ancestor
 
-Read 2026-11-21 (catalog/concepts.json, round 4-lead). It covers the keyed merge of snapshots and conflicts, not the diff3 alignment; no catalog source was found for diff3 itself (searched by title for diff, merge, version control, git and patience). The laws of diff3 that do not hold are those reported by Khanna, Kunal and Pierce, "A Formal Investigation of Diff3", which is not in the catalog.
+Wikipedia redirects Three-way_merge to the Three-way merge section of this article.

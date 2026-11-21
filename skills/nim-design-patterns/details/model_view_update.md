@@ -98,8 +98,6 @@ Also keep `view` free of state: if two equal models can render differently, the 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `3c6220b5e0cafc8b` An Introduction to Elm
-- `60c40163fc52f9a8` Beginning Elm
-- `a6bcf3b6d002b8b8` The Elm Architecture
+- `ac19b0af9d8633b8` Elm (programming language) (Wikipedia): The Elm Architecture: model, view and update driven by messages (the example section)

@@ -105,8 +105,7 @@ Also do not export the variant's discriminator as mutable: build a new value ins
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `0789f21330e7f72a` Source Making Design Patterns and UML
-- `234c8e8fafc08c50` Refactor Like a Superhero
-- `690b10bb5f31ac02` The Catalog of Design Patterns
+- `e0da847236a95912` Code refactoring (Wikipedia): lists the technique 'Replace conditional with polymorphism' among refactorings (brief)
+- `96b03f277d46e69e` State pattern (Wikipedia): replacing conditional statements on state by polymorphic state objects

@@ -105,6 +105,7 @@ Fix: send the request, keep the context in the ledger, return to the host, and l
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `f2b0c2a6b0908171` Making reliable distributed systems in the presence of software errors (Armstrong thesis)
+- `6a0bb33166dabc69` Request–response (Wikipedia): request and reply message-exchange pattern
+- `50fc785f1d11793d` gen_server (Erlang/OTP documentation): call/2 as a synchronous request-reply over asynchronous messages

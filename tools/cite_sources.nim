@@ -1,26 +1,30 @@
-## cite_sources [--root:<repo>] [--max:<n>]
+## cite_sources [--root:<repo>]
 ##
-## Rewrites the Sources section of every details page from catalog/concepts.json and
-## catalog/sources.jsonl (ADR-NCK-0001). Idempotent: a second run changes nothing. Pages are keyed
-## `<area>/<page name>`. At most --max sources per page (default 8), English depth-1 sources first,
-## then by title, so the choice is stable.
+## Rewrites the Sources section of every details page from catalog/citations.json and
+## catalog/sources.jsonl (ADR-NCK-0005). Idempotent: a second run changes nothing. Pages are keyed
+## `<area>/<page name>`; each key lists the URLs of the sources that explain its concept, in the
+## order they are cited, with what each covers, and a note: why none does, or what the cited
+## sources leave out. Exit 1 when a cited URL is not in the catalog or a page has no key, 2 on a
+## usage error.
 
-import std/[algorithm, json, os, parseopt, strutils, tables]
+import std/[json, os, parseopt, strutils, tables]
 
 const SkillArea = [("nim-functional-core", "fp"), ("nim-data-structures", "ds"),
                    ("nim-algorithms", "algo"), ("nim-design-patterns", "patterns")]
 
-type Src = object
-  id, title, lang: string
-  depth: int
+type Cited = object
+  id, title, covers: string
 
-func sourcesSection(cited: seq[Src]; examined: int): string =
+func sourcesSection(cited: seq[Cited]; note: string): string =
   if cited.len == 0:
-    return "## Sources\n\nNone in the catalog: no table of contents among the " & $examined &
-      " core sources examined so far (catalog/concepts.json) names this concept.\n"
-  result = "## Sources\n\nCatalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:\n\n"
+    return "## Sources\n\nNone in the catalog: " & note.strip & "\n"
+  result = "## Sources\n\nCatalog IDs (catalog/sources.jsonl) of sources that explain this concept, " &
+    "each under a licence that allows commercial use:\n\n"
   for s in cited:
-    result.add "- `" & s.id & "` " & s.title.replace("\n", " ") & "\n"
+    result.add "- `" & s.id & "` " & s.title.replace("\n", " ")
+    if s.covers.len > 0: result.add ": " & s.covers.strip.replace("\n", " ")
+    result.add "\n"
+  if note.strip.len > 0: result.add "\n" & note.strip & "\n"
 
 func replaceSources*(page, section: string): string =
   ## `page` with everything from "## Sources" to the end replaced by `section`.
@@ -30,13 +34,11 @@ func replaceSources*(page, section: string): string =
 
 proc main(): int =
   var root = currentSourcePath().parentDir.parentDir
-  var most = 8
   for kind, key, val in getopt():
     case kind
     of cmdLongOption, cmdShortOption:
       case key
       of "root": root = val
-      of "max": most = parseInt(val)
       else:
         stderr.writeLine "cite_sources: unknown option --" & key
         return 2
@@ -44,32 +46,27 @@ proc main(): int =
       stderr.writeLine "cite_sources: unexpected argument " & key
       return 2
     of cmdEnd: discard # getopt never yields cmdEnd inside the loop
-  var byId = initTable[string, Src]()
+  var byUrl = initTable[string, tuple[id, title: string]]()
   for line in lines(root / "catalog" / "sources.jsonl"):
     let j = parseJson(line)
-    byId[j["id"].getStr] = Src(id: j["id"].getStr, title: j["title"].getStr, lang: j["lang"].getStr,
-      depth: j["listings"][0]["depth"].getInt)
-  let cj = parseJson(readFile(root / "catalog" / "concepts.json"))
-  let examined = cj["examined"].len
+    byUrl[j["url"].getStr] = (j["id"].getStr, j["title"].getStr)
+  let pagesJ = parseJson(readFile(root / "catalog" / "citations.json"))["pages"]
   var changed = 0
   for (skill, area) in SkillArea:
     for f in walkFiles(root / "skills" / skill / "details" / "*.md"):
       let key = area & "/" & f.extractFilename.changeFileExt("")
-      var cited: seq[Src]
-      if cj["concepts"].hasKey(key):
-        for id in cj["concepts"][key]:
-          if id.getStr in byId: cited.add byId[id.getStr]
-          else:
-            stderr.writeLine "cite_sources: ", key, ": ", id.getStr, " is not in the catalog"
-            return 1
-      cited.sort(proc(a, b: Src): int =
-        result = cmp(a.lang != "en", b.lang != "en")
-        if result == 0: result = cmp(a.depth, b.depth)
-        if result == 0: result = cmp(a.title.toLowerAscii, b.title.toLowerAscii)
-        if result == 0: result = cmp(a.id, b.id))
-      if cited.len > most: cited.setLen(most)
+      if not pagesJ.hasKey(key):
+        stderr.writeLine "cite_sources: ", key, " has no entry in catalog/citations.json"
+        return 1
+      var cited: seq[Cited]
+      for s in pagesJ[key]["sources"]:
+        let url = s["url"].getStr
+        if url notin byUrl:
+          stderr.writeLine "cite_sources: ", key, ": ", url, " is not in the catalog"
+          return 1
+        cited.add Cited(id: byUrl[url].id, title: byUrl[url].title, covers: s{"covers"}.getStr)
       let page = readFile(f)
-      let updated = replaceSources(page, sourcesSection(cited, examined))
+      let updated = replaceSources(page, sourcesSection(cited, pagesJ[key]{"note"}.getStr))
       if updated != page:
         writeFile(f, updated)
         inc changed

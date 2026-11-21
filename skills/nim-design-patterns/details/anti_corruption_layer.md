@@ -106,9 +106,8 @@ Do not default on a refusal (an unknown status as "active", a bad amount as 0): 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `cb4702a78059e729` Domain-Driven Design Reference
-- `535230a3b79993b3` Domain Driven Design Quickly
+- `d5502080b0bfb822` Domain-driven design (Wikipedia): names the anticorruption layer as a context-mapping relationship that isolates a system from an upstream model
 
-The pattern is from Eric Evans, Domain-Driven Design (2003), in the chapter on maintaining model integrity. The page is written for this repository and copies nothing from it.
+No dedicated English Wikipedia article (Anti-corruption_layer is 404). The Domain-driven design article only defines the layer in one list item; translation by smart constructors is not covered.

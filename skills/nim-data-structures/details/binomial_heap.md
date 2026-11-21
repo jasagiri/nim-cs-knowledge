@@ -99,8 +99,6 @@ doAssert a.merge(b).rankProfile == @[0, 1]
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `7508271bf7980bd3` Data Structures
-- `ed8c50dad686e4d3` Elementary Algorithms
-- `e443a6b88b011f39` Purely Functional Data Structures
+- `7be0194f5928bb1a` Binomial heap (Wikipedia): binomial trees, merge by carry, operations

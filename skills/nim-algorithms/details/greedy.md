@@ -95,13 +95,7 @@ write it in the type's documentation.
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `b6deea26499dcff1` Algorithms
-- `c1b93dc13846e70a` Algorithms Course Materials
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `8230f061e9c86571` E-olymp
+- `3e23f4f0ff0fa382` Greedy Algorithms (Erickson, Algorithms, ch. 4): greedy choice and proving it correct by exchange argument
+- `6ba34697d3d84690` Greedy algorithm (Wikipedia): locally optimal choices and when they are globally optimal

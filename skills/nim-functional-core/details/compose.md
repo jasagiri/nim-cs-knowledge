@@ -143,6 +143,6 @@ The function types need `{.noSideEffect, raises: [].}`: a `proc` that echoes or 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `90944eadae97da9a` Learning Scalaz
+- `d90148315f9e0d2b` Function composition (computer science) (Wikipedia): composing functions, associativity, identity

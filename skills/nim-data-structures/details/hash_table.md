@@ -115,26 +115,8 @@ Do not iterate a hash table and use the order in output: it changes with the has
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04c90d5ac6a2d0db` Real World OCaml
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `4b0dad6bfcfbe438` Lisp Tutorial
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `66b45c74c2786dc9` Concurrent Programming in ERLANG
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `6f359c1814ec309e` Princeton University Algorithms, Part 1
-- `7508271bf7980bd3` Data Structures
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
-- `9e0afdfae6157d74` OCaml from the Very Beginning
-- `ab4202744fa78598` The Ultimate Guide To Elixir For Object-Oriented Programmers
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `e024287b414c64e3` Data Structures and Algorithms Specialization
-- `e842c4dbba02a07e` Data Structures
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `ec523d1543fdd6aa` Interpreting LISP
-- `f3c825e89e068871` Loving Common Lisp, or the Savvy Programmer's Secret Weapon
-- `ffb222d148114a4f` ECS 36C: Data Structures, Algorithms, and Programming
+- `37e2a72c655f9ec1` Hash table (Wikipedia): hashing, load factor, collision resolution
+- `3def4e5120f23b4d` Linear probing (Wikipedia): open addressing with linear probe sequence
+- `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 5, hash tables (LinearHashTable)

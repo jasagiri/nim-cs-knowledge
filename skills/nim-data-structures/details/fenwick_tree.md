@@ -103,9 +103,7 @@ doAssert f.prefixSum(3) == some(10)
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `b8f40165091faa5d` CSES Problem Set
+- `2824f929bb9362ca` Fenwick tree (Wikipedia): binary indexed tree, prefix sums, point update
+- `f872e3eda8f0f8dc` Fenwick Tree (cp-algorithms): implementation, range queries and updates

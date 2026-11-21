@@ -92,6 +92,6 @@ echo indexOfTea(names).get(-1)
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `c59d2a0bec136dcc` Effective Scala
+- `12a6d365d35eb574` Option type (Wikipedia): an explicit type for a value that may be absent, and map/bind over it

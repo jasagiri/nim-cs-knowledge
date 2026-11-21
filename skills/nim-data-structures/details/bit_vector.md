@@ -123,11 +123,6 @@ Another pitfall is calling `len` for the number of members: `len` is the univers
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04a7132319218b7b` Matters Computational: Ideas, Algorithms, Source Code
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `29ca95172575b79a` Algorithms and Data Structures
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
+- `5802d14abf6b676b` Bit array (Wikipedia): packed bit storage and word-level operations

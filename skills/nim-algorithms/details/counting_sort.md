@@ -95,9 +95,6 @@ doAssert sorted == ok(@[(0, "zero"), (1, "first"), (1, "second")], CountingError
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `e8a751ae9f8ed52b` Learning Algorithm
+- `7c6682f61aee42a8` Counting sort (Wikipedia): counting occurrences, prefix sums, stable placement

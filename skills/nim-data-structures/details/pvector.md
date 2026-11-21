@@ -95,6 +95,9 @@ doAssert v.get(9_999) == some(9_999)
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `f31b0e60216ebe20` Understanding Clojure's Persistent Vectors, part 1
+- `93f436ec1b39312a` Persistent data structure (Wikipedia): persistence, path copying, persistent vectors in Clojure
+- `686a74b9cb147d93` Hash array mapped trie (Wikipedia): trie of wide nodes that persistent vectors and maps are built on
+
+No allowed article is specifically about persistent vectors (en.wikipedia Persistent_vector is absent); coverage is of the broader topics.

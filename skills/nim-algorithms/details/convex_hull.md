@@ -71,8 +71,7 @@ Fix: pop on `<= 0` as `convexHull` does, so only strict left turns survive. A se
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `5c9fa6665b83ce3f` LEDA: A Platform for Combinatorial and Geometric Computing
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `b8f40165091faa5d` CSES Problem Set
+- `afbdfaa6bbd570af` Convex hull construction (cp-algorithms): Monotone chain algorithm (Andrew)
+- `b58547ede15087a4` Convex hull algorithms (Wikipedia): overview including the monotone chain

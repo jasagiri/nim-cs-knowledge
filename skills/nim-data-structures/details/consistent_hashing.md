@@ -124,6 +124,6 @@ doAssert min(counts) > 500                     # no node is starved with many vi
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f31dd50eef1beba` Algorithmic Thinking
+- `aa502798cd36de2d` Consistent hashing (Wikipedia): hash ring, key to node mapping, remapping on node change

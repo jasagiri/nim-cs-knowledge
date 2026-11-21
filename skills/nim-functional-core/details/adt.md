@@ -135,13 +135,6 @@ Also remember that `==` on a bare `ref object` compares addresses; define a stru
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `e99282b528704855` A Scala Tutorial for Java programmers
-- `21a878bd1e78232f` A Tour of Scala - an interactive scala tutorial
-- `d211930924723e5e` Anatomy of Programming Languages
-- `c59d2a0bec136dcc` Effective Scala
-- `04bc6d730024731d` Haskell Notes for Professionals
-- `6a3d106c56e40887` OCaml From the Ground Up
-- `04c90d5ac6a2d0db` Real World OCaml
-- `4983fd2e157f75bc` Scala Tutorial
+- `274be44eb11a5120` Algebraic data type (Wikipedia): sum and product types, pattern matching

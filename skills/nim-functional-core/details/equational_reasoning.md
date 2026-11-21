@@ -98,9 +98,6 @@ Make the state an argument and a result, and the call is a value again. Do not a
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `14f064178f32050b` Introduction to Functional Programming (TU Delft OCW)
-- `2766d61d1e588fe4` The Haskell Road to Logic, Math and Programming
-- `73d14d6fafde7152` Advanced Functional Programming in Haskell
-- `ba7c262763893951` Haskell
+- `5d5d2690cf234c94` Referential transparency (Wikipedia): expressions replaceable by their values; substitution of equals (nearest allowed article)

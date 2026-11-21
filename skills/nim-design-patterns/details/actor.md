@@ -160,7 +160,7 @@ Fix: the behaviour is a field of the state and `step` returns the new state; eff
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `d8b43bb6711561da` Actor Model of Computation: Scalable Robust Information Systems (Hewitt)
-- `f2b0c2a6b0908171` Making reliable distributed systems in the presence of software errors (Armstrong thesis)
+- `ed4c9a778416dd3d` Actor model (Wikipedia): actors as private state plus message passing, mailboxes, becoming a new behaviour, spawning
+- `50fc785f1d11793d` gen_server (Erlang/OTP documentation): a process that owns state and handles messages one at a time, with the state returned from each callback

@@ -82,7 +82,7 @@ Fix: walk from the root in breadth-first order (children before grandchildren), 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `b8f40165091faa5d` CSES Problem Set
+- `6c938ccdd8251292` Lowest Common Ancestor - Binary Lifting (cp-algorithms): binary lifting ancestors table
+- `842b7bc536b91e20` Lowest common ancestor (Wikipedia): definition and approaches

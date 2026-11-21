@@ -73,12 +73,7 @@ Also remember that totals are assumed not to overflow `int`.
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `fd559bc6baa61a32` The Design of Approximation Algorithms
+- `5f07ae1db436c53b` Knapsack Problem (cp-algorithms): 0/1 knapsack dynamic programming
+- `e745e029009d8860` Knapsack problem (Wikipedia): problem statement and dynamic-programming solution

@@ -94,6 +94,7 @@ Another trap is a middleware that records timing or logs: that is an effect, and
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `234c8e8fafc08c50` Refactor Like a Superhero
+- `94248ee8312149b5` Pipeline (software) (Wikipedia): chains of processing stages where each output feeds the next (related topic; middleware as handler wrappers is not named)
+- `d90148315f9e0d2b` Function composition (computer science) (Wikipedia): stacking stages as composition, associativity

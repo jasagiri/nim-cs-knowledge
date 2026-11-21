@@ -190,4 +190,9 @@ Fix: `publishFile`, or the same steps in your own edge: a unique temporary name 
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose contents cover an application's temporary-name, fsync and rename protocol (searched 2026-11-21 by title for operating system, file system, crash, durab, storage, unix and rename). Operating Systems: Three Easy Pieces (`24c2ca14b8ed5bf2`) has a chapter 42, FSCK and Journaling, on the crash consistency of the file system itself, and no chapter heading names rename or fsync; its text was not read, so the page does not cite it (catalog/concepts.json, round 4-lead).
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `587cf64fe7ab500e` Rename (computing) (Wikipedia): POSIX rename is atomic: a reader sees the old name or the new one
+- `a8ef5a83069f53fb` sync (Unix) (Wikipedia): fsync and fdatasync flush file data to disk, and the need to check their return values
+
+No source covers the whole recipe (temporary name, fsync, rename, fsync of the directory); the two articles cover the rename and fsync steps. Directory fsync is not discussed.

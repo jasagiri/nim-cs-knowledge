@@ -104,7 +104,9 @@ Also state the rewrite's contract (same store, same output) and test it with ran
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04bc6d730024731d` Haskell Notes for Professionals
-- `90944eadae97da9a` Learning Scalaz
+- `af5c8783453c7e24` Monad (functional programming) (Wikipedia): the free monad section: a program built as data from a functor, run later by an interpreter
+- `1656f17a2f153c91` Interpreter pattern (Wikipedia): a program as a tree of expressions evaluated by an interpreter
+
+The Free monad title redirects to a section of the Monad article; the URL has no fragment as the brief requires.

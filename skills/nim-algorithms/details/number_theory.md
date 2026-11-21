@@ -80,13 +80,8 @@ Also, `modInverse` returning `none` is the normal answer for non-coprime inputs,
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `b8f40165091faa5d` CSES Problem Set
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `254fe28ac0bfd53e` Last Moment DSA Sheet(79) – Ace Interviews
-- `04a7132319218b7b` Matters Computational: Ideas, Algorithms, Source Code
-- `07aa8e8bb90a95ce` MIT's Mathematics for Computer Science
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
+- `08d8fc83218a2108` Extended Euclidean Algorithm (cp-algorithms): gcd, extended Euclid and Bezout coefficients
+- `ef24a19086be350f` Binary Exponentiation (cp-algorithms): fast (modular) exponentiation
+- `2a46e7824597cb31` Modular Inverse (cp-algorithms): modular inverse by extended Euclid and Euler's theorem

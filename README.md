@@ -18,9 +18,9 @@ structural invariants) is a property test.
 | `src/nimcs/patterns/` | the 23 GoF patterns in functional form (and which ones disappear), plus functional architecture patterns: functional core, event sourcing, CQRS, interpreters, tagless final, lenses, parser combinators, idempotent commands, and refactoring and migration patterns (parallel change, strangler fig, branch by abstraction, anti-corruption layer, seam) |
 | `skills/*/SKILL.md`, `details/` | agent skills (Agent Skills format), one details page per concept |
 | `docs/spec/*.md` | the laws and behaviours of each concept, by spec ID; tests are tagged with them |
-| `catalog/` | the sources: every entry of free-programming-books and the Hillside patterns catalog, followed to depth 2, with relevance, reachability and the concepts each core source covers; built by `../free-books-catalog` from `catalog/config.json` |
+| `catalog/` | the sources: articles and chapters that explain each page's concept, only from sites whose licences allow commercial use (`docs/sources.md`); `citations.json` says which page cites which; built by `../free-books-catalog` from `catalog/config.json` |
 | `dataset/` | `records.jsonl` and `chat.jsonl`, generated from the pages, modules and tests |
-| `tools/` | `cite_sources`, `dataset_build` (no network) |
+| `tools/` | `cite_sources` (Sources sections from `catalog/citations.json`), `dataset_build` (no network) |
 | `docs/adr/` | why: sources and copyright (0001), style (0002), dataset (0003) |
 
 ## Using the skills
@@ -41,8 +41,9 @@ messages. Every code answer is a file this repository compiles and tests. Regene
 
 The catalog records facts only (title, URL, section, stated licence, reachability). No text or
 code was copied from any listed book or page; everything under `src/`, `skills/` and `dataset/` was
-written here and cites sources by catalog ID (ADR-NCK-0001, NOTICE). The free-programming-books
-arrangement is CC BY 4.0 and attributed in NOTICE.
+written here and cites sources by catalog ID (ADR-NCK-0001, NOTICE). Every listed source is under a
+licence that allows commercial use (ADR-NCK-0005, `docs/sources.md`), and a test fails if one that
+does not enters the catalog (NCK-SRC-01).
 
 ## Development
 
@@ -57,7 +58,7 @@ nim specCoverage   # G1 table (needs ../nim-spec-coverage)
 
 # refreshing the sources (network; one request per host at a time, robots.txt honoured)
 nim c -d:ssl -d:release -o:bin/catalog_fetch ../free-books-catalog/tools/catalog_fetch.nim
-bin/catalog_fetch fpb   # then: hillside, expand, reach (reads catalog/config.json)
+bin/catalog_fetch reach   # reads catalog/config.json
 ```
 
 `raw/` (the fetched pages) lives outside the repository: `$NIMCS_RAW`, by default

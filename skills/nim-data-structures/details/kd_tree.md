@@ -122,7 +122,6 @@ doAssert t.nearest(point(1, 1)) == some(point(0, 1))   # a tie: the smaller poin
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f359c1814ec309e` Princeton University Algorithms, Part 1
-- `7508271bf7980bd3` Data Structures
+- `92b9cbd0c495c72f` k-d tree (Wikipedia): construction by alternating axes, nearest neighbour and range search

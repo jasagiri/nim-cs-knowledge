@@ -153,4 +153,6 @@ doAssert one.increment(a, 3).merge(one).value == 5 # the larger slot wins
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose table of contents names conflict-free replicated data types (searched 2026-11-21 in the concept index for crdt, conflict-free replicated data type and replicat, and by title for distributed, replicat and consensus). `33c1443567019e4b` Distributed Systems 4th edition covers consistency and replication by its title, but its text was not read, so the page does not cite it.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `f1958593e8886b91` Conflict-free replicated data type (Wikipedia): state-based CRDTs, join-semilattice merge, examples

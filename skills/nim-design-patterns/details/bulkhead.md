@@ -113,7 +113,6 @@ Also size the limits so that they do not add up to more than the real resource i
 
 ## Sources
 
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `d6608bb8bc6985b4` Software Architecture in the AI & Cloud Era
+- `71a07163203c135d` Bulkhead pattern (Wikipedia): isolating resource pools per consumer so a failure or overload stays inside one compartment

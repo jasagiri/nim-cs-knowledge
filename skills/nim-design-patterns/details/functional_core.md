@@ -105,6 +105,9 @@ Also keep the core free of hidden inputs: a clock read or a random draw inside `
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `57f76eb4ea4f92e1` Hands-on Elixir & OTP: Cryptocurrency trading bot
+- `2c1a1cc20924cd71` Pure function (Wikipedia): functions that depend only on their arguments and have no side effects
+- `130ad4e198fe734f` Side effect (computer science) (Wikipedia): what an effect is, and why isolating effects makes code easier to test
+
+No English Wikipedia article for Functional core, imperative shell (404); these cover the core (pure) and the shell (effects) separately, not the split itself.

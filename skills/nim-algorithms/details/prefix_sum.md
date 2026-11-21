@@ -104,7 +104,9 @@ doAssert p.rangeSum(1, 3) == ok(20 + 30, SpanError)               # half-open 1 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `6f31dd50eef1beba` Algorithmic Thinking
+- `05e6a4a78b12dd6a` Prefix sum (Wikipedia): prefix sums and range sums by subtraction
+- `6589db1cad040086` Summed-area table (Wikipedia): two-dimensional prefix sums
+
+Difference arrays have no dedicated allowed article; Prefix sum only mentions finite differences as the inverse.

@@ -94,8 +94,6 @@ Fix: a proc type and plain procs, as in `PriceRule` above. Two further traps: a 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
-- `0789f21330e7f72a` Source Making Design Patterns and UML
-- `690b10bb5f31ac02` The Catalog of Design Patterns
+- `5b50628195d322fa` Strategy pattern (Wikipedia): interchangeable algorithms selected at run time

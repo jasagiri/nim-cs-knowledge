@@ -80,8 +80,7 @@ Fix: start the tortoise one step ahead (`f[start]`) and the hare two steps ahead
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `7f34194abd61a6fc` Singly Linked List
-- `b8f40165091faa5d` CSES Problem Set
+- `fe7de4383fcec4dc` Cycle detection (Wikipedia): Floyd's tortoise and hare on a sequence
+- `aa18a44ed6b8633a` Checking a graph for acyclicity and finding a cycle in O(M) (cp-algorithms): three-colour DFS for finding a cycle in a graph

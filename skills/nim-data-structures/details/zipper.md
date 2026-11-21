@@ -114,10 +114,6 @@ doAssert z.rebuild.toSeq == @[6]
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `14e1135a7e563bfa` CS240h: Functional Systems in Haskell
-- `dfcd9e1737d42519` Exploring Generic Haskell
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `93b1903990c81385` Learn You an Elm
-- `90944eadae97da9a` Learning Scalaz
+- `74e4f056ab8ab490` Zipper (data structure) (Wikipedia): focus plus context for navigating and editing immutable structures

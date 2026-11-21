@@ -223,8 +223,7 @@ Two smaller points. The root does not authenticate a block's position by itself 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `e52e6b835f6d8607` Pro Git (section 10.2 Git Objects: "Git is a content-addressable filesystem"; a tree entry is "the SHA-1 hash of a blob or subtree")
-
-Read 2026-11-21 (catalog/concepts.json, round 4-lead). Not cited: Git from the Bottom Up (`5490b23c80115e87`), whose headings name blobs and trees but not addressing by hash, and whose chapters were not read; Bitcoin and Cryptocurrency Technologies (`30f2ca04a8c28811`), whose table of contents is only in a PDF that was not read. The CVE-2012-2459 remark is the reported behaviour of Bitcoin's block tree, stated without a catalog ID.
+- `910b65056f3e5195` Merkle tree (Wikipedia): hash tree, root hash, inclusion proofs
+- `361f12a35168f674` Content-addressable storage (Wikipedia): addressing data by its content hash

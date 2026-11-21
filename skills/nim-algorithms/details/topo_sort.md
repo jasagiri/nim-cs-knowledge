@@ -74,10 +74,7 @@ The fix is a `Result` whose error names a real cycle, as the module does.
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
+- `8883b90e8f4a0698` Topological Sorting (cp-algorithms): DFS-based topological sort
+- `06a9434c68869f12` Topological sorting (Wikipedia): definition, Kahn's algorithm and DFS method

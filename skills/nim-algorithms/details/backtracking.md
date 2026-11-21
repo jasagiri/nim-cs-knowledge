@@ -93,13 +93,6 @@ inner node does not stop the walk below it; make `children` empty at a complete 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `bde3b4eb1016bf2e` 30 Days of Elixir
-- `73d14d6fafde7152` Advanced Functional Programming in Haskell
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `b6deea26499dcff1` Algorithms
-- `c1b93dc13846e70a` Algorithms Course Materials
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
+- `1b0ee88856ce430c` Backtracking (Wikipedia): depth-first search over partial solutions with pruning

@@ -69,7 +69,7 @@ Fix: take both ends, as `maximalMatchingCover` does; that is what makes every la
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `b6deea26499dcff1` Algorithms
-- `c1b93dc13846e70a` Algorithms Course Materials
+- `28fef639cb78d3cf` Approximation algorithm (Wikipedia): approximation ratio and the idea of a guaranteed bound
+- `77b1d95b642d048c` Vertex cover (Wikipedia): 2-approximation of vertex cover through a maximal matching

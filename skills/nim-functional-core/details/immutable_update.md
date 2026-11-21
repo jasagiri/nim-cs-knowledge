@@ -91,6 +91,7 @@ Also keep a `ref` object out of value objects: copying a `ref` field copies the 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04c90d5ac6a2d0db` Real World OCaml
+- `24f1092fea59a7ac` Immutable object (Wikipedia): returning a modified copy instead of mutating
+- `93f436ec1b39312a` Persistent data structure (Wikipedia): updates preserve the previous version

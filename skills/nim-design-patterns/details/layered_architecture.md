@@ -72,7 +72,6 @@ Also do not let the shell contain a rule: when you find an `if` about the busine
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `253339d34dc0d34e` Load-Bearing: Which Software Principles Hold, and Where They Stop
-- `d6608bb8bc6985b4` Software Architecture in the AI & Cloud Era
+- `f0c3d752953e20ab` Multitier architecture (Wikipedia): layers with one-way dependencies, presentation/application/data tiers

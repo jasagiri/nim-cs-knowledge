@@ -96,13 +96,6 @@ doAssert a.value.codeWords == b.value.codeWords
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `3020c057a8d82e66` S-99: Ninety-Nine Scala Problems
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `5b1535e53ceaa7c4` SICP Distilled - An idiosyncratic tour of SICP in Clojure
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `e024287b414c64e3` Data Structures and Algorithms Specialization
+- `2a69d73160f9ef6e` Huffman coding (Wikipedia): optimal prefix codes by repeatedly merging the two least frequent symbols

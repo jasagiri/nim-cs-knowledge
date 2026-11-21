@@ -98,13 +98,6 @@ Also: forgetting to return the grown memo from the first recursive call makes th
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `b6deea26499dcff1` Algorithms
-- `c1b93dc13846e70a` Algorithms Course Materials
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `42a1cb32a5e35bad` An Open Guide to Data Structures and Algorithms
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `63ad3e14455a34af` Competitive Programmer's Handbook
+- `6bbca9dba1ba391c` Memoization (Wikipedia): caching results of pure function calls

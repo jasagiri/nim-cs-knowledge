@@ -61,10 +61,7 @@ fall-back loop that compares against `pattern[k]` before checking `k > 0`, which
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `6257bfc23c0c0667` Knuth–Morris–Pratt algorithm (Wikipedia): failure table and the matching loop
+- `01393ccf85886fee` Prefix function - Knuth-Morris-Pratt (cp-algorithms): prefix function and its use for substring search

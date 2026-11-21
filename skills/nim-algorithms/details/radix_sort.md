@@ -78,9 +78,7 @@ The fix is to reject negatives first and say so in the result (`err(seq[int], sk
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `83e988650c438ef1` Radix sort (Wikipedia): LSD and MSD digit-wise sorting
+- `7c6682f61aee42a8` Counting sort (Wikipedia): stable counting sort used per digit

@@ -144,4 +144,4 @@ Fix: measure waits as `MonoNs` differences, read one `Now` at the edge, keep "no
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title or table of contents covers wall and monotonic clocks or time as an input (searched 2026-11-20 by title for clock, time, monotonic, deterministic and testing); the page cites no source it has not read.
+None in the catalog: Elapsed real time, System time, Unix time and Network Time Protocol were opened; none explains wall clock vs monotonic clock or passing time as an input.

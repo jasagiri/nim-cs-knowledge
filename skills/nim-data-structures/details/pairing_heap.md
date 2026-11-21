@@ -90,7 +90,6 @@ doAssert h.deleteMin.deleteMin.toSortedSeq == @[3, 4]
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `7508271bf7980bd3` Data Structures
-- `ed8c50dad686e4d3` Elementary Algorithms
+- `a4e73ae2b00d9619` Pairing heap (Wikipedia): two-pass merge of children, operations and complexity

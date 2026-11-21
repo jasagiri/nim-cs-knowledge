@@ -67,11 +67,8 @@ it must rank below every real rank (here -1), or "a" would sort after "ab".
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `7508271bf7980bd3` Data Structures
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `8230f061e9c86571` E-olymp
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `5e9128827e51308c` Suffix Array (cp-algorithms): construction and use of the suffix array
+- `5af7011ac3c7dda9` Suffix array (Wikipedia): definition and construction
+- `f8ccdccce79a7e47` LCP array (Wikipedia): LCP array and Kasai's algorithm

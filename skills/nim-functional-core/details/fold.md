@@ -85,10 +85,6 @@ Another trap: `unfold` with a step that never returns `none` relies on `limit`; 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `14e1135a7e563bfa` CS240h: Functional Systems in Haskell
-- `04bc6d730024731d` Haskell Notes for Professionals
-- `90944eadae97da9a` Learning Scalaz
-- `0a6f20dc60d4d0f3` The Haskell School of Music - From Signals to Symphonies
-- `731b2d900bf6d003` Write Yourself a Scheme in 48 Hours
+- `89ec031e9b5603b0` Fold (higher-order function) (Wikipedia): folding a structure with a combining function

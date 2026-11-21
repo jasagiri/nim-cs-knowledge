@@ -81,9 +81,7 @@ when f(n) is not polynomial, or when the subproblems are unequal, is outside its
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `b6deea26499dcff1` Algorithms
-- `29ca95172575b79a` Algorithms and Data Structures
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
+- `782bceea232d66dd` Divide-and-conquer algorithm (Wikipedia): divide, solve, combine
+- `3aad9115b6daab2c` Master theorem (analysis of algorithms) (Wikipedia): solving T(n)=aT(n/b)+f(n)

@@ -142,6 +142,6 @@ Another trap is a `many` over a parser that can succeed without consuming input:
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `14f064178f32050b` Introduction to Functional Programming (TU Delft OCW)
+- `ec3d2129b08698d4` Parser combinator (Wikipedia): parsers as functions combined by higher-order functions

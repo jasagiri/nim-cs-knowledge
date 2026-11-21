@@ -87,6 +87,9 @@ doAssert q.toSeq == @[1, 2]
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `e443a6b88b011f39` Purely Functional Data Structures
+- `272fbcd73a9312b1` Queue (abstract data type) (Wikipedia): amortized and persistent functional queues
+- `4fb9d2a834ff7720` Purely functional data structure (Wikipedia): persistence and amortization in functional data structures
+
+No allowed source names the banker's method for queues specifically.

@@ -63,13 +63,6 @@ The fix is the third part: elements neither less nor greater go to `equal` and a
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `29ca95172575b79a` Algorithms and Data Structures
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `464f1aa168823232` Computer Science I
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `e8a751ae9f8ed52b` Learning Algorithm
+- `522897bc50694da5` Quicksort (Wikipedia): partitioning and recursion

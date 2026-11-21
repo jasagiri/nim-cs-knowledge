@@ -163,8 +163,8 @@ doAssert applyAll(a.world, batch).units.len == 0
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `737bd5d63c408504` Game Programming Patterns (contents: Command, Event Queue)
-- `22c3d3a350b7b271` Game Programming Patterns (Command, Event Queue, Object Pool, Data Locality)
-- `1cbc332178e5a52f` Data-Oriented Design
+- `01af3730c5bafb02` Command pattern (Wikipedia): requests as data that can be queued and executed later
+
+No source covers deferred structural changes to a collection under iteration. The Wikipedia 'Command buffer' title redirects to a computer-graphics glossary entry, which is a different concept. Command pattern only covers commands as queued plain values.

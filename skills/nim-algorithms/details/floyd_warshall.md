@@ -73,9 +73,7 @@ The fix is `for k` outermost, as in the module: after round k, every path whose 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `e8a751ae9f8ed52b` Learning Algorithm
+- `8f552a6506e48e21` Floyd–Warshall algorithm (Wikipedia): all-pairs shortest paths by dynamic programming over intermediate vertices
+- `a7d6db829063b6f7` Floyd-Warshall - finding all shortest paths (cp-algorithms): algorithm, path reconstruction, negative cycles

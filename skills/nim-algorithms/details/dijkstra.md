@@ -64,10 +64,7 @@ The fix is what the module does: scan the arcs first and return `err(PathTree, g
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `38cd287ed3ec9270` Dijkstra's algorithm (Wikipedia): greedy relaxation with a priority queue
+- `a02954f71a465fec` Dijkstra - finding shortest paths from given vertex (cp-algorithms): algorithm, proof and implementation

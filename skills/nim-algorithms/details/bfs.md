@@ -67,13 +67,7 @@ The fix, used in the module: set the distance when a vertex is first discovered 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `c6a234b79d2a7c88` Computer Science II
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `6215342ef1e70064` Breadth-first search (Wikipedia): queue-based level order traversal
+- `4d69a54a5b23646a` Breadth First Search (cp-algorithms): BFS and shortest paths in unweighted graphs

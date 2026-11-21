@@ -129,6 +129,6 @@ Also validate the policy once: a cap below the base or a jitter over 100 percent
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `bc60002635039782` Exponential Backoff And Jitter
+- `73afa3555eda02ea` Exponential backoff (Wikipedia): growing the wait between retries exponentially, with jitter

@@ -77,9 +77,7 @@ The fix is the n-th round: if anything still improves, return the cycle as an er
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `e8a751ae9f8ed52b` Learning Algorithm
+- `8689564bc83fe8c3` Bellman–Ford algorithm (Wikipedia): relaxation rounds, negative weights, negative-cycle detection
+- `eeed39e57bca4d59` Bellman-Ford - finding shortest paths with negative weights (cp-algorithms): algorithm, proof and negative-cycle handling

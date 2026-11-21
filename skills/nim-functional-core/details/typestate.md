@@ -196,4 +196,6 @@ A generic routine `proc write[S](b: Blob[S]; ...)` is also a hole: `S` is then u
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title covers typestate, phantom types, session types or type-driven design (searched 2026-11-21 by title for typestate, phantom, session type, type-driven, affine, linear type, illegal state and Rust; the Rust and dependent-types titles found are general books, none read as covering typestate, and the page cites no source it has not read).
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `e9f9521ff80ffabe` Typestate analysis (Wikipedia): operations allowed depend on the object's state, checked statically

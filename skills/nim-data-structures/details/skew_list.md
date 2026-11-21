@@ -95,6 +95,8 @@ doAssert xs.get(2) == some(3)          # O(log n) instead of O(n)
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `e443a6b88b011f39` Purely Functional Data Structures
+- `5e7db9cb96450d0c` Skew binary number system (Wikipedia): skew binary representation with O(1) increment
+
+Only the number system is covered; no allowed source describes Okasaki's random-access list built on it.

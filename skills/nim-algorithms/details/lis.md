@@ -61,9 +61,7 @@ Another slip is using `<=` in the search, which turns "strictly increasing" into
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `e8a751ae9f8ed52b` Learning Algorithm
+- `081c8714254e799d` Longest increasing subsequence (cp-algorithms): O(n log n) and O(n^2) solutions
+- `8b8037d0f8b298fe` Longest increasing subsequence (Wikipedia): patience-style algorithm with binary search

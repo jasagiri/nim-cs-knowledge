@@ -117,6 +117,8 @@ Do not annotate the logic `func` when the record's procs have effects; the compi
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `75f066ba7f7db4d2` The Handle Pattern
+- `5bc01215c554611d` Dependency injection (Wikipedia): supplying a component's dependencies from outside instead of having it create them
+
+A record of procs as the injected dependency is the Nim form; the article covers injection in general.

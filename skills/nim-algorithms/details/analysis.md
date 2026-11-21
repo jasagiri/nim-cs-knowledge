@@ -111,16 +111,8 @@ doAssert steps.totalCost <= 3 * 64     # yet the average stays constant
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `5b1535e53ceaa7c4` SICP Distilled - An idiosyncratic tour of SICP in Clojure
-- `6f359c1814ec309e` Princeton University Algorithms, Part 1
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `b6deea26499dcff1` Algorithms
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `c1b93dc13846e70a` Algorithms Course Materials
-- `e842c4dbba02a07e` Data Structures
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `ffb222d148114a4f` ECS 36C: Data Structures, Algorithms, and Programming
+- `b8ef1d121edbbaa1` Big O notation (Wikipedia): asymptotic notation
+- `edf91049891fd604` Amortized analysis (Wikipedia): aggregate, accounting and potential methods
+- `0f84110bc6fb9a48` Time complexity (Wikipedia): counting steps as a function of input size

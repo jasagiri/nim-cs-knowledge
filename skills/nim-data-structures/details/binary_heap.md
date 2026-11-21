@@ -111,17 +111,7 @@ Equal keys are not kept in insertion order: a binary heap is not stable. Add a s
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04a7132319218b7b` Matters Computational: Ideas, Algorithms, Source Code
-- `19250093425bb17e` Data Structures and Algorithm Analysis in C++
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `cc6ccd12f41004bf` Data Structures in C++ - For Beginners
-- `e024287b414c64e3` Data Structures and Algorithms Specialization
-- `e842c4dbba02a07e` Data Structures
-- `ffb222d148114a4f` ECS 36C: Data Structures, Algorithms, and Programming
+- `6049ba2282773666` Binary heap (Wikipedia): array layout, sift-up and sift-down, insert and extract-min
+- `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 10, heaps (BinaryHeap)

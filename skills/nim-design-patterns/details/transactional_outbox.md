@@ -119,5 +119,4 @@ Delivery order across retries is not a guarantee: a failed message stays while l
 
 ## Sources
 
-
-None in the catalog: no source in catalog/sources.jsonl was found whose table of contents names the transactional outbox (searched 2026-11-21 in the concept index for outbox and transactional outbox, and by title for transaction and microservice). Titles on microservices exist (for example `0ee5efee890ce9c4` .NET Microservices: Architecture for Containerized .NET Applications), but their text was not read, so the page does not cite them.
+None in the catalog: No allowed source explains the outbox pattern (Message broker, Distributed transaction and Event-driven architecture were opened).

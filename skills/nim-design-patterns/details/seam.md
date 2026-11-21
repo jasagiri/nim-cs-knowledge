@@ -94,6 +94,4 @@ Also keep the default seam equal to the old wiring until the pins are green; cha
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title or table of contents covers seams or characterization tests (searched 2026-11-20 by title and URL for legacy, refactor, working effectively and testing); the page cites no source it has not read.
-
-The term is Michael Feathers's, from Working Effectively with Legacy Code (2004), where it is the seam model and characterization tests. The page is written for this repository and copies nothing from it.
+None in the catalog: No article found in the allowed sources on seams (Dependency injection and Test double were opened and do not name or explain the concept).

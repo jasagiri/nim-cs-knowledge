@@ -80,13 +80,7 @@ The fix is `low = mid + 1` with the half-open range `[low, high)`, and `low + (h
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `29ca95172575b79a` Algorithms and Data Structures
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `464f1aa168823232` Computer Science I
-- `c6a234b79d2a7c88` Computer Science II
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `254fe28ac0bfd53e` Last Moment DSA Sheet(79) – Ace Interviews
-- `04a7132319218b7b` Matters Computational: Ideas, Algorithms, Source Code
+- `c8557968cbf78e3c` Binary search (Wikipedia): halving search over a sorted array and boundary variants
+- `c240699e92d3dd65` Binary Search (cp-algorithms): binary search on sorted data and on the answer

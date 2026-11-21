@@ -109,5 +109,6 @@ Also keep the last bucket when a request is refused (as `admit` does); dropping 
 
 ## Sources
 
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title or table of contents names a token bucket or rate limiting (searched 2026-11-21 in the concept index for token bucket, rate limit and throttl, and by title for rate, reliab and system design); the page cites no source it has not read.
+- `6b4792f83e33c96a` Token bucket (Wikipedia): bucket filling at a fixed rate; sending consumes tokens

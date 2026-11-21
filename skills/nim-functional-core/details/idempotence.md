@@ -100,7 +100,6 @@ Also: the key must come from the request (client-chosen or derived from its cont
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `3e3407367a2d5466` RFC 9110: HTTP Semantics
-- `f6c5d8cfc5500f9b` The Idempotency-Key HTTP Header Field (IETF draft)
+- `4af7eac48ba49203` Idempotence (Wikipedia): f(f(x)) = f(x); repeating an operation has the same effect

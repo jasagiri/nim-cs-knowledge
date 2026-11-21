@@ -100,7 +100,7 @@ doAssert t.query(1, 5) == some(9)
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `b8f40165091faa5d` CSES Problem Set
+- `5d1bbd84e89fe886` Sparse Table (cp-algorithms): build in O(n log n), O(1) idempotent range queries (min), O(log n) sums
+- `a5de8e339a67b9cb` Range minimum query (Wikipedia): the problem the table answers

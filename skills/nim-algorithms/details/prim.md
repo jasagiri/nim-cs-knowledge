@@ -64,10 +64,7 @@ The fix is the outer loop over all start vertices, counting a new component each
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `73a124478b696126` Prim's algorithm (Wikipedia): growing a tree with a priority queue
+- `fe1cf6fbf2221a75` Minimum Spanning Tree - Prim's Algorithm (cp-algorithms): algorithm, proof and implementations

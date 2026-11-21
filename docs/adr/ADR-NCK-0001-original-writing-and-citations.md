@@ -75,3 +75,10 @@ Options 1 and 2 above.
   above (start points, depth 2, politeness, facts only) are unchanged. The rebuild with the moved
   code gave byte-identical `catalog/` files (NCK-CAT-01). Where this ADR names
   `tools/catalog_fetch.nim`, read free-books-catalog's `tools/catalog_fetch.nim`.
+
+## 訂正 (2026-11-22)
+
+- The catalog no longer holds free-programming-books or the Hillside catalog, and is no longer
+  crawled to depth 2: it lists only the per-page sources whose licences allow commercial use
+  (ADR-NCK-0005). The crawl and the concept mapping (catalog/concepts.json) above describe the catalog
+  as it was built before; the decisions on original writing and citing by catalog ID stand.

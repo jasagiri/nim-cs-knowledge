@@ -68,8 +68,8 @@ Fix: count a run of equal sums with `upperBound(want) - lowerBound(want)`, as `c
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
-- `c1b93dc13846e70a` Algorithms Course Materials
+- `18d03a640694a580` Subset sum problem (Wikipedia): Horowitz and Sahni: two half lists of 2^(n/2) sums, sorted and combined
+
+Wikipedia has no article titled for the general technique; the Meet-in-the-middle attack article is about cryptanalysis and is not cited.

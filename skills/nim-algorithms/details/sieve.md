@@ -64,10 +64,7 @@ Fix: test `p <= limit div p` and start at `p * p`, as `sieveFlags` does. Do not 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `29ca95172575b79a` Algorithms and Data Structures
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `c6a234b79d2a7c88` Computer Science II
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `04a7132319218b7b` Matters Computational: Ideas, Algorithms, Source Code
+- `aad3769fa4532c8c` Sieve of Eratosthenes (cp-algorithms): sieve and its complexity
+- `78f755448f8a37a2` Sieve of Eratosthenes (Wikipedia): the classic algorithm

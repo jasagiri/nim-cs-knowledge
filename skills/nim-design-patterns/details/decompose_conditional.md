@@ -88,7 +88,4 @@ Write the predicates as boundaries (`age < 6`), and test both sides of each boun
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
-
-- `0789f21330e7f72a` Source Making Design Patterns and UML
-- `690b10bb5f31ac02` The Catalog of Design Patterns
+None in the catalog: No allowed source explains this refactoring. Code refactoring (Wikipedia) lists refactoring techniques but does not mention decomposing a conditional.

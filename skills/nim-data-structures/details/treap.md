@@ -124,8 +124,8 @@ doAssert t.invariantsHold
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `7508271bf7980bd3` Data Structures
-- `c1b93dc13846e70a` Algorithms Course Materials
+- `ea8f95762cd9d68a` Treap (Wikipedia): BST by key and heap by random priority, split and merge
+- `18db0f05b9aafd69` Treap (cp-algorithms): split, merge, insert, erase
+- `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 7, random binary search trees (Treap)

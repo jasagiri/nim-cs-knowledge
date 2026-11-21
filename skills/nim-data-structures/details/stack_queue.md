@@ -125,17 +125,10 @@ The two ends differ: a stack works at one end, a queue at both. Do not use a `se
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `04a7132319218b7b` Matters Computational: Ideas, Algorithms, Source Code
-- `473f0313d72c526b` Algorithms, 4th Edition
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `6f359c1814ec309e` Princeton University Algorithms, Part 1
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `cb7c39b58c54bd29` Data Structures and Algorithm Analysis in Java
-- `cc6ccd12f41004bf` Data Structures in C++ - For Beginners
-- `e842c4dbba02a07e` Data Structures
-- `ffb222d148114a4f` ECS 36C: Data Structures, Algorithms, and Programming
+- `780b4ebe442ea1d4` Stack (abstract data type) (Wikipedia): LIFO operations and implementations
+- `272fbcd73a9312b1` Queue (abstract data type) (Wikipedia): FIFO operations and implementations
+- `8e0fb2ad30794afa` Minimum Stack / Minimum Queue (cp-algorithms): stack and queue augmented with running minimum
+
+Monotonic stack is covered only by All_nearest_smaller_values, which is not listed because it is about a related problem.

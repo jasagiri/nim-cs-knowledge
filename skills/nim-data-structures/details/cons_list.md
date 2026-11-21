@@ -106,13 +106,7 @@ doAssert build(4).toSeq == @[0, 1, 2, 3]
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `21a878bd1e78232f` A Tour of Scala - an interactive scala tutorial
-- `55dcf27597d5d92a` Google's Common Lisp Style Guide
-- `4b0dad6bfcfbe438` Lisp Tutorial
-- `6a3d106c56e40887` OCaml From the Ground Up
-- `9e0afdfae6157d74` OCaml from the Very Beginning
-- `aeeff780b0fc104f` Practical Common Lisp
-- `8c7c3db029a468ec` Programming in Scala, First Edition
-- `04c90d5ac6a2d0db` Real World OCaml
+- `e5af0e59bec4756b` cons (Wikipedia): cons cells and immutable singly linked lists
+- `3bdf34b2f0cb5bc8` Linked list (Wikipedia): singly linked list operations and persistence by sharing tails

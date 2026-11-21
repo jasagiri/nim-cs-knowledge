@@ -1,197 +1,1982 @@
 {
- "userAgent": "nim-cs-knowledge-catalog/0.1 (catalog of free programming books; one request per host at a time)",
- "rawEnv": "NIMCS_RAW",
- "rawDefault": "~/.cache/nim-cs-knowledge/raw",
- "fpbCommit": "10e33dd516cc53864e6bece7e6bd51f2a035d06c",
- "hillside": true,
- "fpb": true,
-  "commercialOnly": false,
- "triage": {
-  "sectionKeywords": [
-   "algorithm",
-   "data structure",
-   "design pattern",
-   "patterns",
-   "software architecture",
-   "functional programming",
-   "computer science",
-   "theoretical",
-   "theory of computation",
-   "compiler",
-   "competitive programming",
-   "parallel programming",
-   "concurrency",
-   "type theory",
-   "programming language theory",
-   "formal method",
-   "haskell",
-   "ocaml",
-   "standard ml",
-   "scheme",
-   "racket",
-   "lisp",
-   "clojure",
-   "erlang",
-   "elixir",
-   "f#",
-   "elm",
-   "purescript",
-   "idris",
-   "agda",
-   "coq",
-   "rocq",
-   "lean",
-   "nim",
-   "scala",
-   "lambda",
-   "algoritm",
-   "algorithmen",
-   "algorithmes",
-   "алгоритм",
-   "структур",
-   "entwurfsmuster",
-   "patrones",
-   "padrões",
-   "patrons",
-   "funcional",
-   "funktional",
-   "fonctionnelle",
-   "функциональн",
-   "アルゴリズム",
-   "データ構造",
-   "デザインパターン",
-   "関数型",
-   "コンパイラ",
-   "算法",
-   "数据结构",
-   "设计模式",
-   "函数式",
-   "编译"
-  ],
-  "titleKeywords": [
-   "algorithm",
-   "data structure",
-   "design pattern",
-   "pattern language",
-   "functional programming",
-   "purely functional",
-   "functional data",
-   "type theory",
-   "lambda calculus",
-   "アルゴリズム",
-   "データ構造",
-   "デザインパターン",
-   "関数型",
-   "算法",
-   "数据结构",
-   "设计模式"
-  ],
-  "depth2TitleKeywords": [
-   "pattern"
-  ],
-  "outFiles": [
-   "casts/",
-   "free-programming-cheatsheets.md",
-   "free-programming-playgrounds"
-  ],
-  "hillsideCore": true
- },
- "listed": [
-  {
-   "url": "https://hypirion.com/musings/understanding-persistent-vector-pt-1",
-   "title": "Understanding Clojure's Persistent Vectors, part 1",
-   "section": [
-    "Persistent data structures",
-    "Persistent vector"
-   ]
+  "userAgent": "nim-cs-knowledge-catalog/0.1 (catalog of freely licensed references; one request per host at a time)",
+  "rawEnv": "NIMCS_RAW",
+  "rawDefault": "~/.cache/nim-cs-knowledge/raw",
+  "fpbCommit": "",
+  "hillside": false,
+  "fpb": false,
+  "commercialOnly": true,
+  "triage": {
+    "sectionKeywords": [],
+    "titleKeywords": [],
+    "depth2TitleKeywords": [],
+    "outFiles": [
+      "casts/",
+      "free-programming-cheatsheets.md",
+      "free-programming-playgrounds"
+    ],
+    "hillsideCore": false
   },
-  {
-   "url": "https://okmij.org/ftp/tagless-final/course/lecture.pdf",
-   "title": "Typed Tagless Final Interpreters (lecture notes)",
-   "section": [
-    "Functional design",
-    "Tagless final"
-   ]
-  },
-  {
-   "url": "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/",
-   "title": "Exponential Backoff And Jitter",
-   "section": [
-    "Resilience",
-    "Retry"
-   ]
-  },
-  {
-   "url": "https://wiki.haskell.org/Smart_constructors",
-   "title": "Smart constructors (HaskellWiki)",
-   "section": [
-    "Functional design",
-    "Smart constructor"
-   ]
-  },
-  {
-   "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
-   "title": "RFC 9110: HTTP Semantics",
-   "section": [
-    "Idempotence",
-    "HTTP methods"
-   ]
-  },
-  {
-   "url": "https://www.ietf.org/archive/id/draft-ietf-httpapi-idempotency-key-header-07.html",
-   "title": "The Idempotency-Key HTTP Header Field (IETF draft)",
-   "section": [
-    "Idempotence",
-    "Idempotency key"
-   ]
-  },
-  {
-   "url": "https://jaspervdj.be/posts/2018-03-08-handle-pattern.html",
-   "title": "The Handle Pattern",
-   "section": [
-    "Functional design",
-    "Record of functions"
-   ]
-  },
-  {
-   "url": "https://erlang.org/download/armstrong_thesis_2003.pdf",
-   "title": "Making reliable distributed systems in the presence of software errors (Armstrong thesis)",
-   "section": [
-    "Concurrency",
-    "Message passing and supervision"
-   ]
-  },
-  {
-   "url": "https://www.erlang.org/doc/system/sup_princ.html",
-   "title": "Erlang/OTP: Supervisor Behaviour",
-   "section": [
-    "Concurrency",
-    "Supervisor"
-   ]
-  },
-  {
-   "url": "http://www.erights.org/talks/thesis/markm-thesis.pdf",
-   "title": "Robust Composition (Miller thesis)",
-   "section": [
-    "Security",
-    "Object capabilities"
-   ]
-  },
-  {
-   "url": "https://papers.agoric.com/assets/pdf/papers/capability-myths-demolished.pdf",
-   "title": "Capability Myths Demolished",
-   "section": [
-    "Security",
-    "Object capabilities"
-   ]
-  },
-  {
-   "url": "https://arxiv.org/abs/1008.1459",
-   "title": "Actor Model of Computation: Scalable Robust Information Systems (Hewitt)",
-   "section": [
-    "Concurrency",
-    "Actor model"
-   ]
-  }
- ]
+  "listed": [
+    {
+      "url": "https://cp-algorithms.com/algebra/binary-exp.html",
+      "title": "Binary Exponentiation (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/algebra/extended-euclid-algorithm.html",
+      "title": "Extended Euclidean Algorithm (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/algebra/fibonacci-numbers.html",
+      "title": "Fibonacci Numbers (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/algebra/module-inverse.html",
+      "title": "Modular Inverse (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html",
+      "title": "Sieve of Eratosthenes (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/data_structures/disjoint_set_union.html",
+      "title": "Disjoint Set Union (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/data_structures/fenwick.html",
+      "title": "Fenwick Tree (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/data_structures/segment_tree.html",
+      "title": "Segment Tree (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/data_structures/sparse-table.html",
+      "title": "Sparse Table (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/data_structures/stack_queue_modification.html",
+      "title": "Minimum Stack / Minimum Queue (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/data_structures/treap.html",
+      "title": "Treap (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/dynamic_programming/knapsack.html",
+      "title": "Knapsack Problem (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/dynamic_programming/longest_increasing_subsequence.html",
+      "title": "Longest increasing subsequence (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/geometry/convex-hull.html",
+      "title": "Convex hull construction (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html",
+      "title": "Floyd-Warshall - finding all shortest paths (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/bellman_ford.html",
+      "title": "Bellman-Ford - finding shortest paths with negative weights (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/breadth-first-search.html",
+      "title": "Breadth First Search (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/depth-first-search.html",
+      "title": "Depth First Search (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/dijkstra.html",
+      "title": "Dijkstra - finding shortest paths from given vertex (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/edmonds_karp.html",
+      "title": "Maximum flow - Ford-Fulkerson and Edmonds-Karp (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/euler_path.html",
+      "title": "Finding the Eulerian path in O(M) (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/finding-cycle.html",
+      "title": "Checking a graph for acyclicity and finding a cycle in O(M) (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/kuhn_maximum_bipartite_matching.html",
+      "title": "Kuhn's Algorithm - Maximum Bipartite Matching (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/lca_binary_lifting.html",
+      "title": "Lowest Common Ancestor - Binary Lifting (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/mst_kruskal.html",
+      "title": "Minimum Spanning Tree - Kruskal (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/mst_prim.html",
+      "title": "Minimum Spanning Tree - Prim's Algorithm (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/strongly-connected-components.html",
+      "title": "Strongly Connected Components and Condensation Graph (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/graph/topological-sort.html",
+      "title": "Topological Sorting (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/num_methods/binary_search.html",
+      "title": "Binary Search (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/string/aho_corasick.html",
+      "title": "Aho-Corasick algorithm (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/string/prefix-function.html",
+      "title": "Prefix function - Knuth-Morris-Pratt (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/string/rabin-karp.html",
+      "title": "Rabin-Karp for String Matching (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/string/suffix-array.html",
+      "title": "Suffix Array (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://cp-algorithms.com/string/z-function.html",
+      "title": "Z-function (cp-algorithms)",
+      "section": [
+        "cp-algorithms"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/ABA_problem",
+      "title": "ABA problem (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/AVL_tree",
+      "title": "AVL tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Abstract_factory_pattern",
+      "title": "Abstract factory pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Actor_model",
+      "title": "Actor model (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Adapter_pattern",
+      "title": "Adapter pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Aho–Corasick_algorithm",
+      "title": "Aho–Corasick algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Algebraic_data_type",
+      "title": "Algebraic data type (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Amortized_analysis",
+      "title": "Amortized analysis (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Approximation_algorithm",
+      "title": "Approximation algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/B-tree",
+      "title": "B-tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Backtracking",
+      "title": "Backtracking (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Bellman–Ford_algorithm",
+      "title": "Bellman–Ford algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Bidirectional_transformation",
+      "title": "Bidirectional transformation (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Big_O_notation",
+      "title": "Big O notation (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Binary_heap",
+      "title": "Binary heap (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Binary_search",
+      "title": "Binary search (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Binary_search_tree",
+      "title": "Binary search tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Binomial_heap",
+      "title": "Binomial heap (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Bit_array",
+      "title": "Bit array (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "title": "Bloom filter (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Breadth-first_search",
+      "title": "Breadth-first search (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Bridge_pattern",
+      "title": "Bridge pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Builder_pattern",
+      "title": "Builder pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Bulkhead_pattern",
+      "title": "Bulkhead pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Capability-based_security",
+      "title": "Capability-based security (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern",
+      "title": "Chain-of-responsibility pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern",
+      "title": "Circuit breaker design pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Code_refactoring",
+      "title": "Code refactoring (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Command_Query_Responsibility_Segregation",
+      "title": "Command Query Responsibility Segregation (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Command_pattern",
+      "title": "Command pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Command–query_separation",
+      "title": "Command–query separation (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Composite_pattern",
+      "title": "Composite pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type",
+      "title": "Conflict-free replicated data type (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Cons",
+      "title": "cons (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Consistent_hashing",
+      "title": "Consistent hashing (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Content-addressable_storage",
+      "title": "Content-addressable storage (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Convex_hull_algorithms",
+      "title": "Convex hull algorithms (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Counting_sort",
+      "title": "Counting sort (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Cycle_detection",
+      "title": "Cycle detection (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Decorator_pattern",
+      "title": "Decorator pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Dependency_injection",
+      "title": "Dependency injection (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Depth-first_search",
+      "title": "Depth-first search (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Dijkstra's_algorithm",
+      "title": "Dijkstra's algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Disjoint-set_data_structure",
+      "title": "Disjoint-set data structure (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm",
+      "title": "Divide-and-conquer algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Domain-driven_design",
+      "title": "Domain-driven design (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Double-ended_queue",
+      "title": "Double-ended queue (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Doubly_linked_list",
+      "title": "Doubly linked list (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Edit_distance",
+      "title": "Edit distance (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Elm_(programming_language)",
+      "title": "Elm (programming language) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Eulerian_path",
+      "title": "Eulerian path (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Event_store",
+      "title": "Event store (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Exponential_backoff",
+      "title": "Exponential backoff (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Exponentiation_by_squaring",
+      "title": "Exponentiation by squaring (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/External_sorting",
+      "title": "External sorting (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Facade_pattern",
+      "title": "Facade pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Factory_method_pattern",
+      "title": "Factory method pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Fenwick_tree",
+      "title": "Fenwick tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Finite-state_machine",
+      "title": "Finite-state machine (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Floyd–Warshall_algorithm",
+      "title": "Floyd–Warshall algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Flyweight_pattern",
+      "title": "Flyweight pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Fold_(higher-order_function)",
+      "title": "Fold (higher-order function) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Function_composition_(computer_science)",
+      "title": "Function composition (computer science) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Functor_(functional_programming)",
+      "title": "Functor (functional programming) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Graph_(abstract_data_type)",
+      "title": "Graph (abstract data type) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Greedy_algorithm",
+      "title": "Greedy algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Handle_(computing)",
+      "title": "Handle (computing) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Hash_array_mapped_trie",
+      "title": "Hash array mapped trie (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Hash_table",
+      "title": "Hash table (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Heapsort",
+      "title": "Heapsort (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Huffman_coding",
+      "title": "Huffman coding (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Idempotence",
+      "title": "Idempotence (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Immutable_object",
+      "title": "Immutable object (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Insertion_sort",
+      "title": "Insertion sort (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Interpreter_pattern",
+      "title": "Interpreter pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Iterator_pattern",
+      "title": "Iterator pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/K-d_tree",
+      "title": "k-d tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Knapsack_problem",
+      "title": "Knapsack problem (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Knuth–Morris–Pratt_algorithm",
+      "title": "Knuth–Morris–Pratt algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Kruskal's_algorithm",
+      "title": "Kruskal's algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/LCP_array",
+      "title": "LCP array (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Lazy_evaluation",
+      "title": "Lazy evaluation (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Leftist_tree",
+      "title": "Leftist tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Levenshtein_distance",
+      "title": "Levenshtein distance (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Linear_probing",
+      "title": "Linear probing (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Linked_list",
+      "title": "Linked list (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Long-running_transaction",
+      "title": "Long-running transaction (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Longest_common_subsequence",
+      "title": "Longest common subsequence (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Longest_increasing_subsequence",
+      "title": "Longest increasing subsequence (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Lowest_common_ancestor",
+      "title": "Lowest common ancestor (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Master_theorem_(analysis_of_algorithms)",
+      "title": "Master theorem (analysis of algorithms) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Maximum_flow_problem",
+      "title": "Maximum flow problem (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Mediator_pattern",
+      "title": "Mediator pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Memento_pattern",
+      "title": "Memento pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Memoization",
+      "title": "Memoization (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Merge_(version_control)",
+      "title": "Merge (version control) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Merge_sort",
+      "title": "Merge sort (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Merkle_tree",
+      "title": "Merkle tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Monad_(functional_programming)",
+      "title": "Monad (functional programming) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Monoid",
+      "title": "Monoid (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Multitier_architecture",
+      "title": "Multitier architecture (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Object-capability_model",
+      "title": "Object-capability model (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Observer_pattern",
+      "title": "Observer pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Option_type",
+      "title": "Option type (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Pairing_heap",
+      "title": "Pairing heap (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Parser_combinator",
+      "title": "Parser combinator (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Persistent_data_structure",
+      "title": "Persistent data structure (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Pipeline_(software)",
+      "title": "Pipeline (software) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Prefix_sum",
+      "title": "Prefix sum (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Prim's_algorithm",
+      "title": "Prim's algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Prototype_pattern",
+      "title": "Prototype pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Proxy_pattern",
+      "title": "Proxy pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Pure_function",
+      "title": "Pure function (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Purely_functional_data_structure",
+      "title": "Purely functional data structure (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Queue_(abstract_data_type)",
+      "title": "Queue (abstract data type) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Quicksort",
+      "title": "Quicksort (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Rabin–Karp_algorithm",
+      "title": "Rabin–Karp algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Radix_sort",
+      "title": "Radix sort (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Range_minimum_query",
+      "title": "Range minimum query (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Red–black_tree",
+      "title": "Red–black tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Referential_transparency",
+      "title": "Referential transparency (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Rename_(computing)",
+      "title": "Rename (computing) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Request–response",
+      "title": "Request–response (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Result_type",
+      "title": "Result type (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Segment_tree",
+      "title": "Segment tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Selection_sort",
+      "title": "Selection sort (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree",
+      "title": "Self-balancing binary search tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Shellsort",
+      "title": "Shellsort (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Side_effect_(computer_science)",
+      "title": "Side effect (computer science) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes",
+      "title": "Sieve of Eratosthenes (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Singleton_pattern",
+      "title": "Singleton pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Skew_binary_number_system",
+      "title": "Skew binary number system (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Splay_tree",
+      "title": "Splay tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Stack_(abstract_data_type)",
+      "title": "Stack (abstract data type) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/State_pattern",
+      "title": "State pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Strangler_fig_pattern",
+      "title": "Strangler fig pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Strategy_pattern",
+      "title": "Strategy pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Stream_(abstract_data_type)",
+      "title": "Stream (abstract data type) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Strongly_connected_component",
+      "title": "Strongly connected component (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Subset_sum_problem",
+      "title": "Subset sum problem (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Suffix_array",
+      "title": "Suffix array (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Suffix_tree",
+      "title": "Suffix tree (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Summed-area_table",
+      "title": "Summed-area table (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Sync_(Unix)",
+      "title": "sync (Unix) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Tail_call",
+      "title": "Tail call (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Tarjan's_strongly_connected_components_algorithm",
+      "title": "Tarjan's strongly connected components algorithm (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Template_method_pattern",
+      "title": "Template method pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Time_complexity",
+      "title": "Time complexity (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Token_bucket",
+      "title": "Token bucket (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Topological_sorting",
+      "title": "Topological sorting (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Treap",
+      "title": "Treap (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Trie",
+      "title": "Trie (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Type_class",
+      "title": "Type class (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Typestate_analysis",
+      "title": "Typestate analysis (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Vertex_cover",
+      "title": "Vertex cover (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Visitor_pattern",
+      "title": "Visitor pattern (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Write-ahead_logging",
+      "title": "Write-ahead logging (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Zipper_(data_structure)",
+      "title": "Zipper (data structure) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf",
+      "title": "Greedy Algorithms (Erickson, Algorithms, ch. 4)",
+      "section": [
+        "Erickson, Algorithms"
+      ],
+      "licenses": [
+        "CC-BY-4.0"
+      ]
+    },
+    {
+      "url": "https://opendatastructures.org/",
+      "title": "Open Data Structures (Open Data Structures)",
+      "section": [
+        "Open Data Structures"
+      ],
+      "licenses": [
+        "CC-BY-2.5"
+      ]
+    },
+    {
+      "url": "https://www.erlang.org/doc/apps/stdlib/gen_server.html",
+      "title": "gen_server (Erlang/OTP documentation)",
+      "section": [
+        "Erlang/OTP documentation"
+      ],
+      "licenses": [
+        "Apache-2.0"
+      ]
+    },
+    {
+      "url": "https://www.erlang.org/doc/system/sup_princ.html",
+      "title": "Supervisor Behaviour (Erlang/OTP documentation)",
+      "section": [
+        "Erlang/OTP documentation"
+      ],
+      "licenses": [
+        "Apache-2.0"
+      ]
+    }
+  ]
 }

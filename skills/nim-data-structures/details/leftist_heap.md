@@ -144,6 +144,6 @@ doAssert h.invariantsHold
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `7508271bf7980bd3` Data Structures
+- `2d432cb2a7e0590e` Leftist tree (Wikipedia): null-path length, leftist property, merge-based operations

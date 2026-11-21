@@ -67,12 +67,6 @@ The fix is the strict comparison the module uses: `less(item, sorted[j - 1])`.
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `464f1aa168823232` Computer Science I
-- `1cbc332178e5a52f` Data-Oriented Design
-- `ed8c50dad686e4d3` Elementary Algorithms
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `6f359c1814ec309e` Princeton University Algorithms, Part 1
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
+- `8a5e103ea8f12a60` Insertion sort (Wikipedia): insertion sort

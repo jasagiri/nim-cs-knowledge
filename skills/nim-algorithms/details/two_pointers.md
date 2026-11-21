@@ -92,12 +92,8 @@ doAssert longestWindowAtMost([5, -4, 1], 2) == err(Window, weNegativeElement)
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `3277c50924f59d16` Array
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `7f34194abd61a6fc` Singly Linked List
-- `81c6122da5a53e33` Principles of Algorithmic Problem Solving
-- `b8f40165091faa5d` CSES Problem Set
+- `18d03a640694a580` Subset sum problem (Wikipedia): the two-sum scan with one pointer moving each way over sorted lists (Horowitz and Sahni section)
+
+No allowed article on two pointers or sliding window as a technique; this covers only the opposite-ends scan, not the sliding window. Sliding window protocol on Wikipedia is about networking and is not cited.

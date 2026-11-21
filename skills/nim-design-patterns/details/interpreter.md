@@ -111,9 +111,6 @@ Fix: list every kind (the compiler then rejects a missing one). Also do not let 
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `57d435a932247e45` Crafting Interpreters
-- `25f90d554113e6d5` Scala & Design Patterns: Exploring Language Expressivity
-- `5b1535e53ceaa7c4` SICP Distilled - An idiosyncratic tour of SICP in Clojure
-- `0789f21330e7f72a` Source Making Design Patterns and UML
+- `1656f17a2f153c91` Interpreter pattern (Wikipedia): representing a grammar as classes or nodes and evaluating a sentence by walking the tree

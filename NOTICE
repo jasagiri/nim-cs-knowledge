@@ -1,11 +1,9 @@
 nim-cs-knowledge
 Copyright 2026 jasagiri
 
-catalog/sources.jsonl lists titles and URLs taken from free-programming-books
-(https://github.com/EbookFoundation/free-programming-books), licensed CC BY 4.0
-(https://creativecommons.org/licenses/by/4.0/), and from the Hillside Group's patterns
-catalog (https://hillside.net/patterns/patterns-catalog). Only those facts (title, URL,
-section, stated license) are reproduced; the commit and fetch date are in catalog/meta.json.
+catalog/sources.jsonl lists the articles and chapters named in catalog/config.json: titles, URLs
+and the licence of each (docs/sources.md). Only those facts are reproduced; the fetch date is in
+catalog/meta.json.
 
 No text or code was copied from the books and pages the catalog lists. Every explanation and
 every line of code in src/, skills/ and dataset/ was written for this repository; the sources

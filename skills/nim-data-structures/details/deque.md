@@ -88,10 +88,7 @@ doAssert d.toSeq == @[1, 2]
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `7508271bf7980bd3` Data Structures
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `04a7132319218b7b` Matters Computational: Ideas, Algorithms, Source Code
-- `fc4e34ece13d1024` Open Data Structures: An Introduction
-- `e443a6b88b011f39` Purely Functional Data Structures
+- `99cefbe9562d9272` Double-ended queue (Wikipedia): operations at both ends, array and linked implementations, functional variants
+- `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 2, array-based lists (ArrayDeque)

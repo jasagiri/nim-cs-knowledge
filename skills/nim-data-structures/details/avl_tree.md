@@ -110,10 +110,9 @@ doAssert t.height == 2 and t.invariantsHold
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `3020c057a8d82e66` S-99: Ninety-Nine Scala Problems
-- `5ea7cdc2c5670fd7` Data Structures and Algorithms
-- `7508271bf7980bd3` Data Structures
-- `b8cf0456394ed527` Learn Programming with OCaml: Algorithms and Data Structures
-- `ffb222d148114a4f` ECS 36C: Data Structures, Algorithms, and Programming
+- `90d54c10630371a8` AVL tree (Wikipedia): height-balance invariant and rotations
+- `92fb42677af37dfc` Self-balancing binary search tree (Wikipedia): context for rebalancing by rotation
+
+Persistence (path copying) is covered only generally via Persistent data structure; not added.

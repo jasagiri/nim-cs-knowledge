@@ -103,6 +103,6 @@ A stale entry is its own trap: after a retreat the entry stays in the table as a
 
 ## Sources
 
-None in the catalog: no source in catalog/sources.jsonl was found whose title or table of contents covers the strangler fig or incremental replacement of a system (searched 2026-11-20 by title and URL for strangl, legacy, migrat, microservice and monolith); the page cites no source it has not read.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-The name and the idea are from Martin Fowler's bliki entry "StranglerFigApplication". The page is written for this repository and copies nothing from it.
+- `59217df8cf9ce10e` Strangler fig pattern (Wikipedia): incrementally replacing a legacy system behind a facade

@@ -95,6 +95,6 @@ doAssert m.toSortedSeq == @[("a", 2), ("z", 1)]
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `7508271bf7980bd3` Data Structures
+- `686a74b9cb147d93` Hash array mapped trie (Wikipedia): bitmap-indexed nodes, hash trie, persistent variants

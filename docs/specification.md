@@ -9,8 +9,11 @@ checks that hold the repository together. Every ID has a test tagged `# SPEC: <I
 
 | ID | Statement |
 |---|---|
-| NCK-CAT-01 | catalog/meta.json, sources.jsonl and triage.json are what free-books-catalog (its FBC-01…FBC-09) builds from catalog/config.json and the fetched pages: rebuilding from the cache gives the committed bytes. The check runs where the cache is present. |
+| NCK-CAT-01 | catalog/meta.json, sources.jsonl and triage.json are what free-books-catalog (its FBC-01…FBC-10) builds from catalog/config.json and the fetched pages: rebuilding from the cache gives the committed bytes. The check runs where the cache is present. |
 | NCK-CAT-02 | No module under src/ or tools/ imports a networking module; the network is used only by free-books-catalog's catalog_fetch. |
+| NCK-SRC-01 | Every source in catalog/sources.jsonl states at least one licence, and each is one of `commercialLicenses` in free-books-catalog (src/free_books_catalog/licences.nim: licences that allow use, copying, modification and distribution for any purpose, commercial use included). |
+| NCK-SRC-02 | catalog/config.json switches free-programming-books (`fpb`) and Hillside off and `commercialOnly` on, so the catalog holds exactly the sources it lists and catalog_build refuses a source whose licences are not on the list. |
+| NCK-SRC-03 | catalog/citations.json has one entry per details page; an entry with no source has a note saying why; the URLs it cites are exactly the sources catalog/config.json lists. |
 
 ## Knowledge pages and modules (ADR-NCK-0002)
 

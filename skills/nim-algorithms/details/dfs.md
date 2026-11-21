@@ -72,13 +72,7 @@ The fix is the explicit stack of (vertex, next index) pairs the module uses.
 
 ## Sources
 
-Catalog IDs (catalog/sources.jsonl) whose table of contents covers this concept:
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
-- `6f31dd50eef1beba` Algorithmic Thinking
-- `c1b93dc13846e70a` Algorithms Course Materials
-- `61811291625a13a9` Algorithms for Competitive Programming
-- `a8882bbba7213b23` Algorithms Notes for Professionals
-- `b609569e40e49e47` Analysis of Algorithms (CSE 373)
-- `63ad3e14455a34af` Competitive Programmer's Handbook
-- `e8a751ae9f8ed52b` Learning Algorithm
-- `6f359b1814ec2eeb` Princeton University Algorithms, Part 2
+- `4d89433f773dee8d` Depth-first search (Wikipedia): traversal, discovery and finishing order
+- `fe1d4be54cbfecb9` Depth First Search (cp-algorithms): DFS and its edge classification
