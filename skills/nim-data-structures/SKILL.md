@@ -7,7 +7,8 @@ description: >-
   consistent hashing and CRDTs, plus the
   classic textbook structures as values (hash table, binary heap, stack and queue, arena linked
   list, BST, AVL tree, B-tree, treap, splay tree, k-d tree, Fenwick tree, sparse table, bit vector,
-  suffix trie). Load it when
+  suffix trie), and a generational slot map (handles into one owner instead of shared `ref`s or
+  copies). Load it when
   a task needs a queue, priority queue, ordered or hash map, indexed sequence or prefix search
   whose old versions must stay valid, when an update must not mutate its argument, or when you
   must pick a structure for an access pattern. Every structure is a Nim 2.4 module with
@@ -101,6 +102,7 @@ doAssert ok(3, string).value == 3 and err(int, "bad").isErr
 | Priority queue inside one routine, heap sort, top-k | `std/heapqueue` in a local `var` (O(log n) per push and pop) | `binary_heap` shows how the heap works, but as a value each `push` and `pop` copies the array (O(n)), so k pops cost O(n·k); old versions reused: `leftist_heap` |
 | Plain LIFO/FIFO inside one routine, next greater element (monotonic stack) | `stack_queue` | shared old versions: `cons_list`, `bankers_queue` |
 | O(1) insert and remove next to a known node, LRU order | `linked_list` (arena of indices) | `cons_list` has no back links |
+| Several parts of a program refer to the same entities that are created and destroyed over time (units, nodes, sessions) | `slot_map` (handles with a generation; move the map in at its last use) | a shared `ref` or a copy compiles but allocates and splits ownership; a bare index is accepted after its slot is reused; no order: `linked_list` |
 | Ordered set to learn BST insert, delete and traversal | `bst` (unbalanced; sorted input degrades to a chain) | balanced: `avl_tree`, `rb_tree`, `treap` |
 | Ordered set with `delete` and guaranteed O(log n) | `avl_tree` | `rb_tree` here has no `remove` |
 | Ordered set whose nodes hold many keys (disk-page model) | `b_tree` (insert only) | in memory, `avl_tree` is simpler |
@@ -297,6 +299,7 @@ doAssert q.popHighest.rest.popHighest.item == some((5, "b"))
 | Binary heap | [details/binary_heap.md](details/binary_heap.md) | `src/nimcs/ds/binary_heap.nim` |
 | Stack and queue | [details/stack_queue.md](details/stack_queue.md) | `src/nimcs/ds/stack_queue.nim` |
 | Linked list (arena) | [details/linked_list.md](details/linked_list.md) | `src/nimcs/ds/linked_list.nim` |
+| Slot map (generational handles) | [details/slot_map.md](details/slot_map.md) | `src/nimcs/ds/slot_map.nim` |
 | Binary search tree | [details/bst.md](details/bst.md) | `src/nimcs/ds/bst.nim` |
 | AVL tree | [details/avl_tree.md](details/avl_tree.md) | `src/nimcs/ds/avl_tree.nim` |
 | B-tree | [details/b_tree.md](details/b_tree.md) | `src/nimcs/ds/b_tree.nim` |

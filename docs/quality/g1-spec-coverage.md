@@ -18,6 +18,7 @@ Also from the IDs in the first cell of the table rows of
 `docs/spec/patterns-gof-cs.md`
 `docs/spec/patterns-c.md`
 `docs/spec/algo-b.md`
+`docs/spec/patterns-d.md`
 `docs/spec/algo-a.md`
 `docs/spec/algo-d.md`
 `docs/spec/patterns-fp.md`
@@ -537,6 +538,18 @@ Also from the IDs in the first cell of the table rows of
 | TECH-DC-MASTER-01 | tests/test_algo_divide_conquer.nim (1) |
 | TECH-DC-MASTER-02 | tests/test_algo_divide_conquer.nim (1) |
 | TECH-DC-MASTER-03 | tests/test_algo_divide_conquer.nim (1) |
+| PAT-COMMANDBUFFER-01 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-02 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-03 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-04 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-05 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-06 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-07 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-08 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-09 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-10 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-11 | tests/test_patterns_command_buffer.nim (1) |
+| PAT-COMMANDBUFFER-12 | tests/test_patterns_command_buffer.nim (1) |
 | SORT-INSERT-01 | tests/test_algo_insertion_sort.nim (1) |
 | SORT-INSERT-02 | tests/test_algo_insertion_sort.nim (1) |
 | SORT-INSERT-03 | tests/test_algo_insertion_sort.nim (1) |
@@ -781,6 +794,19 @@ Also from the IDs in the first cell of the table rows of
 | DS-CRDT-21 | tests/test_ds_crdt.nim (1) |
 | DS-CRDT-22 | tests/test_ds_crdt.nim (1) |
 | DS-CRDT-23 | tests/test_ds_crdt.nim (1) |
+| DS-SLOTMAP-01 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-02 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-03 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-04 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-05 | tests/test_ds_slot_map.nim (2) |
+| DS-SLOTMAP-06 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-07 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-08 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-09 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-10 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-11 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-12 | tests/test_ds_slot_map.nim (1) |
+| DS-SLOTMAP-13 | tests/test_ds_slot_map.nim (1) |
 | FP-FUNCTORMONAD-01 | tests/test_fp_functor_monad.nim (1) |
 | FP-FUNCTORMONAD-02 | tests/test_fp_functor_monad.nim (1) |
 | FP-FUNCTORMONAD-03 | tests/test_fp_functor_monad.nim (1) |
@@ -1104,7 +1130,7 @@ Also from the IDs in the first cell of the table rows of
 | DS-SUFFIXTRIE-07 | tests/test_ds_suffix_trie.nim (1) |
 | DS-SUFFIXTRIE-08 | tests/test_ds_suffix_trie.nim (1) |
 
-Declared: 1072  Covered: 1072  Uncovered: 0
+Declared: 1097  Covered: 1097  Uncovered: 0
 
 ## Uncovered declared IDs
 

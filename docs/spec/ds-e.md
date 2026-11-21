@@ -44,3 +44,16 @@ Each row is a law or an externally visible behaviour; each ID has at least one t
 | DS-CRDT-21 | crdt | Given any three OR-Sets, when merged in either grouping, then the results are equal |
 | DS-CRDT-22 | crdt | Given any OR-Sets, when merging a state again, then nothing changes |
 | DS-CRDT-23 | crdt | Given several OR-Sets, when merged in any order and grouping, then the result is the same |
+| DS-SLOTMAP-01 | slot_map | Given the empty map or the zero value, when reading or inserting, then it is empty, every handle is rejected and an insert works |
+| DS-SLOTMAP-02 | slot_map | Given any values, when inserted, then each handle returns its value and the others are unchanged |
+| DS-SLOTMAP-03 | slot_map | Given any inserts and removes, when two handles are live, then they are never equal |
+| DS-SLOTMAP-04 | slot_map | Given any operations, when they have run, then len is the inserts minus the successful removes and agrees with a model |
+| DS-SLOTMAP-05 | slot_map | Given a removed handle, when its slot is reused, then the old handle stays stale for get, contains, remove and put |
+| DS-SLOTMAP-06 | slot_map | Given a stale or unknown handle, when removing or putting, then the map comes back unchanged |
+| DS-SLOTMAP-07 | slot_map | Given a live handle, when putting, then the value is replaced, the handle stays valid and the length is the same |
+| DS-SLOTMAP-08 | slot_map | Given removed slots, when inserting, then the free slots are reused first, most recently freed first |
+| DS-SLOTMAP-09 | slot_map | Given a map, when iterating pairs, then the live handles and values come in slot order and each handle gets its value |
+| DS-SLOTMAP-10 | slot_map | Given a map the caller still uses, when inserting, removing or putting, then the map passed in is unchanged |
+| DS-SLOTMAP-11 | slot_map | Given any operations, when checking the structure, then the invariants hold after every step |
+| DS-SLOTMAP-12 | slot_map | Given a map moved in at its last use, when putting, removing or inserting into freed slots, then no allocation happens whatever the size |
+| DS-SLOTMAP-13 | slot_map | Given two maps, when compared, then equal histories are equal and a different value, handle or free list is not |
