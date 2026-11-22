@@ -73,3 +73,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `18d03a640694a580` Subset sum problem (Wikipedia): Horowitz and Sahni: two half lists of 2^(n/2) sums, sorted and combined
 
 Wikipedia has no article titled for the general technique; the Meet-in-the-middle attack article is about cryptanalysis and is not cited.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

@@ -246,7 +246,8 @@
           "covers": "graph as a data type and adjacency-list representation"
         }
       ],
-      "note": "No allowed source on a canonically ordered immutable graph value; this article covers the representation only."
+      "note": "No allowed source on a canonically ordered immutable graph value; this article covers the representation only.",
+      "original": "part"
     },
     "algo/greedy": {
       "sources": [
@@ -386,7 +387,8 @@
           "covers": "Horowitz and Sahni: two half lists of 2^(n/2) sums, sorted and combined"
         }
       ],
-      "note": "Wikipedia has no article titled for the general technique; the Meet-in-the-middle attack article is about cryptanalysis and is not cited."
+      "note": "Wikipedia has no article titled for the general technique; the Meet-in-the-middle attack article is about cryptanalysis and is not cited.",
+      "original": "part"
     },
     "algo/memoization": {
       "sources": [
@@ -434,7 +436,8 @@
           "covers": "two-dimensional prefix sums"
         }
       ],
-      "note": "Difference arrays have no dedicated allowed article; Prefix sum only mentions finite differences as the inverse."
+      "note": "Difference arrays have no dedicated allowed article; Prefix sum only mentions finite differences as the inverse.",
+      "original": "part"
     },
     "algo/prim": {
       "sources": [
@@ -560,7 +563,8 @@
           "covers": "the two-sum scan with one pointer moving each way over sorted lists (Horowitz and Sahni section)"
         }
       ],
-      "note": "No allowed article on two pointers or sliding window as a technique; this covers only the opposite-ends scan, not the sliding window. Sliding window protocol on Wikipedia is about networking and is not cited."
+      "note": "No allowed article on two pointers or sliding window as a technique; this covers only the opposite-ends scan, not the sliding window. Sliding window protocol on Wikipedia is about networking and is not cited.",
+      "original": "part"
     },
     "algo/z_algorithm": {
       "sources": [
@@ -582,7 +586,8 @@
           "covers": "context for rebalancing by rotation"
         }
       ],
-      "note": "Persistence (path copying) is covered only generally via Persistent data structure; not added."
+      "note": "Persistence (path copying) is covered only generally via Persistent data structure; not added.",
+      "original": "part"
     },
     "ds/b_tree": {
       "sources": [
@@ -608,7 +613,8 @@
           "covers": "persistence and amortization in functional data structures"
         }
       ],
-      "note": "No allowed source names the banker's method for queues specifically."
+      "note": "No allowed source names the banker's method for queues specifically.",
+      "original": "part"
     },
     "ds/binary_heap": {
       "sources": [
@@ -661,7 +667,8 @@
           "covers": "ch. 6, binary trees (BinarySearchTree)"
         }
       ],
-      "note": "Persistence is not covered by these; see Persistent data structure if wanted."
+      "note": "Persistence is not covered by these; see Persistent data structure if wanted.",
+      "original": "part"
     },
     "ds/cons_list": {
       "sources": [
@@ -775,7 +782,8 @@
           "covers": "ch. 3, linked lists (DLList)"
         }
       ],
-      "note": "Arena (index-based) allocation is not covered by these sources."
+      "note": "Arena (index-based) allocation is not covered by these sources.",
+      "original": "part"
     },
     "ds/merkle_tree": {
       "sources": [
@@ -810,7 +818,8 @@
           "covers": "trie of wide nodes that persistent vectors and maps are built on"
         }
       ],
-      "note": "No allowed article is specifically about persistent vectors (en.wikipedia Persistent_vector is absent); coverage is of the broader topics."
+      "note": "No allowed article is specifically about persistent vectors (en.wikipedia Persistent_vector is absent); coverage is of the broader topics.",
+      "original": "part"
     },
     "ds/rb_tree": {
       "sources": [
@@ -845,7 +854,8 @@
           "covers": "skew binary representation with O(1) increment"
         }
       ],
-      "note": "Only the number system is covered; no allowed source describes Okasaki's random-access list built on it."
+      "note": "Only the number system is covered; no allowed source describes Okasaki's random-access list built on it.",
+      "original": "part"
     },
     "ds/slot_map": {
       "sources": [
@@ -858,7 +868,8 @@
           "covers": "reuse of a slot and the generation/tag counter that detects it"
         }
       ],
-      "note": "No allowed source describes a generational slot map itself; coverage is of the two underlying ideas."
+      "note": "No allowed source describes a generational slot map itself; coverage is of the two underlying ideas.",
+      "original": "part"
     },
     "ds/sparse_table": {
       "sources": [
@@ -897,7 +908,8 @@
           "covers": "stack and queue augmented with running minimum"
         }
       ],
-      "note": "Monotonic stack is covered only by All_nearest_smaller_values, which is not listed because it is about a related problem."
+      "note": "Monotonic stack is covered only by All_nearest_smaller_values, which is not listed because it is about a related problem.",
+      "original": "part"
     },
     "ds/suffix_trie": {
       "sources": [
@@ -936,7 +948,8 @@
           "covers": "prefix tree, insert, search, prefix queries"
         }
       ],
-      "note": "Persistence is not covered by this article."
+      "note": "Persistence is not covered by this article.",
+      "original": "part"
     },
     "ds/union_find": {
       "sources": [
@@ -949,7 +962,8 @@
           "covers": "find with compression, union by size or rank"
         }
       ],
-      "note": "Persistent variant is mentioned briefly in the Wikipedia article only."
+      "note": "Persistent variant is mentioned briefly in the Wikipedia article only.",
+      "original": "part"
     },
     "ds/write_ahead_log": {
       "sources": [
@@ -994,7 +1008,8 @@
           "covers": "expressions replaceable by their values; substitution of equals (nearest allowed article)"
         }
       ],
-      "note": ""
+      "note": "Referential transparency is the property that makes the rewriting valid; the article does not show reasoning step by step with equations.",
+      "original": "part"
     },
     "fp/fold": {
       "sources": [
@@ -1072,8 +1087,22 @@
       "note": ""
     },
     "fp/phantom_type": {
-      "sources": [],
-      "note": "English Wikipedia has no Phantom type article (404); Generalized algebraic data type mentions phantom types only twice."
+      "sources": [
+        {
+          "url": "https://doc.rust-lang.org/rust-by-example/generics/phantom.html",
+          "covers": "a type parameter that holds no data but makes types differ at compile time"
+        },
+        {
+          "url": "https://doc.rust-lang.org/rust-by-example/generics/phantom/testcase_units.html",
+          "covers": "phantom unit tags on a quantity so that mixing units fails to compile"
+        },
+        {
+          "url": "https://en.wikibooks.org/wiki/Haskell/GADT",
+          "covers": "the Phantom types section: a type variable added to Expr that is not used in its data"
+        }
+      ],
+      "note": "Rust pages cover the idea and the unit case. They leave out Nim's distinct-type form and the state-tag use (Email[Validated]) and the unforgeability limit.",
+      "original": "part"
     },
     "fp/result": {
       "sources": [
@@ -1085,8 +1114,14 @@
       "note": ""
     },
     "fp/smart_constructor": {
-      "sources": [],
-      "note": "English Wikipedia has no article on smart constructors or Parse, don't validate (404); Abstract data type, Refinement type and Algebraic data type do not cover it."
+      "sources": [
+        {
+          "url": "https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html",
+          "covers": "section 'Creating Custom Types for Validation': a Guess type whose only constructor checks the range, so later code relies on the type"
+        }
+      ],
+      "note": "Covers one check at the boundary and the type carrying the proof; Rust panics where the page returns Result, and it does not discuss 'parse, don't validate' or distinct-type pitfalls.",
+      "original": "part"
     },
     "fp/tail_recursion": {
       "sources": [
@@ -1153,7 +1188,8 @@
           "covers": "names the anticorruption layer as a context-mapping relationship that isolates a system from an upstream model"
         }
       ],
-      "note": "No dedicated English Wikipedia article (Anti-corruption_layer is 404). The Domain-driven design article only defines the layer in one list item; translation by smart constructors is not covered."
+      "note": "No dedicated English Wikipedia article (Anti-corruption_layer is 404). The Domain-driven design article only defines the layer in one list item; translation by smart constructors is not covered.",
+      "original": "part"
     },
     "patterns/atomic_publish": {
       "sources": [
@@ -1166,7 +1202,8 @@
           "covers": "fsync and fdatasync flush file data to disk, and the need to check their return values"
         }
       ],
-      "note": "No source covers the whole recipe (temporary name, fsync, rename, fsync of the directory); the two articles cover the rename and fsync steps. Directory fsync is not discussed."
+      "note": "No source covers the whole recipe (temporary name, fsync, rename, fsync of the directory); the two articles cover the rename and fsync steps. Directory fsync is not discussed.",
+      "original": "part"
     },
     "patterns/branch_by_abstraction": {
       "sources": [
@@ -1175,7 +1212,8 @@
           "covers": "replacing a legacy implementation piece by piece instead of all at once"
         }
       ],
-      "note": "No English Wikipedia article for Branch by abstraction (404). Strangler fig pattern is the closest broader topic (incremental replacement); it does not describe the abstraction layer or the shadow stage."
+      "note": "No English Wikipedia article for Branch by abstraction (404). Strangler fig pattern is the closest broader topic (incremental replacement); it does not describe the abstraction layer or the shadow stage.",
+      "original": "part"
     },
     "patterns/bridge": {
       "sources": [
@@ -1247,7 +1285,8 @@
           "covers": "requests as data that can be queued and executed later"
         }
       ],
-      "note": "No source covers deferred structural changes to a collection under iteration. The Wikipedia 'Command buffer' title redirects to a computer-graphics glossary entry, which is a different concept. Command pattern only covers commands as queued plain values."
+      "note": "No source covers deferred structural changes to a collection under iteration. The Wikipedia 'Command buffer' title redirects to a computer-graphics glossary entry, which is a different concept. Command pattern only covers commands as queued plain values.",
+      "original": "part"
     },
     "patterns/composite": {
       "sources": [
@@ -1273,7 +1312,8 @@
     },
     "patterns/decompose_conditional": {
       "sources": [],
-      "note": "No allowed source explains this refactoring. Code refactoring (Wikipedia) lists refactoring techniques but does not mention decomposing a conditional."
+      "note": "No allowed source found. Searches: Wikipedia API 'decompose conditional refactoring', 'extract method guard clause conditional' (only Code refactoring, which lists 'replace conditional with polymorphism' and has no decompose-conditional item; fetched, 'conditional' appears once); Wikibooks 'decompose conditional' and 'refactoring catalog' (Introduction to Software Engineering/Testing/Refactoring: same short list, no such item); Rust book/Rust by Example have nothing on naming predicates.",
+      "original": "all"
     },
     "patterns/decorator": {
       "sources": [
@@ -1291,7 +1331,8 @@
           "covers": "supplying a component's dependencies from outside instead of having it create them"
         }
       ],
-      "note": "A record of procs as the injected dependency is the Nim form; the article covers injection in general."
+      "note": "A record of procs as the injected dependency is the Nim form; the article covers injection in general.",
+      "original": "part"
     },
     "patterns/event_sourcing": {
       "sources": [
@@ -1300,7 +1341,8 @@
           "covers": "a store that keeps the sequence of events as the record, the storage side of event sourcing"
         }
       ],
-      "note": "No English Wikipedia article for Event sourcing (404). Event store covers the append-only log; replay as a fold and snapshots are not covered."
+      "note": "No English Wikipedia article for Event sourcing (404). Event store covers the append-only log; replay as a fold and snapshots are not covered.",
+      "original": "part"
     },
     "patterns/extract_function": {
       "sources": [
@@ -1309,7 +1351,8 @@
           "covers": "extract method: turn part of a larger routine into a new routine without changing behaviour"
         }
       ],
-      "note": "Broader article; extract method is named in one sentence."
+      "note": "Broader article; extract method is named in one sentence.",
+      "original": "part"
     },
     "patterns/extract_type": {
       "sources": [
@@ -1318,7 +1361,8 @@
           "covers": "extract class: move part of existing code into a new type"
         }
       ],
-      "note": "Broader article; extract class is named in one sentence. The Nim value-type rules (smart constructor, distinct) are not covered."
+      "note": "Broader article; extract class is named in one sentence. The Nim value-type rules (smart constructor, distinct) are not covered.",
+      "original": "part"
     },
     "patterns/facade": {
       "sources": [
@@ -1371,7 +1415,8 @@
           "covers": "what an effect is, and why isolating effects makes code easier to test"
         }
       ],
-      "note": "No English Wikipedia article for Functional core, imperative shell (404); these cover the core (pure) and the shell (effects) separately, not the split itself."
+      "note": "No English Wikipedia article for Functional core, imperative shell (404); these cover the core (pure) and the shell (effects) separately, not the split itself.",
+      "original": "part"
     },
     "patterns/idempotent_command": {
       "sources": [
@@ -1392,8 +1437,18 @@
       "note": ""
     },
     "patterns/introduce_parameter_object": {
-      "sources": [],
-      "note": "No allowed source explains this refactoring. Code refactoring (Wikipedia) does not mention parameter objects; no English Wikipedia article exists (404)."
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Data_clump",
+          "covers": "the smell this refactoring removes: variables passed around together, and grouping them into an object"
+        },
+        {
+          "url": "https://doc.rust-lang.org/book/ch05-02-example-structs.html",
+          "covers": "section 'Refactoring with Structs: Adding More Meaning': replacing loose width/height arguments with one named struct"
+        }
+      ],
+      "note": "Neither names the refactoring nor covers defaults ('no restriction'), builder-style with-functions or combining two filters.",
+      "original": "part"
     },
     "patterns/iterator_pattern": {
       "sources": [
@@ -1420,11 +1475,18 @@
           "covers": "lenses as get/put pairs for focusing on a part of a structure (broader topic; the article's lens section)"
         }
       ],
-      "note": ""
+      "note": "The article describes lenses as get and put in one section; the rest of the page is not covered.",
+      "original": "part"
     },
     "patterns/load_shedding": {
-      "sources": [],
-      "note": "The Wikipedia article Load shedding is about electric power only; Admission control, Rate limiting and Back pressure were opened and do not describe refusing requests to protect an overloaded service."
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Tail_drop",
+          "covers": "refusing new arrivals once a queue is at maximum capacity (the 'queue full' rule)"
+        }
+      ],
+      "note": "Partial only: network packets, not requests; no priorities, deadlines or idempotent ledger.",
+      "original": "part"
     },
     "patterns/mediator": {
       "sources": [
@@ -1477,7 +1539,8 @@
     },
     "patterns/parallel_change": {
       "sources": [],
-      "note": "No allowed source explains expand/migrate/contract. Database refactoring and Schema migration were opened and do not describe the three-step compatible change."
+      "note": "No allowed source found. Searches: Wikipedia API 'parallel change expand contract', 'database schema migration expand contract', 'branch by abstraction', 'backward compatibility API deprecation migration' (no article); fetched Database refactoring (no transition-period or expand/contract text), Feature toggle and Strangler fig pattern (related but different techniques); Wikibooks 'schema migration' (Rails migrations only); gh code search in MicrosoftDocs/azure-docs 'parallel change expand contract' (unrelated hits).",
+      "original": "all"
     },
     "patterns/parser_combinator": {
       "sources": [
@@ -1499,7 +1562,8 @@
           "covers": "stacking stages as composition, associativity"
         }
       ],
-      "note": ""
+      "note": "Neither article covers middleware that wraps a handler.",
+      "original": "part"
     },
     "patterns/prototype": {
       "sources": [
@@ -1530,7 +1594,8 @@
           "covers": "replacing conditional statements on state by polymorphic state objects"
         }
       ],
-      "note": ""
+      "note": "Code refactoring only names the technique; State pattern shows the polymorphic form, not the refactoring steps.",
+      "original": "part"
     },
     "patterns/request_reply": {
       "sources": [
@@ -1564,12 +1629,24 @@
       "note": ""
     },
     "patterns/sealer_unsealer": {
-      "sources": [],
-      "note": "Object-capability model and Capability-based security were opened and do not describe sealer/unsealer pairs."
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/E_(programming_language)",
+          "covers": "the mint example: makeBrandPair makes a sealer and an unsealer, and only that unsealer opens a box the sealer made"
+        }
+      ],
+      "note": "Covers the sealer/unsealer pair and brand idea inside E's capability model; it does not cover tickets, rights amplification or the Nim sealed-type construction.",
+      "original": "part"
     },
     "patterns/seam": {
-      "sources": [],
-      "note": "No article found in the allowed sources on seams (Dependency injection and Test double were opened and do not name or explain the concept)."
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Characterization_test",
+          "covers": "pinning what legacy code does today so a later change can be checked (the pin/holds part)"
+        }
+      ],
+      "note": "Partial: the article names Michael Feathers but does not define 'seam' (fetched, 0 matches).",
+      "original": "part"
     },
     "patterns/singleton": {
       "sources": [
@@ -1626,8 +1703,14 @@
       "note": ""
     },
     "patterns/tagless_final": {
-      "sources": [],
-      "note": "Expression problem only lists tagless-final as one solution; Initial algebra mentions it once. Neither explains it."
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Expression_problem",
+          "covers": "why interpretations and operations must both be extensible; lists tagless-final / object algebras as a solution"
+        }
+      ],
+      "note": "Partial: tagless final appears only as a one-line see-also item; the article does not explain it.",
+      "original": "part"
     },
     "patterns/template_method": {
       "sources": [
@@ -1639,8 +1722,22 @@
       "note": ""
     },
     "patterns/time_as_input": {
-      "sources": [],
-      "note": "Elapsed real time, System time, Unix time and Network Time Protocol were opened; none explains wall clock vs monotonic clock or passing time as an input."
+      "sources": [
+        {
+          "url": "https://pkg.go.dev/time",
+          "covers": "section 'Monotonic Clocks': wall clock versus monotonic clock, and which to use for measuring elapsed time"
+        },
+        {
+          "url": "https://doc.rust-lang.org/std/time/struct.Instant.html",
+          "covers": "a monotonic clock reading, only useful for differences and not comparable across processes"
+        },
+        {
+          "url": "https://doc.rust-lang.org/std/time/struct.SystemTime.html",
+          "covers": "the wall clock, which is not monotonic and can go backwards"
+        }
+      ],
+      "note": "Cover the two clocks and their uses. They leave out reading time once at the edge as a value passed in, tests reaching a moment, and 'none, never 0'.",
+      "original": "part"
     },
     "patterns/token_bucket": {
       "sources": [
@@ -1652,8 +1749,14 @@
       "note": ""
     },
     "patterns/transactional_outbox": {
-      "sources": [],
-      "note": "No allowed source explains the outbox pattern (Message broker, Distributed transaction and Event-driven architecture were opened)."
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Inbox_and_outbox_pattern",
+          "covers": "persisting data to an outbox table and a separate process delivering it with at-least-once guarantee, plus the inbox side"
+        }
+      ],
+      "note": "Short article. It does not discuss the single-transaction argument in detail or the receiver keyed by message id beyond the inbox mention.",
+      "original": "part"
     },
     "patterns/visitor": {
       "sources": [

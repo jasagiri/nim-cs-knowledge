@@ -111,3 +111,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `130ad4e198fe734f` Side effect (computer science) (Wikipedia): what an effect is, and why isolating effects makes code easier to test
 
 No English Wikipedia article for Functional core, imperative shell (404); these cover the core (pure) and the shell (effects) separately, not the split itself.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

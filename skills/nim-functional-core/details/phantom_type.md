@@ -120,4 +120,12 @@ A `distinct` type has none of its base type's operations: define `==`, `<` and t
 
 ## Sources
 
-None in the catalog: English Wikipedia has no Phantom type article (404); Generalized algebraic data type mentions phantom types only twice.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `cd8d67404b0062a7` Phantom type parameters (Rust by Example): a type parameter that holds no data but makes types differ at compile time
+- `25d9ba479ac54c14` Testcase: unit clarification (Rust by Example): phantom unit tags on a quantity so that mixing units fails to compile
+- `853728b9583be562` Haskell/GADT (Wikibooks): the Phantom types section: a type variable added to Expr that is not used in its data
+
+Rust pages cover the idea and the unit case. They leave out Nim's distinct-type form and the state-tag use (Email[Validated]) and the unforgeability limit.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

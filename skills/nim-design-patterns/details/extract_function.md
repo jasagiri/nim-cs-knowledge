@@ -93,3 +93,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `e0da847236a95912` Code refactoring (Wikipedia): extract method: turn part of a larger routine into a new routine without changing behaviour
 
 Broader article; extract method is named in one sentence.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

@@ -196,3 +196,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `a8ef5a83069f53fb` sync (Unix) (Wikipedia): fsync and fdatasync flush file data to disk, and the need to check their return values
 
 No source covers the whole recipe (temporary name, fsync, rename, fsync of the directory); the two articles cover the rename and fsync steps. Directory fsync is not discussed.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

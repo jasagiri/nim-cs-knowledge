@@ -359,6 +359,82 @@
       ]
     },
     {
+      "url": "https://doc.rust-lang.org/book/ch05-02-example-structs.html",
+      "title": "An Example Program Using Structs (The Rust Programming Language)",
+      "section": [
+        "Rust documentation"
+      ],
+      "licenses": [
+        "MIT",
+        "Apache-2.0"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html",
+      "title": "To panic! or Not to panic! (The Rust Programming Language)",
+      "section": [
+        "Rust documentation"
+      ],
+      "licenses": [
+        "MIT",
+        "Apache-2.0"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/rust-by-example/generics/phantom.html",
+      "title": "Phantom type parameters (Rust by Example)",
+      "section": [
+        "Rust documentation"
+      ],
+      "licenses": [
+        "MIT",
+        "Apache-2.0"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/rust-by-example/generics/phantom/testcase_units.html",
+      "title": "Testcase: unit clarification (Rust by Example)",
+      "section": [
+        "Rust documentation"
+      ],
+      "licenses": [
+        "MIT",
+        "Apache-2.0"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/std/time/struct.Instant.html",
+      "title": "Instant in std::time (Rust documentation)",
+      "section": [
+        "Rust documentation"
+      ],
+      "licenses": [
+        "MIT",
+        "Apache-2.0"
+      ]
+    },
+    {
+      "url": "https://doc.rust-lang.org/std/time/struct.SystemTime.html",
+      "title": "SystemTime in std::time (Rust documentation)",
+      "section": [
+        "Rust documentation"
+      ],
+      "licenses": [
+        "MIT",
+        "Apache-2.0"
+      ]
+    },
+    {
+      "url": "https://en.wikibooks.org/wiki/Haskell/GADT",
+      "title": "Haskell/GADT (Wikibooks)",
+      "section": [
+        "Wikibooks"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
       "url": "https://en.wikipedia.org/wiki/ABA_problem",
       "title": "ABA problem (Wikipedia)",
       "section": [
@@ -619,6 +695,16 @@
       ]
     },
     {
+      "url": "https://en.wikipedia.org/wiki/Characterization_test",
+      "title": "Characterization test (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
       "url": "https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern",
       "title": "Circuit breaker design pattern (Wikipedia)",
       "section": [
@@ -749,6 +835,16 @@
       ]
     },
     {
+      "url": "https://en.wikipedia.org/wiki/Data_clump",
+      "title": "Data clump (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
       "url": "https://en.wikipedia.org/wiki/Decorator_pattern",
       "title": "Decorator pattern (Wikipedia)",
       "section": [
@@ -839,6 +935,16 @@
       ]
     },
     {
+      "url": "https://en.wikipedia.org/wiki/E_(programming_language)",
+      "title": "E (programming language) (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
       "url": "https://en.wikipedia.org/wiki/Edit_distance",
       "title": "Edit distance (Wikipedia)",
       "section": [
@@ -891,6 +997,16 @@
     {
       "url": "https://en.wikipedia.org/wiki/Exponentiation_by_squaring",
       "title": "Exponentiation by squaring (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Expression_problem",
+      "title": "Expression problem (Wikipedia)",
       "section": [
         "Wikipedia"
       ],
@@ -1081,6 +1197,16 @@
     {
       "url": "https://en.wikipedia.org/wiki/Immutable_object",
       "title": "Immutable object (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Inbox_and_outbox_pattern",
+      "title": "Inbox and outbox pattern (Wikipedia)",
       "section": [
         "Wikipedia"
       ],
@@ -1809,6 +1935,16 @@
       ]
     },
     {
+      "url": "https://en.wikipedia.org/wiki/Tail_drop",
+      "title": "Tail drop (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
       "url": "https://en.wikipedia.org/wiki/Tarjan's_strongly_connected_components_algorithm",
       "title": "Tarjan's strongly connected components algorithm (Wikipedia)",
       "section": [
@@ -1956,6 +2092,16 @@
       ],
       "licenses": [
         "CC-BY-2.5"
+      ]
+    },
+    {
+      "url": "https://pkg.go.dev/time",
+      "title": "time package (Go standard library)",
+      "section": [
+        "Go standard library"
+      ],
+      "licenses": [
+        "BSD-3-Clause"
       ]
     },
     {

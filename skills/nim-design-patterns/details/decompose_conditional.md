@@ -88,4 +88,6 @@ Write the predicates as boundaries (`age < 6`), and test both sides of each boun
 
 ## Sources
 
-None in the catalog: No allowed source explains this refactoring. Code refactoring (Wikipedia) lists refactoring techniques but does not mention decomposing a conditional.
+None in the catalog: No allowed source found. Searches: Wikipedia API 'decompose conditional refactoring', 'extract method guard clause conditional' (only Code refactoring, which lists 'replace conditional with polymorphism' and has no decompose-conditional item; fetched, 'conditional' appears once); Wikibooks 'decompose conditional' and 'refactoring catalog' (Introduction to Software Engineering/Testing/Refactoring: same short list, no such item); Rust book/Rust by Example have nothing on naming predicates.
+
+Original writing: this page was written for this repository. No source under a licence that allows commercial use was found that explains its concept; what the page claims rests on its module's tests.

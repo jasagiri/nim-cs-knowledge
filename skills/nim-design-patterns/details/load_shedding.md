@@ -103,4 +103,10 @@ Also remember that the deadline is an absolute tick and the clock is the caller'
 
 ## Sources
 
-None in the catalog: The Wikipedia article Load shedding is about electric power only; Admission control, Rate limiting and Back pressure were opened and do not describe refusing requests to protect an overloaded service.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `eaea7dde179723dc` Tail drop (Wikipedia): refusing new arrivals once a queue is at maximum capacity (the 'queue full' rule)
+
+Partial only: network packets, not requests; no priorities, deadlines or idempotent ledger.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

@@ -98,3 +98,7 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 
 - `94248ee8312149b5` Pipeline (software) (Wikipedia): chains of processing stages where each output feeds the next (related topic; middleware as handler wrappers is not named)
 - `d90148315f9e0d2b` Function composition (computer science) (Wikipedia): stacking stages as composition, associativity
+
+Neither article covers middleware that wraps a handler.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

@@ -144,4 +144,12 @@ Fix: measure waits as `MonoNs` differences, read one `Now` at the edge, keep "no
 
 ## Sources
 
-None in the catalog: Elapsed real time, System time, Unix time and Network Time Protocol were opened; none explains wall clock vs monotonic clock or passing time as an input.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `3b680b9eeb9b9357` time package (Go standard library): section 'Monotonic Clocks': wall clock versus monotonic clock, and which to use for measuring elapsed time
+- `fac70fde463133fd` Instant in std::time (Rust documentation): a monotonic clock reading, only useful for differences and not comparable across processes
+- `a6e401f95ff216b0` SystemTime in std::time (Rust documentation): the wall clock, which is not monotonic and can go backwards
+
+Cover the two clocks and their uses. They leave out reading time once at the edge as a value passed in, tests reaching a moment, and 'none, never 0'.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

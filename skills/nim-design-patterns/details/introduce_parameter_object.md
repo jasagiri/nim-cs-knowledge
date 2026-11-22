@@ -113,4 +113,11 @@ doAssert not Query(minStops: 3, maxStops: 1).matches(2)   # min > max matches no
 
 ## Sources
 
-None in the catalog: No allowed source explains this refactoring. Code refactoring (Wikipedia) does not mention parameter objects; no English Wikipedia article exists (404).
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `18368b39df2a86d6` Data clump (Wikipedia): the smell this refactoring removes: variables passed around together, and grouping them into an object
+- `f0e6847a3be7cb1a` An Example Program Using Structs (The Rust Programming Language): section 'Refactoring with Structs: Adding More Meaning': replacing loose width/height arguments with one named struct
+
+Neither names the refactoring nor covers defaults ('no restriction'), builder-style with-functions or combining two filters.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

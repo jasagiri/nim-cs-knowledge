@@ -101,3 +101,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `686a74b9cb147d93` Hash array mapped trie (Wikipedia): trie of wide nodes that persistent vectors and maps are built on
 
 No allowed article is specifically about persistent vectors (en.wikipedia Persistent_vector is absent); coverage is of the broader topics.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

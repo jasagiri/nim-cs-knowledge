@@ -119,4 +119,10 @@ Delivery order across retries is not a guarantee: a failed message stays while l
 
 ## Sources
 
-None in the catalog: No allowed source explains the outbox pattern (Message broker, Distributed transaction and Event-driven architecture were opened).
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `a6ccc58b0112e6cd` Inbox and outbox pattern (Wikipedia): persisting data to an outbox table and a separate process delivering it with at-least-once guarantee, plus the inbox side
+
+Short article. It does not discuss the single-transaction argument in detail or the receiver keyed by message id beyond the inbox mention.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

@@ -13,7 +13,8 @@ checks that hold the repository together. Every ID has a test tagged `# SPEC: <I
 | NCK-CAT-02 | No module under src/ or tools/ imports a networking module; the network is used only by free-books-catalog's catalog_fetch. |
 | NCK-SRC-01 | Every source in catalog/sources.jsonl states at least one licence, and each is one of `commercialLicenses` in free-books-catalog (src/free_books_catalog/licences.nim: licences that allow use, copying, modification and distribution for any purpose, commercial use included). |
 | NCK-SRC-02 | catalog/config.json switches free-programming-books (`fpb`) and Hillside off and `commercialOnly` on, so the catalog holds exactly the sources it lists and catalog_build refuses a source whose licences are not on the list. |
-| NCK-SRC-03 | catalog/citations.json has one entry per details page; an entry with no source has a note saying why; the URLs it cites are exactly the sources catalog/config.json lists. |
+| NCK-SRC-03 | catalog/citations.json has one entry per details page; an entry with no source has a note saying why and `original` "all"; an entry with `original` "part" has a note saying what its sources leave out; no other entry has `original`; the URLs it cites are exactly the sources catalog/config.json lists. |
+| NCK-SRC-04 | Every Sources section of a page whose entry has `original` says "Original writing:"; a page whose entry has none does not. |
 
 ## Knowledge pages and modules (ADR-NCK-0002)
 

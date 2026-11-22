@@ -111,3 +111,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `d5502080b0bfb822` Domain-driven design (Wikipedia): names the anticorruption layer as a context-mapping relationship that isolates a system from an upstream model
 
 No dedicated English Wikipedia article (Anti-corruption_layer is 404). The Domain-driven design article only defines the layer in one list item; translation by smart constructors is not covered.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

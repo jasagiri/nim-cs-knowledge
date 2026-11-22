@@ -93,3 +93,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `4fb9d2a834ff7720` Purely functional data structure (Wikipedia): persistence and amortization in functional data structures
 
 No allowed source names the banker's method for queues specifically.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

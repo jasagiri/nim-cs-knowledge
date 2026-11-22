@@ -100,3 +100,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `5e7db9cb96450d0c` Skew binary number system (Wikipedia): skew binary representation with O(1) increment
 
 Only the number system is covered; no allowed source describes Okasaki's random-access list built on it.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

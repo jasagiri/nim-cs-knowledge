@@ -1,30 +1,45 @@
 # Sources and their licences
 
-The catalog holds only these 196 sources (ADR-NCK-0005): articles and chapters, each chosen because
+The catalog holds only these 210 sources (ADR-NCK-0005): articles and chapters, each chosen because
 it explains the concept of a page, from sites whose licences were read on 2026-11-22:
 
 | Site | Sources | Licence | Where the licence was read |
 |---|---|---|---|
-| English Wikipedia | 158 | CC-BY-SA-4.0 | the notice at the foot of each article |
+| English Wikipedia | 164 | CC-BY-SA-4.0 | the notice at the foot of each article |
+| English Wikibooks | 1 | CC-BY-SA-4.0 | the notice at the foot of each page |
 | cp-algorithms | 34 | CC-BY-SA-4.0 | the LICENSE file of the site's repository |
 | Jeff Erickson, *Algorithms* | 1 | CC-BY-4.0 | the course page: the textbook is CC BY 4.0 (his other lecture notes are CC BY-NC-SA and are not cited) |
 | Open Data Structures | 1 | CC-BY-2.5 | the home page's licence link |
 | Erlang/OTP documentation | 2 | Apache-2.0 | the licence of the Erlang/OTP repository, which holds the documentation |
+| Rust documentation (standard library, The Rust Programming Language, Rust by Example) | 6 | MIT, Apache-2.0 | the LICENSE-MIT and LICENSE-APACHE files of the rust-lang repositories |
+| Go standard library documentation | 1 | BSD-3-Clause | the licence pkg.go.dev shows for the package |
 
 Every licence allows use, copying, modification and distribution for any purpose, commercial use
 included (`commercialLicenses` in free-books-catalog's `src/free_books_catalog/licences.nim`;
 catalog_build refuses any other because `catalog/config.json` sets `"commercialOnly": true`, and
 NCK-SRC-01 checks the committed catalog). Which page cites which source, and what each covers, is in
-`catalog/citations.json`; `tools/cite_sources` writes the pages' Sources sections from it. 11 of
-the 159 pages cite nothing, because no source on these sites explains their concept; their
-Sources section says so. The pages are written here, not copied from the sources.
+`catalog/citations.json`; `tools/cite_sources` writes the pages' Sources sections from it.
+
+Original writing is marked on the page itself, in an "Original writing:" paragraph of its Sources
+section: 2 pages are entirely original, because no source on these sites explains their
+concept; 36 pages cite sources that explain part of the page, and the note above that
+paragraph says what the rest is. The other 121 pages cite sources that explain their concept.
+No page copies text from a source.
 
 | Source | Catalog ID | Licence |
 |---|---|---|
 | [Greedy Algorithms (Erickson, Algorithms, ch. 4)](https://jeffe.cs.illinois.edu/teaching/algorithms/book/04-greedy.pdf) | `3e23f4f0ff0fa382` | CC-BY-4.0 |
 | [gen_server (Erlang/OTP documentation)](https://www.erlang.org/doc/apps/stdlib/gen_server.html) | `50fc785f1d11793d` | Apache-2.0 |
 | [Supervisor Behaviour (Erlang/OTP documentation)](https://www.erlang.org/doc/system/sup_princ.html) | `1b179470b870e5fe` | Apache-2.0 |
+| [time package (Go standard library)](https://pkg.go.dev/time) | `3b680b9eeb9b9357` | BSD-3-Clause |
 | [Open Data Structures (Open Data Structures)](https://opendatastructures.org/) | `fc4e34ece13d1024` | CC-BY-2.5 |
+| [An Example Program Using Structs (The Rust Programming Language)](https://doc.rust-lang.org/book/ch05-02-example-structs.html) | `f0e6847a3be7cb1a` | MIT, Apache-2.0 |
+| [Instant in std::time (Rust documentation)](https://doc.rust-lang.org/std/time/struct.Instant.html) | `fac70fde463133fd` | MIT, Apache-2.0 |
+| [Phantom type parameters (Rust by Example)](https://doc.rust-lang.org/rust-by-example/generics/phantom.html) | `cd8d67404b0062a7` | MIT, Apache-2.0 |
+| [SystemTime in std::time (Rust documentation)](https://doc.rust-lang.org/std/time/struct.SystemTime.html) | `a6e401f95ff216b0` | MIT, Apache-2.0 |
+| [Testcase: unit clarification (Rust by Example)](https://doc.rust-lang.org/rust-by-example/generics/phantom/testcase_units.html) | `25d9ba479ac54c14` | MIT, Apache-2.0 |
+| [To panic! or Not to panic! (The Rust Programming Language)](https://doc.rust-lang.org/book/ch09-03-to-panic-or-not-to-panic.html) | `c356b95a27dce231` | MIT, Apache-2.0 |
+| [Haskell/GADT (Wikibooks)](https://en.wikibooks.org/wiki/Haskell/GADT) | `853728b9583be562` | CC-BY-SA-4.0 |
 | [ABA problem (Wikipedia)](https://en.wikipedia.org/wiki/ABA_problem) | `3825593c370bd0c8` | CC-BY-SA-4.0 |
 | [Abstract factory pattern (Wikipedia)](https://en.wikipedia.org/wiki/Abstract_factory_pattern) | `90708edeeebbaec0` | CC-BY-SA-4.0 |
 | [Actor model (Wikipedia)](https://en.wikipedia.org/wiki/Actor_model) | `ed4c9a778416dd3d` | CC-BY-SA-4.0 |
@@ -51,6 +66,7 @@ Sources section says so. The pages are written here, not copied from the sources
 | [Bulkhead pattern (Wikipedia)](https://en.wikipedia.org/wiki/Bulkhead_pattern) | `71a07163203c135d` | CC-BY-SA-4.0 |
 | [Capability-based security (Wikipedia)](https://en.wikipedia.org/wiki/Capability-based_security) | `60e228e8e5a43305` | CC-BY-SA-4.0 |
 | [Chain-of-responsibility pattern (Wikipedia)](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) | `cfed21302ac49e11` | CC-BY-SA-4.0 |
+| [Characterization test (Wikipedia)](https://en.wikipedia.org/wiki/Characterization_test) | `2980226ed868c08c` | CC-BY-SA-4.0 |
 | [Circuit breaker design pattern (Wikipedia)](https://en.wikipedia.org/wiki/Circuit_breaker_design_pattern) | `b92abb9855f547cc` | CC-BY-SA-4.0 |
 | [Code refactoring (Wikipedia)](https://en.wikipedia.org/wiki/Code_refactoring) | `e0da847236a95912` | CC-BY-SA-4.0 |
 | [Command pattern (Wikipedia)](https://en.wikipedia.org/wiki/Command_pattern) | `01af3730c5bafb02` | CC-BY-SA-4.0 |
@@ -64,6 +80,7 @@ Sources section says so. The pages are written here, not copied from the sources
 | [Convex hull algorithms (Wikipedia)](https://en.wikipedia.org/wiki/Convex_hull_algorithms) | `b58547ede15087a4` | CC-BY-SA-4.0 |
 | [Counting sort (Wikipedia)](https://en.wikipedia.org/wiki/Counting_sort) | `7c6682f61aee42a8` | CC-BY-SA-4.0 |
 | [Cycle detection (Wikipedia)](https://en.wikipedia.org/wiki/Cycle_detection) | `fe7de4383fcec4dc` | CC-BY-SA-4.0 |
+| [Data clump (Wikipedia)](https://en.wikipedia.org/wiki/Data_clump) | `18368b39df2a86d6` | CC-BY-SA-4.0 |
 | [Decorator pattern (Wikipedia)](https://en.wikipedia.org/wiki/Decorator_pattern) | `7063af83192f3c1e` | CC-BY-SA-4.0 |
 | [Dependency injection (Wikipedia)](https://en.wikipedia.org/wiki/Dependency_injection) | `5bc01215c554611d` | CC-BY-SA-4.0 |
 | [Depth-first search (Wikipedia)](https://en.wikipedia.org/wiki/Depth-first_search) | `4d89433f773dee8d` | CC-BY-SA-4.0 |
@@ -73,12 +90,14 @@ Sources section says so. The pages are written here, not copied from the sources
 | [Domain-driven design (Wikipedia)](https://en.wikipedia.org/wiki/Domain-driven_design) | `d5502080b0bfb822` | CC-BY-SA-4.0 |
 | [Double-ended queue (Wikipedia)](https://en.wikipedia.org/wiki/Double-ended_queue) | `99cefbe9562d9272` | CC-BY-SA-4.0 |
 | [Doubly linked list (Wikipedia)](https://en.wikipedia.org/wiki/Doubly_linked_list) | `37174714b555d156` | CC-BY-SA-4.0 |
+| [E (programming language) (Wikipedia)](https://en.wikipedia.org/wiki/E_(programming_language)) | `652c8ebe27b4b6a1` | CC-BY-SA-4.0 |
 | [Edit distance (Wikipedia)](https://en.wikipedia.org/wiki/Edit_distance) | `1398dddb85ced758` | CC-BY-SA-4.0 |
 | [Elm (programming language) (Wikipedia)](https://en.wikipedia.org/wiki/Elm_(programming_language)) | `ac19b0af9d8633b8` | CC-BY-SA-4.0 |
 | [Eulerian path (Wikipedia)](https://en.wikipedia.org/wiki/Eulerian_path) | `8c716cce20eb0265` | CC-BY-SA-4.0 |
 | [Event store (Wikipedia)](https://en.wikipedia.org/wiki/Event_store) | `bf73fcd9a3f53a30` | CC-BY-SA-4.0 |
 | [Exponential backoff (Wikipedia)](https://en.wikipedia.org/wiki/Exponential_backoff) | `73afa3555eda02ea` | CC-BY-SA-4.0 |
 | [Exponentiation by squaring (Wikipedia)](https://en.wikipedia.org/wiki/Exponentiation_by_squaring) | `04c79e1e35914fe8` | CC-BY-SA-4.0 |
+| [Expression problem (Wikipedia)](https://en.wikipedia.org/wiki/Expression_problem) | `fe89d8ef736ee3c0` | CC-BY-SA-4.0 |
 | [External sorting (Wikipedia)](https://en.wikipedia.org/wiki/External_sorting) | `6abe18a4d21811b2` | CC-BY-SA-4.0 |
 | [Facade pattern (Wikipedia)](https://en.wikipedia.org/wiki/Facade_pattern) | `2711392e55cdaff1` | CC-BY-SA-4.0 |
 | [Factory method pattern (Wikipedia)](https://en.wikipedia.org/wiki/Factory_method_pattern) | `ae149a41a0a65001` | CC-BY-SA-4.0 |
@@ -98,6 +117,7 @@ Sources section says so. The pages are written here, not copied from the sources
 | [Huffman coding (Wikipedia)](https://en.wikipedia.org/wiki/Huffman_coding) | `2a69d73160f9ef6e` | CC-BY-SA-4.0 |
 | [Idempotence (Wikipedia)](https://en.wikipedia.org/wiki/Idempotence) | `4af7eac48ba49203` | CC-BY-SA-4.0 |
 | [Immutable object (Wikipedia)](https://en.wikipedia.org/wiki/Immutable_object) | `24f1092fea59a7ac` | CC-BY-SA-4.0 |
+| [Inbox and outbox pattern (Wikipedia)](https://en.wikipedia.org/wiki/Inbox_and_outbox_pattern) | `a6ccc58b0112e6cd` | CC-BY-SA-4.0 |
 | [Insertion sort (Wikipedia)](https://en.wikipedia.org/wiki/Insertion_sort) | `8a5e103ea8f12a60` | CC-BY-SA-4.0 |
 | [Interpreter pattern (Wikipedia)](https://en.wikipedia.org/wiki/Interpreter_pattern) | `1656f17a2f153c91` | CC-BY-SA-4.0 |
 | [Iterator pattern (Wikipedia)](https://en.wikipedia.org/wiki/Iterator_pattern) | `424aa21b5f8ea285` | CC-BY-SA-4.0 |
@@ -170,6 +190,7 @@ Sources section says so. The pages are written here, not copied from the sources
 | [Summed-area table (Wikipedia)](https://en.wikipedia.org/wiki/Summed-area_table) | `6589db1cad040086` | CC-BY-SA-4.0 |
 | [sync (Unix) (Wikipedia)](https://en.wikipedia.org/wiki/Sync_(Unix)) | `a8ef5a83069f53fb` | CC-BY-SA-4.0 |
 | [Tail call (Wikipedia)](https://en.wikipedia.org/wiki/Tail_call) | `992f110785fdcdd9` | CC-BY-SA-4.0 |
+| [Tail drop (Wikipedia)](https://en.wikipedia.org/wiki/Tail_drop) | `eaea7dde179723dc` | CC-BY-SA-4.0 |
 | [Tarjan's strongly connected components algorithm (Wikipedia)](https://en.wikipedia.org/wiki/Tarjan's_strongly_connected_components_algorithm) | `73daa642c7d48c08` | CC-BY-SA-4.0 |
 | [Template method pattern (Wikipedia)](https://en.wikipedia.org/wiki/Template_method_pattern) | `98db8836fc706621` | CC-BY-SA-4.0 |
 | [Time complexity (Wikipedia)](https://en.wikipedia.org/wiki/Time_complexity) | `0f84110bc6fb9a48` | CC-BY-SA-4.0 |

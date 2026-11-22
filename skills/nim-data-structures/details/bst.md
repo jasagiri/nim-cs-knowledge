@@ -130,3 +130,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `fc4e34ece13d1024` Open Data Structures (Open Data Structures): ch. 6, binary trees (BinarySearchTree)
 
 Persistence is not covered by these; see Persistent data structure if wanted.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

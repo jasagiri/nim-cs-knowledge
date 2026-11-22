@@ -101,3 +101,7 @@ Make the state an argument and a result, and the call is a value again. Do not a
 Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
 - `5d5d2690cf234c94` Referential transparency (Wikipedia): expressions replaceable by their values; substitution of equals (nearest allowed article)
+
+Referential transparency is the property that makes the rewriting valid; the article does not show reasoning step by step with equations.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

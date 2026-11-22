@@ -97,3 +97,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `18d03a640694a580` Subset sum problem (Wikipedia): the two-sum scan with one pointer moving each way over sorted lists (Horowitz and Sahni section)
 
 No allowed article on two pointers or sliding window as a technique; this covers only the opposite-ends scan, not the sliding window. Sliding window protocol on Wikipedia is about networking and is not cited.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

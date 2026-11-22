@@ -116,3 +116,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `92fb42677af37dfc` Self-balancing binary search tree (Wikipedia): context for rebalancing by rotation
 
 Persistence (path copying) is covered only generally via Persistent data structure; not added.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

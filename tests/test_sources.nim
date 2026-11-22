@@ -1,7 +1,7 @@
 ## E tests for docs/specification.md NCK-SRC-01 and NCK-SRC-02 (ADR-NCK-0005): every source the
 ## repository lists is under a licence that allows commercial use.
 
-import std/[json, os, sets, unittest]
+import std/[json, os, sets, strutils, unittest]
 import free_books_catalog/licences
 
 const root = currentSourcePath().parentDir.parentDir
@@ -37,7 +37,7 @@ suite "sources":
     check inCatalog == listed
 
   # SPEC: NCK-SRC-03
-  test "NCK-SRC-03 Given catalog/citations.json, when read, then every page has an entry, every cited URL is a listed source and every listed source is cited":
+  test "NCK-SRC-03 Given catalog/citations.json, when read, then every page has an entry, original matches its sources and note, and the cited URLs are exactly the listed sources":
     let cj = parseJson(readFile(root / "catalog" / "citations.json"))["pages"]
     var pages = initHashSet[string]()
     for (skill, area) in [("nim-functional-core", "fp"), ("nim-data-structures", "ds"),
@@ -49,8 +49,29 @@ suite "sources":
     check keys == pages
     var cited = initHashSet[string]()
     for _, v in cj.pairs:
-      if v["sources"].len == 0: check v{"note"}.getStr.len > 0
+      let original = v{"original"}.getStr
+      if v["sources"].len == 0:
+        check v{"note"}.getStr.len > 0
+        check original == "all"
+      else:
+        check original in ["", "part"]
+        if original == "part": check v{"note"}.getStr.len > 0
       for s in v["sources"]: cited.incl s["url"].getStr
     var listed = initHashSet[string]()
     for x in parseJson(readFile(root / "catalog" / "config.json"))["listed"]: listed.incl x["url"].getStr
     check cited == listed
+
+  # SPEC: NCK-SRC-04
+  test "NCK-SRC-04 Given each page and its entry, when its Sources section is read, then it says Original writing exactly when the entry has original":
+    let cj = parseJson(readFile(root / "catalog" / "citations.json"))["pages"]
+    for (skill, area) in [("nim-functional-core", "fp"), ("nim-data-structures", "ds"),
+                          ("nim-algorithms", "algo"), ("nim-design-patterns", "patterns")]:
+      for f in walkFiles(root / "skills" / skill / "details" / "*.md"):
+        let key = area & "/" & f.extractFilename.changeFileExt("")
+        let text = readFile(f)
+        let sources = text[text.find("\n## Sources") .. ^1]
+        checkpoint key
+        let marked = sources.contains("Original writing:")
+        let expected = cj[key]{"original"}.getStr.len > 0
+        check marked == expected
+

@@ -122,3 +122,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `5bc01215c554611d` Dependency injection (Wikipedia): supplying a component's dependencies from outside instead of having it create them
 
 A record of procs as the injected dependency is the Nim form; the article covers injection in general.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

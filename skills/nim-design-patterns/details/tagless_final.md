@@ -110,4 +110,10 @@ Give each interpretation its own `distinct` type, as `Eval` and `Size` do. A sec
 
 ## Sources
 
-None in the catalog: Expression problem only lists tagless-final as one solution; Initial algebra mentions it once. Neither explains it.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `fe89d8ef736ee3c0` Expression problem (Wikipedia): why interpretations and operations must both be extensible; lists tagless-final / object algebras as a solution
+
+Partial: tagless final appears only as a one-line see-also item; the article does not explain it.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

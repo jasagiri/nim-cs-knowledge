@@ -38,6 +38,7 @@ Also from the IDs in the first cell of the table rows of
 | NCK-SRC-01 | tests/test_sources.nim (1) |
 | NCK-SRC-02 | tests/test_sources.nim (1) |
 | NCK-SRC-03 | tests/test_sources.nim (1) |
+| NCK-SRC-04 | tests/test_sources.nim (1) |
 | NCK-KNOW-01 | tests/test_pages.nim (1) |
 | NCK-KNOW-02 | tests/test_pages.nim (1) |
 | NCK-KNOW-03 | tests/test_pages.nim (1) |
@@ -1134,7 +1135,7 @@ Also from the IDs in the first cell of the table rows of
 | DS-SUFFIXTRIE-07 | tests/test_ds_suffix_trie.nim (1) |
 | DS-SUFFIXTRIE-08 | tests/test_ds_suffix_trie.nim (1) |
 
-Declared: 1100  Covered: 1100  Uncovered: 0
+Declared: 1101  Covered: 1101  Uncovered: 0
 
 ## Uncovered declared IDs
 

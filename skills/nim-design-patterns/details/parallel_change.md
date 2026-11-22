@@ -102,4 +102,6 @@ Also do not contract on a calendar date: contract when `contract` accepts the st
 
 ## Sources
 
-None in the catalog: No allowed source explains expand/migrate/contract. Database refactoring and Schema migration were opened and do not describe the three-step compatible change.
+None in the catalog: No allowed source found. Searches: Wikipedia API 'parallel change expand contract', 'database schema migration expand contract', 'branch by abstraction', 'backward compatibility API deprecation migration' (no article); fetched Database refactoring (no transition-period or expand/contract text), Feature toggle and Strangler fig pattern (related but different techniques); Wikibooks 'schema migration' (Rails migrations only); gh code search in MicrosoftDocs/azure-docs 'parallel change expand contract' (unrelated hits).
+
+Original writing: this page was written for this repository. No source under a licence that allows commercial use was found that explains its concept; what the page claims rests on its module's tests.

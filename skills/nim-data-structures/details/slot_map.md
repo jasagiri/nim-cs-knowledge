@@ -177,3 +177,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `3825593c370bd0c8` ABA problem (Wikipedia): reuse of a slot and the generation/tag counter that detects it
 
 No allowed source describes a generational slot map itself; coverage is of the two underlying ideas.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

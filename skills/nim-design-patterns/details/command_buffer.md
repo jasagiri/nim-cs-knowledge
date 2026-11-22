@@ -168,3 +168,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `01af3730c5bafb02` Command pattern (Wikipedia): requests as data that can be queued and executed later
 
 No source covers deferred structural changes to a collection under iteration. The Wikipedia 'Command buffer' title redirects to a computer-graphics glossary entry, which is a different concept. Command pattern only covers commands as queued plain values.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

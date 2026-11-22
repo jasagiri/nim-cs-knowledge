@@ -114,4 +114,10 @@ Keep `distinct` for what it is good at (a `Meters` that cannot be added to a `Se
 
 ## Sources
 
-None in the catalog: English Wikipedia has no article on smart constructors or Parse, don't validate (404); Abstract data type, Refinement type and Algebraic data type do not cover it.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `c356b95a27dce231` To panic! or Not to panic! (The Rust Programming Language): section 'Creating Custom Types for Validation': a Guess type whose only constructor checks the range, so later code relies on the type
+
+Covers one check at the boundary and the type carrying the proof; Rust panics where the page returns Result, and it does not discuss 'parse, don't validate' or distinct-type pitfalls.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

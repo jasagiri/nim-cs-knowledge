@@ -99,3 +99,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `59217df8cf9ce10e` Strangler fig pattern (Wikipedia): replacing a legacy implementation piece by piece instead of all at once
 
 No English Wikipedia article for Branch by abstraction (404). Strangler fig pattern is the closest broader topic (incremental replacement); it does not describe the abstraction layer or the shadow stage.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

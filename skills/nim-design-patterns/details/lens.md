@@ -116,3 +116,7 @@ A second trap is rebuilding a record in a setter and forgetting a field: the get
 Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
 
 - `1ff6c768cd18f607` Bidirectional transformation (Wikipedia): lenses as get/put pairs for focusing on a part of a structure (broader topic; the article's lens section)
+
+The article describes lenses as get and put in one section; the rest of the page is not covered.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

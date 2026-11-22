@@ -110,3 +110,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `a1da01744743a89c` Graph (abstract data type) (Wikipedia): graph as a data type and adjacency-list representation
 
 No allowed source on a canonically ordered immutable graph value; this article covers the representation only.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

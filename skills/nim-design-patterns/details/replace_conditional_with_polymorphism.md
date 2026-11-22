@@ -109,3 +109,7 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 
 - `e0da847236a95912` Code refactoring (Wikipedia): lists the technique 'Replace conditional with polymorphism' among refactorings (brief)
 - `96b03f277d46e69e` State pattern (Wikipedia): replacing conditional statements on state by polymorphic state objects
+
+Code refactoring only names the technique; State pattern shows the polymorphic form, not the refactoring steps.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

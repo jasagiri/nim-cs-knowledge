@@ -132,3 +132,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `8e0fb2ad30794afa` Minimum Stack / Minimum Queue (cp-algorithms): stack and queue augmented with running minimum
 
 Monotonic stack is covered only by All_nearest_smaller_values, which is not listed because it is about a related problem.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

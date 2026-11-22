@@ -94,3 +94,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `bf73fcd9a3f53a30` Event store (Wikipedia): a store that keeps the sequence of events as the record, the storage side of event sourcing
 
 No English Wikipedia article for Event sourcing (404). Event store covers the append-only log; replay as a fold and snapshots are not covered.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

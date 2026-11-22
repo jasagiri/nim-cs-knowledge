@@ -94,4 +94,10 @@ Also keep the default seam equal to the old wiring until the pins are green; cha
 
 ## Sources
 
-None in the catalog: No article found in the allowed sources on seams (Dependency injection and Test double were opened and do not name or explain the concept).
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `2980226ed868c08c` Characterization test (Wikipedia): pinning what legacy code does today so a later change can be checked (the pin/holds part)
+
+Partial: the article names Michael Feathers but does not define 'seam' (fetched, 0 matches).
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

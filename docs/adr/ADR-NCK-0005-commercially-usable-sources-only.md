@@ -64,3 +64,16 @@ A.
 ## Rejected alternatives
 
 B and C, for the reasons under Trade-offs.
+
+## 訂正 (2026-11-22)
+
+- jasagiri asked the same day for the pages without a source to be searched again and for original
+  writing to be marked as such. The search added Wikibooks beyond Haskell, the Rust documentation
+  (MIT and Apache-2.0) and the Go standard library documentation (BSD-3-Clause); 9 of the 11 pages
+  now cite a source, and the catalog lists 210 sources. "Not decided here" is decided
+  for these sites.
+- `catalog/citations.json` gained `original`: "all" for a page no source explains (2 pages),
+  "part" for a page whose sources explain only part of it (36 pages, the note says what
+  they leave out). `tools/cite_sources` writes an "Original writing:" paragraph for each, and
+  NCK-SRC-03 and NCK-SRC-04 check them.
+

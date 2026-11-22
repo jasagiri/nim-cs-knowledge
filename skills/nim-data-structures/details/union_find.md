@@ -100,3 +100,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `273c7482c4c715b8` Disjoint Set Union (cp-algorithms): find with compression, union by size or rank
 
 Persistent variant is mentioned briefly in the Wikipedia article only.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

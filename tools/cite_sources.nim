@@ -4,8 +4,10 @@
 ## catalog/sources.jsonl (ADR-NCK-0005). Idempotent: a second run changes nothing. Pages are keyed
 ## `<area>/<page name>`; each key lists the URLs of the sources that explain its concept, in the
 ## order they are cited, with what each covers, and a note: why none does, or what the cited
-## sources leave out. Exit 1 when a cited URL is not in the catalog or a page has no key, 2 on a
-## usage error.
+## sources leave out. `original` says which writing is the repository's own: "all" (no source
+## explains the concept) or "part" (what the note says the sources leave out); each becomes an
+## "Original writing:" paragraph. Exit 1 when a cited URL is not in the catalog, a page has no key,
+## or `original` does not match the sources (ADR-NCK-0005), 2 on a usage error.
 
 import std/[json, os, parseopt, strutils, tables]
 
@@ -15,9 +17,16 @@ const SkillArea = [("nim-functional-core", "fp"), ("nim-data-structures", "ds"),
 type Cited = object
   id, title, covers: string
 
-func sourcesSection(cited: seq[Cited]; note: string): string =
+const
+  allOriginal = "Original writing: this page was written for this repository. No source under a " &
+    "licence that allows commercial use was found that explains its concept; what the page claims " &
+    "rests on its module's tests."
+  partOriginal = "Original writing: what the note above says the cited sources leave out was " &
+    "written for this repository; it rests on the module's tests."
+
+func sourcesSection(cited: seq[Cited]; note, original: string): string =
   if cited.len == 0:
-    return "## Sources\n\nNone in the catalog: " & note.strip & "\n"
+    return "## Sources\n\nNone in the catalog: " & note.strip & "\n\n" & allOriginal & "\n"
   result = "## Sources\n\nCatalog IDs (catalog/sources.jsonl) of sources that explain this concept, " &
     "each under a licence that allows commercial use:\n\n"
   for s in cited:
@@ -25,6 +34,7 @@ func sourcesSection(cited: seq[Cited]; note: string): string =
     if s.covers.len > 0: result.add ": " & s.covers.strip.replace("\n", " ")
     result.add "\n"
   if note.strip.len > 0: result.add "\n" & note.strip & "\n"
+  if original == "part": result.add "\n" & partOriginal & "\n"
 
 func replaceSources*(page, section: string): string =
   ## `page` with everything from "## Sources" to the end replaced by `section`.
@@ -65,8 +75,15 @@ proc main(): int =
           stderr.writeLine "cite_sources: ", key, ": ", url, " is not in the catalog"
           return 1
         cited.add Cited(id: byUrl[url].id, title: byUrl[url].title, covers: s{"covers"}.getStr)
+      let original = pagesJ[key]{"original"}.getStr
+      let note = pagesJ[key]{"note"}.getStr
+      if (cited.len == 0) != (original == "all") or original notin ["", "all", "part"] or
+          (original == "part" and note.strip.len == 0):
+        stderr.writeLine "cite_sources: ", key, ": original is \"", original,
+          "\"; it must be \"all\" exactly when no source is cited, and \"part\" needs a note"
+        return 1
       let page = readFile(f)
-      let updated = replaceSources(page, sourcesSection(cited, pagesJ[key]{"note"}.getStr))
+      let updated = replaceSources(page, sourcesSection(cited, note, original))
       if updated != page:
         writeFile(f, updated)
         inc changed

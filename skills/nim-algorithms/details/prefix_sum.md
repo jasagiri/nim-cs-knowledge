@@ -110,3 +110,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `6589db1cad040086` Summed-area table (Wikipedia): two-dimensional prefix sums
 
 Difference arrays have no dedicated allowed article; Prefix sum only mentions finite differences as the inverse.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

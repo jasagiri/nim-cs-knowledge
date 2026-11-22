@@ -89,3 +89,5 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 - `e0da847236a95912` Code refactoring (Wikipedia): extract class: move part of existing code into a new type
 
 Broader article; extract class is named in one sentence. The Nim value-type rules (smart constructor, distinct) are not covered.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.

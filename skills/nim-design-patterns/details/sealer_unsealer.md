@@ -76,4 +76,10 @@ Fix: seal the content in a `Box[T]` and keep the unsealer with the issuer; a val
 
 ## Sources
 
-None in the catalog: Object-capability model and Capability-based security were opened and do not describe sealer/unsealer pairs.
+Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each under a licence that allows commercial use:
+
+- `652c8ebe27b4b6a1` E (programming language) (Wikipedia): the mint example: makeBrandPair makes a sealer and an unsealer, and only that unsealer opens a box the sealer made
+
+Covers the sealer/unsealer pair and brand idea inside E's capability model; it does not cover tickets, rights amplification or the Nim sealed-type construction.
+
+Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.
