@@ -380,7 +380,7 @@ nim c -r --hints:off tests/test_fp_<concept>.nim
 ../beautifulnim/beautifulnim check --min-level:warning src/nimcs/fp/*.nim tests/test_fp_*.nim
 ```
 
-Both must exit with 0. Each `nim` block in this skill and in `details/` compiles on its own.
+Both must exit with 0. Each `nim` block in this skill and in `details/` compiles on its own and runs with every assertion holding.
 
 ## The details pages
 

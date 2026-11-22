@@ -1,7 +1,7 @@
 ## E tests for docs/specification.md NCK-KNOW-01…NCK-KNOW-06 (details pages, skills, modules) and
 ## NCK-STYLE-01…NCK-STYLE-02 (style).
 
-import std/[os, osproc, sets, strutils, unittest]
+import std/[os, osproc, sets, streams, strutils, unittest]
 import nimcs/dataset
 
 const
@@ -55,12 +55,13 @@ suite "NCK-K pages and modules":
       check bad
 
   # SPEC: NCK-KNOW-02
-  test "NCK-KNOW-02 Given every nim block of the skills, when compiled alone under the lint settings, then nim check passes":
+  test "NCK-KNOW-02 Given every nim block of the skills, when compiled alone under the lint settings and run, then it builds and every assertion holds":
     let work = getTempDir() / "nck-examples-" & $getCurrentProcessId()
     var cfg = "--path:\"" & root / "src" & "\"\n"
     for line in readFile(root / "nim.cfg").splitLines:
       if line.startsWith("--") and "--path" notin line: cfg.add line & "\n"
-    var n = 0
+    removeDir(work)
+    var places, cmds: seq[string]
     for f in skillFiles() & pages:
       var inside = false
       var good = false
@@ -79,18 +80,27 @@ suite "NCK-K pages and modules":
         elif inside and line.startsWith("```"):
           inside = false
           if good:
-            inc n
-            removeDir(work)
-            createDir(work)
-            writeFile(work / "nim.cfg", cfg)
-            writeFile(work / "example.nim", code)
-            let (output, rc) = execCmdEx("nim check --hints:off example.nim", workingDir = work)
-            if rc != 0: checkpoint f.relativePath(root) & ":" & $lineNo & "\n" & output
-            check rc == 0
+            let dir = work / $places.len
+            createDir(dir)
+            writeFile(dir / "nim.cfg", cfg)
+            writeFile(dir / "example.nim", code)
+            places.add f.relativePath(root) & ":" & $lineNo
+            cmds.add "cd " & quoteShell(dir) & " && nim r --hints:off --nimcache:nc example.nim"
         elif inside:
           code.add line & "\n"
+    # Run, not only `nim check`: a doAssert in an example is a claim of the page, and only running
+    # it tests the claim.
+    var outputs = newSeq[string](cmds.len)
+    var codes = newSeq[int](cmds.len)
+    discard execProcesses(cmds, options = {poStdErrToStdOut, poUsePath, poEvalCommand},
+      afterRunEvent = proc(i: int; p: Process) =
+        outputs[i] = p.outputStream.readAll
+        codes[i] = p.peekExitCode)
+    for i in 0 ..< cmds.len:
+      if codes[i] != 0: checkpoint places[i] & "\n" & outputs[i]
+      check codes[i] == 0
     removeDir(work)
-    check n > 0
+    check cmds.len > 0
 
   # SPEC: NCK-KNOW-03
   test "NCK-KNOW-03 Given every Sources section, when read, then it cites existing catalog IDs or says why there are none":
