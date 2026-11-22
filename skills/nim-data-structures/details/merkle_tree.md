@@ -67,8 +67,8 @@ type Generation = object
 func line(path: string; name: Digest): string =
   path & "\x00" & name.toHex            # the path may not contain NUL, so the line splits in one place
 
-func snapshot(h: Hasher; files: openArray[(string, string)]): Generation =
-  var store = newCasStore(h)
+func snapshot(h: Hasher; base: CasStore; files: openArray[(string, string)]): Generation =
+  var store = base                               # blobs already held are kept, not copied again
   var lines: seq[string]
   for (path, content) in sorted(files):          # a fixed order, or equal states get different roots
     let stored = store.put(content)
@@ -77,12 +77,12 @@ func snapshot(h: Hasher; files: openArray[(string, string)]): Generation =
   Generation(store: store, tree: merkleTree(h, lines))
 
 let h = insecureFnv1a64()
-let monday = snapshot(h, [("notes.txt", "milk"), ("todo.txt", "write"), ("a/b.txt", "x")])
-let sameAgain = snapshot(h, [("a/b.txt", "x"), ("todo.txt", "write"), ("notes.txt", "milk")])
+let monday = snapshot(h, newCasStore(h), [("notes.txt", "milk"), ("todo.txt", "write"), ("a/b.txt", "x")])
+let sameAgain = snapshot(h, newCasStore(h), [("a/b.txt", "x"), ("todo.txt", "write"), ("notes.txt", "milk")])
 doAssert monday.tree.root == sameAgain.tree.root       # one digest says "same state"
-let tuesday = snapshot(h, [("notes.txt", "milk, eggs"), ("todo.txt", "write"), ("a/b.txt", "x")])
+let tuesday = snapshot(h, monday.store, [("notes.txt", "milk, eggs"), ("todo.txt", "write"), ("a/b.txt", "x")])
 doAssert tuesday.tree.root != monday.tree.root
-doAssert tuesday.store.len == 4                        # three files and the one edited content
+doAssert tuesday.store.len == 4                        # Monday's three blobs and the one edited content
 ```
 
 The main module is `src/nimcs/ds/merkle_tree.nim`.
