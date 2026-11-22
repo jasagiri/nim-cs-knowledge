@@ -112,4 +112,4 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 
 No dedicated English Wikipedia article (Anti-corruption_layer is 404). The Domain-driven design article only defines the layer in one list item; translation by smart constructors is not covered.
 
-Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.
+Original writing: what the note above says the cited sources leave out was written for this repository. Its laws are checked by the module's tests and its examples are run (NCK-KNOW-02); the advice on when to use it is the authors' judgement.

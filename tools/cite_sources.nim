@@ -19,10 +19,12 @@ type Cited = object
 
 const
   allOriginal = "Original writing: this page was written for this repository. No source under a " &
-    "licence that allows commercial use was found that explains its concept; what the page claims " &
-    "rests on its module's tests."
+    "licence that allows commercial use was found that explains its concept. Its laws are checked " &
+    "by its module's tests and its examples are run (NCK-KNOW-02); the advice on when to use it is " &
+    "the authors' judgement."
   partOriginal = "Original writing: what the note above says the cited sources leave out was " &
-    "written for this repository; it rests on the module's tests."
+    "written for this repository. Its laws are checked by the module's tests and its examples are " &
+    "run (NCK-KNOW-02); the advice on when to use it is the authors' judgement."
 
 func sourcesSection(cited: seq[Cited]; note, original: string): string =
   if cited.len == 0:

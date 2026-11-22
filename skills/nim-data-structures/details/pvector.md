@@ -102,4 +102,4 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 
 No allowed article is specifically about persistent vectors (en.wikipedia Persistent_vector is absent); coverage is of the broader topics.
 
-Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.
+Original writing: what the note above says the cited sources leave out was written for this repository. Its laws are checked by the module's tests and its examples are run (NCK-KNOW-02); the advice on when to use it is the authors' judgement.

@@ -104,4 +104,4 @@ Also do not contract on a calendar date: contract when `contract` accepts the st
 
 None in the catalog: No allowed source found. Searches: Wikipedia API 'parallel change expand contract', 'database schema migration expand contract', 'branch by abstraction', 'backward compatibility API deprecation migration' (no article); fetched Database refactoring (no transition-period or expand/contract text), Feature toggle and Strangler fig pattern (related but different techniques); Wikibooks 'schema migration' (Rails migrations only); gh code search in MicrosoftDocs/azure-docs 'parallel change expand contract' (unrelated hits).
 
-Original writing: this page was written for this repository. No source under a licence that allows commercial use was found that explains its concept; what the page claims rests on its module's tests.
+Original writing: this page was written for this repository. No source under a licence that allows commercial use was found that explains its concept. Its laws are checked by its module's tests and its examples are run (NCK-KNOW-02); the advice on when to use it is the authors' judgement.

@@ -76,4 +76,10 @@ B and C, for the reasons under Trade-offs.
   "part" for a page whose sources explain only part of it (36 pages, the note says what
   they leave out). `tools/cite_sources` writes an "Original writing:" paragraph for each, and
   NCK-SRC-03 and NCK-SRC-04 check them.
-
+- jasagiri asked whether the original writing can be trusted because its behaviour is checked. Only
+  part of it was: the laws were checked by the module tests, but NCK-KNOW-02 only type-checked the
+  page examples (`nim check`), so their assertions never ran. Running all 367 examples found one
+  false claim (a merkle_tree example asserted a store count that its code did not produce).
+  NCK-KNOW-02 now runs every example, and the "Original writing:" paragraph says what is checked
+  (laws by the tests, examples run) and what is not (the advice on when to use the concept is
+  judgement).

@@ -128,4 +128,4 @@ Catalog IDs (catalog/sources.jsonl) of sources that explain this concept, each u
 
 Rust pages cover the idea and the unit case. They leave out Nim's distinct-type form and the state-tag use (Email[Validated]) and the unforgeability limit.
 
-Original writing: what the note above says the cited sources leave out was written for this repository; it rests on the module's tests.
+Original writing: what the note above says the cited sources leave out was written for this repository. Its laws are checked by the module's tests and its examples are run (NCK-KNOW-02); the advice on when to use it is the authors' judgement.

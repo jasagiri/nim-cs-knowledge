@@ -90,4 +90,4 @@ Write the predicates as boundaries (`age < 6`), and test both sides of each boun
 
 None in the catalog: No allowed source found. Searches: Wikipedia API 'decompose conditional refactoring', 'extract method guard clause conditional' (only Code refactoring, which lists 'replace conditional with polymorphism' and has no decompose-conditional item; fetched, 'conditional' appears once); Wikibooks 'decompose conditional' and 'refactoring catalog' (Introduction to Software Engineering/Testing/Refactoring: same short list, no such item); Rust book/Rust by Example have nothing on naming predicates.
 
-Original writing: this page was written for this repository. No source under a licence that allows commercial use was found that explains its concept; what the page claims rests on its module's tests.
+Original writing: this page was written for this repository. No source under a licence that allows commercial use was found that explains its concept. Its laws are checked by its module's tests and its examples are run (NCK-KNOW-02); the advice on when to use it is the authors' judgement.
