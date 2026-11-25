@@ -86,3 +86,8 @@ Modules in `src/nimcs/patterns/`; tests in `tests/test_patterns_<module>.nim`. E
 | PAT-PARSERCOMBINATOR-05 | parser_combinator | For any tree, `printSpaced` output, with extra blanks around it, parses back to the same tree. |
 | PAT-PARSERCOMBINATOR-07 | parser_combinator | Input longer than `MaxInputLen` (1024 bytes) or nested deeper than `MaxNesting` (64 parentheses) is refused with a `ParseError` before parsing, never a crash; input at the limits parses, prints, compares and evaluates. |
 | PAT-PARSERCOMBINATOR-06 | parser_combinator | For small expressions, print, parse and evaluate equals an independent stack model; an intermediate value beyond 2^31 is `eeOutOfRange`. |
+| PAT-EXECSPEC-01 | executable_specification | For any version, parsing its printed text gives the same version back. |
+| PAT-EXECSPEC-02 | executable_specification | For any text that parses, printing the parsed version gives that text. |
+| PAT-EXECSPEC-03 | executable_specification | A text that is not `v` and three dot-separated parts of one to six decimal digits without a leading zero is an error naming the first rule it breaks. |
+| PAT-EXECSPEC-04 | executable_specification | Versions are ordered as the triples (major, minor, patch) of their parts are. |
+| PAT-EXECSPEC-05 | executable_specification | `failures` names, in table order, exactly the examples whose expected output the function does not give. |

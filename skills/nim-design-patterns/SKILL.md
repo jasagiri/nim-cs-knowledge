@@ -6,7 +6,7 @@ description: >-
   free and tagless-final interpreters, dependency records, middleware pipelines, idempotent
   commands, lenses, parser combinators, retry with backoff) and actor- and capability-based designs
   (actors, supervisors, request/reply, object capabilities, caretakers, sealer/unsealer) and refactoring and migration patterns (parallel change, strangler fig,
-  branch by abstraction, anti-corruption layer, seam), small refactorings (replace conditional
+  branch by abstraction, anti-corruption layer, seam), executable specifications, small refactorings (replace conditional
   with polymorphism, decompose conditional, extract function, extract type, introduce parameter
   object) and architecture styles (layered architecture, model-view-update, load shedding) and resilience patterns (circuit breaker, bulkhead, token
   bucket, saga, transactional outbox) and the command buffer (a read pass that emits commands and a
@@ -146,6 +146,7 @@ global mutable state. Dynamic dispatch, when it is really needed, is a record of
 | an implementation must be replaced inside one program over many commits, without a long-lived branch | Branch by abstraction → callers take a record of procs; a stage value (old, shadow, new) picks the implementation | [details/branch_by_abstraction.md](details/branch_by_abstraction.md) |
 | a foreign model (a partner's message, a legacy schema) must not shape yours | Anti-corruption layer → a translating `func` per foreign version, built through your smart constructor, refusals as values | [details/anti_corruption_layer.md](details/anti_corruption_layer.md) |
 | code that reaches for its dependencies from inside must be changed but cannot yet be tested | Seam → pass the dependency in as a proc, check old against new, pin today's behaviour before refactoring | [details/seam.md](details/seam.md) |
+| a specification row lists values that the tests also list, or says two things at once | Executable specification → one sentence per rule in the specification, the values in an example table the test runs, the rule in a type with private fields | [details/executable_specification.md](details/executable_specification.md) |
 | a record with a tag and every kind's fields, branched on in `if` chains that end in a default | Replace conditional with polymorphism → one variant per kind, `case` without `else` | [details/replace_conditional_with_polymorphism.md](details/replace_conditional_with_polymorphism.md) |
 | one condition mixes several ideas (age, weekday, flag) | Decompose conditional → a named `func` per idea, the decision reads as their combination | [details/decompose_conditional.md](details/decompose_conditional.md) |
 | a long routine with comments between its steps | Extract function → one `func` per step, the original becomes their composition | [details/extract_function.md](details/extract_function.md) |

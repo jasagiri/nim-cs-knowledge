@@ -759,6 +759,11 @@ Also from the IDs in the first cell of the table rows of
 | PAT-PARSERCOMBINATOR-05 | tests/test_patterns_parser_combinator.nim (1) |
 | PAT-PARSERCOMBINATOR-07 | tests/test_patterns_parser_combinator.nim (2) |
 | PAT-PARSERCOMBINATOR-06 | tests/test_patterns_parser_combinator.nim (2) |
+| PAT-EXECSPEC-01 | tests/test_patterns_executable_specification.nim (1) |
+| PAT-EXECSPEC-02 | tests/test_patterns_executable_specification.nim (1) |
+| PAT-EXECSPEC-03 | tests/test_patterns_executable_specification.nim (1) |
+| PAT-EXECSPEC-04 | tests/test_patterns_executable_specification.nim (1) |
+| PAT-EXECSPEC-05 | tests/test_patterns_executable_specification.nim (1) |
 | DS-WRITEAHEADLOG-01 | tests/test_ds_write_ahead_log.nim (1) |
 | DS-WRITEAHEADLOG-02 | tests/test_ds_write_ahead_log.nim (1) |
 | DS-WRITEAHEADLOG-03 | tests/test_ds_write_ahead_log.nim (1) |
@@ -1135,7 +1140,7 @@ Also from the IDs in the first cell of the table rows of
 | DS-SUFFIXTRIE-07 | tests/test_ds_suffix_trie.nim (1) |
 | DS-SUFFIXTRIE-08 | tests/test_ds_suffix_trie.nim (1) |
 
-Declared: 1101  Covered: 1101  Uncovered: 0
+Declared: 1106  Covered: 1106  Uncovered: 0
 
 ## Uncovered declared IDs
 

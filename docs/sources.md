@@ -1,11 +1,11 @@
 # Sources and their licences
 
-The catalog holds only these 210 sources (ADR-NCK-0005): articles and chapters, each chosen because
+The catalog holds only these 212 sources (ADR-NCK-0005): articles and chapters, each chosen because
 it explains the concept of a page, from sites whose licences were read on 2026-11-22:
 
 | Site | Sources | Licence | Where the licence was read |
 |---|---|---|---|
-| English Wikipedia | 164 | CC-BY-SA-4.0 | the notice at the foot of each article |
+| English Wikipedia | 166 | CC-BY-SA-4.0 | the notice at the foot of each article |
 | English Wikibooks | 1 | CC-BY-SA-4.0 | the notice at the foot of each page |
 | cp-algorithms | 34 | CC-BY-SA-4.0 | the LICENSE file of the site's repository |
 | Jeff Erickson, *Algorithms* | 1 | CC-BY-4.0 | the course page: the textbook is CC BY 4.0 (his other lecture notes are CC BY-NC-SA and are not cited) |
@@ -22,7 +22,7 @@ NCK-SRC-01 checks the committed catalog). Which page cites which source, and wha
 
 Original writing is marked on the page itself, in an "Original writing:" paragraph of its Sources
 section: 2 pages are entirely original, because no source on these sites explains their
-concept; 36 pages cite sources that explain part of the page, and the note above that
+concept; 37 pages cite sources that explain part of the page, and the note above that
 paragraph says what the rest is. The other 121 pages cite sources that explain their concept.
 No page copies text from a source.
 
@@ -160,6 +160,7 @@ No page copies text from a source.
 | [Pure function (Wikipedia)](https://en.wikipedia.org/wiki/Pure_function) | `2c1a1cc20924cd71` | CC-BY-SA-4.0 |
 | [Purely functional data structure (Wikipedia)](https://en.wikipedia.org/wiki/Purely_functional_data_structure) | `4fb9d2a834ff7720` | CC-BY-SA-4.0 |
 | [Queue (abstract data type) (Wikipedia)](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) | `272fbcd73a9312b1` | CC-BY-SA-4.0 |
+| [QuickCheck (Wikipedia)](https://en.wikipedia.org/wiki/QuickCheck) | `e15be8ba43c81a1b` | CC-BY-SA-4.0 |
 | [Quicksort (Wikipedia)](https://en.wikipedia.org/wiki/Quicksort) | `522897bc50694da5` | CC-BY-SA-4.0 |
 | [Rabin–Karp algorithm (Wikipedia)](https://en.wikipedia.org/wiki/Rabin–Karp_algorithm) | `e328397a112aae43` | CC-BY-SA-4.0 |
 | [Radix sort (Wikipedia)](https://en.wikipedia.org/wiki/Radix_sort) | `83e988650c438ef1` | CC-BY-SA-4.0 |
@@ -177,6 +178,7 @@ No page copies text from a source.
 | [Sieve of Eratosthenes (Wikipedia)](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) | `78f755448f8a37a2` | CC-BY-SA-4.0 |
 | [Singleton pattern (Wikipedia)](https://en.wikipedia.org/wiki/Singleton_pattern) | `7425770abb5f06c2` | CC-BY-SA-4.0 |
 | [Skew binary number system (Wikipedia)](https://en.wikipedia.org/wiki/Skew_binary_number_system) | `5e7db9cb96450d0c` | CC-BY-SA-4.0 |
+| [Specification by example (Wikipedia)](https://en.wikipedia.org/wiki/Specification_by_example) | `ac0acc541aca9c88` | CC-BY-SA-4.0 |
 | [Splay tree (Wikipedia)](https://en.wikipedia.org/wiki/Splay_tree) | `05fb7d420d53954a` | CC-BY-SA-4.0 |
 | [Stack (abstract data type) (Wikipedia)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) | `780b4ebe442ea1d4` | CC-BY-SA-4.0 |
 | [State pattern (Wikipedia)](https://en.wikipedia.org/wiki/State_pattern) | `96b03f277d46e69e` | CC-BY-SA-4.0 |

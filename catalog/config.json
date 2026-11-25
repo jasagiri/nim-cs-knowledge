@@ -2123,6 +2123,26 @@
       "licenses": [
         "Apache-2.0"
       ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Specification_by_example",
+      "title": "Specification by example (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/QuickCheck",
+      "title": "QuickCheck (Wikipedia)",
+      "section": [
+        "Wikipedia"
+      ],
+      "licenses": [
+        "CC-BY-SA-4.0"
+      ]
     }
   ]
 }

@@ -1344,6 +1344,20 @@
       "note": "No English Wikipedia article for Event sourcing (404). Event store covers the append-only log; replay as a fold and snapshots are not covered.",
       "original": "part"
     },
+    "patterns/executable_specification": {
+      "sources": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Specification_by_example",
+          "covers": "examples as the one source of truth that is both the specification and the test, kept true by running them (living documentation)"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/QuickCheck",
+          "covers": "properties checked over generated inputs, with a failing input shrunk to a minimal one (the laws of the page)"
+        }
+      ],
+      "note": "Partial: neither article says that a written specification should state only the obligation and leave the values to the tests, nor that a type with private fields carries the rule.",
+      "original": "part"
+    },
     "patterns/extract_function": {
       "sources": [
         {
